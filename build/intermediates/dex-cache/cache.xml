@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="/Users/leeyun/Desktop/DEVELOP/Android/StringTingProject/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="768d89b7654ede68d20c470c4daef79be11514dd">
+        <dex dex="/Users/leeyun/Desktop/DEVELOP/Android/StringTingProject/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_2b4220f95ff6f25b921aab4b9492158430649b43/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/leeyun/Desktop/DEVELOP/Android/StringTingProject/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
+        <dex dex="/Users/leeyun/Desktop/DEVELOP/Android/StringTingProject/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_bcfa244d10ddaf303c13412d33a9f74bca4fa998/classes.dex" />
+    </item>
+
+</items>

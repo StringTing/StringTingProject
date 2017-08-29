@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">StringTingProject</string>
+    <color name="white">#FFFFFF</color>
+    <string name="facebook_app_id">1140823656052301</string>
+</resources>
