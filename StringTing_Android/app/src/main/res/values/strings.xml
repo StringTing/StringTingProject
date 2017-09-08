@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">StringTing_Android</string>
+    <color name="white">#FFFFFF</color>
+    <string name="facebook_app_id">532106416975820</string>
+</resources>

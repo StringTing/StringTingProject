@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageButton
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:paddingTop="15dp"
+            android:src="@drawable/backbtn"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="로그인"
+            android:layout_centerHorizontal="true"
+            android:textSize="20dp"
+            android:paddingTop="10dp"/>
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true">
+
+        <Button
+            android:id="@+id/fb_btn"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="Facebook으로 로그인" />
+
+        <Button
+            android:id="@+id/local_btn"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/fb_btn"
+            android:paddingTop="10dp"
+            android:text="스물한살 계정으로 로그인"
+            android:layout_alignEnd="@+id/fb_btn"
+            android:onClick="onClick_login_local"
+            />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>
+
