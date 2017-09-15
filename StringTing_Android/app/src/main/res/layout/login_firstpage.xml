@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/white">
+    android:background="@color/white"
+    android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/topBar"
@@ -11,99 +11,64 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+
+
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_weight="0.02"
+            android:id="@+id/topBlank_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="70dp"
+
+            android:orientation="horizontal">
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:id="@+id/logo_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="150dp"
+
 
             >
 
-            <RelativeLayout
+            <ImageView
+                android:id="@+id/logo_image"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <ImageButton
-                    android:id="@+id/imageButton"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:paddingTop="15dp"
-                    android:src="@drawable/backbtn" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:paddingTop="10dp"
-                    android:text="로그인"
-                    android:textSize="20dp" />
-            </RelativeLayout>
+                android:layout_height="150dp"
+                android:src="@drawable/logo" />
 
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.2"
-            android:orientation="vertical">
-
-        </LinearLayout>
-
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.2"
+            android:gravity="center"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
+
+            <Button
+                android:id="@+id/fb_btn"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:text="Facebook으로 로그인" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-
-                <Button
-                    android:id="@+id/fb_btn"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:text="Facebook으로 로그인" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
+            <Button
+                android:id="@+id/kaka_btn"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:text="Kakao으로 로그인" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
 
-                <Button
-                    android:id="@+id/local_btn"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:onClick="onClick_login_local"
-                    android:paddingTop="10dp"
-                    android:text="스물한살 계정으로 로그인" />
+            <Button
+                android:id="@+id/local_btn"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:onClick="onClick_login_local"
+                android:paddingTop="10dp"
+                android:text="이메일 계정으로 로그인" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-
-            </LinearLayout>
 
         </LinearLayout>
     </LinearLayout>
