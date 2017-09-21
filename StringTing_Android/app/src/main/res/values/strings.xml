@@ -2,4 +2,17 @@
     <string name="app_name">StringTing_Android</string>
     <color name="white">#FFFFFF</color>
     <string name="facebook_app_id">306641599811296</string>
+    <string name="age_prompt">나이</string>
+
+    <string-array name="age">
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+        <item>24</item>
+        <item>25</item>
+        <item>26</item>
+
+
+    </string-array>
 </resources>
