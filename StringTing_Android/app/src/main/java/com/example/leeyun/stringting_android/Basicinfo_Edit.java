@@ -11,6 +11,7 @@ import android.widget.Spinner;
 import org.w3c.dom.Text;
 
 import static com.example.leeyun.stringting_android.R.id.Spinner_age;
+import static com.example.leeyun.stringting_android.R.id.Spinner_city;
 
 /**
  * Created by leeyun on 2017. 9. 16..
@@ -24,11 +25,13 @@ public class Basicinfo_Edit extends Activity {
 
 
         Spinner age = (Spinner)findViewById(Spinner_age);
-        ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.age, R.layout.spinner_item);
+        Spinner city = (Spinner)findViewById(Spinner_city);
 
+        ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.age, R.layout.spinner_item);
+        ArrayAdapter adapter2 = ArrayAdapter.createFromResource(this, R.array.city, R.layout.spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         age.setAdapter(adapter);
-
+        city.setAdapter(adapter2);
 
 
 
