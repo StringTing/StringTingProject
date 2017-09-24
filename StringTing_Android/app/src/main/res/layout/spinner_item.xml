@@ -3,8 +3,9 @@
     android:id="@+id/spitem_set"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:textSize="22dp"
+    android:textSize="18dp"
     android:textColor="#000"
+
     >
 
 </TextView>
