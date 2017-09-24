@@ -52,25 +52,25 @@
             >
 
 
-
             <TextView
                 android:id="@+id/text_id"
-                android:layout_width="50dp"
+                android:layout_width="68dp"
                 android:layout_height="wrap_content"
-                android:paddingRight="18dp"
-                android:text="ID"
+                android:paddingRight="17dp"
+                android:text="Email"
                 android:textSize="20dp"
 
                 />
 
             <EditText
-                android:id="@+id/editText"
-                android:layout_width="250dp"
+                android:id="@+id/Email"
+                android:layout_width="229dp"
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@+id/text_id"
                 android:layout_toRightOf="@+id/text_id"
                 android:text=""
-                android:textSize="20dp" />
+                android:textSize="20dp"
+                android:inputType="textEmailAddress"/>
 
 
 
