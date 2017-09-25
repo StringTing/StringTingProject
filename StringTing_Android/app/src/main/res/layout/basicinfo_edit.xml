@@ -332,10 +332,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:onClick="onClick_login_check"
+                android:onClick="onClick_photo_upload"
                 android:text="다음"
                 android:textSize="20sp"
                 android:layout_alignParentBottom="true"
+
               />
         </RelativeLayout>
     </RelativeLayout>

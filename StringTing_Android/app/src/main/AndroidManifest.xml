@@ -27,6 +27,7 @@
         android:value="@string/kakao_app_key" />
         <activity android:name=".SuccessActivity"></activity>
         <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id" />
+        <activity android:name=".Photo_Upload"></activity>
     </application>
 
 </manifest>

@@ -1,6 +1,7 @@
 package com.example.leeyun.stringting_android;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -47,6 +48,12 @@ public class Basicinfo_Edit extends Activity {
         religion.setAdapter(adapter5);
 
 
+
+    }
+    public void onClick_photo_upload(View v){
+        Intent intent = new Intent(getApplicationContext(),Photo_Upload.class);
+
+        startActivity(intent);
 
     }
 

@@ -10,4 +10,5 @@ public class Photo_Upload extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.photo_upload);
     }
+
 }
