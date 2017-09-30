@@ -31,4 +31,8 @@ dependencies {
     compile 'com.ssomai:android.scalablelayout:2.1.6'
     compile group: project.KAKAO_SDK_GROUP, name: 'usermgmt', version: project.KAKAO_SDK_VERSION
     compile 'info.hoang8f:android-segmented:1.0.6'
+    compile 'com.squareup.retrofit2:retrofit:2.1.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
+
+
 }

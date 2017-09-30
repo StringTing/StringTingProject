@@ -1,6 +1,7 @@
 package com.example.leeyun.stringting_android;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.util.Linkify;
@@ -11,7 +12,9 @@ import android.widget.TextView;
 
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -31,6 +34,7 @@ import com.kakao.auth.ErrorCode;
 import com.kakao.auth.ISessionCallback;
 import com.kakao.auth.Session;
 import com.kakao.network.ErrorResult;
+import com.kakao.network.response.ResponseBody;
 import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.LogoutResponseCallback;
 import com.kakao.usermgmt.callback.MeResponseCallback;
@@ -38,11 +42,25 @@ import com.kakao.usermgmt.response.model.UserProfile;
 import com.kakao.util.exception.KakaoException;
 import com.kakao.util.helper.log.Logger;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+
 
 public class MainActivity extends AppCompatActivity {
     private LoginButton loginButton;
     private Button CustomloginButton;
     private CallbackManager callbackManager;
+
+
+    //rest api를 위한 변수선언
+    Retrofit retrofit;
+    Rest_ApiService apiService;
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,6 +107,7 @@ public class MainActivity extends AppCompatActivity {
         //버튼에 바로 콜백을 등록하는 경우 LoginManager에 콜백을 등록하지 않아도됩니다.
         //반면에 커스텀으로 만든 버튼을 사용할 경우 아래보면 CustomloginButton OnClickListener안에 LoginManager를 이용해서
         //로그인 처리를 해주어야 합니다.
+
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) { //로그인 성공시 호출되는 메소드
@@ -103,6 +122,8 @@ public class MainActivity extends AppCompatActivity {
                             public void onCompleted(JSONObject object, GraphResponse response) {
                                 try {
                                     Log.e("user profile", object.toString());
+                                    String email = response.getJSONObject().getString("id").toString();
+                                    Log.e("email:",email);
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
@@ -151,6 +172,28 @@ public class MainActivity extends AppCompatActivity {
 //                        });
             }
         });
+    }
+
+    private class NetworkCall extends AsyncTask<Call, Void, String> {
+        @Override
+        protected String doInBackground(Call... params) {
+            try {
+                Call<List<Contributor>> call = params[0];
+                Response<List<Contributor>> response = call.execute();
+                Log.e("apitest",response.body().toString());
+                return response.body().toString();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            final TextView textView = (TextView) findViewById(R.id.textView);
+            textView.setText(result);
+        }
     }
 
     @Override
@@ -212,6 +255,10 @@ public class MainActivity extends AppCompatActivity {
                     //로그인에 성공하면 로그인한 사용자의 일련번호, 닉네임, 이미지url등을 리턴합니다.
                     //사용자 ID는 보안상의 문제로 제공하지 않고 일련번호는 제공합니다.
                     Log.e("UserProfile", userProfile.toString());
+                    String kakaoID = String.valueOf(userProfile.getId()); // userProfile에서 ID값을 가져옴
+                    String kakaoNickname = userProfile.getNickname();     // Nickname 값을 가져옴
+                    Log.e("KakaoId", kakaoID);
+
                     Intent intent = new Intent(MainActivity.this, SuccessActivity.class);
                     startActivity(intent);
                     finish();
