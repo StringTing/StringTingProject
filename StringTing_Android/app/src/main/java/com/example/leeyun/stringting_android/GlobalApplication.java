@@ -9,6 +9,17 @@ import com.kakao.auth.KakaoSDK;
 public class GlobalApplication extends Application {
     private static volatile GlobalApplication obj = null;
     private static volatile Activity currentActivity = null;
+    private String Test_Global_Email;
+
+    public String getGlobalString()
+    {
+        return Test_Global_Email;
+    }
+
+    public void setGlobalString(String globalString)
+    {
+        this.Test_Global_Email = globalString;
+    }
 
     @Override
     public void onCreate() {

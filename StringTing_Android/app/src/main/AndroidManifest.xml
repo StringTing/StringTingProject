@@ -22,12 +22,14 @@
         <activity android:name=".Login_firstpage"/>
         <activity android:name=".Login_local"/>
         <activity android:name=".Basicinfo_Edit"/>
+        
         <meta-data
         android:name="com.kakao.sdk.AppKey"
         android:value="@string/kakao_app_key" />
         <activity android:name=".SuccessActivity"></activity>
         <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id" />
         <activity android:name=".Photo_Upload"></activity>
+        
     </application>
 
 </manifest>

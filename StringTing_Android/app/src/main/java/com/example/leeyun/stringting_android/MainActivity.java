@@ -1,5 +1,6 @@
 package com.example.leeyun.stringting_android;
 
+import android.app.Application;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -34,7 +35,6 @@ import com.kakao.auth.ErrorCode;
 import com.kakao.auth.ISessionCallback;
 import com.kakao.auth.Session;
 import com.kakao.network.ErrorResult;
-import com.kakao.network.response.ResponseBody;
 import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.LogoutResponseCallback;
 import com.kakao.usermgmt.callback.MeResponseCallback;
@@ -46,6 +46,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+import okhttp3.ResponseBody;
+import retrofit2.http.GET;
+import retrofit2.http.Query;
+
+import static com.example.leeyun.stringting_android.R.id.Provision_Linkify;
+
 
 
 public class MainActivity extends AppCompatActivity {
@@ -53,10 +59,24 @@ public class MainActivity extends AppCompatActivity {
     private Button CustomloginButton;
     private CallbackManager callbackManager;
 
+    static String Email;
 
     //rest api를 위한 변수선언
     Retrofit retrofit;
     Rest_ApiService apiService;
+
+    class Strings extends Application {
+
+        private String Facebook_email;
+
+        public String getState(){
+            return Facebook_email;
+        }
+        public void setState(String s){
+            Facebook_email = s;
+        }
+    }
+
 
 
 
@@ -67,6 +87,28 @@ public class MainActivity extends AppCompatActivity {
         FacebookSdk.sdkInitialize(getApplicationContext()); // SDK 초기화 (setContentView 보다 먼저 실행되어야합니다. 안그럼 에러납니다.)
         setContentView(R.layout.activity_main);
 
+        retrofit = new Retrofit.Builder().baseUrl(Rest_ApiService.API_URL).build();
+        apiService=retrofit.create(Rest_ApiService.class);
+
+
+        //Restrofit_test
+        Call<ResponseBody>comment =apiService.getComment("s");
+        comment.enqueue(new Callback<ResponseBody>() {
+
+            @Override
+            public void onResponse(Call <ResponseBody> call, Response<ResponseBody> response) {
+                try{
+                    Log.v("Test",response.body().string());
+                }catch (IOException e){
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call call, Throwable t) {
+
+            }
+        });
 
         TextView Provision_Linkify =(TextView)findViewById(R.id.Provision_Linkify);
 
@@ -122,8 +164,9 @@ public class MainActivity extends AppCompatActivity {
                             public void onCompleted(JSONObject object, GraphResponse response) {
                                 try {
                                     Log.e("user profile", object.toString());
-                                    String email = response.getJSONObject().getString("id").toString();
-                                    Log.e("email:",email);
+
+                                    Email   = response.getJSONObject().getString("id").toString();
+                                    Log.e("email:",Email);
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
@@ -174,27 +217,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private class NetworkCall extends AsyncTask<Call, Void, String> {
-        @Override
-        protected String doInBackground(Call... params) {
-            try {
-                Call<List<Contributor>> call = params[0];
-                Response<List<Contributor>> response = call.execute();
-                Log.e("apitest",response.body().toString());
-                return response.body().toString();
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            final TextView textView = (TextView) findViewById(R.id.textView);
-            textView.setText(result);
-        }
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -273,6 +295,15 @@ public class MainActivity extends AppCompatActivity {
             // 어쩔때 실패되는지는 테스트를 안해보았음 ㅜㅜ
         }
     }
+    public interface Rest_ApiService {
+
+        public  static  final String API_URL="http://jsonplaceholder.typicode.com/";
+
+        @GET("comments")
+        Call<okhttp3.ResponseBody> getComment(@Query("postId")String postId);
+
+    }
+
 }
 
 
