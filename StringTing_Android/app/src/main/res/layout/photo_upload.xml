@@ -111,7 +111,7 @@
                         android:layout_width="75dp"
                         android:layout_height="75dp"
                         android:layout_weight="1"
-                        android:onClick="onClick2"
+                        android:onClick="onClick_imageUpload2"
                          />
 
                     <ImageView
@@ -119,7 +119,7 @@
                         android:layout_width="75dp"
                         android:layout_height="75dp"
                         android:layout_weight="1"
-                        android:onClick="onClick2"
+                        android:onClick="onClick_imageUpload3"
                         android:textSize="13dp" />
 
                     <ImageView
@@ -127,7 +127,7 @@
                         android:layout_width="75dp"
                         android:layout_height="75dp"
                         android:layout_weight="1"
-                        android:onClick="onClick"
+                        android:onClick="onClick_imageUpload4"
                         android:textSize="13dp" />
 
                     <ImageView
@@ -135,7 +135,7 @@
                         android:layout_width="75dp"
                         android:layout_height="75dp"
                         android:layout_weight="1"
-                        android:onClick="onClick"
+                        android:onClick="onClick_imageUpload5"
                         android:textSize="13dp" />
 
                     <ImageView
@@ -143,7 +143,7 @@
                         android:layout_width="75dp"
                         android:layout_height="75dp"
                         android:layout_weight="1"
-                        android:onClick="onClick"
+                        android:onClick="onClick_imageUpload6"
                         android:textSize="13dp" />
 
                 </LinearLayout>

@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         //Restrofit_test
-        Call<ResponseBody>comment =apiService.getComment("s");
+        Call<ResponseBody>comment =apiService.getComment(5);
         comment.enqueue(new Callback<ResponseBody>() {
 
             @Override
@@ -289,6 +289,7 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
+
         @Override
         public void onSessionOpenFailed(KakaoException exception) {
             // 세션 연결이 실패했을때
@@ -300,7 +301,7 @@ public class MainActivity extends AppCompatActivity {
         public  static  final String API_URL="http://jsonplaceholder.typicode.com/";
 
         @GET("comments")
-        Call<okhttp3.ResponseBody> getComment(@Query("postId")String postId);
+        Call<okhttp3.ResponseBody> getComment(@Query("postId")int postId);
 
     }
 

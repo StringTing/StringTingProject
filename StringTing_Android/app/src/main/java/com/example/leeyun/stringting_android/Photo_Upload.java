@@ -18,6 +18,9 @@ import android.widget.ImageView;
 
 import java.io.File;
 
+import static com.example.leeyun.stringting_android.R.array.age;
+import static com.example.leeyun.stringting_android.R.id.imageView;
+
 public class Photo_Upload extends AppCompatActivity implements View.OnClickListener  {
     private static final int PICK_FROM_CAMERA = 0;
     private static final int PICK_FROM_ALBUM = 1;
@@ -65,6 +68,122 @@ public class Photo_Upload extends AppCompatActivity implements View.OnClickListe
                 .setNegativeButton("취소",canceListener)
                 .show();
     }
+
+    public void onClick_imageUpload2(View v){
+        DialogInterface.OnClickListener albumListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                doTakeAlbumAction();
+            }
+        };
+        //취소
+        DialogInterface.OnClickListener canceListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        };
+
+        new AlertDialog.Builder(this)
+                .setTitle("업로드이미지 선택")
+                //.setPositiveButton("사진촬영",cameraListener)
+                .setNeutralButton("앨범선택",albumListener)
+                .setNegativeButton("취소",canceListener)
+                .show();
+    }
+
+    public void onClick_imageUpload3(View v){
+        DialogInterface.OnClickListener albumListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                doTakeAlbumAction();
+            }
+        };
+        //취소
+        DialogInterface.OnClickListener canceListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        };
+
+        new AlertDialog.Builder(this)
+                .setTitle("업로드이미지 선택")
+                //.setPositiveButton("사진촬영",cameraListener)
+                .setNeutralButton("앨범선택",albumListener)
+                .setNegativeButton("취소",canceListener)
+                .show();
+    }
+
+    public void onClick_imageUpload4(View v){
+        DialogInterface.OnClickListener albumListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                doTakeAlbumAction();
+            }
+        };
+        //취소
+        DialogInterface.OnClickListener canceListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        };
+
+        new AlertDialog.Builder(this)
+                .setTitle("업로드이미지 선택")
+                //.setPositiveButton("사진촬영",cameraListener)
+                .setNeutralButton("앨범선택",albumListener)
+                .setNegativeButton("취소",canceListener)
+                .show();
+    }
+
+    public void onClick_imageUpload5(View v){
+        DialogInterface.OnClickListener albumListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                doTakeAlbumAction();
+            }
+        };
+        //취소
+        DialogInterface.OnClickListener canceListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        };
+
+        new AlertDialog.Builder(this)
+                .setTitle("업로드이미지 선택")
+                //.setPositiveButton("사진촬영",cameraListener)
+                .setNeutralButton("앨범선택",albumListener)
+                .setNegativeButton("취소",canceListener)
+                .show();
+    }
+
+    public void onClick_imageUpload6(View v){
+        DialogInterface.OnClickListener albumListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                doTakeAlbumAction();
+            }
+        };
+        //취소
+        DialogInterface.OnClickListener canceListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        };
+
+        new AlertDialog.Builder(this)
+                .setTitle("업로드이미지 선택")
+                //.setPositiveButton("사진촬영",cameraListener)
+                .setNeutralButton("앨범선택",albumListener)
+                .setNegativeButton("취소",canceListener)
+                .show();
+    }
+
 
     private void doTakeAlbumAction() { //앨범에서 이미지 가져오기
         //앨범 호출
@@ -115,9 +234,28 @@ public class Photo_Upload extends AppCompatActivity implements View.OnClickListe
 
                 if(extras != null) {
                     Bitmap photo = extras.getParcelable("data");//CROP된 BITMAP
-                    iv_UserPhoto1.setImageBitmap(photo);
+
+
+                    if (null== iv_UserPhoto1.getDrawable()) {
+                        iv_UserPhoto1.setImageBitmap(photo);
+                    }
+                    else if(null== iv_UserPhoto2.getDrawable()){
+                        iv_UserPhoto2.setImageBitmap(photo);
+                    }
+                    else if(null== iv_UserPhoto3.getDrawable()){
+                        iv_UserPhoto3.setImageBitmap(photo);
+                    }
+                    else if(null==iv_UserPhoto4.getDrawable()){
+                        iv_UserPhoto4.setImageBitmap(photo);
+
+                    }
+                    else{
+                        iv_UserPhoto5.setImageBitmap(photo);
+
+                    }
                     break;
                 }
+
 
 
                 //임시파일삭제
