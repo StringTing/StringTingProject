@@ -3,7 +3,8 @@ package com.example.leeyun.stringting_android;
 import android.app.Application;
 
 import android.app.Activity;
-import android.app.Application;
+
+import com.example.leeyun.stringting_android.API.kakakSDKAdapter;
 import com.kakao.auth.KakaoSDK;
 
 public class GlobalApplication extends Application {
@@ -25,7 +26,7 @@ public class GlobalApplication extends Application {
     public void onCreate() {
         super.onCreate();
         obj = this;
-        KakaoSDK.init(new KakaoSDKAdapter());
+        KakaoSDK.init(new kakakSDKAdapter());
     }
 
     public static GlobalApplication getGlobalApplicationContext() {

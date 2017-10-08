@@ -22,9 +22,6 @@ public class Login_local extends Activity {
             setContentView(R.layout.login_local);
 
 
-
-
-
         }
 
 
@@ -47,6 +44,10 @@ public class Login_local extends Activity {
             Toast.makeText(Login_local.this, "로그인실패", Toast.LENGTH_SHORT).show();
         }
 
+
+    }
+    public void onClick_back(View v){
+        super.onBackPressed(); // or super.finish();
 
     }
 

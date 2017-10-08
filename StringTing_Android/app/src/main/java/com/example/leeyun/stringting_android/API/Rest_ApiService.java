@@ -1,4 +1,4 @@
-package com.example.leeyun.stringting_android;
+package com.example.leeyun.stringting_android.API;
 
 import com.google.gson.annotations.SerializedName;
 import com.kakao.network.response.ResponseBody;

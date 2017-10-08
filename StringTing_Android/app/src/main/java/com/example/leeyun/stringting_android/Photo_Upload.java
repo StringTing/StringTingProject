@@ -25,7 +25,6 @@ public class Photo_Upload extends AppCompatActivity implements View.OnClickListe
     private static final int PICK_FROM_CAMERA = 0;
     private static final int PICK_FROM_ALBUM = 1;
     private static final int CROP_FROM_IMAGE = 2;
-
     private Uri mImageCaptureUri;
     private ImageView iv_UserPhoto1, iv_UserPhoto2, iv_UserPhoto3, iv_UserPhoto4, iv_UserPhoto5, iv_UserPhoto6;
 
@@ -42,6 +41,7 @@ public class Photo_Upload extends AppCompatActivity implements View.OnClickListe
         iv_UserPhoto5 = (ImageView)this.findViewById(R.id.photo5);
         iv_UserPhoto6 = (ImageView)this.findViewById(R.id.photo6);
     }
+
 
 
     public void onClick(View v){
@@ -182,6 +182,11 @@ public class Photo_Upload extends AppCompatActivity implements View.OnClickListe
                 .setNeutralButton("앨범선택",albumListener)
                 .setNegativeButton("취소",canceListener)
                 .show();
+    }
+
+    public void onClick_back(View v){
+        super.onBackPressed(); // or super.finish();
+
     }
 
 

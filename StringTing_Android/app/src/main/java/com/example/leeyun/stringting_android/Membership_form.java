@@ -60,5 +60,8 @@ public class Membership_form extends Activity {
 
     }
 
+    public void onClick_back(View v){
+        super.onBackPressed(); // or super.finish();
 
+    }
 }

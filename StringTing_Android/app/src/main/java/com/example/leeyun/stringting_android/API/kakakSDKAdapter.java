@@ -1,4 +1,4 @@
-package com.example.leeyun.stringting_android;
+package com.example.leeyun.stringting_android.API;
 
 /**
  * Created by leeyun on 2017. 9. 16..
@@ -7,13 +7,14 @@ package com.example.leeyun.stringting_android;
 import android.app.Activity;
 import android.content.Context;
 
+import com.example.leeyun.stringting_android.GlobalApplication;
 import com.kakao.auth.ApprovalType;
 import com.kakao.auth.AuthType;
 import com.kakao.auth.IApplicationConfig;
 import com.kakao.auth.ISessionConfig;
 import com.kakao.auth.KakaoAdapter;
 
-class KakaoSDKAdapter extends KakaoAdapter {
+public class kakakSDKAdapter extends KakaoAdapter {
 
     /**
      * 로그인을 위해 Session을 생성하기 위해 필요한 옵션을 얻기위한 abstract class.

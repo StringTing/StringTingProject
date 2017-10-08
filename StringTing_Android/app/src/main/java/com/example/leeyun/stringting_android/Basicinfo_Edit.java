@@ -56,5 +56,9 @@ public class Basicinfo_Edit extends Activity {
         startActivity(intent);
 
     }
+    public void onClick_back(View v){
+        super.onBackPressed(); // or super.finish();
+
+    }
 
 }

@@ -281,7 +281,7 @@ public class MainActivity extends AppCompatActivity {
                     String kakaoNickname = userProfile.getNickname();     // Nickname 값을 가져옴
                     Log.e("KakaoId", kakaoID);
 
-                    Intent intent = new Intent(MainActivity.this, SuccessActivity.class);
+                    Intent intent = new Intent(MainActivity.this,  Basicinfo_Edit.class);
                     startActivity(intent);
                     finish();
                 }
