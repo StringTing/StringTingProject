@@ -47,11 +47,14 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import okhttp3.ResponseBody;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 import static com.example.leeyun.stringting_android.R.id.Provision_Linkify;
-
+import static com.google.zxing.qrcode.decoder.ErrorCorrectionLevel.Q;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -92,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         //Restrofit_test
-        Call<ResponseBody>comment =apiService.getComment(5);
+        Call<ResponseBody>comment =apiService.getComment(1);
         comment.enqueue(new Callback<ResponseBody>() {
 
             @Override
@@ -109,6 +112,8 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+
 
         TextView Provision_Linkify =(TextView)findViewById(R.id.Provision_Linkify);
 
@@ -187,6 +192,25 @@ public class MainActivity extends AppCompatActivity {
            
             
         });
+
+        Call<ResponseBody>comment2 =apiService.getPostCommentStr("test");
+        comment2.enqueue(new Callback<ResponseBody>() {
+
+            @Override
+            public void onResponse(Call <ResponseBody> call, Response<ResponseBody> response) {
+                try{
+                    Log.v("Test",response.body().string());
+                }catch (IOException e){
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call call, Throwable t) {
+
+            }
+        });
+
 
         CustomloginButton = (Button)findViewById(R.id.loginBtn);
         CustomloginButton.setOnClickListener(new View.OnClickListener() {
@@ -296,13 +320,17 @@ public class MainActivity extends AppCompatActivity {
             // 어쩔때 실패되는지는 테스트를 안해보았음 ㅜㅜ
         }
     }
+
     public interface Rest_ApiService {
 
         public  static  final String API_URL="http://jsonplaceholder.typicode.com/";
 
         @GET("comments")
-        Call<okhttp3.ResponseBody> getComment(@Query("postId")int postId);
+        Call<okhttp3.ResponseBody> getComment(@Query("postId")int testid);
 
+        @FormUrlEncoded
+        @POST("comments")
+        Call<ResponseBody>getPostCommentStr(@Field("postId")String testid);
     }
 
 }

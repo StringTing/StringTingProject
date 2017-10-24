@@ -22,6 +22,7 @@
         <activity android:name=".Login_firstpage"/>
         <activity android:name=".Login_local"/>
         <activity android:name=".Basicinfo_Edit"/>
+        <activity android:name=".Chat_View"/>
         
         <meta-data
         android:name="com.kakao.sdk.AppKey"

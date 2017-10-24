@@ -28,11 +28,16 @@ public class Photo_Upload extends AppCompatActivity implements View.OnClickListe
     private Uri mImageCaptureUri;
     private ImageView iv_UserPhoto1, iv_UserPhoto2, iv_UserPhoto3, iv_UserPhoto4, iv_UserPhoto5, iv_UserPhoto6;
 
+    public void onClick_ChatView(View v){
+        Intent intent = new Intent(getApplicationContext(),Chat_View.class);
+        startActivity(intent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.photo_upload);
+
 
         iv_UserPhoto1 = (ImageView)this.findViewById(R.id.photo1);
         iv_UserPhoto2 = (ImageView)this.findViewById(R.id.photo2);
@@ -41,6 +46,8 @@ public class Photo_Upload extends AppCompatActivity implements View.OnClickListe
         iv_UserPhoto5 = (ImageView)this.findViewById(R.id.photo5);
         iv_UserPhoto6 = (ImageView)this.findViewById(R.id.photo6);
     }
+
+
 
 
 

@@ -167,7 +167,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_marginTop="10dp"
-                android:onClick="onClick_photo_upload"
+                android:onClick="onClick_ChatView"
                 android:text="다음"
                 android:textSize="20sp"
 

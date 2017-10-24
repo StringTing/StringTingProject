@@ -1,79 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/white"
-    tools:context="com.example.leeyun.stringting_android.ChatView">
+    xmlns:chatview="http://schemas.android.com/apk/res-auto"
 
-    <LinearLayout
+    >
+
+    <co.intentservice.chatui.ChatView
+        android:id="@+id/chat_view"
         android:layout_width="match_parent"
-        android:layout_height="40dp">
+        android:layout_height="fill_parent"
+        chatview:backgroundColor="@color/white"
+        chatview:bubbleElevation="elevated"
+        chatview:bubbleBackgroundRcv="@color/white"
+        chatview:bubbleBackgroundSend="@color/white">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <!-- Insert customisation options here -->
 
-            <ImageButton
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:background="@android:color/transparent"
-                android:padding="0sp"
-                android:paddingTop="20dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/backbtn" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:paddingTop="10dp"
-                android:text="기본정보입력"
-                android:textSize="20dp" />
-
-        </RelativeLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_gravity="center"
-        android:orientation="vertical">
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_gravity="center"
-            android:src="@drawable/form_progressbar2"
-            android:textSize="20sp" />
+    </co.intentservice.chatui.ChatView>
 
 
-    </LinearLayout>
-
-    <RelativeLayout
-        android:layout_width="330dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="center">
-
-
-        <EditText
-            android:id="@+id/editText2"
-            android:layout_width="270dp"
-            android:layout_height="40dp"
-            android:layout_alignParentBottom="true"
-            android:ems="10"
-            android:inputType="textPersonName" />
-
-        <Button
-            android:id="@+id/button3"
-            android:layout_width="50dp"
-            android:layout_height="40dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
-            android:text="전송"
-            android:textSize="15dp" />
-    </RelativeLayout>
 </LinearLayout>
