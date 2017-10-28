@@ -61,7 +61,7 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
     private ImageView iv_UserPhoto1, iv_UserPhoto2, iv_UserPhoto3, iv_UserPhoto4, iv_UserPhoto5, iv_UserPhoto6;
 
     public void onClick_ChatView(View v) {
-        Intent intent = new Intent(getApplicationContext(), Chat_View.class);
+        Intent intent = new Intent(getApplicationContext(), ChatView.class);
         startActivity(intent);
     }
 
@@ -106,7 +106,7 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
     }
 
     public void onClick_photo_upload(View v) {
-        Intent intent = new Intent(getApplicationContext(), Chat_View.class);
+        Intent intent = new Intent(getApplicationContext(), ChatView.class);
 
         startActivity(intent);
 
