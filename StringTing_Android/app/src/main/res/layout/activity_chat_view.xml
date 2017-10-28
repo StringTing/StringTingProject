@@ -1,23 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:chatview="http://schemas.android.com/apk/res-auto"
+    tools:context="com.example.leeyun.stringting_android.ChatView">
 
-    >
-
-    <co.intentservice.chatui.ChatView
-        android:id="@+id/chat_view"
+    <LinearLayout
+        android:id="@+id/sb"
         android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        chatview:backgroundColor="@color/white"
-        chatview:bubbleElevation="elevated"
-        chatview:bubbleBackgroundRcv="@color/white"
-        chatview:bubbleBackgroundSend="@color/white">
+        android:layout_height="40dp">
 
-        <!-- Insert customisation options here -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    </co.intentservice.chatui.ChatView>
+            <ImageButton
+                android:id="@+id/img_btn1"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@android:color/transparent"
+                android:padding="0sp"
+                android:paddingTop="20dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/backbtn" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:paddingTop="10dp"
+                android:text="대화함"
+                android:textSize="20dp" />
 
-</LinearLayout>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/sb"
+        android:layout_above="@+id/enter_chatting"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_alignParentStart="true">
+
+        <ListView
+            android:id="@+id/listView1"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:cacheColorHint="#00000000"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="5dp"
+            android:listSelector="#00000000"
+            android:transcriptMode="alwaysScroll" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/enter_chatting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/input_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_weight="9"
+            android:ems="10"
+            android:inputType="textPersonName" />
+
+        <Button
+            android:id="@+id/send_btn"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="전송" />
+    </LinearLayout>
+
+</RelativeLayout>
