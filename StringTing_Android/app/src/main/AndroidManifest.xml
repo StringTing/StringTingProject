@@ -22,9 +22,9 @@
         <activity android:name=".Membership_form" ></activity>
         <activity android:name=".Login_firstpage"/>
         <activity android:name=".Login_local"/>
-        <activity android:name=".Basicinfo_Edit"/>
-        <activity android:name=".Chat_View"/>
-        
+        <activity android:name=".Basicinfo_Edit"
+            android:windowSoftInputMode="stateAlwaysHidden"/>
+
         <meta-data
         android:name="com.kakao.sdk.AppKey"
         android:value="@string/kakao_app_key" />
