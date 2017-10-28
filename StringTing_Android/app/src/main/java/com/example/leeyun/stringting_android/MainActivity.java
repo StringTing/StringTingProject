@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
     private CallbackManager callbackManager;
 
     static String Email;
+    GlobalApplication globalApplication=(GlobalApplication)getApplication();
 
     //rest api를 위한 변수선언
     Retrofit retrofit;
@@ -169,9 +170,14 @@ public class MainActivity extends AppCompatActivity {
                             public void onCompleted(JSONObject object, GraphResponse response) {
                                 try {
                                     Log.e("user profile", object.toString());
-
                                     Email   = response.getJSONObject().getString("id").toString();
                                     Log.e("email:",Email);
+                                    Intent intent = new Intent(MainActivity.this,  Basicinfo_Edit.class);
+                                    intent.putExtra("facebook_email",Email);
+                                    intent.putExtra("setid",'F');
+                                    startActivity(intent);
+
+
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
@@ -251,6 +257,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         super.onActivityResult(requestCode, resultCode, data);
+
     }
 
     public void onClick_membership(View v){
@@ -306,8 +313,9 @@ public class MainActivity extends AppCompatActivity {
                     Log.e("KakaoId", kakaoID);
 
                     Intent intent = new Intent(MainActivity.this,  Basicinfo_Edit.class);
+                    intent.putExtra("kakaoID",kakaoID);
+                    intent.putExtra("setid",'K');
                     startActivity(intent);
-                    finish();
                 }
             });
 

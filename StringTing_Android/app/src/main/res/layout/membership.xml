@@ -124,6 +124,7 @@
                     android:layout_height="wrap_content"
                     android:text=""
                     android:textSize="20dp"
+                    android:inputType="textPassword"
                     android:layout_alignBaseline="@+id/Pw_text"
                     android:layout_alignBottom="@+id/Pw_text"
                     android:layout_alignParentEnd="true" />
@@ -134,7 +135,9 @@
                     android:layout_alignLeft="@+id/Pw_edit"
                     android:layout_below="@+id/Pw_edit"
                     android:textSize="15dp"
-                    android:text="ddd"/>
+                    android:textColor="#F15F5F"
+
+                    android:text=""/>
 
 
             </RelativeLayout>
@@ -171,11 +174,22 @@
                     android:layout_height="wrap_content"
 
                     android:layout_alignParentEnd="true"
-
+                    android:inputType="textPassword"
                     android:layout_alignParentTop="true"
                     android:paddingTop="20dp"
                     android:text=""
                     android:textSize="20dp" />
+                <TextView
+                    android:id="@+id/Pw_equalText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_alignLeft="@+id/check_pw"
+                    android:layout_below="@+id/check_pw"
+                    android:textSize="15dp"
+                    android:textColor="#F15F5F"
+
+                    android:text=""/>
+
 
             </RelativeLayout>
 
