@@ -69,4 +69,9 @@ public class ChatView extends Activity {
         m_Adapter.add(inputValue,_str) ;
         m_Adapter.notifyDataSetChanged();
     }
+    public void onClick_back(View v) {
+        super.onBackPressed(); // or super.finish();
+
+    }
+
 }

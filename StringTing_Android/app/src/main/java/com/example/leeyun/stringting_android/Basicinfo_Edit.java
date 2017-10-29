@@ -61,13 +61,14 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
     private ImageView iv_UserPhoto1, iv_UserPhoto2, iv_UserPhoto3, iv_UserPhoto4, iv_UserPhoto5, iv_UserPhoto6;
 
     public void onClick_ChatView(View v) {
-        Intent intent = new Intent(getApplicationContext(), ChatView.class);
+        Intent intent = new Intent(getApplicationContext(), ChatCustom.class);
         startActivity(intent);
     }
 
     public void onClick_Basicinfo_upload(View v){               //basicinfo에서 불러온 정보들을 변수에 저장
         EditText Check_email= (EditText)findViewById(Email);
-
+        Intent intent = new Intent(getApplicationContext(), ChatView.class);
+        startActivity(intent);
     }
 
     @Override
