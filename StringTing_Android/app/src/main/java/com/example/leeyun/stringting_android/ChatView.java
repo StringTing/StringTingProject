@@ -36,6 +36,11 @@ public class ChatView extends Activity {
                 "제가 하는 질문을 이상형인 사람이 질문한다고생각해주시고 정성스럽게 답장해주세요!", 0);
 
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> origin/master
         /*요기가 우리가 띄울거
         findViewById(R.id.send_btn).setOnClickListener(new Button.OnClickListener() {
             @Override
@@ -69,9 +74,12 @@ public class ChatView extends Activity {
         m_Adapter.add(inputValue,_str) ;
         m_Adapter.notifyDataSetChanged();
     }
+<<<<<<< HEAD
     public void onClick_back(View v) {
         super.onBackPressed(); // or super.finish();
 
     }
 
+=======
+>>>>>>> origin/master
 }
