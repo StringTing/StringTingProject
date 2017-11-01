@@ -313,7 +313,7 @@ public class MainActivity extends AppCompatActivity {
                     Log.e("KakaoId", kakaoID);
 
                     Intent intent = new Intent(MainActivity.this,  Basicinfo_Edit.class);
-                    intent.putExtra("kakaoID",kakaoID);
+                    intent.putExtra("ID",kakaoID);
                     intent.putExtra("setid",'K');
                     startActivity(intent);
                 }

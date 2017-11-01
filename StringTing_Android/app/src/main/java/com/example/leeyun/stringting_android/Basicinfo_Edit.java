@@ -76,6 +76,7 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.basicinfo_edit);
 
+        userinfo_save();
 
         iv_UserPhoto1 = (ImageView) this.findViewById(R.id.photo1);
         iv_UserPhoto2 = (ImageView) this.findViewById(R.id.photo2);
@@ -334,5 +335,20 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
             }
 
         }
+    }
+    public void userinfo_save(){
+        userinfo UserInfo =new userinfo();
+
+        Intent i =getIntent();                      // facebook 또는 kakao의 아이디, 메신저타입을 받아와 변수에 저장
+        String id=i.getExtras().getString("ID");
+        char Setting_id=i.getExtras().getChar("setid");
+        Log.e("Test", id);
+        Log.e("Test2", String.valueOf(Setting_id));
+
+        UserInfo.Id=id;
+        Log.e("Test3",UserInfo.Id);                     //LOG.e는 테스트코드
+
+        EditText editText = (EditText) findViewById(R.id.input_text);
+        String inputValue = editText.getText().toString();
     }
 }
