@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import static com.facebook.FacebookSdk.getApplicationContext;
+
 /**
  * Created by sg970 on 2017-10-28.
  */
@@ -32,7 +34,6 @@ public class ChatCustom extends BaseAdapter{
     }
     // 외부에서 아이템 추가 요청 시 사용
     public void add(String _msg,int _type) {
-
         m_List.add(new ListContents(_msg,_type));
     }
 
@@ -56,7 +57,7 @@ public class ChatCustom extends BaseAdapter{
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         final int pos = position;
         final Context context = parent.getContext();
 
@@ -104,28 +105,27 @@ public class ChatCustom extends BaseAdapter{
             viewLeft.setVisibility(View.GONE);
         }else if(m_List.get(position).type == 1){
             text.setBackgroundResource(R.drawable.bubble_right);
+            text.append("\n\n수정하기");
+            text.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
             layout.setGravity(Gravity.RIGHT);
             viewRight.setVisibility(View.GONE);
             viewLeft.setVisibility(View.GONE);
+
+           /* //수정하기 버튼 누르면 할일
+            final TextView finalText = text;
+            convertView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finalText.getText();
+                }
+            });*/
         }
         /*else if(m_List.get(position).type == 2){
             text.setBackgroundResource(R.drawable.datebg);
             layout.setGravity(Gravity.CENTER);
             viewRight.setVisibility(View.VISIBLE);
             viewLeft.setVisibility(View.VISIBLE);
-        }*/
-
-        /*
-        // 리스트 아이템을 터치 했을 때 이벤트 발생
-
-        convertView.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                // 터치 시 해당 아이템 이름 출력
-                Toast.makeText(context, "리스트 클릭 : "+m_List.get(pos), Toast.LENGTH_SHORT).show();
-            }
-        });
+        }
 
         // 리스트 아이템을 길게 터치 했을때 이벤트 발생
         convertView.setOnLongClickListener(new View.OnLongClickListener() {
