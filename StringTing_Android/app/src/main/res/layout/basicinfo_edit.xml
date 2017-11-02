@@ -229,21 +229,21 @@
                         segmentedgroup:sc_corner_radius="10dp">
 
                         <RadioButton
-                            android:id="@+id/Complete"
+                            android:id="@+id/RadioArmy_Complete"
                             style="@style/RadioButton"
                             android:layout_width="90dp"
                             android:layout_height="wrap_content"
                             android:text="군필" />
 
                         <RadioButton
-                            android:id="@+id/InComplete"
+                            android:id="@+id/RadioArmy_InComplete"
                             style="@style/RadioButton"
                             android:layout_width="90dp"
                             android:layout_height="wrap_content"
                             android:text="미필" />
 
                         <RadioButton
-                            android:id="@+id/Notduty"
+                            android:id="@+id/RadioArmy_Notduty"
                             style="@style/RadioButton"
                             android:layout_width="90dp"
                             android:layout_height="wrap_content"
@@ -427,14 +427,14 @@
                         segmentedgroup:sc_corner_radius="10dp">
 
                         <RadioButton
-                            android:id="@+id/smoking"
+                            android:id="@+id/Radio_smokingO"
                             style="@style/RadioButton"
                             android:layout_width="135dp"
                             android:layout_height="wrap_content"
                             android:text="흡연" />
 
                         <RadioButton
-                            android:id="@+id/Not_smoking"
+                            android:id="@+id/RadioNot_smoking"
                             style="@style/RadioButton"
                             android:layout_width="135dp"
                             android:layout_height="wrap_content"

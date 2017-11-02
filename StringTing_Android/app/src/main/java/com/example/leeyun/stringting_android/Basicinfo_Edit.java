@@ -13,8 +13,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -30,7 +33,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.io.File;
 
@@ -46,6 +51,8 @@ import static com.example.leeyun.stringting_android.R.id.Spinner_blood;
 import static com.example.leeyun.stringting_android.R.id.Spinner_city;
 import static com.example.leeyun.stringting_android.R.id.Spinner_drink;
 import static com.example.leeyun.stringting_android.R.id.Spinner_religion;
+import static com.example.leeyun.stringting_android.R.id.radioButton;
+import static com.example.leeyun.stringting_android.R.id.radioButton1;
 import static com.example.leeyun.stringting_android.R.layout.spinner_item;
 import static com.facebook.FacebookSdk.getApplicationContext;
 
@@ -59,6 +66,8 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
     private static final int CROP_FROM_IMAGE = 2;
     private Uri mImageCaptureUri;
     private ImageView iv_UserPhoto1, iv_UserPhoto2, iv_UserPhoto3, iv_UserPhoto4, iv_UserPhoto5, iv_UserPhoto6;
+
+
 
     public void onClick_ChatView(View v) {
         Intent intent = new Intent(getApplicationContext(), ChatCustom.class);
@@ -103,6 +112,10 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
         blood.setAdapter(adapter3);
         drink.setAdapter(adapter4);
         religion.setAdapter(adapter5);
+
+
+        RadioChecked();
+
 
 
     }
@@ -339,16 +352,88 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
     public void userinfo_save(){
         userinfo UserInfo =new userinfo();
 
-        Intent i =getIntent();                      // facebook 또는 kakao의 아이디, 메신저타입을 받아와 변수에 저장
+        final Intent i =getIntent();                      // facebook 또는 kakao의 아이디, 메신저타입을 받아와 변수에 저장
         String id=i.getExtras().getString("ID");
         char Setting_id=i.getExtras().getChar("setid");
         Log.e("Test", id);
-        Log.e("Test2", String.valueOf(Setting_id));
-
+        Log.e("Test1", String.valueOf(Setting_id));
         UserInfo.Id=id;
         Log.e("Test3",UserInfo.Id);                     //LOG.e는 테스트코드
 
-        EditText editText = (EditText) findViewById(R.id.input_text);
-        String inputValue = editText.getText().toString();
+
+
+
+
+    }
+        // RadioButton을  checked 하는 함수
+    public void RadioChecked(){
+        final RadioButton RadioMan_checked = (RadioButton) findViewById(R.id.RadioMan);
+        final RadioButton RadioWomen_checked= (RadioButton)findViewById(R.id.RadioWoman);
+        final RadioButton RadioArmy_Complete_checked= (RadioButton)findViewById(R.id.RadioArmy_Complete);
+        final RadioButton RadioArmy_InComplete_checked= (RadioButton)findViewById(R.id.RadioArmy_InComplete);
+        final RadioButton RadioArmy_Notduty_checked= (RadioButton)findViewById(R.id.RadioArmy_Notduty);
+        final RadioButton Radio_smoking= (RadioButton)findViewById(R.id.Radio_smokingO);
+        final RadioButton Radio_Notsmoking= (RadioButton)findViewById(R.id.RadioNot_smoking);
+
+
+
+        RadioMan_checked.setOnClickListener(new RadioButton.OnClickListener(){
+            public void onClick(View v) {
+                if (RadioMan_checked.isChecked()) {
+                    Log.e("성별.", "남자");
+                }
+
+            }
+        });
+        RadioWomen_checked.setOnClickListener(new RadioButton.OnClickListener(){
+            public void onClick(View v) {
+                if (RadioMan_checked.isChecked()) {
+                    Log.e("성별.", "여자");
+                }
+
+            }
+        });
+
+        RadioArmy_Complete_checked.setOnClickListener(new RadioButton.OnClickListener(){
+            public void onClick(View v) {
+                if (RadioArmy_Complete_checked.isChecked()) {
+                    Log.e("병역.", "병역필");
+                }
+
+            }
+        });
+
+        RadioArmy_InComplete_checked.setOnClickListener(new RadioButton.OnClickListener(){
+            public void onClick(View v) {
+                if (RadioArmy_InComplete_checked.isChecked()) {
+                    Log.e("병역.", "미필");
+                }
+
+            }
+        });
+        RadioArmy_Notduty_checked.setOnClickListener(new RadioButton.OnClickListener(){
+            public void onClick(View v) {
+                if (RadioArmy_Notduty_checked.isChecked()) {
+                    Log.e("병역.", "미필");
+                }
+
+            }
+        });
+        Radio_smoking.setOnClickListener(new RadioButton.OnClickListener(){
+            public void onClick(View v) {
+                if (Radio_smoking.isChecked()) {
+                    Log.e("흡연.", "흡연");
+                }
+
+            }
+        });
+        Radio_Notsmoking.setOnClickListener(new RadioButton.OnClickListener(){
+            public void onClick(View v) {
+                if (Radio_Notsmoking.isChecked()) {
+                    Log.e("흡연.", "흡연");
+                }
+
+            }
+        });
     }
 }
