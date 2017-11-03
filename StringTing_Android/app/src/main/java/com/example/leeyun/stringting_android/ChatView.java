@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -26,6 +27,12 @@ public class ChatView extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_view);
+
+        userinfo Userinfo = (userinfo)getIntent().getSerializableExtra("UserInfo");
+
+        Log.e("Blood_TYPE",Userinfo.blood_type);
+        Log.e("Department",Userinfo.department);
+
 
         // 커스텀 어댑터 생성
         m_Adapter = new ChatCustom();

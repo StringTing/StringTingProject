@@ -7,6 +7,7 @@
     <string name="blood_prompt">혈액형</string>
     <string name="religion_prompt">종교</string>
     <string name="drink_prompt">음주</string>
+    <string name="education_prompt">학력</string>
 
     <string-array name="age">
         <item>20</item>
@@ -43,6 +44,7 @@
         <item>O</item>
         <item>AB</item>
     </string-array>
+
     <string-array name="religion">
         <item>없음</item>
         <item>기독교</item>
@@ -56,4 +58,15 @@
         <item>적당히 즐김</item>
         <item>즐김</item>
     </string-array>
+
+    <string-array name="education">
+        <item>인서울 상위</item>
+        <item>인서울 4년제</item>
+        <item>수도권 4년</item>
+        <item>전문대</item>
+        <item>4년제</item>
+        <item>해외대학</item>
+        <item>고졸</item>
+    </string-array>
+
 </resources>

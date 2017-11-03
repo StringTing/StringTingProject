@@ -260,6 +260,35 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:id="@+id/text_id00"
+                        android:layout_width="60dp"
+                        android:layout_height="22dp"
+                        android:paddingRight="13dp"
+                        android:text="학력"
+
+                        android:textSize="20dp" />
+
+                    <Spinner
+                        android:id="@+id/Spinner_education"
+                        android:layout_width="325dp"
+                        android:layout_height="30dp"
+                        android:layout_alignTop="@+id/text_id00"
+                        android:layout_gravity="center"
+                        android:layout_margin="3dp"
+                        android:layout_toRightOf="@+id/text_id00"
+                        android:prompt="@string/education_prompt">
+
+                    </Spinner>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
                         android:id="@+id/text_id3"
                         android:layout_width="60dp"
                         android:layout_height="22dp"
