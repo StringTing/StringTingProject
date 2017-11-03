@@ -54,9 +54,6 @@ public class ChatView extends Activity {
         Log.e("TestGson",Userinfo_Json);
 
 
-        retrofit = new Retrofit.Builder().baseUrl(Rest_ApiService.API_URL).build();
-        apiService= retrofit.create(Rest_ApiService.class);
-
         
 
 

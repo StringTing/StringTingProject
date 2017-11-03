@@ -76,6 +76,8 @@ public class Membership_form extends Activity {
 
             if(PW.equals(EqualPw)) {
                 Intent intent = new Intent(getApplicationContext(), Basicinfo_Edit.class);
+                intent.putExtra("ID",Email);
+                intent.putExtra("setid",'F');
                 startActivity(intent);
 
             }

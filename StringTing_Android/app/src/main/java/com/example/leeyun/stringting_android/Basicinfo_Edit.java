@@ -76,10 +76,7 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
 
 
 
-    public void onClick_ChatView(View v) {
-        Intent intent = new Intent(getApplicationContext(), ChatCustom.class);
-        startActivity(intent);
-    }
+
 
     public void onClick_Basicinfo_upload(View v){               //basicinfo에서 불러온 정보들을 변수에 저장
         RadioChecked_SpinnerCheck();
