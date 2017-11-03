@@ -152,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
                                     Email   = response.getJSONObject().getString("id").toString();
                                     Log.e("email:",Email);
                                     Intent intent = new Intent(MainActivity.this,  Basicinfo_Edit.class);
-                                    intent.putExtra("facebook_email",Email);
+                                    intent.putExtra("ID",Email);
                                     intent.putExtra("setid",'F');
                                     startActivity(intent);
 
