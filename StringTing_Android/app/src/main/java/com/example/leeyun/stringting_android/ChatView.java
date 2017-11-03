@@ -15,6 +15,21 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
+import java.io.IOException;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
+import retrofit2.http.POST;
+import retrofit2.http.Query;
+
 import static android.R.attr.visible;
 import static com.example.leeyun.stringting_android.R.styleable.View;
 import static com.facebook.FacebookSdk.getApplicationContext;
@@ -22,6 +37,8 @@ import static com.facebook.FacebookSdk.getApplicationContext;
 public class ChatView extends Activity {
     ListView m_ListView;
     ChatCustom m_Adapter;
+    Retrofit retrofit;
+    Rest_ApiService apiService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +49,16 @@ public class ChatView extends Activity {
 
         Log.e("Blood_TYPE",Userinfo.blood_type);
         Log.e("Department",Userinfo.department);
+
+        String Userinfo_Json= new Gson().toJson(Userinfo);
+        Log.e("TestGson",Userinfo_Json);
+
+
+        retrofit = new Retrofit.Builder().baseUrl(Rest_ApiService.API_URL).build();
+        apiService= retrofit.create(Rest_ApiService.class);
+
+        
+
 
 
         // 커스텀 어댑터 생성
@@ -111,4 +138,16 @@ public class ChatView extends Activity {
 
     }
 
+
+    public interface Rest_ApiService {
+
+        public  static  final String API_URL="115.68.226.54:3825/information/join/";
+
+        @GET("comments")
+        Call<ResponseBody> getComment(@Query("postId")int testid);
+
+        @FormUrlEncoded
+        @POST("comments")
+        Call<ResponseBody>getPostCommentStr(@Field("postId")String testid);
+    }
 }

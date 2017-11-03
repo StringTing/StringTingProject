@@ -66,8 +66,7 @@ public class MainActivity extends AppCompatActivity {
     GlobalApplication globalApplication=(GlobalApplication)getApplication();
 
     //rest api를 위한 변수선언
-    Retrofit retrofit;
-    Rest_ApiService apiService;
+
 
     class Strings extends Application {
 
@@ -91,29 +90,9 @@ public class MainActivity extends AppCompatActivity {
         FacebookSdk.sdkInitialize(getApplicationContext()); // SDK 초기화 (setContentView 보다 먼저 실행되어야합니다. 안그럼 에러납니다.)
         setContentView(R.layout.activity_main);
 
-        retrofit = new Retrofit.Builder().baseUrl(Rest_ApiService.API_URL).build();
-        apiService=retrofit.create(Rest_ApiService.class);
 
 
         //Restrofit_test
-        Call<ResponseBody>comment =apiService.getComment(1);
-        comment.enqueue(new Callback<ResponseBody>() {
-
-            @Override
-            public void onResponse(Call <ResponseBody> call, Response<ResponseBody> response) {
-                try{
-                    Log.v("Test",response.body().string());
-                }catch (IOException e){
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onFailure(Call call, Throwable t) {
-
-            }
-        });
-
 
 
         TextView Provision_Linkify =(TextView)findViewById(R.id.Provision_Linkify);
@@ -199,23 +178,7 @@ public class MainActivity extends AppCompatActivity {
             
         });
 
-        Call<ResponseBody>comment2 =apiService.getPostCommentStr("test");
-        comment2.enqueue(new Callback<ResponseBody>() {
 
-            @Override
-            public void onResponse(Call <ResponseBody> call, Response<ResponseBody> response) {
-                try{
-                    Log.v("Test",response.body().string());
-                }catch (IOException e){
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onFailure(Call call, Throwable t) {
-
-            }
-        });
 
 
         CustomloginButton = (Button)findViewById(R.id.loginBtn);
@@ -327,18 +290,6 @@ public class MainActivity extends AppCompatActivity {
             // 세션 연결이 실패했을때
             // 어쩔때 실패되는지는 테스트를 안해보았음 ㅜㅜ
         }
-    }
-
-    public interface Rest_ApiService {
-
-        public  static  final String API_URL="http://jsonplaceholder.typicode.com/";
-
-        @GET("comments")
-        Call<okhttp3.ResponseBody> getComment(@Query("postId")int testid);
-
-        @FormUrlEncoded
-        @POST("comments")
-        Call<ResponseBody>getPostCommentStr(@Field("postId")String testid);
     }
 
 }
