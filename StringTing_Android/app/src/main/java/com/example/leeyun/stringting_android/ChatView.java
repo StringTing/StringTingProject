@@ -2,20 +2,17 @@ package com.example.leeyun.stringting_android;
 
 import android.app.Activity;
 import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
-import android.widget.CursorAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.kakao.usermgmt.response.model.User;
 
 import java.io.IOException;
 
@@ -29,10 +26,6 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
-
-import static android.R.attr.visible;
-import static com.example.leeyun.stringting_android.R.styleable.View;
-import static com.facebook.FacebookSdk.getApplicationContext;
 
 public class ChatView extends Activity {
     ListView m_ListView;
@@ -50,12 +43,27 @@ public class ChatView extends Activity {
         Log.e("Blood_TYPE",Userinfo.blood_type);
         Log.e("Department",Userinfo.department);
 
-        String Userinfo_Json= new Gson().toJson(Userinfo);
+        final String Userinfo_Json= new Gson().toJson(Userinfo);
         Log.e("TestGson",Userinfo_Json);
 
 
-        
 
+        Call<ResponseBody> comment = apiService.getPostCommentStr(Userinfo_Json);
+        comment.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+               try {
+                   Log.e("OnResponse", Userinfo_Json);
+               }catch (NumberFormatException nfe){
+                   Log.e("onFailure","dd");
+               }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.d("sam", "fail");
+            }
+        });
 
 
         // 커스텀 어댑터 생성
@@ -138,13 +146,15 @@ public class ChatView extends Activity {
 
     public interface Rest_ApiService {
 
-        public  static  final String API_URL="115.68.226.54:3825/information/join/";
+        public  static  final String API_URL="http://115.68.226.54:3825/information/join/";
 
         @GET("comments")
         Call<ResponseBody> getComment(@Query("postId")int testid);
 
         @FormUrlEncoded
         @POST("comments")
-        Call<ResponseBody>getPostCommentStr(@Field("postId")String testid);
+        Call<ResponseBody>getPostCommentStr(@Field("PostJSON2") String UserinfoJson);
+
     }
+
 }
