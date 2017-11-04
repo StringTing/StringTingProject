@@ -149,13 +149,13 @@ public class ChatView extends Activity {
 
     public interface Rest_ApiService {
 
-        public  static  final String API_URL="http://115.68.226.54:3825/information/join/";
+        public  static  final String API_URL="http://115.68.226.54:3825/information/";
 
-        @GET("comments")
+        @GET("/")
         Call<ResponseBody> getComment(@Query("postId")int testid);
 
         @FormUrlEncoded
-        @POST("comments")
+        @POST("join")
         Call<ResponseBody>getPostCommentStr(@Field("PostJSON2") String UserinfoJson);
 
     }
