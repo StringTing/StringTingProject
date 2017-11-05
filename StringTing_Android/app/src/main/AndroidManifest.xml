@@ -30,7 +30,7 @@
         android:value="@string/kakao_app_key" />
         <activity android:name=".SuccessActivity"></activity>
         <activity android:name=".ChatView" />
-        
+        <activity android:name=".TabbedBar"/>
         <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id" />
 
         

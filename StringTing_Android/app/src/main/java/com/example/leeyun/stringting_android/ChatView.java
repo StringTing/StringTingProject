@@ -2,6 +2,7 @@ package com.example.leeyun.stringting_android;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -144,6 +145,11 @@ public class ChatView extends Activity {
     public void onClick_back(View v) {
         super.onBackPressed(); // or super.finish();
 
+    }
+
+    public void onClick_TabbedBar(View v){               //basicinfo에서 불러온 정보들을 변수에 저장
+        Intent intent = new Intent(getApplicationContext(), TabbedBar.class);
+        startActivity(intent);
     }
 
 
