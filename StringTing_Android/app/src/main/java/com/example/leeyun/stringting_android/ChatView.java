@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -14,24 +13,15 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.example.leeyun.stringting_android.API.ResponseApi;
+import com.example.leeyun.stringting_android.API.Rest_ApiService;
 import com.example.leeyun.stringting_android.API.userinfo;
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 
-import okhttp3.MediaType;
-import okhttp3.RequestBody;
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.http.Body;
-import retrofit2.http.Field;
-import retrofit2.http.FormUrlEncoded;
-import retrofit2.http.GET;
-import retrofit2.http.POST;
-import retrofit2.http.Query;
 
 public class ChatView extends Activity {
     ListView m_ListView;
@@ -170,25 +160,6 @@ public class ChatView extends Activity {
     }
 
 
-    public interface Rest_ApiService {
 
-        public  static  final String API_URL="http://115.68.226.54:3825/information/";
-
-        @GET("/")
-        Call<ResponseBody> getComment(@Query("postId")int testid);
-
-        @FormUrlEncoded
-        @POST("join/")
-        Call<ResponseApi> getPostCommentStr(@Field("PostJSON2") String Userinfo_Json);
-
-        @FormUrlEncoded
-        @POST("check_email/")
-        Call<ResponseApi> getPostEmailStr(@Field("email") String email);
-
-        @POST("check_email/")
-        Call<ResponseApi> getPostEmailStr1(@Body ResponseApi reponseapi);
-
-
-    }
 
 }
