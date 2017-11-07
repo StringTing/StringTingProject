@@ -1,4 +1,6 @@
-package com.example.leeyun.stringting_android;
+package com.example.leeyun.stringting_android.API;
+
+import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
@@ -8,7 +10,9 @@ import java.io.Serializable;
 
 public class userinfo implements Serializable{
 
+    @SerializedName("Id")
     public String Id;
+    public String email;
     public int age;
     public String password;
     public char login_format;
@@ -25,6 +29,7 @@ public class userinfo implements Serializable{
     public String blood_type;
     public char authenticated;
     public String id_image;
+
 
 
 }

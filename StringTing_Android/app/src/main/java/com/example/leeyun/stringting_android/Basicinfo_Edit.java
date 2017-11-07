@@ -1,6 +1,5 @@
 package com.example.leeyun.stringting_android;
 
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -13,53 +12,24 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.Spinner;
-import android.app.Dialog;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.net.Uri;
-import android.os.Environment;
-import android.provider.MediaStore;
-import android.provider.Settings;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.ImageView;
-import android.widget.Toast;
 
-import com.kakao.usermgmt.response.model.User;
+import com.example.leeyun.stringting_android.API.userinfo;
 
 import java.io.File;
 
 
-import org.w3c.dom.Text;
-
-import java.io.File;
-
-import static android.app.Activity.RESULT_OK;
-import static com.example.leeyun.stringting_android.R.id.Email;
-import static com.example.leeyun.stringting_android.R.id.InputCarrea;
-import static com.example.leeyun.stringting_android.R.id.InputTall;
 import static com.example.leeyun.stringting_android.R.id.Spinner_age;
 import static com.example.leeyun.stringting_android.R.id.Spinner_blood;
 import static com.example.leeyun.stringting_android.R.id.Spinner_city;
 import static com.example.leeyun.stringting_android.R.id.Spinner_drink;
 import static com.example.leeyun.stringting_android.R.id.Spinner_education;
 import static com.example.leeyun.stringting_android.R.id.Spinner_religion;
-import static com.example.leeyun.stringting_android.R.id.radioButton;
-import static com.example.leeyun.stringting_android.R.id.radioButton1;
 import static com.example.leeyun.stringting_android.R.layout.spinner_item;
-import static com.facebook.FacebookSdk.getApplicationContext;
 import static java.lang.Integer.parseInt;
 
 /**
@@ -372,10 +342,7 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
         UserInfo.Id=id;
         UserInfo.login_format=Setting_id;
         Log.e("Test3",UserInfo.Id);                     //LOG.e는 테스트코드
-
-
-
-
+        UserInfo.email=id;
 
     }
         // RadioButton을  checked 하는 함수
