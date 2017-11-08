@@ -1,5 +1,6 @@
 package com.example.leeyun.stringting_android;
 
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ public class TabbedBar extends AppCompatActivity implements View.OnClickListener
     private final int FRAGMENT4= 4;
     private final int FRAGMENT5= 5;
 
+    ViewPager pager;
 
     private Button bt_tab1, bt_tab2,bt_tab3,bt_tab4,bt_tab5;
 
@@ -21,6 +23,24 @@ public class TabbedBar extends AppCompatActivity implements View.OnClickListener
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tabbed_bar);
+
+
+
+
+
+        //ViewPager에 설정할 Adapter 객체 생성
+
+        //ListView에서 사용하는 Adapter와 같은 역할.
+
+        //다만. ViewPager로 스크롤 될 수 있도록 되어 있다는 것이 다름
+
+        //PagerAdapter를 상속받은 CustomAdapter 객체 생성
+
+        //CustomAdapter에게 LayoutInflater 객체 전달
+
+
+
+
 
         // 위젯에 대한 참조
         bt_tab1 = (Button)findViewById(R.id.button1);
