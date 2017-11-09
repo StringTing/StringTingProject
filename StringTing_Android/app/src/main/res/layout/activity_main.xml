@@ -94,6 +94,7 @@
             android:layout_margin="10dp"
             android:background="@color/colorPrimary"
             android:text="커스텀 페이스북 로그인 버튼"
+            android:onClick="facebookLoginOnclick"
             android:textColor="#fff"
 
             />

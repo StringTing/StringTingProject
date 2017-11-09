@@ -1,15 +1,20 @@
 package com.example.leeyun.stringting_android;
 
 import android.app.Application;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.util.Linkify;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONObject;
 
@@ -20,6 +25,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
+import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -55,17 +61,19 @@ import retrofit2.http.Query;
 
 import static com.example.leeyun.stringting_android.R.id.Provision_Linkify;
 import static com.google.zxing.qrcode.decoder.ErrorCorrectionLevel.Q;
+import static com.kakao.auth.StringSet.error;
 
 
 public class MainActivity extends AppCompatActivity {
     private LoginButton loginButton;
+
     private Button CustomloginButton;
     private CallbackManager callbackManager;
 
-    static String Email;
-    GlobalApplication globalApplication=(GlobalApplication)getApplication();
+    SessionCallback callback;
 
-    //rest api를 위한 변수선언
+    static String Email;
+
 
 
     class Strings extends Application {
@@ -91,14 +99,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-
         //Restrofit_test
 
 
-        TextView Provision_Linkify =(TextView)findViewById(R.id.Provision_Linkify);
+        TextView Provision_Linkify = (TextView) findViewById(R.id.Provision_Linkify);
 
-        String text="가입하기 또는 로그인 버튼을 누루면 이용약관 및 개인정보취급방침에 동의하신 것이 됩니다.";
-                Provision_Linkify.setText(text);
+        String text = "가입하기 또는 로그인 버튼을 누루면 이용약관 및 개인정보취급방침에 동의하신 것이 됩니다.";
+        Provision_Linkify.setText(text);
 
         Linkify.TransformFilter mTransform = new Linkify.TransformFilter() {
             @Override
@@ -110,105 +117,74 @@ public class MainActivity extends AppCompatActivity {
         Pattern pattern1 = Pattern.compile("이용약관");
         Pattern pattern2 = Pattern.compile("개인정보취급방침");
 
-        Linkify.addLinks(Provision_Linkify, pattern1, "http://www.naver.com",null,mTransform);
-        Linkify.addLinks(Provision_Linkify, pattern2, "http://gun0912.tistory.com/",null,mTransform);
+        Linkify.addLinks(Provision_Linkify, pattern1, "http://www.naver.com", null, mTransform);
+        Linkify.addLinks(Provision_Linkify, pattern2, "http://gun0912.tistory.com/", null, mTransform);
 
         //이용약관 및 개인정보 취급방식에대한 링크
 
 
 
-        UserManagement.requestLogout(new LogoutResponseCallback() {
-            @Override
-            public void onCompleteLogout() {
-                //로그아웃 성공 후 하고싶은 내용 코딩 ~
-            }
-        });
 
-        SessionCallback callback = new SessionCallback();
+        callback = new SessionCallback();
         Session.getCurrentSession().addCallback(callback);
+
+
         
-        callbackManager = CallbackManager.Factory.create();  //로그인 응답을 처리할 콜백 관리자
-        loginButton = (LoginButton) findViewById(R.id.buttonId); //페이스북 로그인 버튼
-        //유저 정보, 친구정보, 이메일 정보등을 수집하기 위해서는 허가(퍼미션)를 받아야 합니다.
-        loginButton.setReadPermissions("public_profile", "user_friends", "email");
-        //버튼에 바로 콜백을 등록하는 경우 LoginManager에 콜백을 등록하지 않아도됩니다.
-        //반면에 커스텀으로 만든 버튼을 사용할 경우 아래보면 CustomloginButton OnClickListener안에 LoginManager를 이용해서
-        //로그인 처리를 해주어야 합니다.
+    }
+    public void facebookLoginOnclick(View v){
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        callbackManager = CallbackManager.Factory.create();
 
-        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+        LoginManager.getInstance().logInWithReadPermissions(MainActivity.this,
+                Arrays.asList("public_profile", "email"));
+        LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+
             @Override
-            public void onSuccess(LoginResult loginResult) { //로그인 성공시 호출되는 메소드
-                Log.e("토큰", loginResult.getAccessToken().getToken());
-                Log.e("유저아이디", loginResult.getAccessToken().getUserId());
-                Log.e("퍼미션 리스트", loginResult.getAccessToken().getPermissions() + "");
+            public void onSuccess(final LoginResult result) {
 
-                //loginResult.getAccessToken() 정보를 가지고 유저 정보를 가져올수 있습니다.
-                GraphRequest request = GraphRequest.newMeRequest(loginResult.getAccessToken(),
-                        new GraphRequest.GraphJSONObjectCallback() {
-                            @Override
-                            public void onCompleted(JSONObject object, GraphResponse response) {
-                                try {
-                                    Log.e("user profile", object.toString());
-                                    Email   = response.getJSONObject().getString("id").toString();
-                                    Log.e("email:",Email);
-                                    Intent intent = new Intent(MainActivity.this,  Basicinfo_Edit.class);
-                                    intent.putExtra("ID",Email);
-                                    intent.putExtra("setid",'F');
-                                    startActivity(intent);
+                GraphRequest request;
+                request = GraphRequest.newMeRequest(result.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
 
+                    @Override
+                    public void onCompleted(JSONObject user, GraphResponse response) {
+                        if (response.getError() != null) {
 
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }
+                        } else {
+                            try{
+                            Log.e("user profile", user.toString());
+                            Email   = response.getJSONObject().getString("id").toString();
+                            Log.e("email:",Email);
+                            Intent intent = new Intent(MainActivity.this,  Basicinfo_Edit.class);
+                            intent.putExtra("ID",Email);
+                            intent.putExtra("setid",'F');
+                            startActivity(intent);
+                            finish();}
+                            catch (Exception e){
+                                e.printStackTrace();
                             }
-                        });
+                        }
+                    }
+                });
+                Bundle parameters = new Bundle();
+                parameters.putString("fields", "id,name,email,gender,birthday");
+                request.setParameters(parameters);
                 request.executeAsync();
             }
 
             @Override
             public void onError(FacebookException error) {
+                Log.e("test", "Error: " + error);
+                //finish();
             }
 
             @Override
             public void onCancel() {
-            }
-
-            
-           
-            
-        });
-
-
-
-
-        CustomloginButton = (Button)findViewById(R.id.loginBtn);
-        CustomloginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loginButton.performClick();
-//                LoginManager - 요청된 읽기 또는 게시 권한으로 로그인 절차를 시작합니다.
-//                LoginManager.getInstance().logInWithReadPermissions(MainActivity.this,
-//                        Arrays.asList("public_profile", "user_friends"));
-//                LoginManager.getInstance().registerCallback(callbackManager,
-//                        new FacebookCallback<LoginResult>() {
-//                            @Override
-//                            public void onSuccess(LoginResult loginResult) {
-//                                Log.e("onSuccess", "onSuccess");
-//                            }
-//
-//                            @Override
-//                            public void onCancel() {
-//                                Log.e("onCancel", "onCancel");
-//                            }
-//
-//                            @Override
-//                            public void onError(FacebookException exception) {
-//                                Log.e("onError", "onError " + exception.getLocalizedMessage());
-//                            }
-//                        });
+                //finish();
             }
         });
     }
+
+
 
 
     @Override
@@ -256,6 +232,7 @@ public class MainActivity extends AppCompatActivity {
                     } else {
                         //redirectMainActivity();
                     }
+
                 }
 
                 @Override
@@ -287,11 +264,20 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onSessionOpenFailed(KakaoException exception) {
-            // 세션 연결이 실패했을때
-            // 어쩔때 실패되는지는 테스트를 안해보았음 ㅜㅜ
+
+            Log.e("sessionopenfail","fail");
         }
     }
 
+        public boolean isConnected() {          //인터넷 연결상태확인인
+            ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo netInfo = cm.getActiveNetworkInfo();
+            if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+                return true;
+            }
+
+            return false;
+        }
 }
 
 
