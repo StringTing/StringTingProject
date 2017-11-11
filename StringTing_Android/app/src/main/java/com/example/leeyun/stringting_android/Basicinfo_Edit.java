@@ -42,8 +42,9 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
     private static final int CROP_FROM_IMAGE = 2;
     private Uri mImageCaptureUri;
     private ImageView iv_UserPhoto1, iv_UserPhoto2, iv_UserPhoto3, iv_UserPhoto4, iv_UserPhoto5, iv_UserPhoto6;
-    userinfo UserInfo =new userinfo();
 
+
+    userinfo UserInfo = new userinfo();
 
 
     public void onClick_ChatView(View v) {
@@ -339,10 +340,10 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
         char Setting_id=i.getExtras().getChar("setid");
         Log.e("Test", id);
         Log.e("Test1", String.valueOf(Setting_id));
-        UserInfo.Id=id;
-        UserInfo.login_format=Setting_id;
-        Log.e("Test3",UserInfo.Id);                     //LOG.e는 테스트코드
-        UserInfo.email=id;
+        UserInfo.setId(id);
+        UserInfo.setLogin_format(Setting_id);
+        Log.e("Test3",UserInfo.getId());                     //LOG.e는 테스트코드
+        UserInfo.setEmail(id);
 
     }
         // RadioButton을  checked 하는 함수
@@ -385,7 +386,7 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
             public void onClick(View v) {
                 if (RadioArmy_Complete_checked.isChecked()) {
                     Log.e("병역.", "병역필");
-                    UserInfo.military_service_status="Army_complete";
+                    UserInfo.setMilitary_service_status("Army_complete");
                 }
 
             }
@@ -396,7 +397,7 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
                 if (RadioArmy_InComplete_checked.isChecked()) {
 
                     Log.e("병역.", "미필");
-                    UserInfo.military_service_status="Army_Incomplete";
+                    UserInfo.setMilitary_service_status("Army_Incompelte");
 
                 }
 
@@ -406,7 +407,7 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
             public void onClick(View v) {
                 if (RadioArmy_Notduty_checked.isChecked()) {
                     Log.e("병역.", "해당없음");
-                    UserInfo.military_service_status="Army_Notduty";
+                    UserInfo.setMilitary_service_status("Army_Noduty");
 
                 }
 
@@ -416,7 +417,7 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
             public void onClick(View v) {
                 if (Radio_smoking.isChecked()) {
                     Log.e("흡연.", "흡연");
-                    UserInfo.smoke=true;
+                    UserInfo.setSmoke(true);
 
                 }
 
@@ -426,8 +427,7 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
             public void onClick(View v) {
                 if (Radio_Notsmoking.isChecked()) {
                     Log.e("흡연.", "비흡연");
-                    UserInfo.smoke=false;
-                }
+                    UserInfo.setSmoke(false);                }
 
             }
         });
@@ -436,7 +436,7 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Log.e("age", (String) spinnerAge.getItemAtPosition(position));
-                UserInfo.age= Integer.parseInt(spinnerAge.getItemAtPosition(position).toString());
+                UserInfo.setAge(Integer.parseInt(spinnerAge.getItemAtPosition(position).toString()));
             }
 
             @Override
@@ -449,7 +449,7 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Log.e("City", (String) spinnerCity.getItemAtPosition(position));
-                UserInfo.location=spinnerCity.getItemAtPosition(position).toString();
+                UserInfo.setLocation(spinnerCity.getItemAtPosition(position).toString());
             }
 
             @Override
@@ -461,7 +461,7 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Log.e("Blood", (String) spinnerBlood.getItemAtPosition(position));
-                UserInfo.blood_type=spinnerBlood.getItemAtPosition(position).toString();
+                UserInfo.setBlood_type(spinnerBlood.getItemAtPosition(position).toString());
             }
 
             @Override
@@ -473,7 +473,7 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Log.e("Drink", (String) spinnerDrink.getItemAtPosition(position));
-                UserInfo.drink=spinnerDrink.getItemAtPosition(position).toString();
+                UserInfo.setDrink(spinnerDrink.getItemAtPosition(position).toString());
             }
 
             @Override
@@ -507,7 +507,7 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
                 else{
                     InputUserinfoReligion='O';
                 }
-                UserInfo.religion=InputUserinfoReligion;
+                UserInfo.setReligion(InputUserinfoReligion);
             }
 
             @Override
@@ -520,7 +520,7 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Log.e("education", (String) spinnerEducation.getItemAtPosition(position));
-                UserInfo.education=spinnerEducation.getItemAtPosition(position).toString();
+                UserInfo.setEducation(spinnerEducation.getItemAtPosition(position).toString());
             }
 
             @Override
@@ -531,12 +531,12 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
 
         EditText InputCareea=(EditText)findViewById(R.id.InputCarrea);
         String Check_InputCareea=InputCareea.getText().toString();
-        UserInfo.department=Check_InputCareea;
+        UserInfo.setDepartment(Check_InputCareea);
 
         EditText InputTall=(EditText)findViewById(R.id.InputTall);
         String Check_InputTall=InputTall.getText().toString();
         try{
-            UserInfo.hegiht= Integer.parseInt(Check_InputTall.toString());
+            UserInfo.setHegiht(Integer.parseInt(Check_InputTall.toString()));
 
         }catch(NumberFormatException nfe){
             Log.e("error","error");
