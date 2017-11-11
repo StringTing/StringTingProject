@@ -93,19 +93,6 @@ public class ChatView extends Activity {
 
 
 
-        /*요기가 우리가 띄울거
-        findViewById(R.id.send_btn).setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(android.view.View v) {
-                EditText editText = (EditText) findViewById(R.id.input_text);
-                String inputValue = editText.getText().toString();
-                editText.setText("");
-                refresh(inputValue, 0);
-            }
-        }
-        );*/
-
-
 
         findViewById(R.id.send_btn).setOnClickListener(new Button.OnClickListener() {
             int i=1;
