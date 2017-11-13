@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="#00ff0000"
-            android:text="찾기" />
+            android:text="플레이스" />
 
         <Button
             android:id="@+id/button3"
@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="#00ff0000"
-            android:text="픽s" />
+            android:text="나의픽" />
 
         <Button
             android:id="@+id/button4"
@@ -49,7 +49,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="#00ff0000"
-            android:text="채팅" />
+            android:text="메세지" />
 
         <Button
             android:id="@+id/button5"

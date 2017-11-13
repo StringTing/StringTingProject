@@ -79,20 +79,6 @@
                         android:text="1. 소속 인증 (선택 사항)"
                         android:textSize="20dp" />
 
-                    <Button
-                        android:id="@+id/button5"
-                        android:layout_width="match_parent"
-                        android:layout_height="200dp"
-                        android:layout_marginBottom="10dp"
-                        android:text="소속인증사진\n(선택)\n프리미엄 인증회원이 되어보세요! 자신의 커리어 및 소속을 인증해줄 수 있는 학생증, 사원증, 명함등을 업로드해주세요! String 심사를 통과하면 더욱 더 믿음가는 회원과 매칭이 됩니다!" />
-
-                    <TextView
-                        android:id="@+id/textView8"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="2. 사진 입력 (필수 사항)"
-                        android:textSize="20dp" />
-
                     <TextView
                         android:id="@+id/textView9"
                         android:layout_width="match_parent"
@@ -100,7 +86,7 @@
                         android:layout_gravity="center"
                         android:layout_marginBottom="5dp"
                         android:layout_marginTop="5dp"
-                        android:text="상대방에게 보여질 사진이에요! 정성스럽게 올려주세요! 본인의 사진이 아니거나, 알아보기 힘든 사지일 경우 반려사유가 될 수 있습니다 # 최소 3장 이상 " />
+                        android:text="당신의 인생샷을 보여주세요! 본인의 사진이 아니거나, 알아보기 어려운 사진은 거절당할 수  있어요ㅠ " />
 
                     <HorizontalScrollView
                         android:layout_width="match_parent"
@@ -161,17 +147,33 @@
                     </HorizontalScrollView>
                 </LinearLayout>
 
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="2. 기본정보 "
+                    android:textSize="20dp" />
+
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="10dp"
                     android:orientation="horizontal">
 
+                    <Button
+                        android:id="@+id/r_btn1"
+                        android:layout_alignParentLeft="true"
+                        android:layout_width="30dp"
+                        android:layout_height="35dp"
+                        android:background="@drawable/round_btn" />
+
                     <TextView
                         android:id="@+id/text_id"
                         android:layout_width="60dp"
                         android:layout_height="22dp"
-                        android:paddingRight="13dp"
+                        android:layout_centerVertical="true"
+                        android:paddingLeft="5dp"
+                        android:layout_toRightOf="@+id/r_btn1"
                         android:text="성별"
                         android:textSize="20dp" />
 
@@ -209,11 +211,21 @@
                     android:layout_marginTop="10dp"
                     android:orientation="horizontal">
 
+                    <Button
+                        android:id="@+id/r_btn2"
+                        android:layout_alignParentLeft="true"
+                        android:layout_width="30dp"
+                        android:layout_height="35dp"
+                        android:background="@drawable/round_btn" />
+
+
                     <TextView
                         android:id="@+id/text_id2"
                         android:layout_width="60dp"
                         android:layout_height="22dp"
-                        android:paddingRight="13dp"
+                        android:layout_centerVertical="true"
+                        android:paddingLeft="5dp"
+                        android:layout_toRightOf="@+id/r_btn2"
                         android:text="병역"
                         android:textSize="20dp" />
 
@@ -259,11 +271,20 @@
                     android:layout_marginTop="10dp"
                     android:orientation="horizontal">
 
+                    <Button
+                        android:id="@+id/r_btn3"
+                        android:layout_alignParentLeft="true"
+                        android:layout_width="30dp"
+                        android:layout_height="35dp"
+                        android:background="@drawable/round_btn" />
+
                     <TextView
                         android:id="@+id/text_id00"
                         android:layout_width="60dp"
                         android:layout_height="22dp"
-                        android:paddingRight="13dp"
+                        android:layout_centerVertical="true"
+                        android:paddingLeft="5dp"
+                        android:layout_toRightOf="@+id/r_btn3"
                         android:text="학력"
 
                         android:textSize="20dp" />
@@ -288,11 +309,21 @@
                     android:layout_marginTop="10dp"
                     android:orientation="horizontal">
 
+                    <Button
+                        android:id="@+id/r_btn4"
+                        android:layout_alignParentLeft="true"
+                        android:layout_width="30dp"
+                        android:layout_height="35dp"
+                        android:background="@drawable/round_btn" />
+
+
                     <TextView
                         android:id="@+id/text_id3"
                         android:layout_width="60dp"
                         android:layout_height="22dp"
-                        android:paddingRight="13dp"
+                        android:layout_centerVertical="true"
+                        android:paddingLeft="5dp"
+                        android:layout_toRightOf="@+id/r_btn4"
                         android:text="커리어"
                         android:textSize="20dp" />
 
@@ -304,7 +335,6 @@
                         android:layout_alignTop="@+id/text_id3"
                         android:layout_gravity="center"
                         android:layout_toRightOf="@id/text_id3"
-                        android:text=""
                         android:textSize="20dp" />
 
                 </RelativeLayout>
@@ -315,11 +345,20 @@
                     android:layout_marginTop="10dp"
                     android:orientation="horizontal">
 
+                    <Button
+                        android:id="@+id/r_btn5"
+                        android:layout_alignParentLeft="true"
+                        android:layout_width="30dp"
+                        android:layout_height="35dp"
+                        android:background="@drawable/round_btn" />
+
                     <TextView
                         android:id="@+id/text_id4"
                         android:layout_width="60dp"
-                        android:layout_height="wrap_content"
-                        android:paddingRight="13dp"
+                        android:layout_height="22dp"
+                        android:layout_centerVertical="true"
+                        android:paddingLeft="5dp"
+                        android:layout_toRightOf="@+id/r_btn5"
                         android:text="나이"
 
                         android:textSize="20dp" />
@@ -346,11 +385,21 @@
                     android:layout_marginTop="10dp"
                     android:orientation="horizontal">
 
+                    <Button
+                        android:id="@+id/r_btn6"
+                        android:layout_alignParentLeft="true"
+                        android:layout_width="30dp"
+                        android:layout_height="35dp"
+                        android:background="@drawable/round_btn" />
+
+
                     <TextView
                         android:id="@+id/text_id5"
                         android:layout_width="60dp"
                         android:layout_height="22dp"
-                        android:paddingRight="13dp"
+                        android:layout_centerVertical="true"
+                        android:paddingLeft="5dp"
+                        android:layout_toRightOf="@+id/r_btn6"
                         android:text="지역"
                         android:textSize="20dp" />
 
@@ -376,11 +425,22 @@
                     android:layout_marginTop="10dp"
                     android:orientation="horizontal">
 
+                    <Button
+                        android:id="@+id/r_btn7"
+                        android:layout_alignParentLeft="true"
+                        android:layout_width="30dp"
+                        android:layout_height="35dp"
+                        android:background="@drawable/round_btn" />
+
+
+
                     <TextView
                         android:id="@+id/text_id6"
                         android:layout_width="60dp"
                         android:layout_height="22dp"
-                        android:paddingRight="13dp"
+                        android:layout_centerVertical="true"
+                        android:paddingLeft="5dp"
+                        android:layout_toRightOf="@+id/r_btn7"
                         android:text="키"
                         android:textSize="20dp" />
 
@@ -405,10 +465,22 @@
                     android:layout_marginTop="10dp"
                     android:orientation="horizontal">
 
+                    <Button
+                        android:id="@+id/r_btn8"
+                        android:layout_alignParentLeft="true"
+                        android:layout_width="30dp"
+                        android:layout_height="35dp"
+                        android:background="@drawable/round_btn" />
+
+
+
                     <TextView
                         android:id="@+id/text_id8"
                         android:layout_width="60dp"
                         android:layout_height="22dp"
+                        android:layout_centerVertical="true"
+                        android:paddingLeft="5dp"
+                        android:layout_toRightOf="@+id/r_btn8"
                         android:text="혈액형"
                         android:textSize="20dp" />
 
@@ -437,11 +509,22 @@
                     android:layout_marginTop="10dp"
                     android:orientation="horizontal">
 
+                    <Button
+                        android:id="@+id/r_btn9"
+                        android:layout_alignParentLeft="true"
+                        android:layout_width="30dp"
+                        android:layout_height="35dp"
+                        android:background="@drawable/round_btn" />
+
+
+
                     <TextView
                         android:id="@+id/text_id9"
                         android:layout_width="60dp"
                         android:layout_height="22dp"
-                        android:paddingRight="13dp"
+                        android:layout_centerVertical="true"
+                        android:paddingLeft="5dp"
+                        android:layout_toRightOf="@+id/r_btn9"
                         android:text="흡연"
                         android:textSize="20dp" />
 
@@ -484,11 +567,22 @@
                     android:layout_marginTop="10dp"
                     android:orientation="horizontal">
 
+                    <Button
+                        android:id="@+id/r_btn10"
+                        android:layout_alignParentLeft="true"
+                        android:layout_width="30dp"
+                        android:layout_height="35dp"
+                        android:background="@drawable/round_btn" />
+
+
+
                     <TextView
                         android:id="@+id/text_id10"
                         android:layout_width="60dp"
                         android:layout_height="22dp"
-                        android:paddingRight="13dp"
+                        android:layout_centerVertical="true"
+                        android:paddingLeft="5dp"
+                        android:layout_toRightOf="@+id/r_btn10"
                         android:text="음주"
                         android:textSize="20dp" />
 
@@ -514,11 +608,22 @@
                     android:layout_marginTop="10dp"
                     android:orientation="horizontal">
 
+                    <Button
+                        android:id="@+id/r_btn11"
+                        android:layout_alignParentLeft="true"
+                        android:layout_width="30dp"
+                        android:layout_height="35dp"
+                        android:background="@drawable/round_btn" />
+
+
+
                     <TextView
                         android:id="@+id/text_id11"
                         android:layout_width="60dp"
                         android:layout_height="22dp"
-                        android:paddingRight="13dp"
+                        android:layout_centerVertical="true"
+                        android:paddingLeft="5dp"
+                        android:layout_toRightOf="@+id/r_btn11"
                         android:text="종교"
                         android:textSize="20dp" />
 
