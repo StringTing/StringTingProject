@@ -3,6 +3,7 @@ package com.example.leeyun.stringting_android;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,11 +13,14 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
+import com.example.leeyun.stringting_android.API.App;
 import com.example.leeyun.stringting_android.API.ResponseApi;
 import com.example.leeyun.stringting_android.API.Rest_ApiService;
 import com.example.leeyun.stringting_android.API.userinfo;
 import com.google.gson.Gson;
 
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -26,8 +30,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ChatView extends Activity {
     ListView m_ListView;
     ChatCustom m_Adapter;
-    Retrofit retrofit;
-    Rest_ApiService apiService;
+    RealmDB realmDB;
+    App realmDBset;
+    private Realm realm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,46 +40,16 @@ public class ChatView extends Activity {
         setContentView(R.layout.activity_chat_view);
 
         final userinfo Userinfo = (userinfo)getIntent().getSerializableExtra("UserInfo");
-        ResponseApi responapi =new ResponseApi();
-        responapi.setEmail(Userinfo.Id);
 
         final String Userinfo_Json= new Gson().toJson(Userinfo);
-        final String EmailCheck_Json= new Gson().toJson(responapi.getEmail());
         Log.e("TestUserinfoGson",Userinfo_Json);            //userinfo정보를 json타입으로 변환
-        Log.e("TestEmailGson",EmailCheck_Json);
 
-        retrofit = new Retrofit.Builder().baseUrl(Rest_ApiService.API_URL).addConverterFactory(GsonConverterFactory.create()).build();
-        apiService= retrofit.create(Rest_ApiService.class);
+        savePreferences(Userinfo.getId());
 
+        SharedPreferences example= getSharedPreferences("Local_DB", MODE_PRIVATE);
+        String str = example.getString("Id", "");
+        Log.e("localdbtest",str);
 
-        Call<ResponseApi> comment = apiService.getPostEmailStr1(responapi);
-        comment.enqueue(new Callback<ResponseApi>() {
-            @Override
-            public void onResponse(Call<ResponseApi> call, Response<ResponseApi> response) {
-
-
-                    ResponseApi gsonresponse=response.body();
-                    Log.v("onresponse", gsonresponse.getResult());
-                    Log.v("onresponse",gsonresponse.getMessage());
-                    Log.v("onresponse", String.valueOf(response.code()));
-
-                    if("success".equals(gsonresponse.getResult())){
-                        Log.v("onresponse", "success");
-
-                    }
-                    else{
-                        Log.v("onresponse","fail");
-                    }
-
-
-
-            }
-
-            @Override
-            public void onFailure(Call<ResponseApi> call, Throwable t) {
-                Log.d("sam", "fail");
-            }
-        });
 
 
         // 커스텀 어댑터 생성
@@ -125,6 +100,8 @@ public class ChatView extends Activity {
     }
 
 
+
+
     private void refresh (String inputValue, int _str) {
         m_Adapter.add(inputValue,_str) ;
         m_Adapter.notifyDataSetChanged();
@@ -146,6 +123,13 @@ public class ChatView extends Activity {
         startActivity(intent);
     }
 
+    // 값 저장하기
+        public void savePreferences(String data){
+        SharedPreferences pref = getSharedPreferences("Local_DB", MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putString("Id",data);
+        editor.commit();
+    }
 
 
 

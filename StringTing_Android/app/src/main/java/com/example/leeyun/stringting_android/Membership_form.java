@@ -4,15 +4,25 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.leeyun.stringting_android.API.ResponseApi;
+import com.example.leeyun.stringting_android.API.Rest_ApiService;
+
 import org.w3c.dom.Text;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.example.leeyun.stringting_android.R.id.Email;
 import static com.example.leeyun.stringting_android.R.id.Email_checkText;
@@ -29,18 +39,22 @@ import static com.example.leeyun.stringting_android.R.id.check_pw;
 
 public class Membership_form extends Activity {
 
+    ResponseApi responapi =new ResponseApi();
+    Rest_ApiService apiService;
+    Retrofit retrofit;
+
+
+
     private Dialog dialog;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.membership);
 
-
+        retrofit = new Retrofit.Builder().baseUrl(Rest_ApiService.API_URL).addConverterFactory(GsonConverterFactory.create()).build();
+        apiService= retrofit.create(Rest_ApiService.class);
 
     }
-
-
-
 
     public void onClick_Basicinfo_Edit(View v){
 
@@ -59,6 +73,39 @@ public class Membership_form extends Activity {
         String Email=Check_email.getText().toString();
         String PW=Check_pw.getText().toString();
         String EqualPw=EqualCheck_pw.getText().toString();
+
+
+        responapi.setEmail(Email);
+
+
+        Call<ResponseApi> comment = apiService.getPostEmailStr1(responapi);
+        comment.enqueue(new Callback<ResponseApi>() {
+            @Override
+            public void onResponse(Call<ResponseApi> call, Response<ResponseApi> response) {
+
+
+                ResponseApi gsonresponse=response.body();
+                Log.v("onresponse", gsonresponse.getResult());
+                Log.v("onresponse",gsonresponse.getMessage());
+                Log.v("onresponse", String.valueOf(response.code()));
+
+                if("success".equals(gsonresponse.getResult())){
+                    Log.v("onresponse", "success");
+
+                }
+                else{
+                    Log.v("onresponse","fail");
+                }
+
+
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseApi> call, Throwable t) {
+                Log.d("sam", "fail");
+            }
+        });
 
         boolean b = Pattern.matches("[\\w\\~\\-\\.]+@[\\w\\~\\-]+(\\.[\\w\\~\\-]+)+",Email.trim());
         boolean a = Pattern.matches("([a-zA-Z0-9].*[!,@,#,$,%,^,&,*,?,_,~])|([!,@,#,$,%,^,&,*,?,_,~].*[a-zA-Z0-9])",PW.trim());
