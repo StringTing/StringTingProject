@@ -23,6 +23,7 @@ import com.example.leeyun.stringting_android.API.userinfo;
 import java.io.File;
 
 
+import static com.example.leeyun.stringting_android.R.id.Spinner_Tall;
 import static com.example.leeyun.stringting_android.R.id.Spinner_age;
 import static com.example.leeyun.stringting_android.R.id.Spinner_blood;
 import static com.example.leeyun.stringting_android.R.id.Spinner_city;
@@ -81,6 +82,7 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
         Spinner drink = (Spinner) findViewById(Spinner_drink);
         Spinner religion = (Spinner) findViewById(Spinner_religion);
         Spinner education = (Spinner) findViewById(Spinner_education);
+        Spinner Tall=(Spinner)findViewById(Spinner_Tall);
 
 
         ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.age, spinner_item);
@@ -89,6 +91,8 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
         ArrayAdapter adapter4 = ArrayAdapter.createFromResource(this, R.array.drink, spinner_item);
         ArrayAdapter adapter5 = ArrayAdapter.createFromResource(this, R.array.religion, spinner_item);
         ArrayAdapter adapter6 = ArrayAdapter.createFromResource(this, R.array.education, spinner_item);
+        ArrayAdapter adapter7 = ArrayAdapter.createFromResource(this, R.array.Tall, spinner_item);
+
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         age.setAdapter(adapter);
@@ -97,7 +101,7 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
         drink.setAdapter(adapter4);
         religion.setAdapter(adapter5);
         education.setAdapter(adapter6);
-
+        Tall.setAdapter(adapter7);
         RadioChecked_SpinnerCheck();   //RadioCehcked&&SpinnerCheck 값 받아오는 class
 
 
@@ -362,6 +366,8 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
         final Spinner spinnerDrink=(Spinner)findViewById(R.id.Spinner_drink);
         final Spinner spinnerReligion=(Spinner)findViewById(R.id.Spinner_religion);
         final Spinner spinnerEducation=(Spinner)findViewById(R.id.Spinner_education);
+        final Spinner spinnerTall=(Spinner)findViewById(R.id.Spinner_Tall);
+
 
 
         RadioMan_checked.setOnClickListener(new RadioButton.OnClickListener(){
@@ -528,19 +534,23 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
 
             }
         });
+        spinnerTall.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Log.e("Tall", (String) spinnerTall.getItemAtPosition(position));
+                UserInfo.setHegiht(Integer.parseInt(spinnerTall.getItemAtPosition(position).toString()));
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
         EditText InputCareea=(EditText)findViewById(R.id.InputCarrea);
         String Check_InputCareea=InputCareea.getText().toString();
         UserInfo.setDepartment(Check_InputCareea);
 
-        EditText InputTall=(EditText)findViewById(R.id.InputTall);
-        String Check_InputTall=InputTall.getText().toString();
-        try{
-            UserInfo.setHegiht(Integer.parseInt(Check_InputTall.toString()));
 
-        }catch(NumberFormatException nfe){
-            Log.e("error","error");
-        }
 
 
     }

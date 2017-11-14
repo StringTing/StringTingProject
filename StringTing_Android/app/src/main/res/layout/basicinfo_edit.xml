@@ -385,17 +385,15 @@
                         android:textSize="20dp" />
 
 
-                    <EditText
-                        android:id="@+id/InputTall"
-                        android:layout_width="320dp"
-                        android:layout_height="wrap_content"
+                    <Spinner
+                        android:id="@+id/Spinner_Tall"
+                        android:layout_width="325dp"
+                        android:layout_height="30dp"
                         android:layout_alignTop="@+id/text_id6"
                         android:layout_gravity="center"
+                        android:layout_margin="3dp"
                         android:layout_toRightOf="@+id/text_id6"
-                        android:digits="0123456789"
-                        android:inputType="number"
-                        android:text=""
-                        android:textSize="20dp" />
+                        android:prompt="@string/blood_prompt"/>
 
                 </RelativeLayout>
 
