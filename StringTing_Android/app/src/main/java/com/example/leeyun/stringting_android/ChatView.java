@@ -97,6 +97,8 @@ public class ChatView extends Activity {
             }
         }
         );
+
+
     }
 
 
@@ -131,6 +133,8 @@ public class ChatView extends Activity {
         editor.commit();
     }
 
+    public void modify(View v){
 
+    }
 
 }

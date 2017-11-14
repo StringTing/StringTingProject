@@ -3,7 +3,9 @@ package com.example.leeyun.stringting_android;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -12,18 +14,29 @@ import android.widget.Toast;
 
 import com.example.leeyun.stringting_android.API.ResponseApi;
 import com.example.leeyun.stringting_android.API.Rest_ApiService;
+import com.kakao.util.helper.FileUtils;
 
 import org.w3c.dom.Text;
 
+import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URL;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static android.R.attr.description;
+import static android.R.attr.src;
+import static com.example.leeyun.stringting_android.R.drawable.form_progressbar2;
 import static com.example.leeyun.stringting_android.R.id.Email;
 import static com.example.leeyun.stringting_android.R.id.Email_checkText;
 import static com.example.leeyun.stringting_android.R.id.Pw_check;
@@ -32,6 +45,7 @@ import static com.example.leeyun.stringting_android.R.id.Pw_edit;
 import static com.example.leeyun.stringting_android.R.id.Pw_equalText;
 import static com.example.leeyun.stringting_android.R.id.Pw_text;
 import static com.example.leeyun.stringting_android.R.id.check_pw;
+import static com.kakao.auth.StringSet.file;
 
 /**
  * Created by leeyun on 2017. 9. 8..
@@ -43,9 +57,10 @@ public class Membership_form extends Activity {
     Rest_ApiService apiService;
     Retrofit retrofit;
 
-
+    File Postfile;
 
     private Dialog dialog;
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,9 +69,10 @@ public class Membership_form extends Activity {
         retrofit = new Retrofit.Builder().baseUrl(Rest_ApiService.API_URL).addConverterFactory(GsonConverterFactory.create()).build();
         apiService= retrofit.create(Rest_ApiService.class);
 
+
     }
 
-    public void onClick_Basicinfo_Edit(View v){
+    public void onClick_Basicinfo_Edit(View v) throws MalformedURLException {
 
 
         EditText Check_email= (EditText)findViewById(Email);
@@ -76,6 +92,43 @@ public class Membership_form extends Activity {
 
 
         responapi.setEmail(Email);
+
+
+
+        String imageUri = "drawable://" + R.drawable.gametitle_01;
+        Uri imageURI = Uri.parse("android.resource://" + getPackageName() + "/" + R.drawable.gametitle_01);
+
+        String root = Environment.getExternalStorageDirectory().toString();
+        Postfile = new File(root+"/Download/pane1-1.jpg");
+
+        RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), Postfile);
+
+        Log.v("getName(postfile)",Postfile.getName());
+
+        MultipartBody.Part body =
+                MultipartBody.Part.createFormData("file", Postfile.getName(), requestFile);
+        RequestBody filename = RequestBody.create(MediaType.parse("multipart/form-data"), Postfile.getName());
+
+        Call<ResponseApi> call = apiService.getPostImage(body,filename);
+        call.enqueue(new Callback<ResponseApi>() {
+            @Override
+            public void onResponse(Call<ResponseApi> call, Response<ResponseApi> response) {
+                ResponseApi imageresponse=response.body();
+                if("success".equals(imageresponse.getResult())){
+                    Log.v("onresponse", "success");
+
+                }
+                else{
+                    Log.v("onresponse","fail");
+                    Log.v("onresponse",imageresponse.getMessage());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseApi> call, Throwable t) {
+                    Log.v("onresponseImage2",t.toString());
+            }
+        });
 
 
         Call<ResponseApi> comment = apiService.getPostEmailStr1(responapi);
@@ -106,6 +159,7 @@ public class Membership_form extends Activity {
                 Log.d("sam", "fail");
             }
         });
+
 
         boolean b = Pattern.matches("[\\w\\~\\-\\.]+@[\\w\\~\\-]+(\\.[\\w\\~\\-]+)+",Email.trim());
         boolean a = Pattern.matches("([a-zA-Z0-9].*[!,@,#,$,%,^,&,*,?,_,~])|([!,@,#,$,%,^,&,*,?,_,~].*[a-zA-Z0-9])",PW.trim());
@@ -150,4 +204,5 @@ public class Membership_form extends Activity {
         super.onBackPressed(); // or super.finish();
 
     }
+
 }
