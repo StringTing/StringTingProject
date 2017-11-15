@@ -8,31 +8,21 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Toast;
 
-import com.example.leeyun.stringting_android.API.App;
-import com.example.leeyun.stringting_android.API.ResponseApi;
-import com.example.leeyun.stringting_android.API.Rest_ApiService;
 import com.example.leeyun.stringting_android.API.userinfo;
 import com.google.gson.Gson;
 
-import io.realm.Realm;
-import io.realm.RealmConfiguration;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+import java.util.ArrayList;
 
-public class ChatView extends Activity {
+public class ChatView extends Activity implements AdapterView.OnItemClickListener {
     ListView m_ListView;
     ChatCustom m_Adapter;
-    RealmDB realmDB;
-    App realmDBset;
-    private Realm realm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +42,10 @@ public class ChatView extends Activity {
 
 
 
+
+
+
+
         // 커스텀 어댑터 생성
         m_Adapter = new ChatCustom();
 
@@ -65,6 +59,7 @@ public class ChatView extends Activity {
                 "회원정보를 입력하시느라 고생많으셨어요~\n" +
                 "이제 마지막 단계인데요!\n" +
                 "제가 하는 질문을 이상형인 사람이 질문한다고생각해주시고 정성스럽게 답장해주세요!", 0);
+
 
 
 
@@ -102,8 +97,6 @@ public class ChatView extends Activity {
     }
 
 
-
-
     private void refresh (String inputValue, int _str) {
         m_Adapter.add(inputValue,_str) ;
         m_Adapter.notifyDataSetChanged();
@@ -133,8 +126,38 @@ public class ChatView extends Activity {
         editor.commit();
     }
 
-    public void modify(View v){
 
+    public void modify(View view) {
+
+
+        Toast.makeText(getApplicationContext(), "OK", Toast.LENGTH_LONG).show();
+        EditText editText =(EditText)findViewById(R.id.input_text);
+        editText.requestFocus();
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,InputMethodManager.HIDE_IMPLICIT_ONLY);
+
+
+
+        String modifyString = editText.getText().toString();
+        Log.v("modifyString",modifyString);
+
+        int count,checked;
+        count=m_Adapter.getCount();
+        Log.v("count", String.valueOf(count));
+        if(count>0){
+            checked=m_ListView.getCheckedItemPosition();
+
+            Log.v("checked", String.valueOf(checked));
+                m_Adapter.getM_List().set(1, new ChatCustom.ListContents(modifyString,1));
+
+                m_Adapter.notifyDataSetChanged();
+
+        }
     }
 
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+    }
 }

@@ -13,6 +13,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 /**
@@ -33,8 +34,8 @@ public interface Rest_ApiService {
         Call<ResponseApi> getPostEmailStr1(@Body ResponseApi responseApi);
 
         @Multipart
-        @POST("check/email/")
-        Call<ResponseApi> getPostImage(@Part MultipartBody.Part Image,@Part("Image") RequestBody name);
+        @POST("upload-image/")
+        Call<ResponseApi> getPostImage(@Part MultipartBody.Part Image, @Part("sex") String sex, @Part("account_id")String account_id);
 
 
     }

@@ -32,12 +32,12 @@
 
         <Button
             android:id="@+id/modify_btn"
+            android:onClick="modify"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
             android:background="#00ff0000"
-            android:onClick="modify"
             android:text="수정하기" />
     </LinearLayout>
 

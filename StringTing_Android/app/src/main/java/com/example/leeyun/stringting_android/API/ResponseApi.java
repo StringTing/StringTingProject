@@ -9,7 +9,10 @@ import io.realm.annotations.PrimaryKey;
  */
 
 public class ResponseApi {
-
+    @SerializedName("account_id")
+    private String account_id;
+    @SerializedName("sex")
+    private  String sex;
     @SerializedName("email")
     private String email;
     @SerializedName("message")
@@ -17,6 +20,8 @@ public class ResponseApi {
     @SerializedName("result")
     @PrimaryKey
     private String result;
+
+
 
     public String getEmail(){
         return email;
@@ -26,6 +31,12 @@ public class ResponseApi {
     }
     public  String getResult(){
         return  result;
+    }
+    public String getSex() {
+        return sex;
+    }
+    public String getAccount_id(){
+        return account_id;
     }
 
     public String setEmail(String email){
@@ -38,4 +49,8 @@ public class ResponseApi {
     public  void setResult(String result){
         this.result=result;
     }
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+    public void setAccount_id(String account_id){this.account_id=account_id;}
 }

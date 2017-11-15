@@ -109,18 +109,19 @@ public class Membership_form extends Activity {
                 MultipartBody.Part.createFormData("file", Postfile.getName(), requestFile);
         RequestBody filename = RequestBody.create(MediaType.parse("multipart/form-data"), Postfile.getName());
 
-        Call<ResponseApi> call = apiService.getPostImage(body,filename);
+        Call<ResponseApi> call = apiService.getPostImage(body,"male","1");
         call.enqueue(new Callback<ResponseApi>() {
             @Override
             public void onResponse(Call<ResponseApi> call, Response<ResponseApi> response) {
                 ResponseApi imageresponse=response.body();
                 if("success".equals(imageresponse.getResult())){
                     Log.v("onresponse", "success");
+                    Log.v("onresponse",response.body().toString());
 
                 }
                 else{
-                    Log.v("onresponse","fail");
-                    Log.v("onresponse",imageresponse.getMessage());
+                    Log.v("onresponse",response.body().toString());
+
                 }
             }
 
