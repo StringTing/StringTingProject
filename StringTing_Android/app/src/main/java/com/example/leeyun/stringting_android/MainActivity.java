@@ -23,6 +23,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
+import com.example.leeyun.stringting_android.API.MyFirebaseInstanceIDService;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -135,6 +136,9 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+        //fcm token
+        MyFirebaseInstanceIDService myFirebaseInstanceIDService =new MyFirebaseInstanceIDService();
+        myFirebaseInstanceIDService.onTokenRefresh();
 
     }
     public void facebookLoginOnclick(View v){
