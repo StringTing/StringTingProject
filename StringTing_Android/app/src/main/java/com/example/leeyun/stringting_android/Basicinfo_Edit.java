@@ -8,10 +8,13 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -435,11 +438,12 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
         final Spinner spinnerTall=(Spinner)findViewById(R.id.Spinner_Tall);
 
 
-
         RadioMan_checked.setOnClickListener(new RadioButton.OnClickListener(){
             public void onClick(View v) {
                 if (RadioMan_checked.isChecked()) {
                     Log.e("성별.", "남자");
+                    Button b1 = (Button)findViewById(R.id.r_btn1);
+                    b1.setBackgroundResource(R.drawable.press_round_btn);
 
                 }
 
@@ -447,8 +451,10 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
         });
         RadioWomen_checked.setOnClickListener(new RadioButton.OnClickListener(){
             public void onClick(View v) {
-                if (RadioMan_checked.isChecked()) {
+                if (RadioWomen_checked.isChecked()) {
                     Log.e("성별.", "여자");
+                    Button b1 = (Button)findViewById(R.id.r_btn1);
+                    b1.setBackgroundResource(R.drawable.press_round_btn);
                 }
 
             }
@@ -459,6 +465,8 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
                 if (RadioArmy_Complete_checked.isChecked()) {
                     Log.e("병역.", "병역필");
                     UserInfo.setMilitary_service_status("Army_complete");
+                    Button b1 = (Button)findViewById(R.id.r_btn2);
+                    b1.setBackgroundResource(R.drawable.press_round_btn);
                 }
 
             }
@@ -470,6 +478,8 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
 
                     Log.e("병역.", "미필");
                     UserInfo.setMilitary_service_status("Army_Incompelte");
+                    Button b1 = (Button)findViewById(R.id.r_btn2);
+                    b1.setBackgroundResource(R.drawable.press_round_btn);
 
                 }
 
@@ -480,6 +490,8 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
                 if (RadioArmy_Notduty_checked.isChecked()) {
                     Log.e("병역.", "해당없음");
                     UserInfo.setMilitary_service_status("Army_Noduty");
+                    Button b1 = (Button)findViewById(R.id.r_btn2);
+                    b1.setBackgroundResource(R.drawable.press_round_btn);
 
                 }
 
@@ -490,6 +502,8 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
                 if (Radio_smoking.isChecked()) {
                     Log.e("흡연.", "흡연");
                     UserInfo.setSmoke(true);
+                    Button b1 = (Button)findViewById(R.id.r_btn9);
+                    b1.setBackgroundResource(R.drawable.press_round_btn);
 
                 }
 
@@ -499,7 +513,10 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
             public void onClick(View v) {
                 if (Radio_Notsmoking.isChecked()) {
                     Log.e("흡연.", "비흡연");
-                    UserInfo.setSmoke(false);                }
+                    UserInfo.setSmoke(false);
+                    Button b1 = (Button)findViewById(R.id.r_btn9);
+                    b1.setBackgroundResource(R.drawable.press_round_btn);
+                }
 
             }
         });
@@ -509,6 +526,12 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Log.e("age", (String) spinnerAge.getItemAtPosition(position));
                 UserInfo.setAge(Integer.parseInt(spinnerAge.getItemAtPosition(position).toString()));
+                Button b1 = (Button) findViewById(R.id.r_btn5);
+                if(UserInfo.getAge() != 00) {
+                    b1.setBackgroundResource(R.drawable.press_round_btn);
+                } else {
+                    b1.setBackgroundResource(R.drawable.round_btn);
+                }
             }
 
             @Override
@@ -522,6 +545,12 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Log.e("City", (String) spinnerCity.getItemAtPosition(position));
                 UserInfo.setLocation(spinnerCity.getItemAtPosition(position).toString());
+                Button b1 = (Button) findViewById(R.id.r_btn6);
+                if("--".equals(UserInfo.getLocation())!=true) {
+                    b1.setBackgroundResource(R.drawable.press_round_btn);
+                } else  {
+                    b1.setBackgroundResource(R.drawable.round_btn);
+                }
             }
 
             @Override
@@ -534,6 +563,12 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Log.e("Blood", (String) spinnerBlood.getItemAtPosition(position));
                 UserInfo.setBlood_type(spinnerBlood.getItemAtPosition(position).toString());
+                Button b1 = (Button) findViewById(R.id.r_btn8);
+                if("--".equals(UserInfo.getBlood_type())!=true) {
+                    b1.setBackgroundResource(R.drawable.press_round_btn);
+                } else {
+                    b1.setBackgroundResource(R.drawable.round_btn);
+                }
             }
 
             @Override
@@ -546,6 +581,12 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Log.e("Drink", (String) spinnerDrink.getItemAtPosition(position));
                 UserInfo.setDrink(spinnerDrink.getItemAtPosition(position).toString());
+                Button b1 = (Button)findViewById(R.id.r_btn10);
+                if("--".equals(UserInfo.getDrink())!=true){
+                    b1.setBackgroundResource(R.drawable.press_round_btn);
+                } else {
+                    b1.setBackgroundResource(R.drawable.round_btn);
+                }
             }
 
             @Override
@@ -560,24 +601,43 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
                 String CheckSpinnerReligion=(String)spinnerReligion.getItemAtPosition(position);
                 Character InputUserinfoReligion;
 
-                if("기독교".equals(CheckSpinnerReligion)){
+                Button b1 = (Button)findViewById(R.id.r_btn11);
+
+                if("--".equals(CheckSpinnerReligion)){
                     InputUserinfoReligion='P';
+                    b1.setBackgroundResource(R.drawable.round_btn);
+                }
+                else if("기독교".equals(CheckSpinnerReligion)){
+                    InputUserinfoReligion='P';
+                    b1.setBackgroundResource(R.drawable.press_round_btn);
                 }
                 else if("불교".equals(CheckSpinnerReligion)){
                     InputUserinfoReligion='B';
+                    b1.setBackgroundResource(R.drawable.press_round_btn);
                 }
                 else if("가톨릭".equals(CheckSpinnerReligion)){
                     InputUserinfoReligion='C';
+                    b1.setBackgroundResource(R.drawable.press_round_btn);
                 }
                 else if("이슬람".equals(CheckSpinnerReligion)){
                     InputUserinfoReligion='I';
+                    b1.setBackgroundResource(R.drawable.press_round_btn);
 
                 }
                 else if("없음".equals(CheckSpinnerReligion)){
                     InputUserinfoReligion='N';
+                    b1.setBackgroundResource(R.drawable.press_round_btn);
                 }
+                else if("기타".equals(CheckSpinnerReligion)){
+                    InputUserinfoReligion='N';
+                    b1.setBackgroundResource(R.drawable.press_round_btn);
+                }
+
+
                 else{
                     InputUserinfoReligion='O';
+                    b1.setBackgroundResource(R.drawable.round_btn);
+
                 }
                 UserInfo.setReligion(InputUserinfoReligion);
             }
@@ -593,6 +653,12 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Log.e("education", (String) spinnerEducation.getItemAtPosition(position));
                 UserInfo.setEducation(spinnerEducation.getItemAtPosition(position).toString());
+                Button b1 = (Button) findViewById(R.id.r_btn3);
+                if("--".equals(UserInfo.getEducation())!=true) {
+                    b1.setBackgroundResource(R.drawable.press_round_btn);
+                } else {
+                    b1.setBackgroundResource(R.drawable.round_btn);
+                }
             }
 
             @Override
@@ -605,6 +671,12 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Log.e("Tall", (String) spinnerTall.getItemAtPosition(position));
                 UserInfo.setHegiht(Integer.parseInt(spinnerTall.getItemAtPosition(position).toString()));
+                Button b1 = (Button) findViewById(R.id.r_btn7);
+                if(UserInfo.getHegiht() != 00){
+                    b1.setBackgroundResource(R.drawable.press_round_btn);
+                } else {
+                    b1.setBackgroundResource(R.drawable.round_btn);
+                }
             }
 
             @Override
@@ -616,9 +688,36 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
         String Check_InputCareea=InputCareea.getText().toString();
         UserInfo.setDepartment(Check_InputCareea);
 
+        InputCareea.addTextChangedListener(new TextWatcher() {
+            // 입력되는 텍스트에 변화가 있을 때
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                Button b1 = (Button) findViewById(R.id.r_btn4);
+                if (s.length() >= 1) {
+                    b1.setBackgroundResource(R.drawable.press_round_btn);
+                } else {
+                    b1.setBackgroundResource(R.drawable.round_btn);
+                }
+            }
+
+            // 입력이 끝났을 때
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+
+            // 입력하기 전에
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+        });
+
+
 
 
 
     }
+
 
 }
