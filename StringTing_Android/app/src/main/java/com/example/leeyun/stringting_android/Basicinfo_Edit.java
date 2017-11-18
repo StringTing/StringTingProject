@@ -18,6 +18,8 @@ import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.support.v7.app.AlertDialog;
 
+import com.example.leeyun.stringting_android.API.ResponseApi;
+import com.example.leeyun.stringting_android.API.Rest_ApiService;
 import com.example.leeyun.stringting_android.API.userinfo;
 
 import java.io.BufferedOutputStream;
@@ -25,6 +27,9 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 
+
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.example.leeyun.stringting_android.R.id.Spinner_Tall;
 import static com.example.leeyun.stringting_android.R.id.Spinner_age;
@@ -49,6 +54,11 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
     int imageupload_count=0;
     ArrayList<String> Imageupload_countList=new ArrayList<>();
     userinfo UserInfo = new userinfo();
+    ResponseApi responapi =new ResponseApi();
+    Rest_ApiService apiService;
+    Retrofit retrofit;
+
+    File Postfile;
 
 
     public void onClick_ChatView(View v) {
@@ -58,8 +68,10 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
 
     public void onClick_Basicinfo_upload(View v){               //basicinfo에서 불러온 정보들을 변수에 저장
         RadioChecked_SpinnerCheck();
+
         Intent intent = new Intent(getApplicationContext(), ChatView.class);
         intent.putExtra("UserInfo",UserInfo);
+        intent.putExtra("ProfileFilepate",Imageupload_countList);
         startActivity(intent);
     }
 
@@ -67,6 +79,11 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.basicinfo_edit);
+
+        retrofit = new Retrofit.Builder().baseUrl(Rest_ApiService.API_URL).addConverterFactory(GsonConverterFactory.create()).build();
+        apiService= retrofit.create(Rest_ApiService.class);
+
+
         userinfo UserInfo =new userinfo();
 
         userinfo_save();
@@ -112,6 +129,9 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
     }
 
     public void onClick_photo_upload(View v) {
+
+
+
         Intent intent = new Intent(getApplicationContext(), ChatView.class);
 
         startActivity(intent);
@@ -382,6 +402,7 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
         }
 
     }
+
     public void userinfo_save(){
 
         final Intent i =getIntent();                      // facebook 또는 kakao의 아이디, 메신저타입을 받아와 변수에 저장

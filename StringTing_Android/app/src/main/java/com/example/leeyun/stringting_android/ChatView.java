@@ -30,6 +30,15 @@ public class ChatView extends Activity implements AdapterView.OnItemClickListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_view);
 
+        Intent intent=getIntent();
+
+        ArrayList<String> Imageupload_countList=new ArrayList<>();
+
+        Imageupload_countList=intent.getExtras().getStringArrayList("ProfileFilepate");
+
+        for (int i=0;i<Imageupload_countList.size();i++){
+            Log.v("Imagefilepath",Imageupload_countList.get(i));
+        }
         final userinfo Userinfo = (userinfo)getIntent().getSerializableExtra("UserInfo");
 
         final String Userinfo_Json= new Gson().toJson(Userinfo);

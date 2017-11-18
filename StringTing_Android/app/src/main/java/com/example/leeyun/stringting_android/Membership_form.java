@@ -94,10 +94,6 @@ public class Membership_form extends Activity {
         responapi.setEmail(Email);
 
 
-
-        String imageUri = "drawable://" + R.drawable.gametitle_01;
-        Uri imageURI = Uri.parse("android.resource://" + getPackageName() + "/" + R.drawable.gametitle_01);
-
         String root = Environment.getExternalStorageDirectory().toString();
         Postfile = new File(root+"/Download/25576de222c603a.jpg");
 
