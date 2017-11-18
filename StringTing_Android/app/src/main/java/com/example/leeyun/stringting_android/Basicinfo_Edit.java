@@ -20,7 +20,10 @@ import android.support.v7.app.AlertDialog;
 
 import com.example.leeyun.stringting_android.API.userinfo;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.util.ArrayList;
 
 
 import static com.example.leeyun.stringting_android.R.id.Spinner_Tall;
@@ -43,8 +46,8 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
     private static final int CROP_FROM_IMAGE = 2;
     private Uri mImageCaptureUri;
     private ImageView iv_UserPhoto1, iv_UserPhoto2, iv_UserPhoto3, iv_UserPhoto4, iv_UserPhoto5, iv_UserPhoto6;
-
-
+    int imageupload_count=0;
+    ArrayList<String> Imageupload_countList=new ArrayList<>();
     userinfo UserInfo = new userinfo();
 
 
@@ -303,24 +306,40 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
                     return;
                 }
                 final Bundle extras = data.getExtras();
+                imageupload_count++;            //배열에 집어넣기위
+                Log.v("imageipload_count", String.valueOf(imageupload_count));
 
                 String filePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/SmartWheel" + System.currentTimeMillis() + ".jpg";
+                Imageupload_countList.add(filePath);
+                for (int i=0;i<Imageupload_countList.size();i++){
+                    Log.v("imageupload_countList", String.valueOf(Imageupload_countList.get(i)));
 
+                }
                 if (extras != null) {
                     Bitmap photo = extras.getParcelable("data");//CROP된 BITMAP
 
 
                     if (null == iv_UserPhoto1.getDrawable()) {
                         iv_UserPhoto1.setImageBitmap(photo);
+                        storeCropImage(photo,filePath);
                     } else if (null == iv_UserPhoto2.getDrawable()) {
                         iv_UserPhoto2.setImageBitmap(photo);
+                        storeCropImage(photo,filePath);
+
                     } else if (null == iv_UserPhoto3.getDrawable()) {
+
                         iv_UserPhoto3.setImageBitmap(photo);
+                        storeCropImage(photo,filePath);
+
                     } else if (null == iv_UserPhoto4.getDrawable()) {
                         iv_UserPhoto4.setImageBitmap(photo);
+                        storeCropImage(photo,filePath);
+
 
                     } else {
                         iv_UserPhoto5.setImageBitmap(photo);
+                        storeCropImage(photo,filePath);
+
 
                     }
                     break;
@@ -336,6 +355,32 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
             }
 
         }
+    }
+    private void storeCropImage(Bitmap bitmap,String filePath){
+        //SmartWheel 폴더를 생성하여 이미지를 저장하는 방식
+        String dirPath=Environment.getExternalStorageDirectory().getAbsolutePath()+"/SmartWheel";
+        File directory_SmartWheel =new File(dirPath);
+
+        if(!directory_SmartWheel.exists()){
+            directory_SmartWheel.mkdir();
+        }
+        File copyFile= new File(filePath);
+        BufferedOutputStream out=null;
+
+        try{
+            copyFile.createNewFile();
+            out= new BufferedOutputStream(new FileOutputStream(copyFile));
+            bitmap.compress(Bitmap.CompressFormat.JPEG,100,out);
+
+            //sendBroadcst를 통해 Crop된 사진을 앨범에 보이도록 갱신한다
+            sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,Uri.fromFile(copyFile)));
+            out.flush();
+            out.close();
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
     public void userinfo_save(){
 

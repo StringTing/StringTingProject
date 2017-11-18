@@ -137,8 +137,6 @@ public class ChatCustom extends BaseAdapter{
 
 
 
-
-
         return convertView;
     }
 

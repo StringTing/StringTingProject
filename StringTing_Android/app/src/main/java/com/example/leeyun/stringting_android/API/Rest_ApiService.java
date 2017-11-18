@@ -35,7 +35,7 @@ public interface Rest_ApiService {
 
         @Multipart
         @POST("upload-image/")
-        Call<ResponseApi> getPostImage(@Part MultipartBody.Part Image, @Part("sex") String sex, @Part("account_id")String account_id);
+        Call<ResponseApi> getPostImage(@Part MultipartBody.Part image, @Part("sex")RequestBody sex, @Part("account_id")RequestBody account_id);
 
 
     }

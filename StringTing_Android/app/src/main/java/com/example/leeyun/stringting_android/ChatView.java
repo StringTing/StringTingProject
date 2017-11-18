@@ -24,6 +24,7 @@ public class ChatView extends Activity implements AdapterView.OnItemClickListene
     ListView m_ListView;
     ChatCustom m_Adapter;
 
+    static  int position;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,9 +93,37 @@ public class ChatView extends Activity implements AdapterView.OnItemClickListene
             }
         }
         );
+        //수정 버튼을 클릭하면 edittext를 받아서 listview에 세팅해줌
+        findViewById(R.id.modify_sendbtn).setOnClickListener(new Button.OnClickListener() {
+            int i=1;
+            @Override
+            public void onClick(View v) {
+
+                EditText editText =(EditText)findViewById(R.id.modify_Edit);
+                editText.requestFocus();
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,InputMethodManager.HIDE_IMPLICIT_ONLY);
+                Toast.makeText(getApplicationContext(), "modify_send", Toast.LENGTH_LONG).show();
+                String modifyString = editText.getText().toString();
+                Log.v("modifyString",modifyString);
+
+                m_Adapter.getM_List().set(position, new ChatCustom.ListContents(modifyString,position));
+                m_Adapter.notifyDataSetChanged();
+
+                LinearLayout l2 = (LinearLayout)findViewById(R.id.enter_chatting_visible);
+                l2.setVisibility(View.GONE);
+                LinearLayout ll = (LinearLayout)findViewById(R.id.enter_chatting);
+                ll.setVisibility(View.VISIBLE);
+
+
+               }
+            }
+        );
 
 
     }
+
+
 
 
     private void refresh (String inputValue, int _str) {
@@ -127,15 +156,20 @@ public class ChatView extends Activity implements AdapterView.OnItemClickListene
     }
 
 
+
+    //수정하기 버튼을 눌렀을때 position을 받아옴, 전송버튼을 수정버튼으로 바꿔줌
     public void modify(View view) {
 
+        LinearLayout ll = (LinearLayout)findViewById(R.id.enter_chatting);
+        ll.setVisibility(View.GONE);
+        LinearLayout l2 = (LinearLayout)findViewById(R.id.enter_chatting_visible);
+        l2.setVisibility(View.VISIBLE);
 
         Toast.makeText(getApplicationContext(), "OK", Toast.LENGTH_LONG).show();
         EditText editText =(EditText)findViewById(R.id.input_text);
         editText.requestFocus();
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,InputMethodManager.HIDE_IMPLICIT_ONLY);
-
 
 
         String modifyString = editText.getText().toString();
@@ -145,15 +179,14 @@ public class ChatView extends Activity implements AdapterView.OnItemClickListene
         count=m_Adapter.getCount();
         Log.v("count", String.valueOf(count));
         if(count>0){
-            checked=m_ListView.getCheckedItemPosition();
 
-            Log.v("checked", String.valueOf(checked));
-                m_Adapter.getM_List().set(1, new ChatCustom.ListContents(modifyString,1));
+            position=m_ListView.getPositionForView(view);
 
-                m_Adapter.notifyDataSetChanged();
-
+            Log.v("checked", String.valueOf(position));
         }
+
     }
+
 
 
     @Override

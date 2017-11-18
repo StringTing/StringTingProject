@@ -99,30 +99,26 @@ public class Membership_form extends Activity {
         Uri imageURI = Uri.parse("android.resource://" + getPackageName() + "/" + R.drawable.gametitle_01);
 
         String root = Environment.getExternalStorageDirectory().toString();
-        Postfile = new File(root+"/Download/pane1-1.jpg");
+        Postfile = new File(root+"/Download/25576de222c603a.jpg");
 
         RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), Postfile);
+        RequestBody sex = RequestBody.create(MediaType.parse("multipart/form-data"), "male");
+        RequestBody account_id = RequestBody.create(MediaType.parse("multipart/form-data"), "1");
 
         Log.v("getName(postfile)",Postfile.getName());
 
-        MultipartBody.Part body =
-                MultipartBody.Part.createFormData("file", Postfile.getName(), requestFile);
-        RequestBody filename = RequestBody.create(MediaType.parse("multipart/form-data"), Postfile.getName());
+        MultipartBody.Part image =
+                MultipartBody.Part.createFormData("image", Postfile.getName(), requestFile);
 
-        Call<ResponseApi> call = apiService.getPostImage(body,"male","1");
+
+        Call<ResponseApi> call = apiService.getPostImage(image,sex,account_id);
         call.enqueue(new Callback<ResponseApi>() {
             @Override
             public void onResponse(Call<ResponseApi> call, Response<ResponseApi> response) {
                 ResponseApi imageresponse=response.body();
-                if("success".equals(imageresponse.getResult())){
-                    Log.v("onresponse", "success");
-                    Log.v("onresponse",response.body().toString());
+                Log.v("onresponseImage",imageresponse.getResult());
+                Log.v("getName(postfile)",Postfile.getName());
 
-                }
-                else{
-                    Log.v("onresponse",response.body().toString());
-
-                }
             }
 
             @Override
