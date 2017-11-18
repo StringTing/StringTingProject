@@ -33,125 +33,156 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/sb1"
-            android:layout_marginBottom="50dp">
+            android:layout_marginBottom="50dp"
+            android:layout_marginTop="7dp">
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="360dp"
+                android:layout_height="640dp"
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="344dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
                     android:orientation="horizontal">
 
                     <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
+                        android:layout_width="155dp"
+                        android:layout_height="255dp"
+                        android:layout_marginRight="8dp"
                         android:gravity="center"
                         android:orientation="vertical"
-                        android:padding="15dp">
+                        android:background="@drawable/rounded">
 
                         <ImageView
                             android:id="@+id/imageView"
-                            android:layout_width="150dp"
-                            android:layout_height="150dp"
+                            android:layout_width="155dp"
+                            android:layout_height="196dp"
                             android:scaleType="fitXY"
                             app:srcCompat="@drawable/kakao_default_profile_image" />
 
                         <TextView
+                            android:layout_width="155dp"
+                            android:layout_height="16dp"
+                            android:background="@drawable/gradient_background"
+                            android:text="  White Member"
+                            android:textColor="#ffffff"
+                            android:textSize="10sp" />
+
+                        <TextView
                             android:id="@+id/textView"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
+                            android:layout_width="71dp"
+                            android:layout_height="27dp"
+                            android:layout_marginTop="7dp"
+                            android:textSize="10sp"
+                            android:layout_gravity="start"
+                            android:layout_marginLeft="12dp"
                             android:text="#서울 #기획자 \n#182 #기획자" />
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
+                        android:layout_width="155dp"
+                        android:layout_height="255dp"
+                        android:layout_marginLeft="8dp"
                         android:gravity="center"
                         android:orientation="vertical"
-                        android:padding="15dp">
+                        android:background="@drawable/rounded">
 
                         <ImageView
                             android:id="@+id/imageView2"
-                            android:layout_width="150dp"
-                            android:layout_height="150dp"
+                            android:layout_width="155dp"
+                            android:layout_height="196dp"
                             android:scaleType="fitXY"
-                            app:srcCompat="@drawable/kakao_default_profile_image" />
+                             />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="end"
+                            android:text="White Member"
+                            android:textColor="#ffffff"
+                            android:textSize="10sp" />
 
                         <TextView
                             android:id="@+id/textView2"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
+                            android:layout_width="71dp"
+                            android:layout_height="27dp"
+                            android:layout_marginTop="7dp"
+                            android:textSize="10sp"
+                            android:layout_gravity="start"
+                            android:layout_marginLeft="12dp"
                             android:text="#서울 #기획자 \n#182 #기획자" />
+
                     </LinearLayout>
                 </LinearLayout>
 
-                <TextView
-                    android:id="@+id/textView19"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
+                <ImageView
+                    android:layout_width="326dp"
+                    android:layout_height="51dp"
                     android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="1"
-                    android:text=" &lt;화이트맴버(본인인증)신청하러 가기&gt;\n좋아요 50% 할인, 화이트 맴버끼리의 매칭, 하루 한번 더 소개 등의\n화이트 맴버 혜택을 누려보세요!"
-                    android:textAlignment="center" />
+                    app:srcCompat="@drawable/whitemember"
+
+                    />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="30dp"
-                    android:layout_weight="1"
+                    android:layout_marginTop="15dp"
                     android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/textView3"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingLeft="20dp"
+                        android:layout_width="50dp"
+                        android:layout_height="14dp"
+                        android:layout_marginLeft="16dp"
+                        android:textSize="12sp"
+                        android:textColor="#000000"
+                        android:letterSpacing="0.04"
                         android:text="지난 픽들"
-                        android:textSize="25dp" />
+                        />
+
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
+                        android:layout_marginTop="20dp"
+
+                        >
 
                         <ImageView
                             android:id="@+id/imageView6"
-                            android:layout_width="120dp"
-                            android:layout_height="120dp"
+                            android:layout_width="94dp"
+                            android:layout_height="94dp"
                             android:layout_gravity="center"
-                            android:layout_weight="1"
-                            android:padding="10dp"
                             android:scaleType="fitXY"
-                            app:srcCompat="@drawable/kakao_default_profile_image" />
+                            android:layout_marginRight="11.5dp"
+                            app:srcCompat="@drawable/kakao_default_profile_image"
+                            android:background="@drawable/rounded"/>
 
                         <ImageView
                             android:id="@+id/imageView7"
-                            android:layout_width="120dp"
-                            android:layout_height="120dp"
+                            android:layout_width="94dp"
+                            android:layout_height="94dp"
                             android:layout_gravity="center"
-                            android:layout_weight="1"
-                            android:padding="10dp"
                             android:scaleType="fitXY"
-                            app:srcCompat="@drawable/kakao_default_profile_image" />
+                            android:layout_marginLeft="11.5dp"
+                            android:layout_marginRight="11.5dp"
+                            android:background="@drawable/rounded"/>
 
                         <ImageView
                             android:id="@+id/imageView8"
-                            android:layout_width="120dp"
-                            android:layout_height="120dp"
+                            android:layout_width="94dp"
+                            android:layout_height="94dp"
                             android:layout_gravity="center"
-                            android:layout_weight="1"
-                            android:padding="10dp"
                             android:scaleType="fitXY"
-                            app:srcCompat="@drawable/kakao_default_profile_image" />
+                            android:layout_marginLeft="11.5dp"
+                            android:background="@drawable/rounded"/>
 
                     </LinearLayout>
 
@@ -160,27 +191,29 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
-                        android:orientation="vertical">
+                        android:layout_marginTop="16dp"
+                        android:orientation="horizontal">
 
+                        <View
+                            android:layout_width="131dp"
+                            android:layout_height="2dp"
+                            android:background="#cecece"
+                            android:layout_marginRight="18dp"/>
+                        
                         <TextView
                             android:id="@+id/textView4"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="20dp"
-                            android:layout_weight="1"
-                            android:text="더보기"
-                            android:textSize="18dp" />
+                            android:layout_width="32dp"
+                            android:layout_height="12dp"
+                            android:textSize="11sp"
+                            android:letterSpacing="0.05"
+                            android:text="더보기"/>
 
-                        <ImageButton
-                            android:id="@+id/imageButton"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:layout_weight="1"
-                            android:background="#00ff0000"
-                            app:srcCompat="@drawable/com_facebook_tooltip_black_bottomnub" />
-
+                        <View
+                            android:layout_width="131dp"
+                            android:layout_height="2dp"
+                            android:background="#cecece"
+                            android:layout_marginLeft="18dp" />
+                    
                     </LinearLayout>
 
                     <LinearLayout

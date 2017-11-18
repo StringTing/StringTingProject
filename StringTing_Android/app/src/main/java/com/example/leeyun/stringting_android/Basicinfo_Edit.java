@@ -341,31 +341,35 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
                 if (extras != null) {
                     Bitmap photo = extras.getParcelable("data");//CROP된 BITMAP
 
-
-                    if (null == iv_UserPhoto1.getDrawable()) {
-                        iv_UserPhoto1.setImageBitmap(photo);
-                        storeCropImage(photo,filePath);
-                    } else if (null == iv_UserPhoto2.getDrawable()) {
-                        iv_UserPhoto2.setImageBitmap(photo);
-                        storeCropImage(photo,filePath);
-
-                    } else if (null == iv_UserPhoto3.getDrawable()) {
-
-                        iv_UserPhoto3.setImageBitmap(photo);
-                        storeCropImage(photo,filePath);
-
-                    } else if (null == iv_UserPhoto4.getDrawable()) {
-                        iv_UserPhoto4.setImageBitmap(photo);
-                        storeCropImage(photo,filePath);
-
-
-                    } else {
-                        iv_UserPhoto5.setImageBitmap(photo);
-                        storeCropImage(photo,filePath);
-
-
+                    switch (imageupload_count){
+                        case 1:{
+                            iv_UserPhoto1.setImageBitmap(photo);
+                            storeCropImage(photo,filePath);
+                            break;
+                        }
+                        case 2:{
+                            iv_UserPhoto2.setImageBitmap(photo);
+                            storeCropImage(photo,filePath);
+                            break;
+                        }
+                        case 3:{
+                            iv_UserPhoto3.setImageBitmap(photo);
+                            storeCropImage(photo,filePath);
+                            break;
+                        }
+                        case 4:{
+                            iv_UserPhoto4.setImageBitmap(photo);
+                            storeCropImage(photo,filePath);
+                            break;
+                        }
+                        case 5:{
+                            iv_UserPhoto5.setImageBitmap(photo);
+                            storeCropImage(photo,filePath);
+                            break;
+                        }
                     }
-                    break;
+
+
                 }
 
 
