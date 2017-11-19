@@ -133,12 +133,12 @@ public class Membership_form extends Activity {
 
 
                 ResponseApi gsonresponse=response.body();
-                Log.v("onresponse", gsonresponse.getResult());
-                Log.v("onresponse",gsonresponse.getMessage());
-                Log.v("onresponse", String.valueOf(response.code()));
+                Log.v("onresponse_Imagecheck", gsonresponse.getResult());
+                Log.v("onresponse_Imagecheck",gsonresponse.getMessage());
+                Log.v("onresponse_Imagecheck", String.valueOf(response.code()));
 
-                if("success".equals(gsonresponse.getResult())){
-                    Log.v("onresponse", "success");
+                if("true".equals(gsonresponse.getResult())){
+                    Log.v("onresponse_Imagecheck", "success");
 
                 }
                 else{

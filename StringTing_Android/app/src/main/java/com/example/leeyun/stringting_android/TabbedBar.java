@@ -34,19 +34,15 @@ public class TabbedBar extends AppCompatActivity implements View.OnClickListener
 
     ViewPager pager;
 
-<<<<<<< HEAD
     ResponseApi responapi =new ResponseApi();
     Rest_ApiService apiService;
     Retrofit retrofit;
 
     userinfo Userinfo=new userinfo();
-    private Button bt_tab1, bt_tab2,bt_tab3,bt_tab4,bt_tab5;
-=======
     private LinearLayout bt_tab1,bt_tab2,bt_tab3,bt_tab4,bt_tab5;
 
 
     private LinearLayout on_tab1,on_tab2,on_tab3,on_tab4,on_tab5;
->>>>>>> cd23eafaad3772b2ccff90178e87c9557949fc02
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +82,7 @@ public class TabbedBar extends AppCompatActivity implements View.OnClickListener
                 userinfo gsonresponse=response.body();
                 Log.v("onresponse", gsonresponse.getResult());
                 Log.v("onresponse", String.valueOf(response.code()));
-                if("success".equals(gsonresponse.getResult())){
+                if("true".equals(gsonresponse.getResult())){
                     Log.v("onresponse", "success");
 
                 }
