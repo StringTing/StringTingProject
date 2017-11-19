@@ -566,7 +566,7 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
                 //UserInfo.setBirthday(Integer.parseInt(spinnerbir1.getItemAtPosition(position).toString()));
                 UserInfo.setBirthday("1997-11-15");
                 Button b1 = (Button) findViewById(R.id.r_btn5);
-                if(UserInfo.getBirthday() != "00") {
+                if(UserInfo.getBirthday().contains("00") == false) {
                     b1.setBackgroundResource(R.drawable.press_round_btn);
                 } else {
                     b1.setBackgroundResource(R.drawable.round_btn);
