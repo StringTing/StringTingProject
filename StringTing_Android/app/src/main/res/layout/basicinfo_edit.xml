@@ -22,7 +22,7 @@
             android:onClick="onClick_back"
             android:layout_centerVertical="true"
             android:scaleType="centerCrop"
-            android:src="@drawable/backbtn"
+            android:src="@mipmap/arrow_back"
             />
 
         <TextView
@@ -409,47 +409,84 @@
                         android:id="@+id/text_id4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:paddingLeft="11dp"
+                        android:layout_alignBaseline="@+id/r_btn5"
+                        android:layout_alignBottom="@+id/r_btn5"
+                        android:layout_toEndOf="@+id/r_btn5"
                         android:letterSpacing="-0.02"
-                        android:textSize="11sp"
-                        android:layout_toRightOf="@+id/r_btn5"
-                        android:text="생년원일"
-                        />
+                        android:paddingLeft="11dp"
+                        android:text="생년월일"
+                        android:textSize="11sp" />
 
                     <Spinner
                         android:id="@+id/Spinner_birthday1"
                         android:layout_width="60dp"
                         android:layout_height="30dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="3dp"
+                        android:layout_toLeftOf="@+id/bir1"
                         android:layout_gravity="center"
                         android:background="@drawable/spinner_rectangle_border"
                         android:prompt="@string/age_prompt">
 
                     </Spinner>
+
+                    <TextView
+                        android:id="@+id/bir1"
+                        android:layout_width="20dp"
+                        android:layout_height="wrap_content"
+                        android:layout_toLeftOf="@+id/Spinner_birthday2"
+                        android:layout_marginRight="10dp"
+                        android:textAlignment="textEnd"
+                        android:layout_centerVertical="true"
+                        android:letterSpacing="-0.02"
+                        android:textSize="11sp"
+                        android:text="년" />
+
                     <Spinner
                     android:id="@+id/Spinner_birthday2"
-                    android:layout_width="60dp"
+                    android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="3dp"
+                        android:layout_toLeftOf="@+id/bir2"
+
                     android:layout_gravity="center"
                     android:background="@drawable/spinner_rectangle_border"
                     android:prompt="@string/age_prompt">
 
                     </Spinner>
+
+                    <TextView
+                        android:id="@+id/bir2"
+                        android:layout_width="20dp"
+                        android:layout_height="wrap_content"
+                        android:layout_toLeftOf="@+id/Spinner_birthday3"
+                        android:letterSpacing="-0.02"
+                        android:textAlignment="textEnd"
+                        android:layout_marginRight="10dp"
+                        android:layout_centerVertical="true"
+                        android:textSize="11sp"
+                        android:text="월" />
+
                     <Spinner
                         android:id="@+id/Spinner_birthday3"
-                        android:layout_width="60dp"
+                        android:layout_width="30dp"
                         android:layout_height="30dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="3dp"
+                        android:layout_toLeftOf="@+id/bir3"
                         android:layout_gravity="center"
                         android:background="@drawable/spinner_rectangle_border"
                         android:prompt="@string/age_prompt">
 
                     </Spinner>
+
+                    <TextView
+                        android:id="@+id/bir3"
+                        android:layout_width="20dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="17dp"
+                        android:textAlignment="textEnd"
+                        android:layout_centerVertical="true"
+                        android:letterSpacing="-0.02"
+                        android:textSize="11sp"
+                        android:text="일" />
+
 
                 </RelativeLayout>
 
@@ -542,6 +579,9 @@
                         />
 
                 </RelativeLayout>
+
+
+
 
                 <RelativeLayout
                     android:layout_width="match_parent"
