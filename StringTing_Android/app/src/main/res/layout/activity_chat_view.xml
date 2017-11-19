@@ -6,37 +6,36 @@
     android:layout_height="match_parent"
     tools:context="com.example.leeyun.stringting_android.ChatView">
 
-    <LinearLayout
-        android:id="@+id/sb"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp">
+        android:layout_height="50dp"
+        android:id="@+id/sb">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <ImageButton
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginLeft="16dp"
+            android:background="@android:color/transparent"
+            android:onClick="onClick_back"
+            android:layout_centerVertical="true"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/arrow_back"
+            />
 
-            <ImageButton
-                android:id="@+id/img_btn1"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:background="@android:color/transparent"
-                android:onClick="onClick_back"
-                android:padding="0sp"
-                android:paddingTop="20dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/backbtn" />
+        <TextView
+            android:id="@+id/textView21"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:textColor="#de000000"
+            android:lineSpacingExtra="12sp"
+            android:text="대화함"
+            android:textSize="16sp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:paddingTop="10dp"
-                android:text="대화함"
-                android:textSize="20dp" />
+    </RelativeLayout>
 
-        </RelativeLayout>
 
-    </LinearLayout>
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -69,20 +68,24 @@
         <Button
             android:id="@+id/next_btn"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_alignParentBottom="true"
             android:layout_marginTop="10dp"
-            android:text="다음"
-            android:textSize="20sp"
+            android:background="@android:color/transparent"
+            android:text="다  음"
+            android:textColor="#de000000"
+            android:lineSpacingExtra="12sp"
+            android:textSize="18sp"
             android:onClick="onClick_TabbedBar"
             android:visibility="invisible" />
 
         <LinearLayout
             android:id="@+id/enter_chatting"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true"
+            android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:orientation="horizontal"
             android:visibility="visible">
@@ -91,8 +94,12 @@
                 android:id="@+id/input_text"
                 android:layout_width="283dp"
                 android:layout_height="36dp"
-                android:layout_weight="9"
+                android:layout_marginLeft="7dp"
                 android:layout_marginRight="7dp"
+                android:layout_marginBottom="7dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:layout_gravity="center"
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:background="@drawable/rounded_edittext"/>
@@ -102,7 +109,9 @@
                 android:id="@+id/send_btn"
                 android:layout_width="56dp"
                 android:layout_height="36dp"
-                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:layout_marginBottom="7dp"
+                android:layout_marginRight="7dp"
                 android:textColor="@color/white"
                 android:background="@drawable/rounded_sendbtn"
                 android:text="전송" />
@@ -111,10 +120,11 @@
 
         <LinearLayout
             android:id="@+id/enter_chatting_visible"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true"
+            android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:orientation="horizontal"
             android:visibility="invisible">
@@ -124,7 +134,12 @@
                 android:id="@+id/modify_Edit"
                 android:layout_width="283dp"
                 android:layout_height="36dp"
+                android:layout_marginLeft="7dp"
                 android:layout_marginRight="7dp"
+                android:layout_marginBottom="7dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:layout_gravity="center"
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:background="@drawable/rounded_edittext"
@@ -137,7 +152,9 @@
                 android:layout_height="36dp"
                 android:textColor="@color/white"
                 android:text="수정"
+                android:layout_marginBottom="7dp"
                 android:layout_marginRight="7dp"
+                android:layout_gravity="center"
                 android:background="@drawable/rounded_sendbtn"
                 android:visibility="visible"/>
         </LinearLayout>
