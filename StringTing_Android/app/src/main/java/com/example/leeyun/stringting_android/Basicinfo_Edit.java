@@ -3,6 +3,8 @@ package com.example.leeyun.stringting_android;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -12,14 +14,17 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.support.v7.app.AlertDialog;
+import android.widget.TextView;
 
 import com.example.leeyun.stringting_android.API.ResponseApi;
 import com.example.leeyun.stringting_android.API.Rest_ApiService;
@@ -62,6 +67,8 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
     Retrofit retrofit;
 
     File Postfile;
+
+
 
 
     public void onClick_ChatView(View v) {
@@ -442,12 +449,15 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
         final Spinner spinnerTall=(Spinner)findViewById(R.id.Spinner_Tall);
 
 
+
         RadioMan_checked.setOnClickListener(new RadioButton.OnClickListener(){
             public void onClick(View v) {
                 if (RadioMan_checked.isChecked()) {
                     Log.e("성별.", "남자");
                     Button b1 = (Button)findViewById(R.id.r_btn1);
                     b1.setBackgroundResource(R.drawable.press_round_btn);
+                    RelativeLayout army = (RelativeLayout) findViewById(R.id.army);
+                    army.setVisibility(View.VISIBLE);
 
                 }
 
@@ -459,6 +469,9 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
                     Log.e("성별.", "여자");
                     Button b1 = (Button)findViewById(R.id.r_btn1);
                     b1.setBackgroundResource(R.drawable.press_round_btn);
+
+                    RelativeLayout army = (RelativeLayout) findViewById(R.id.army);
+                    army.setVisibility(View.GONE);
                 }
 
             }
@@ -545,6 +558,8 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
         });
 
         spinnerCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Log.e("City", (String) spinnerCity.getItemAtPosition(position));
