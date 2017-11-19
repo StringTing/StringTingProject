@@ -167,6 +167,7 @@ public class MainActivity extends AppCompatActivity {
                             Intent intent = new Intent(MainActivity.this,  Basicinfo_Edit.class);
                             intent.putExtra("ID",Email);
                             intent.putExtra("setid",'F');
+
                             startActivity(intent);
                             finish();}
                             catch (Exception e){

@@ -23,6 +23,7 @@ import java.util.ArrayList;
 public class ChatView extends Activity implements AdapterView.OnItemClickListener {
     ListView m_ListView;
     ChatCustom m_Adapter;
+    userinfo Userinfo = new userinfo();
 
     static  int position;
     @Override
@@ -39,12 +40,12 @@ public class ChatView extends Activity implements AdapterView.OnItemClickListene
         for (int i=0;i<Imageupload_countList.size();i++){
             Log.v("Imagefilepath",Imageupload_countList.get(i));
         }
-        final userinfo Userinfo = (userinfo)getIntent().getSerializableExtra("UserInfo");
+        Userinfo = (userinfo)getIntent().getSerializableExtra("UserInfo");
 
         final String Userinfo_Json= new Gson().toJson(Userinfo);
         Log.e("TestUserinfoGson",Userinfo_Json);            //userinfo정보를 json타입으로 변환
 
-        savePreferences(Userinfo.getId());
+        savePreferences(Userinfo.getEmail());
 
         SharedPreferences example= getSharedPreferences("Local_DB", MODE_PRIVATE);
         String str = example.getString("Id", "");
@@ -153,6 +154,7 @@ public class ChatView extends Activity implements AdapterView.OnItemClickListene
 
     public void onClick_TabbedBar(View v){               //basicinfo에서 불러온 정보들을 변수에 저장
         Intent intent = new Intent(getApplicationContext(), TabbedBar.class);
+        intent.putExtra("Userinfo",Userinfo);
         startActivity(intent);
     }
 

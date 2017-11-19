@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.leeyun.stringting_android.API.ResponseApi;
 import com.example.leeyun.stringting_android.API.Rest_ApiService;
+import com.example.leeyun.stringting_android.API.userinfo;
 import com.kakao.util.helper.FileUtils;
 
 import org.w3c.dom.Text;
@@ -54,6 +55,7 @@ import static com.kakao.auth.StringSet.file;
 public class Membership_form extends Activity {
 
     ResponseApi responapi =new ResponseApi();
+    userinfo Userinfo =new userinfo();
     Rest_ApiService apiService;
     Retrofit retrofit;
 
@@ -94,6 +96,7 @@ public class Membership_form extends Activity {
         responapi.setEmail(Email);
 
 
+
         String root = Environment.getExternalStorageDirectory().toString();
         Postfile = new File(root+"/Download/25576de222c603a.jpg");
 
@@ -106,7 +109,7 @@ public class Membership_form extends Activity {
                 MultipartBody.Part.createFormData("image", Postfile.getName(), requestFile);
 
 
-        Call<ResponseApi> call = apiService.getPostImage("male",image);
+        Call<ResponseApi> call = apiService.getPostImage("male","1",image);
         call.enqueue(new Callback<ResponseApi>() {
             @Override
             public void onResponse(Call<ResponseApi> call, Response<ResponseApi> response) {
@@ -170,7 +173,8 @@ public class Membership_form extends Activity {
             if(PW.equals(EqualPw)) {
                 Intent intent = new Intent(getApplicationContext(), Basicinfo_Edit.class);
                 intent.putExtra("ID",Email);
-                intent.putExtra("setid",'F');
+                intent.putExtra("PW",PW);
+                intent.putExtra("setformat","EMAIL");
                 startActivity(intent);
 
             }

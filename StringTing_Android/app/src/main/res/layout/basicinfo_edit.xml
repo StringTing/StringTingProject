@@ -414,15 +414,37 @@
                         android:letterSpacing="-0.02"
                         android:textSize="11sp"
                         android:layout_toRightOf="@+id/r_btn5"
-                        android:text="나이"
+                        android:text="생년원일"
                         />
 
                     <Spinner
-                        android:id="@+id/Spinner_age"
-                        android:layout_width="200dp"
+                        android:id="@+id/Spinner_birthday1"
+                        android:layout_width="60dp"
                         android:layout_height="30dp"
                         android:layout_alignParentRight="true"
-                        android:layout_marginRight="17dp"
+                        android:layout_marginRight="3dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/spinner_rectangle_border"
+                        android:prompt="@string/age_prompt">
+
+                    </Spinner>
+                    <Spinner
+                    android:id="@+id/Spinner_birthday2"
+                    android:layout_width="60dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="3dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/spinner_rectangle_border"
+                    android:prompt="@string/age_prompt">
+
+                    </Spinner>
+                    <Spinner
+                        android:id="@+id/Spinner_birthday3"
+                        android:layout_width="60dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="3dp"
                         android:layout_gravity="center"
                         android:background="@drawable/spinner_rectangle_border"
                         android:prompt="@string/age_prompt">

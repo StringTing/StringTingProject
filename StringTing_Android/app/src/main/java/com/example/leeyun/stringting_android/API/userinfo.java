@@ -17,24 +17,32 @@ public class userinfo implements Serializable{
 
 
 
-    @SerializedName("Id")
-    private String Id;
-    private int age;
-    private char login_format;
-    private int birthday;
+    private String login_format;
+    private String birthday;
     private String military_service_status;
     private String education;
     private String department;
     private String location;
-    private int hegiht;
-    private char body_form;
+    private int height;
     private boolean smoke;
     private String drink;            //논의 필요
     private String religion;
     private String blood_type;
-    private char authenticated;
+    private boolean authenticated;
     private String id_image;
+    private String password;
+    private String body_form;
 
+    public void setResult(String result) {
+        this.result = result;
+    }
+
+    public String getResult() {
+
+        return result;
+    }
+
+    private String result;
 
 
     private String email;
@@ -70,15 +78,12 @@ public class userinfo implements Serializable{
         return password;
     }
 
-    public char getLogin_format() {
+    public String getLogin_format() {
         return login_format;
     }
 
-    public userinfo(String id) {
-        Id = id;
-    }
 
-    public int getBirthday() {
+    public String getBirthday() {
         return birthday;
     }
 
@@ -94,13 +99,13 @@ public class userinfo implements Serializable{
         return email;
     }
 
-    private String password;
+
 
     public void setId_image(String id_image) {
         this.id_image = id_image;
     }
 
-    public void setAuthenticated(char authenticated) {
+    public void setAuthenticated(boolean authenticated) {
 
         this.authenticated = authenticated;
     }
@@ -125,14 +130,14 @@ public class userinfo implements Serializable{
         this.smoke = smoke;
     }
 
-    public void setBody_form(char body_form) {
+    public void setBody_form(String body_form) {
 
         this.body_form = body_form;
     }
 
-    public void setHegiht(int hegiht) {
+    public void setheight(int height) {
 
-        this.hegiht = hegiht;
+        this.height = height;
     }
 
     public void setLocation(String location) {
@@ -155,12 +160,12 @@ public class userinfo implements Serializable{
         this.military_service_status = military_service_status;
     }
 
-    public void setBirthday(int birthday) {
+    public void setBirthday(String birthday) {
 
         this.birthday = birthday;
     }
 
-    public void setLogin_format(char login_format) {
+    public void setLogin_format(String login_format) {
 
         this.login_format = login_format;
     }
@@ -170,22 +175,15 @@ public class userinfo implements Serializable{
         this.password = password;
     }
 
-    public void setAge(int age) {
 
-        this.age = age;
-    }
 
-    public void setId(String id) {
-
-        Id = id;
-    }
 
     public String getId_image() {
 
         return id_image;
     }
 
-    public char getAuthenticated() {
+    public boolean getAuthenticated() {
 
         return authenticated;
     }
@@ -210,14 +208,14 @@ public class userinfo implements Serializable{
         return smoke;
     }
 
-    public char getBody_form() {
+    public String getBody_form() {
 
         return body_form;
     }
 
-    public int getHegiht() {
+    public int getheight() {
 
-        return hegiht;
+        return height;
     }
 
     public String getLocation() {
@@ -230,18 +228,12 @@ public class userinfo implements Serializable{
         return department;
     }
 
-    public String getId() {
-        return Id;
-    }
-
-    public int getAge() {
-        return age;
-    }
 
 
     public void setEmail(String email) {
         this.email = email;
     }
+
 
 
 }
