@@ -1,13 +1,28 @@
 package com.example.leeyun.stringting_android;
 
+import android.content.Intent;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+
+import com.example.leeyun.stringting_android.API.ResponseApi;
+import com.example.leeyun.stringting_android.API.Rest_ApiService;
+import com.example.leeyun.stringting_android.API.userinfo;
+import com.google.gson.Gson;
+
+import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class TabbedBar extends AppCompatActivity implements View.OnClickListener {
 
@@ -19,10 +34,19 @@ public class TabbedBar extends AppCompatActivity implements View.OnClickListener
 
     ViewPager pager;
 
+<<<<<<< HEAD
+    ResponseApi responapi =new ResponseApi();
+    Rest_ApiService apiService;
+    Retrofit retrofit;
+
+    userinfo Userinfo=new userinfo();
+    private Button bt_tab1, bt_tab2,bt_tab3,bt_tab4,bt_tab5;
+=======
     private LinearLayout bt_tab1,bt_tab2,bt_tab3,bt_tab4,bt_tab5;
 
 
     private LinearLayout on_tab1,on_tab2,on_tab3,on_tab4,on_tab5;
+>>>>>>> cd23eafaad3772b2ccff90178e87c9557949fc02
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +54,14 @@ public class TabbedBar extends AppCompatActivity implements View.OnClickListener
         setContentView(R.layout.activity_tabbed_bar);
 
 
+
+        Intent intent =getIntent();
+
+        Userinfo = (userinfo)getIntent().getSerializableExtra("Userinfo");
+        final String Userinfo_Json= new Gson().toJson(Userinfo);
+        Log.e("Userinfo_Json",Userinfo_Json);
+        retrofit = new Retrofit.Builder().baseUrl(Rest_ApiService.API_URLTest).addConverterFactory(GsonConverterFactory.create()).build();
+        apiService= retrofit.create(Rest_ApiService.class);
 
 
 
@@ -44,6 +76,33 @@ public class TabbedBar extends AppCompatActivity implements View.OnClickListener
         //CustomAdapter에게 LayoutInflater 객체 전달
 
 
+
+        Call<userinfo>PostUserinfo = apiService.getPostUserinfo(Userinfo);
+        PostUserinfo.enqueue(new Callback<userinfo>() {
+            @Override
+            public void onResponse(Call<userinfo> call, Response<userinfo> response) {
+
+
+                userinfo gsonresponse=response.body();
+                Log.v("onresponse", gsonresponse.getResult());
+                Log.v("onresponse", String.valueOf(response.code()));
+                if("success".equals(gsonresponse.getResult())){
+                    Log.v("onresponse", "success");
+
+                }
+                else{
+                    Log.v("onresponse","fail");
+                }
+
+
+
+            }
+
+            @Override
+            public void onFailure(Call<userinfo> call, Throwable t) {
+                Log.d("sam", "fail");
+            }
+        });
 
 
         // 위젯에 대한 참조

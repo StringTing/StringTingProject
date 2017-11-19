@@ -10,18 +10,74 @@
     <string name="education_prompt">학력</string>
     <string name="tall_prompt">키</string>
 
-    <string-array name="age">
-        <item>00</item>
-        <item>20</item>
-        <item>21</item>
-        <item>22</item>
-        <item>23</item>
-        <item>24</item>
-        <item>25</item>
-        <item>26</item>
+
+    <string-array name="birthday1">
+        <item>1987</item>
+        <item>1988</item>
+        <item>1989</item>
+        <item>1990</item>
+        <item>1991</item>
+        <item>1992</item>
+        <item>1993</item>
+        <item>1994</item>
+        <item>1995</item>
+        <item>1996</item>
+        <item>1997</item>
+        <item>1998</item>
+        <item>1999</item>
 
     </string-array>
 
+    <string-array name="birthday2">
+        <item>01</item>
+        <item>02</item>
+        <item>03</item>
+        <item>04</item>
+        <item>05</item>
+        <item>06</item>
+        <item>07</item>
+        <item>08</item>
+        <item>09</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+
+    </string-array>
+
+    <string-array name="birthday3">
+        <item>01</item>
+        <item>02</item>
+        <item>03</item>
+        <item>04</item>
+        <item>05</item>
+        <item>06</item>
+        <item>07</item>
+        <item>08</item>
+        <item>09</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+            <item>13</item>
+            <item>14</item>
+            <item>15</item>
+            <item>16</item>
+            <item>17</item>
+            <item>18</item>
+            <item>19</item>
+            <item>20</item>
+            <item>21</item>
+            <item>22</item>
+            <item>23</item>
+            <item>24</item>
+            <item>25</item>
+            <item>26</item>
+            <item>27</item>
+            <item>28</item>
+            <item>29</item>
+            <item>30</item>
+            <item>31</item>
+
+    </string-array>
     <string-array name="city">
         <item>--</item>
         <item>서울</item>
@@ -54,26 +110,27 @@
         <item>없음</item>
         <item>기독교</item>
         <item>천주교</item>
-        <item>불교</item>
+        <item>원불교</item>
+        <item>이슬람</item>
         <item>기타</item>
 
     </string-array>
     <string-array name="drink">
         <item>--</item>
-        <item>마시지 않음</item>
-        <item>적당히 즐김</item>
-        <item>즐김</item>
+        <item>알코올 몰라</item>
+        <item>적당히즐김</item>
+        <item>술고래</item>
     </string-array>
 
     <string-array name="education">
         <item>--</item>
-        <item>인서울 상위</item>
-        <item>인서울 4년제</item>
-        <item>수도권 4년</item>
+        <item>인서울상위</item>
+        <item>인서울4년제</item>
+        <item>수도권4년</item>
         <item>전문대</item>
         <item>4년제</item>
         <item>해외대학</item>
-        <item>고졸</item>
+        <item>고등학</item>
     </string-array>
 
     <string-array name="Tall">

@@ -34,13 +34,17 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.example.leeyun.stringting_android.R.id.Spinner_Tall;
-import static com.example.leeyun.stringting_android.R.id.Spinner_age;
+
+import static com.example.leeyun.stringting_android.R.id.Spinner_birthday1;
+import static com.example.leeyun.stringting_android.R.id.Spinner_birthday2;
+import static com.example.leeyun.stringting_android.R.id.Spinner_birthday3;
 import static com.example.leeyun.stringting_android.R.id.Spinner_blood;
 import static com.example.leeyun.stringting_android.R.id.Spinner_city;
 import static com.example.leeyun.stringting_android.R.id.Spinner_drink;
@@ -48,6 +52,7 @@ import static com.example.leeyun.stringting_android.R.id.Spinner_education;
 import static com.example.leeyun.stringting_android.R.id.Spinner_religion;
 import static com.example.leeyun.stringting_android.R.layout.spinner_item;
 import static java.lang.Integer.parseInt;
+import static okhttp3.Protocol.get;
 
 /**
  * Created by leeyun on 2017. 9. 16..
@@ -65,6 +70,8 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
     ResponseApi responapi =new ResponseApi();
     Rest_ApiService apiService;
     Retrofit retrofit;
+    HashMap<String, String> location_Map= new HashMap<String, String>();
+
 
     File Postfile;
 
@@ -94,6 +101,7 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
         apiService= retrofit.create(Rest_ApiService.class);
 
 
+
         userinfo UserInfo =new userinfo();
 
         userinfo_save();
@@ -106,7 +114,9 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
         iv_UserPhoto6 = (ImageView) this.findViewById(R.id.photo6);
 
 
-        Spinner age = (Spinner) findViewById(Spinner_age);          //Spinner Setting
+        Spinner birthday1 = (Spinner) findViewById(Spinner_birthday1);          //Spinner Setting
+        Spinner birthday2 = (Spinner) findViewById(Spinner_birthday2);
+        Spinner birthday3 = (Spinner) findViewById(Spinner_birthday3);
         Spinner city = (Spinner) findViewById(Spinner_city);
         Spinner blood = (Spinner) findViewById(Spinner_blood);
         Spinner drink = (Spinner) findViewById(Spinner_drink);
@@ -115,7 +125,10 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
         Spinner Tall=(Spinner)findViewById(Spinner_Tall);
 
 
-        ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.age, spinner_item);
+        ArrayAdapter adapter= ArrayAdapter.createFromResource(this, R.array.birthday1, spinner_item);
+        ArrayAdapter adapter_bir2 = ArrayAdapter.createFromResource(this, R.array.birthday2, spinner_item);
+        ArrayAdapter adapter_bir3 = ArrayAdapter.createFromResource(this, R.array.birthday3, spinner_item);
+
         ArrayAdapter adapter2 = ArrayAdapter.createFromResource(this, R.array.city, spinner_item);
         ArrayAdapter adapter3 = ArrayAdapter.createFromResource(this, R.array.blood, spinner_item);
         ArrayAdapter adapter4 = ArrayAdapter.createFromResource(this, R.array.drink, spinner_item);
@@ -125,7 +138,9 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
 
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        age.setAdapter(adapter);
+        birthday1.setAdapter(adapter);
+        birthday2.setAdapter(adapter_bir2);
+        birthday3.setAdapter(adapter_bir3);
         city.setAdapter(adapter2);
         blood.setAdapter(adapter3);
         drink.setAdapter(adapter4);
@@ -134,6 +149,7 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
         Tall.setAdapter(adapter7);
         RadioChecked_SpinnerCheck();   //RadioCehcked&&SpinnerCheck 값 받아오는 class
 
+        //body_form 임의로 넣어줌
 
 
     }
@@ -421,12 +437,14 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
 
         final Intent i =getIntent();                      // facebook 또는 kakao의 아이디, 메신저타입을 받아와 변수에 저장
         String id=i.getExtras().getString("ID");
-        char Setting_id=i.getExtras().getChar("setid");
+        String PW=i.getExtras().getString("PW");
+        String Setting_id=i.getExtras().getString("setformat");
         Log.e("Test", id);
         Log.e("Test1", String.valueOf(Setting_id));
-        UserInfo.setId(id);
+        UserInfo.setEmail(id);
+        UserInfo.setPassword(PW);
         UserInfo.setLogin_format(Setting_id);
-        Log.e("Test3",UserInfo.getId());                     //LOG.e는 테스트코드
+
         UserInfo.setEmail(id);
 
     }
@@ -440,7 +458,10 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
         final RadioButton Radio_smoking= (RadioButton)findViewById(R.id.Radio_smokingO);
         final RadioButton Radio_Notsmoking= (RadioButton)findViewById(R.id.RadioNot_smoking);
 
-        final Spinner spinnerAge = (Spinner)findViewById(R.id.Spinner_age);
+        final Spinner spinnerbir1 = (Spinner)findViewById(R.id.Spinner_birthday1);
+        final Spinner spinnerbir2 = (Spinner)findViewById(R.id.Spinner_birthday2);
+        final Spinner spinnerbir3 = (Spinner)findViewById(R.id.Spinner_birthday3);
+
         final Spinner spinnerCity = (Spinner)findViewById(R.id.Spinner_city);
         final Spinner spinnerBlood = (Spinner)findViewById(R.id.Spinner_blood);
         final Spinner spinnerDrink=(Spinner)findViewById(R.id.Spinner_drink);
@@ -481,7 +502,7 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
             public void onClick(View v) {
                 if (RadioArmy_Complete_checked.isChecked()) {
                     Log.e("병역.", "병역필");
-                    UserInfo.setMilitary_service_status("Army_complete");
+                    UserInfo.setMilitary_service_status("군필");
                     Button b1 = (Button)findViewById(R.id.r_btn2);
                     b1.setBackgroundResource(R.drawable.press_round_btn);
                 }
@@ -494,7 +515,7 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
                 if (RadioArmy_InComplete_checked.isChecked()) {
 
                     Log.e("병역.", "미필");
-                    UserInfo.setMilitary_service_status("Army_Incompelte");
+                    UserInfo.setMilitary_service_status("미필");
                     Button b1 = (Button)findViewById(R.id.r_btn2);
                     b1.setBackgroundResource(R.drawable.press_round_btn);
 
@@ -506,7 +527,7 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
             public void onClick(View v) {
                 if (RadioArmy_Notduty_checked.isChecked()) {
                     Log.e("병역.", "해당없음");
-                    UserInfo.setMilitary_service_status("Army_Noduty");
+                    UserInfo.setMilitary_service_status("해당없음");
                     Button b1 = (Button)findViewById(R.id.r_btn2);
                     b1.setBackgroundResource(R.drawable.press_round_btn);
 
@@ -538,13 +559,14 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
             }
         });
 
-        spinnerAge.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spinnerbir1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Log.e("age", (String) spinnerAge.getItemAtPosition(position));
-                UserInfo.setAge(Integer.parseInt(spinnerAge.getItemAtPosition(position).toString()));
+                Log.e("age", (String) spinnerbir1.getItemAtPosition(position));
+                //UserInfo.setBirthday(Integer.parseInt(spinnerbir1.getItemAtPosition(position).toString()));
+                UserInfo.setBirthday("1997-11-15");
                 Button b1 = (Button) findViewById(R.id.r_btn5);
-                if(UserInfo.getAge() != 00) {
+                if(UserInfo.getBirthday() != "00") {
                     b1.setBackgroundResource(R.drawable.press_round_btn);
                 } else {
                     b1.setBackgroundResource(R.drawable.round_btn);
@@ -619,7 +641,7 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
                 Log.e("Religion", (String) spinnerReligion.getItemAtPosition(position));
                 String CheckSpinnerReligion=(String)spinnerReligion.getItemAtPosition(position);
                 Character InputUserinfoReligion;
-
+                UserInfo.setReligion(CheckSpinnerReligion);
                 Button b1 = (Button)findViewById(R.id.r_btn11);
 
                 if("--".equals(CheckSpinnerReligion)){
@@ -658,7 +680,6 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
                     b1.setBackgroundResource(R.drawable.round_btn);
 
                 }
-                UserInfo.setReligion(InputUserinfoReligion);
             }
 
             @Override
@@ -689,9 +710,13 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Log.e("Tall", (String) spinnerTall.getItemAtPosition(position));
-                UserInfo.setHegiht(Integer.parseInt(spinnerTall.getItemAtPosition(position).toString()));
+                UserInfo.setheight(Integer.parseInt(spinnerTall.getItemAtPosition(position).toString()));
+
+                //bodyform 임의로 넣어줌
+                UserInfo.setBody_form("슬림");
+
                 Button b1 = (Button) findViewById(R.id.r_btn7);
-                if(UserInfo.getHegiht() != 00){
+                if(UserInfo.getheight() != 00){
                     b1.setBackgroundResource(R.drawable.press_round_btn);
                 } else {
                     b1.setBackgroundResource(R.drawable.round_btn);

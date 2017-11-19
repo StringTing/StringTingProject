@@ -3,6 +3,11 @@ package com.example.leeyun.stringting_android.API;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;
 
 /**
  * Created by leeyun on 2017. 11. 1..
@@ -10,24 +15,34 @@ import java.io.Serializable;
 
 public class userinfo implements Serializable{
 
-    @SerializedName("Id")
-    private String Id;
-    private int age;
-    private char login_format;
-    private int birthday;
+
+
+    private String login_format;
+    private String birthday;
     private String military_service_status;
     private String education;
     private String department;
     private String location;
-    private int hegiht;
-    private char body_form;
+    private int height;
     private boolean smoke;
     private String drink;            //논의 필요
-    private char religion;
+    private String religion;
     private String blood_type;
-    private char authenticated;
+    private boolean authenticated;
     private String id_image;
+    private String password;
+    private String body_form;
 
+    public void setResult(String result) {
+        this.result = result;
+    }
+
+    public String getResult() {
+
+        return result;
+    }
+
+    private String result;
 
 
     private String email;
@@ -38,20 +53,37 @@ public class userinfo implements Serializable{
 
     }
 
+    public HashMap<String, String> haspMapSetting(){
+        HashMap<String, String> location_Map = new HashMap();
+        location_Map.put("서울","SU");
+        location_Map.put("부산","BS");
+        location_Map.put("인천","IC");
+        location_Map.put("광주","KJ");
+        location_Map.put("울산","OS");
+        location_Map.put("대전","DJ");
+        location_Map.put("경기","GG");
+        location_Map.put("강원","KW");
+        location_Map.put("경남","KN");
+        location_Map.put("경북","KB");
+        location_Map.put("충북","CB");
+        location_Map.put("충남","CN");
+        location_Map.put("전북","JB");
+        location_Map.put("전남","JN");
+        location_Map.put("세종","SJ");
+
+        return location_Map;
+    }
 
     public String getPassword() {
         return password;
     }
 
-    public char getLogin_format() {
+    public String getLogin_format() {
         return login_format;
     }
 
-    public userinfo(String id) {
-        Id = id;
-    }
 
-    public int getBirthday() {
+    public String getBirthday() {
         return birthday;
     }
 
@@ -67,13 +99,13 @@ public class userinfo implements Serializable{
         return email;
     }
 
-    private String password;
+
 
     public void setId_image(String id_image) {
         this.id_image = id_image;
     }
 
-    public void setAuthenticated(char authenticated) {
+    public void setAuthenticated(boolean authenticated) {
 
         this.authenticated = authenticated;
     }
@@ -83,7 +115,7 @@ public class userinfo implements Serializable{
         this.blood_type = blood_type;
     }
 
-    public void setReligion(char religion) {
+    public void setReligion(String religion) {
 
         this.religion = religion;
     }
@@ -98,14 +130,14 @@ public class userinfo implements Serializable{
         this.smoke = smoke;
     }
 
-    public void setBody_form(char body_form) {
+    public void setBody_form(String body_form) {
 
         this.body_form = body_form;
     }
 
-    public void setHegiht(int hegiht) {
+    public void setheight(int height) {
 
-        this.hegiht = hegiht;
+        this.height = height;
     }
 
     public void setLocation(String location) {
@@ -128,12 +160,12 @@ public class userinfo implements Serializable{
         this.military_service_status = military_service_status;
     }
 
-    public void setBirthday(int birthday) {
+    public void setBirthday(String birthday) {
 
         this.birthday = birthday;
     }
 
-    public void setLogin_format(char login_format) {
+    public void setLogin_format(String login_format) {
 
         this.login_format = login_format;
     }
@@ -143,22 +175,15 @@ public class userinfo implements Serializable{
         this.password = password;
     }
 
-    public void setAge(int age) {
 
-        this.age = age;
-    }
 
-    public void setId(String id) {
-
-        Id = id;
-    }
 
     public String getId_image() {
 
         return id_image;
     }
 
-    public char getAuthenticated() {
+    public boolean getAuthenticated() {
 
         return authenticated;
     }
@@ -168,7 +193,7 @@ public class userinfo implements Serializable{
         return blood_type;
     }
 
-    public char getReligion() {
+    public String getReligion() {
 
         return religion;
     }
@@ -183,14 +208,14 @@ public class userinfo implements Serializable{
         return smoke;
     }
 
-    public char getBody_form() {
+    public String getBody_form() {
 
         return body_form;
     }
 
-    public int getHegiht() {
+    public int getheight() {
 
-        return hegiht;
+        return height;
     }
 
     public String getLocation() {
@@ -203,16 +228,12 @@ public class userinfo implements Serializable{
         return department;
     }
 
-    public String getId() {
-        return Id;
-    }
-
-    public int getAge() {
-        return age;
-    }
 
 
     public void setEmail(String email) {
         this.email = email;
     }
+
+
+
 }
