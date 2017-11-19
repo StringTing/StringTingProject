@@ -78,6 +78,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
                         android:letterSpacing="-0.02"
+                        android:textColor="#616060"
                         android:layout_marginLeft="39dp"
                         android:text="상대방에게 보여질 사진입니다. 정성스럽게 올려주세요!
 본인의 사진이 아니거나, 알아보기 힘든 사진일 경우,
@@ -155,6 +156,7 @@
                                 android:layout_width="106dp"
                                 android:layout_height="106dp"
                                 android:layout_marginLeft="24dp"
+                                android:layout_marginRight="39dp"
                                 android:layout_weight="1"
                                 android:background="@drawable/un_rectangle_border"
                                 android:scaleType="center"
@@ -233,6 +235,7 @@
                 </RelativeLayout>
 
                 <RelativeLayout
+                    android:id="@+id/army"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="10dp"
@@ -738,27 +741,27 @@
 
                 </RelativeLayout>
 
+                <Button
 
+                    android:id="@+id/next_btn"
+                    android:layout_width="350dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_gravity="center"
+                    android:onClick="onClick_Basicinfo_upload"
+                    android:text="다  음"
+                    android:background="@drawable/btn_rounded"
+                    android:textColor="#ffffff"
+                    android:letterSpacing="-0.02"
+                    android:textSize="13sp"
+
+                    />
             </LinearLayout>
         </ScrollView>
     </LinearLayout>
 
-    <Button
 
-        android:id="@+id/next_btn"
-        android:layout_width="350dp"
-        android:layout_height="40dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:layout_centerHorizontal="true"
-        android:onClick="onClick_Basicinfo_upload"
-        android:text="다  음"
-        android:background="#ff0066"
-        android:textColor="#ffffff"
-        android:letterSpacing="-0.02"
-        android:textSize="13sp"
-
-        />
 
 </RelativeLayout>
