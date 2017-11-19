@@ -34,15 +34,28 @@ public class TabbedBar extends AppCompatActivity implements View.OnClickListener
 
     ViewPager pager;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> b5f2659bc31083e1acbe2322181be5a8ffa3a148
     ResponseApi responapi =new ResponseApi();
     Rest_ApiService apiService;
     Retrofit retrofit;
 
     userinfo Userinfo=new userinfo();
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> b5f2659bc31083e1acbe2322181be5a8ffa3a148
     private LinearLayout bt_tab1,bt_tab2,bt_tab3,bt_tab4,bt_tab5;
 
 
     private LinearLayout on_tab1,on_tab2,on_tab3,on_tab4,on_tab5;
+<<<<<<< HEAD
+=======
+
+>>>>>>> b5f2659bc31083e1acbe2322181be5a8ffa3a148
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

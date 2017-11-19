@@ -8,67 +8,78 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
-            android:id="@+id/sb1"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="50dp"
+            android:id="@+id/sb">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+            <ImageButton
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginLeft="16dp"
+                android:background="@android:color/transparent"
+                android:onClick="onClick_back"
+                android:layout_centerVertical="true"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/arrow_back"
+                />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:paddingTop="10dp"
-                    android:text="오늘의 픽"
-                    android:textSize="20dp" />
+            <TextView
+                android:id="@+id/textView21"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:textColor="#de000000"
+                android:lineSpacingExtra="12sp"
+                android:text="오늘의 픽"
+                android:textSize="16sp" />
 
-            </RelativeLayout>
-
-        </LinearLayout>
+        </RelativeLayout>
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/sb1"
-            android:layout_marginBottom="50dp"
-            android:layout_marginTop="7dp">
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/sb">
 
             <LinearLayout
-                android:layout_width="360dp"
-                android:layout_height="640dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:layout_width="344dp"
+                    android:layout_width="328dp"
                     android:layout_height="match_parent"
+                    android:layout_marginTop="18dp"
                     android:layout_marginBottom="20dp"
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
+                    android:layout_gravity="center"
                     android:orientation="horizontal">
 
-                    <LinearLayout
+
+                    <RelativeLayout
                         android:layout_width="155dp"
                         android:layout_height="255dp"
                         android:layout_marginRight="8dp"
-                        android:gravity="center"
-                        android:orientation="vertical"
                         android:background="@drawable/rounded">
 
                         <ImageView
-                            android:id="@+id/imageView"
+                            android:id="@+id/imageView1"
                             android:layout_width="155dp"
                             android:layout_height="196dp"
                             android:scaleType="fitXY"
-                            app:srcCompat="@drawable/kakao_default_profile_image" />
+                            android:background="@drawable/gametitle_01" />
 
                         <TextView
+                            android:id="@+id/white_text"
                             android:layout_width="155dp"
                             android:layout_height="16dp"
+                            android:layout_below="@+id/imageView1"
                             android:background="@drawable/gradient_background"
-                            android:text="  White Member"
+                            android:paddingLeft="10dp"
+                            android:paddingTop="2dp"
+                            android:text="White Member"
                             android:textColor="#ffffff"
                             android:textSize="10sp" />
 
@@ -76,55 +87,65 @@
                             android:id="@+id/textView"
                             android:layout_width="71dp"
                             android:layout_height="27dp"
-                            android:layout_marginTop="7dp"
-                            android:textSize="10sp"
                             android:layout_gravity="start"
+                            android:layout_below="@+id/white_text"
                             android:layout_marginLeft="12dp"
-                            android:text="#서울 #기획자 \n#182 #기획자" />
-                    </LinearLayout>
+                            android:layout_marginTop="7dp"
+                            android:text="#서울 #기획자 #182 #기획자"
+                            android:textSize="10sp" />
 
-                    <LinearLayout
+                    </RelativeLayout>
+
+
+
+
+
+                    <RelativeLayout
                         android:layout_width="155dp"
                         android:layout_height="255dp"
                         android:layout_marginLeft="8dp"
-                        android:gravity="center"
-                        android:orientation="vertical"
                         android:background="@drawable/rounded">
 
                         <ImageView
                             android:id="@+id/imageView2"
                             android:layout_width="155dp"
                             android:layout_height="196dp"
-                            android:scaleType="fitXY"
-                             />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="end"
-                            android:text="White Member"
-                            android:textColor="#ffffff"
-                            android:textSize="10sp" />
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:background="@drawable/border_bottom"
+                            android:scaleType="fitXY" />
 
                         <TextView
                             android:id="@+id/textView2"
                             android:layout_width="71dp"
                             android:layout_height="27dp"
-                            android:layout_marginTop="7dp"
-                            android:textSize="10sp"
+                            android:layout_below="@+id/imageView2"
                             android:layout_gravity="start"
                             android:layout_marginLeft="12dp"
-                            android:text="#서울 #기획자 \n#182 #기획자" />
+                            android:layout_marginTop="21dp"
+                            android:text="#서울 #기획자 #182 #기획자"
+                            android:textSize="10sp" />
 
-                    </LinearLayout>
+                        <ImageView
+                            android:id="@+id/imageView"
+                            android:layout_width="13.9dp"
+                            android:layout_height="19.1dp"
+                            android:layout_marginRight="10.1dp"
+                            android:layout_marginBottom="10.6dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentBottom="true"
+                            app:srcCompat="@mipmap/x" />
+
+                    </RelativeLayout>
+
+
                 </LinearLayout>
 
                 <ImageView
                     android:layout_width="326dp"
                     android:layout_height="51dp"
                     android:layout_gravity="center"
-                    app:srcCompat="@drawable/whitemember"
-
+                    android:background="@mipmap/invalid_name"
                     />
 
                 <LinearLayout
@@ -138,20 +159,20 @@
                         android:layout_width="50dp"
                         android:layout_height="14dp"
                         android:layout_marginLeft="16dp"
-                        android:textSize="12sp"
-                        android:textColor="#000000"
                         android:letterSpacing="0.04"
                         android:text="지난 픽들"
-                        />
+                        android:textColor="#000000"
+                        android:textSize="12sp" />
 
 
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:orientation="horizontal"
                         android:layout_marginLeft="16dp"
                         android:layout_marginRight="16dp"
                         android:layout_marginTop="20dp"
+                        android:layout_gravity="center"
+                        android:orientation="horizontal"
 
                         >
 
@@ -160,29 +181,29 @@
                             android:layout_width="94dp"
                             android:layout_height="94dp"
                             android:layout_gravity="center"
-                            android:scaleType="fitXY"
                             android:layout_marginRight="11.5dp"
-                            app:srcCompat="@drawable/kakao_default_profile_image"
-                            android:background="@drawable/rounded"/>
+                            android:background="@drawable/rounded"
+                            android:scaleType="fitXY"
+                            app:srcCompat="@drawable/kakao_default_profile_image" />
 
                         <ImageView
                             android:id="@+id/imageView7"
                             android:layout_width="94dp"
                             android:layout_height="94dp"
                             android:layout_gravity="center"
-                            android:scaleType="fitXY"
                             android:layout_marginLeft="11.5dp"
                             android:layout_marginRight="11.5dp"
-                            android:background="@drawable/rounded"/>
+                            android:background="@drawable/rounded"
+                            android:scaleType="fitXY" />
 
                         <ImageView
                             android:id="@+id/imageView8"
                             android:layout_width="94dp"
                             android:layout_height="94dp"
                             android:layout_gravity="center"
-                            android:scaleType="fitXY"
                             android:layout_marginLeft="11.5dp"
-                            android:background="@drawable/rounded"/>
+                            android:background="@drawable/rounded"
+                            android:scaleType="fitXY" />
 
                     </LinearLayout>
 
@@ -192,28 +213,31 @@
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
                         android:layout_marginTop="16dp"
+                        android:layout_marginBottom="21dp"
                         android:orientation="horizontal">
 
                         <View
                             android:layout_width="131dp"
                             android:layout_height="2dp"
-                            android:background="#cecece"
-                            android:layout_marginRight="18dp"/>
-                        
+                            android:layout_marginRight="18dp"
+                            android:layout_gravity="center"
+                            android:background="#cecece" />
+
                         <TextView
                             android:id="@+id/textView4"
                             android:layout_width="32dp"
                             android:layout_height="12dp"
-                            android:textSize="11sp"
                             android:letterSpacing="0.05"
-                            android:text="더보기"/>
+                            android:text="더보기"
+                            android:textSize="11sp" />
 
                         <View
                             android:layout_width="131dp"
                             android:layout_height="2dp"
-                            android:background="#cecece"
-                            android:layout_marginLeft="18dp" />
-                    
+                            android:layout_marginLeft="18dp"
+                            android:layout_gravity="center"
+                            android:background="#cecece" />
+
                     </LinearLayout>
 
                     <LinearLayout
