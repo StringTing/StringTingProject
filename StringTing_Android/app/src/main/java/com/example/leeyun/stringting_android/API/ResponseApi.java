@@ -23,6 +23,7 @@ public class ResponseApi {
 
 
 
+
     public String getEmail(){
         return email;
     }

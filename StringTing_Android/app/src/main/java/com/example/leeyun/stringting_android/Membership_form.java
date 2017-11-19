@@ -98,8 +98,7 @@ public class Membership_form extends Activity {
         Postfile = new File(root+"/Download/25576de222c603a.jpg");
 
         RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), Postfile);
-        RequestBody sex = RequestBody.create(MediaType.parse("multipart/form-data"), "male");
-        RequestBody account_id = RequestBody.create(MediaType.parse("multipart/form-data"), "1");
+
 
         Log.v("getName(postfile)",Postfile.getName());
 
@@ -107,7 +106,7 @@ public class Membership_form extends Activity {
                 MultipartBody.Part.createFormData("image", Postfile.getName(), requestFile);
 
 
-        Call<ResponseApi> call = apiService.getPostImage(image,sex,account_id);
+        Call<ResponseApi> call = apiService.getPostImage("male",image);
         call.enqueue(new Callback<ResponseApi>() {
             @Override
             public void onResponse(Call<ResponseApi> call, Response<ResponseApi> response) {

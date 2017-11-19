@@ -29,6 +29,7 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 import retrofit2.Retrofit;
@@ -43,6 +44,7 @@ import static com.example.leeyun.stringting_android.R.id.Spinner_education;
 import static com.example.leeyun.stringting_android.R.id.Spinner_religion;
 import static com.example.leeyun.stringting_android.R.layout.spinner_item;
 import static java.lang.Integer.parseInt;
+import static okhttp3.Protocol.get;
 
 /**
  * Created by leeyun on 2017. 9. 16..
@@ -60,6 +62,8 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
     ResponseApi responapi =new ResponseApi();
     Rest_ApiService apiService;
     Retrofit retrofit;
+    HashMap<String, String> location_Map= new HashMap<String, String>();
+
 
     File Postfile;
 
@@ -85,6 +89,7 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
 
         retrofit = new Retrofit.Builder().baseUrl(Rest_ApiService.API_URL).addConverterFactory(GsonConverterFactory.create()).build();
         apiService= retrofit.create(Rest_ApiService.class);
+
 
 
         userinfo UserInfo =new userinfo();
@@ -468,7 +473,7 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
             public void onClick(View v) {
                 if (RadioArmy_Complete_checked.isChecked()) {
                     Log.e("병역.", "병역필");
-                    UserInfo.setMilitary_service_status("Army_complete");
+                    UserInfo.setMilitary_service_status("FINISHED");
                     Button b1 = (Button)findViewById(R.id.r_btn2);
                     b1.setBackgroundResource(R.drawable.press_round_btn);
                 }
@@ -481,7 +486,7 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
                 if (RadioArmy_InComplete_checked.isChecked()) {
 
                     Log.e("병역.", "미필");
-                    UserInfo.setMilitary_service_status("Army_Incompelte");
+                    UserInfo.setMilitary_service_status("UNFINISHED");
                     Button b1 = (Button)findViewById(R.id.r_btn2);
                     b1.setBackgroundResource(R.drawable.press_round_btn);
 
@@ -493,7 +498,7 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
             public void onClick(View v) {
                 if (RadioArmy_Notduty_checked.isChecked()) {
                     Log.e("병역.", "해당없음");
-                    UserInfo.setMilitary_service_status("Army_Noduty");
+                    UserInfo.setMilitary_service_status("PROGRESS");
                     Button b1 = (Button)findViewById(R.id.r_btn2);
                     b1.setBackgroundResource(R.drawable.press_round_btn);
 
@@ -604,7 +609,7 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
                 Log.e("Religion", (String) spinnerReligion.getItemAtPosition(position));
                 String CheckSpinnerReligion=(String)spinnerReligion.getItemAtPosition(position);
                 Character InputUserinfoReligion;
-
+                UserInfo.setReligion(CheckSpinnerReligion);
                 Button b1 = (Button)findViewById(R.id.r_btn11);
 
                 if("--".equals(CheckSpinnerReligion)){
@@ -643,7 +648,6 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
                     b1.setBackgroundResource(R.drawable.round_btn);
 
                 }
-                UserInfo.setReligion(InputUserinfoReligion);
             }
 
             @Override

@@ -27,16 +27,25 @@ public interface Rest_ApiService {
 
 
         @FormUrlEncoded
-        @POST("join/")
-        Call<ResponseApi> getPostCommentStr(@Field("PostJSON2") String Userinfo_Json);
+        @POST("{sex}/join/")
+        Call<ResponseApi> getPostCommentStr(@Field("sex") String Userinfo_Json);
 
         @POST("check/email/")
         Call<ResponseApi> getPostEmailStr1(@Body ResponseApi responseApi);
 
         @Multipart
-        @POST("upload-image/")
-        Call<ResponseApi> getPostImage(@Part MultipartBody.Part image, @Part("sex")RequestBody sex, @Part("account_id")RequestBody account_id);
+        @POST("{sex}/register/image/")
+        Call<ResponseApi> getPostImage(@Path("sex")String RegisterImage_sex,@Part MultipartBody.Part image);
 
+
+        @POST("{sex}/register/like/")
+        Call<register_like> getPostRegister_like(@Path("sex")String Registerlike_sex,@Body register_like registerLike);
+
+        @POST("{sex}/register/message/")
+        Call<register_message>getPostRegister_message(@Path("sex")String RegisterMessage_sex,@Body register_message registerMessage);
+
+        @GET("{sex}/{account_id}/detail")
+        Call<Getdetail>Getdetail(@Path("sex")String Getdetail_sex, @Path("account_id")int Getdetail_accountId);
 
     }
 

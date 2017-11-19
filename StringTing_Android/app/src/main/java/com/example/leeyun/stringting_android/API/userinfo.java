@@ -3,12 +3,19 @@ package com.example.leeyun.stringting_android.API;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;
 
 /**
  * Created by leeyun on 2017. 11. 1..
  */
 
 public class userinfo implements Serializable{
+
+
 
     @SerializedName("Id")
     private String Id;
@@ -23,7 +30,7 @@ public class userinfo implements Serializable{
     private char body_form;
     private boolean smoke;
     private String drink;            //논의 필요
-    private char religion;
+    private String religion;
     private String blood_type;
     private char authenticated;
     private String id_image;
@@ -38,6 +45,26 @@ public class userinfo implements Serializable{
 
     }
 
+    public HashMap<String, String> haspMapSetting(){
+        HashMap<String, String> location_Map = new HashMap();
+        location_Map.put("서울","SU");
+        location_Map.put("부산","BS");
+        location_Map.put("인천","IC");
+        location_Map.put("광주","KJ");
+        location_Map.put("울산","OS");
+        location_Map.put("대전","DJ");
+        location_Map.put("경기","GG");
+        location_Map.put("강원","KW");
+        location_Map.put("경남","KN");
+        location_Map.put("경북","KB");
+        location_Map.put("충북","CB");
+        location_Map.put("충남","CN");
+        location_Map.put("전북","JB");
+        location_Map.put("전남","JN");
+        location_Map.put("세종","SJ");
+
+        return location_Map;
+    }
 
     public String getPassword() {
         return password;
@@ -83,7 +110,7 @@ public class userinfo implements Serializable{
         this.blood_type = blood_type;
     }
 
-    public void setReligion(char religion) {
+    public void setReligion(String religion) {
 
         this.religion = religion;
     }
@@ -168,7 +195,7 @@ public class userinfo implements Serializable{
         return blood_type;
     }
 
-    public char getReligion() {
+    public String getReligion() {
 
         return religion;
     }
@@ -215,4 +242,6 @@ public class userinfo implements Serializable{
     public void setEmail(String email) {
         this.email = email;
     }
+
+
 }
