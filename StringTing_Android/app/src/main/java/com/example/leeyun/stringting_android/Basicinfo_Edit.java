@@ -46,6 +46,8 @@ import static com.example.leeyun.stringting_android.R.id.Spinner_birthday1;
 import static com.example.leeyun.stringting_android.R.id.Spinner_birthday2;
 import static com.example.leeyun.stringting_android.R.id.Spinner_birthday3;
 import static com.example.leeyun.stringting_android.R.id.Spinner_blood;
+import static com.example.leeyun.stringting_android.R.id.Spinner_body_form_female;
+import static com.example.leeyun.stringting_android.R.id.Spinner_body_form_male;
 import static com.example.leeyun.stringting_android.R.id.Spinner_city;
 import static com.example.leeyun.stringting_android.R.id.Spinner_drink;
 import static com.example.leeyun.stringting_android.R.id.Spinner_education;
@@ -70,8 +72,9 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
     ResponseApi responapi =new ResponseApi();
     Rest_ApiService apiService;
     Retrofit retrofit;
-    HashMap<String, String> location_Map= new HashMap<String, String>();
-
+    String birthdayYear;
+    String birthdayMonth;
+    String birthdayDay;
 
     File Postfile;
 
@@ -123,6 +126,8 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
         Spinner religion = (Spinner) findViewById(Spinner_religion);
         Spinner education = (Spinner) findViewById(Spinner_education);
         Spinner Tall=(Spinner)findViewById(Spinner_Tall);
+        Spinner body_form_male=(Spinner)findViewById(Spinner_body_form_male);
+        Spinner body_form_female=(Spinner)findViewById(Spinner_body_form_female);
 
 
         ArrayAdapter adapter= ArrayAdapter.createFromResource(this, R.array.birthday1, spinner_item);
@@ -135,7 +140,8 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
         ArrayAdapter adapter5 = ArrayAdapter.createFromResource(this, R.array.religion, spinner_item);
         ArrayAdapter adapter6 = ArrayAdapter.createFromResource(this, R.array.education, spinner_item);
         ArrayAdapter adapter7 = ArrayAdapter.createFromResource(this, R.array.Tall, spinner_item);
-
+        ArrayAdapter adapter8 = ArrayAdapter.createFromResource(this,R.array.body_form_male,spinner_item);
+        ArrayAdapter adapter9 = ArrayAdapter.createFromResource(this,R.array.body_form_female,spinner_item);
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         birthday1.setAdapter(adapter);
@@ -147,6 +153,8 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
         religion.setAdapter(adapter5);
         education.setAdapter(adapter6);
         Tall.setAdapter(adapter7);
+        body_form_male.setAdapter(adapter8);
+        body_form_female.setAdapter(adapter9);
         RadioChecked_SpinnerCheck();   //RadioCehcked&&SpinnerCheck 값 받아오는 class
 
         //body_form 임의로 넣어줌
@@ -461,7 +469,8 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
         final Spinner spinnerbir1 = (Spinner)findViewById(R.id.Spinner_birthday1);
         final Spinner spinnerbir2 = (Spinner)findViewById(R.id.Spinner_birthday2);
         final Spinner spinnerbir3 = (Spinner)findViewById(R.id.Spinner_birthday3);
-
+        final Spinner spinnerbodyform_male=(Spinner)findViewById(R.id.Spinner_body_form_male);
+        final Spinner spinnerbodyform_female=(Spinner)findViewById(R.id.Spinner_body_form_female);
         final Spinner spinnerCity = (Spinner)findViewById(R.id.Spinner_city);
         final Spinner spinnerBlood = (Spinner)findViewById(R.id.Spinner_blood);
         final Spinner spinnerDrink=(Spinner)findViewById(R.id.Spinner_drink);
@@ -479,6 +488,11 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
                     b1.setBackgroundResource(R.drawable.press_round_btn);
                     RelativeLayout army = (RelativeLayout) findViewById(R.id.army);
                     army.setVisibility(View.VISIBLE);
+                    Spinner body_male=(Spinner)findViewById(R.id.Spinner_body_form_male);
+                    Spinner body_female=(Spinner)findViewById(R.id.Spinner_body_form_female);
+
+                    body_male.setVisibility(View.VISIBLE);
+                    body_female.setVisibility(View.GONE);
 
                 }
 
@@ -493,6 +507,12 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
 
                     RelativeLayout army = (RelativeLayout) findViewById(R.id.army);
                     army.setVisibility(View.GONE);
+                    Spinner body_male=(Spinner)findViewById(R.id.Spinner_body_form_male);
+                    Spinner body_female=(Spinner)findViewById(R.id.Spinner_body_form_female);
+
+                    body_male.setVisibility(View.GONE);
+                    body_female.setVisibility(View.VISIBLE);
+
                 }
 
             }
@@ -562,9 +582,40 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
         spinnerbir1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Log.e("age", (String) spinnerbir1.getItemAtPosition(position));
-                //UserInfo.setBirthday(Integer.parseInt(spinnerbir1.getItemAtPosition(position).toString()));
-                UserInfo.setBirthday("1997-11-15");
+                Log.e("birthdayYear", (String) spinnerbir1.getItemAtPosition(position));
+                birthdayYear= (String) spinnerbir1.getItemAtPosition(position);
+                Button b1 = (Button) findViewById(R.id.r_btn5);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+        spinnerbir2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Log.e("birthdayMonth", (String) spinnerbir2.getItemAtPosition(position));
+                birthdayMonth= (String) spinnerbir2.getItemAtPosition(position);
+                Button b1 = (Button) findViewById(R.id.r_btn5);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        spinnerbir3.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Log.e("birthdayDay", (String) spinnerbir3.getItemAtPosition(position));
+                birthdayDay= (String) spinnerbir3.getItemAtPosition(position);
+                UserInfo.setBirthday(birthdayYear+"-"+birthdayMonth+"-"+birthdayDay);
+                Log.v("SETBIRTHDAY",UserInfo.getBirthday());
                 Button b1 = (Button) findViewById(R.id.r_btn5);
                 if(UserInfo.getBirthday().contains("00") == false) {
                     b1.setBackgroundResource(R.drawable.press_round_btn);
@@ -578,7 +629,6 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
 
             }
         });
-
         spinnerCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
 
@@ -693,6 +743,42 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Log.e("education", (String) spinnerEducation.getItemAtPosition(position));
                 UserInfo.setEducation(spinnerEducation.getItemAtPosition(position).toString());
+                Button b1 = (Button) findViewById(R.id.r_btn3);
+                if("--".equals(UserInfo.getEducation())!=true) {
+                    b1.setBackgroundResource(R.drawable.press_round_btn);
+                } else {
+                    b1.setBackgroundResource(R.drawable.round_btn);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        spinnerEducation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Log.e("BODY_form", (String) spinnerbodyform_male.getItemAtPosition(position));
+                UserInfo.setBody_form(spinnerbodyform_male.getItemAtPosition(position).toString());
+                Button b1 = (Button) findViewById(R.id.r_btn3);
+                if("--".equals(UserInfo.getEducation())!=true) {
+                    b1.setBackgroundResource(R.drawable.press_round_btn);
+                } else {
+                    b1.setBackgroundResource(R.drawable.round_btn);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        spinnerEducation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Log.e("BODY_form", (String) spinnerbodyform_female.getItemAtPosition(position));
+                UserInfo.setBody_form(spinnerbodyform_female.getItemAtPosition(position).toString());
                 Button b1 = (Button) findViewById(R.id.r_btn3);
                 if("--".equals(UserInfo.getEducation())!=true) {
                     b1.setBackgroundResource(R.drawable.press_round_btn);

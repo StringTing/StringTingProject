@@ -583,6 +583,8 @@
 
 
 
+
+
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -781,6 +783,68 @@
                         android:layout_gravity="center"
                         android:background="@drawable/spinner_rectangle_border"
                         android:prompt="@string/religion_prompt">
+
+                    </Spinner>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+
+
+                    <Button
+                        android:id="@+id/r_btn12"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginLeft="33dp"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/round_btn" />
+
+
+
+                    <TextView
+                        android:id="@+id/text_id12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:paddingLeft="11dp"
+                        android:letterSpacing="-0.02"
+                        android:textSize="11sp"
+                        android:layout_toRightOf="@+id/r_btn12"
+                        android:text="바디타입"
+                        />
+
+
+
+                    <Spinner
+                        android:id="@+id/Spinner_body_form_male"
+                        android:layout_width="200dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="17dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/spinner_rectangle_border"
+                        android:prompt="@string/religion_prompt"
+                        android:visibility="visible">
+
+                    </Spinner>
+
+                    <Spinner
+                        android:id="@+id/Spinner_body_form_female"
+                        android:layout_width="200dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="17dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/spinner_rectangle_border"
+                        android:prompt="@string/religion_prompt"
+                        android:visibility="gone">
+
 
                     </Spinner>
 
