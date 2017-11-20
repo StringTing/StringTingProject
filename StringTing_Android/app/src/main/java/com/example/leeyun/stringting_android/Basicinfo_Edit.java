@@ -403,7 +403,6 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
 
                 }
 
-
                 //임시파일삭제
                 File f = new File(mImageCaptureUri.getPath());
                 if (f.exists()) {
