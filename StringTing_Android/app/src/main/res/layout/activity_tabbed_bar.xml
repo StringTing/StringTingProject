@@ -46,7 +46,7 @@
                 android:letterSpacing="0.05"
                 android:textColor="#a9a9a9"
                 android:textSize="8sp"
-                tools:text="오늘의픽" />
+                android:text="오늘의픽" />
 
         </LinearLayout>
 
@@ -73,7 +73,7 @@
                 android:letterSpacing="0.05"
                 android:textColor="#a9a9a9"
                 android:textSize="8sp"
-                tools:text="플레이스" />
+                android:text="플레이스" />
 
         </LinearLayout>
 
@@ -100,7 +100,7 @@
                 android:letterSpacing="0.05"
                 android:textColor="#a9a9a9"
                 android:textSize="8sp"
-                tools:text="나의픽" />
+                android:text="나의픽" />
 
         </LinearLayout>
 
@@ -127,7 +127,7 @@
                 android:letterSpacing="0.05"
                 android:textColor="#a9a9a9"
                 android:textSize="8sp"
-                tools:text="채팅" />
+                android:text="채팅" />
         </LinearLayout>
 
         <LinearLayout
@@ -154,7 +154,7 @@
                 android:letterSpacing="0.05"
                 android:textColor="#a9a9a9"
                 android:textSize="8sp"
-                tools:text="내정보" />
+                android:text="내정보" />
 
 
         </LinearLayout>
@@ -195,7 +195,7 @@
                 android:letterSpacing="0.05"
                 android:textColor="#ff1b6d"
                 android:textSize="8sp"
-                tools:text="오늘의픽" />
+                android:text="오늘의픽" />
 
         </LinearLayout>
 
@@ -223,7 +223,7 @@
                 android:letterSpacing="0.05"
                 android:textColor="#ff1b6d"
                 android:textSize="8sp"
-                tools:text="플레이스" />
+                android:text="플레이스" />
 
         </LinearLayout>
 
@@ -251,7 +251,7 @@
                 android:letterSpacing="0.05"
                 android:textColor="#ff1b6d"
                 android:textSize="8sp"
-                tools:text="나의픽" />
+                android:text="나의픽" />
 
         </LinearLayout>
 
@@ -279,7 +279,7 @@
                 android:letterSpacing="0.05"
                 android:textColor="#ff1b6d"
                 android:textSize="8sp"
-                tools:text="채팅" />
+                android:text="채팅" />
         </LinearLayout>
 
         <LinearLayout
@@ -307,7 +307,7 @@
                 android:letterSpacing="0.05"
                 android:textColor="#ff1b6d"
                 android:textSize="8sp"
-                tools:text="내정보" />
+                android:text="내정보" />
 
 
         </LinearLayout>
