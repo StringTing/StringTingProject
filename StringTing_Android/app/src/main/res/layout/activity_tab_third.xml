@@ -22,7 +22,7 @@
                 android:layout_centerVertical="true"
                 android:textColor="#de000000"
                 android:lineSpacingExtra="12sp"
-                android:text="플레이스"
+                android:text="나의 픽"
                 android:textSize="16sp" />
 
         </RelativeLayout>
