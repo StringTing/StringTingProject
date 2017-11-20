@@ -79,7 +79,6 @@ public class Tab_Second extends Fragment implements View.OnClickListener {
 
         return result;
     }
-
     @Override
     public void onClick(View view) {
         switch (view.getId()){
