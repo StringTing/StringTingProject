@@ -89,7 +89,7 @@ public class ViewPagerAdapter extends PagerAdapter {
         //현재 position에 해당하는 이미지를 setting
 
         img.setImageResource(R.drawable.gametitle_01+position);
-
+        img.setScaleType(ImageView.ScaleType.FIT_XY);
 
 
         //ViewPager에 만들어 낸 View 추가
