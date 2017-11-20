@@ -780,7 +780,7 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
                 Log.e("BODY_form", (String) spinnerbodyform_female.getItemAtPosition(position));
                 UserInfo.setBody_form(spinnerbodyform_female.getItemAtPosition(position).toString());
                 Button b1 = (Button) findViewById(R.id.r_btn3);
-                if("--".equals(UserInfo.getEducation())!=true) {
+                if("--".equals(UserInfo.getBody_form())!=true) {
                     b1.setBackgroundResource(R.drawable.press_round_btn);
                 } else {
                     b1.setBackgroundResource(R.drawable.round_btn);
