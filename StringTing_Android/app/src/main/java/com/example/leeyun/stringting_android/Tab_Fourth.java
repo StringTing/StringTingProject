@@ -49,7 +49,7 @@ public class Tab_Fourth extends Fragment {
         lv.setAdapter(mAdapter);
 
         //데이터 넣는거
-        list.add(new listItem(R.drawable.kakao_default_profile_image,"이름","내용","시간"));
+        list.add(new listItem(R.drawable.circlr_border,"이름","내용","시간"));
         list.add(new listItem(R.drawable.kakao_default_profile_image,"이름","내용","시간"));
         list.add(new listItem(R.drawable.kakao_default_profile_image,"이름","내용","시간"));
         list.add(new listItem(R.drawable.kakao_default_profile_image,"이름","내용","시간"));
@@ -63,6 +63,7 @@ public class Tab_Fourth extends Fragment {
         private String name;
         private String chat;
         private String date;
+
 
         public listItem(int p,String n, String c,String d){
             this.profile=p;
@@ -118,8 +119,6 @@ public class Tab_Fourth extends Fragment {
                 TextView name = (TextView)v.findViewById(R.id.keyword);
                 TextView chat = (TextView)v.findViewById(R.id.text);
                 TextView date = (TextView)v.findViewById(R.id.date);
-
-
 
                 profile.setImageResource(getItem(pos).profile);
                 name.setText(getItem(pos).name);

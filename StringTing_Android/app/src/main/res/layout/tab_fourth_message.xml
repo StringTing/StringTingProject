@@ -5,39 +5,36 @@
     android:layout_height="match_parent">
 
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="5dp">
+        >
 
-        <FrameLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <com.example.leeyun.stringting_android.CircleImageView
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/profile_image"
-                android:layout_width="98dp"
-                android:layout_height="98dp"
-                android:background="@drawable/circlr_border"
-                android:scaleType="center"
-                app:civ_border_width="2dp"
-                app:civ_border_color="#FF000000"/>
-        </FrameLayout>
+        <ImageView
+            android:id="@+id/profile_image"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="19dp"
+            app:srcCompat="@drawable/account" />
 
         <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:id="@+id/chat_box"
+            android:layout_width="264dp"
+            android:layout_height="50dp"
+            android:layout_toRightOf="@+id/profile_image"
             android:layout_marginLeft="10dp"
             android:padding="5dp"
-            android:layout_weight="1">
+            >
 
             <TextView
                 android:id="@+id/keyword"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:textSize="12sp"
+                android:textColor="#000000"
+                android:letterSpacing="-0.01"
+                android:text="#서울 #23세 #176 #대학생" />
 
             <TextView
                 android:id="@+id/text"
@@ -45,16 +42,46 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/keyword"
                 android:layout_marginTop="5dp"
-                android:text="TextView" />
+                android:textSize="10sp"
+                android:letterSpacing="-0.01"
+                android:textColor="#606060"
+                android:text="안녕하세요!" />
 
             <TextView
                 android:id="@+id/date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:text="TextView" />
+                android:textColor="#7a7a7a"
+                android:textSize="8sp"
+                android:text="오전 2:00" />
+
+
+            <TextView
+                android:id="@+id/pop"
+                android:layout_width="34dp"
+                android:layout_height="26dp"
+                android:background="@drawable/btn_rounded"
+                android:layout_below="@+id/date"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="9dp"
+                android:gravity="center"
+                android:text="1"
+                android:textSize="12sp"
+                android:textColor="#ffffff"
+                android:letterSpacing="-0.01"
+                />
+
 
         </RelativeLayout>
 
-    </LinearLayout>
+        <ImageView
+            android:id="@+id/line"
+            android:layout_below="@+id/chat_box"
+            android:layout_marginLeft="79dp"
+            android:layout_width="264dp"
+            android:layout_height="3dp"
+            android:background="@drawable/line" />
+
+    </RelativeLayout>
 </RelativeLayout>
