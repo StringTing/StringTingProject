@@ -1,5 +1,7 @@
 package com.example.leeyun.stringting_android.API;
 
+import com.google.gson.JsonObject;
+
 import java.util.ArrayList;
 
 /**
@@ -7,14 +9,14 @@ import java.util.ArrayList;
  */
 
 public class Ger_last_5day_matched_account {
-    ArrayList<String> account=new ArrayList<>();
+    ArrayList<JsonObject> account=new ArrayList<>();
 
 
-    public ArrayList<String> getAccount() {
+    public ArrayList<JsonObject> getAccount() {
         return account;
     }
 
-    public void setAccount(ArrayList<String> account) {
+    public void setAccount(ArrayList<JsonObject> account) {
         this.account = account;
     }
 }

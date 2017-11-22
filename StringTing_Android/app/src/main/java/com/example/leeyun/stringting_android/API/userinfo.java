@@ -53,26 +53,7 @@ public class userinfo implements Serializable{
 
     }
 
-    public HashMap<String, String> haspMapSetting(){
-        HashMap<String, String> location_Map = new HashMap();
-        location_Map.put("서울","SU");
-        location_Map.put("부산","BS");
-        location_Map.put("인천","IC");
-        location_Map.put("광주","KJ");
-        location_Map.put("울산","OS");
-        location_Map.put("대전","DJ");
-        location_Map.put("경기","GG");
-        location_Map.put("강원","KW");
-        location_Map.put("경남","KN");
-        location_Map.put("경북","KB");
-        location_Map.put("충북","CB");
-        location_Map.put("충남","CN");
-        location_Map.put("전북","JB");
-        location_Map.put("전남","JN");
-        location_Map.put("세종","SJ");
 
-        return location_Map;
-    }
 
     public String getPassword() {
         return password;

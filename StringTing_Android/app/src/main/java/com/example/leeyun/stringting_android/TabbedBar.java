@@ -55,27 +55,19 @@ public class TabbedBar extends AppCompatActivity implements View.OnClickListener
 
 
         Intent intent =getIntent();
-
+        //Userinfo chatview에서 넘겨받아옴
         Userinfo = (userinfo)getIntent().getSerializableExtra("Userinfo");
         final String Userinfo_Json= new Gson().toJson(Userinfo);
         Log.e("Userinfo_Json",Userinfo_Json);
+
         retrofit = new Retrofit.Builder().baseUrl(Rest_ApiService.API_URLTest).addConverterFactory(GsonConverterFactory.create()).build();
         apiService= retrofit.create(Rest_ApiService.class);
 
 
 
-        //ViewPager에 설정할 Adapter 객체 생성
-
-        //ListView에서 사용하는 Adapter와 같은 역할.
-
-        //다만. ViewPager로 스크롤 될 수 있도록 되어 있다는 것이 다름
-
-        //PagerAdapter를 상속받은 CustomAdapter 객체 생성
-
-        //CustomAdapter에게 LayoutInflater 객체 전달
 
 
-
+        //userinfo 서버로 post
         Call<userinfo>PostUserinfo = apiService.getPostUserinfo(Userinfo);
         PostUserinfo.enqueue(new Callback<userinfo>() {
             @Override
