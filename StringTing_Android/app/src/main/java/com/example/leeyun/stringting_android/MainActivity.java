@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
@@ -48,6 +49,8 @@ import com.kakao.util.exception.KakaoException;
 import com.kakao.util.helper.log.Logger;
 
 import io.realm.Realm;
+
+import static com.kakao.auth.StringSet.error;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -139,6 +142,24 @@ public class MainActivity extends AppCompatActivity {
         //fcm token
         MyFirebaseInstanceIDService myFirebaseInstanceIDService =new MyFirebaseInstanceIDService();
         myFirebaseInstanceIDService.onTokenRefresh();
+
+
+        //LocalDb
+
+        SharedPreferences test = getSharedPreferences("Local_DB", MODE_PRIVATE);
+        try {
+            String getTEST=test.getString("ID","success");
+            Log.v("Localdbid",getTEST);
+            if (getTEST.equals(null)){
+                Log.e("localid is null","fail");
+
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            Log.e("can not get localid","fail");
+        }
+
+
 
     }
     public void facebookLoginOnclick(View v){

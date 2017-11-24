@@ -20,10 +20,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 
-import com.bumptech.glide.Glide;
-
-import jp.wasabeef.glide.transformations.BlurTransformation;
-
 import static com.facebook.FacebookSdk.getApplicationContext;
 
 

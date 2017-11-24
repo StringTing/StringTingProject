@@ -46,11 +46,9 @@ public class ChatView extends Activity implements AdapterView.OnItemClickListene
         Log.e("TestUserinfoGson",Userinfo_Json);            //userinfo정보를 json타입으로 변환
 
         savePreferences(Userinfo.getEmail());
-
-        SharedPreferences example= getSharedPreferences("Local_DB", MODE_PRIVATE);
-        String str = example.getString("Id", "");
-        Log.e("localdbtest",str);
-
+        SharedPreferences pref = getSharedPreferences("Local_DB", MODE_PRIVATE);
+        String test = pref.getString("ID","success");
+        Log.v("localdbtest",test);
 
 
 
