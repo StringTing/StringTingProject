@@ -66,8 +66,8 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
     private static final int CROP_FROM_IMAGE = 2;
     private Uri mImageCaptureUri;
     private ImageView iv_UserPhoto1, iv_UserPhoto2, iv_UserPhoto3, iv_UserPhoto4, iv_UserPhoto5, iv_UserPhoto6;
-    int imageupload_count=0;
-    ArrayList<String> Imageupload_countList=new ArrayList<>();
+    public int imageupload_count=0;
+    public ArrayList<String> Imageupload_countList=new ArrayList<>();
     userinfo UserInfo = new userinfo();
     ResponseApi responapi =new ResponseApi();
     Rest_ApiService apiService;
@@ -91,7 +91,7 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
 
         Intent intent = new Intent(getApplicationContext(), ChatView.class);
         intent.putExtra("UserInfo",UserInfo);
-        intent.putExtra("ProfileFilepate",Imageupload_countList);
+        intent.putExtra("ProfileFilepath",Imageupload_countList);
         startActivity(intent);
     }
 
@@ -360,15 +360,19 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
                     return;
                 }
                 final Bundle extras = data.getExtras();
-                imageupload_count++;            //배열에 집어넣기위
-                Log.v("imageipload_count", String.valueOf(imageupload_count));
+
+                imageupload_count++;
+                Log.e("imageipload_count", String.valueOf(imageupload_count));
+
 
                 String filePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/SmartWheel" + System.currentTimeMillis() + ".jpg";
                 Imageupload_countList.add(filePath);
+
                 for (int i=0;i<Imageupload_countList.size();i++){
-                    Log.v("imageupload_countList", String.valueOf(Imageupload_countList.get(i)));
+                    Log.e("imageupload_countList", String.valueOf(Imageupload_countList.get(i)));
 
                 }
+
                 if (extras != null) {
                     Bitmap photo = extras.getParcelable("data");//CROP된 BITMAP
 
@@ -451,7 +455,6 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
         UserInfo.setEmail(id);
         UserInfo.setPassword(PW);
         UserInfo.setLogin_format(Setting_id);
-
         UserInfo.setEmail(id);
 
     }
@@ -755,13 +758,14 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
 
             }
         });
-        spinnerEducation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+        spinnerbodyform_male.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Log.e("BODY_form", (String) spinnerbodyform_male.getItemAtPosition(position));
                 UserInfo.setBody_form(spinnerbodyform_male.getItemAtPosition(position).toString());
                 Button b1 = (Button) findViewById(R.id.r_btn3);
-                if("--".equals(UserInfo.getEducation())!=true) {
+                if("--".equals(UserInfo.getBody_form())!=true) {
                     b1.setBackgroundResource(R.drawable.press_round_btn);
                 } else {
                     b1.setBackgroundResource(R.drawable.round_btn);
@@ -773,7 +777,7 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
 
             }
         });
-        spinnerEducation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spinnerbodyform_female.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Log.e("BODY_form", (String) spinnerbodyform_female.getItemAtPosition(position));
@@ -797,8 +801,6 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
                 Log.e("Tall", (String) spinnerTall.getItemAtPosition(position));
                 UserInfo.setheight(Integer.parseInt(spinnerTall.getItemAtPosition(position).toString()));
 
-                //bodyform 임의로 넣어줌
-                UserInfo.setBody_form("슬림");
 
                 Button b1 = (Button) findViewById(R.id.r_btn7);
                 if(UserInfo.getheight() != 00){

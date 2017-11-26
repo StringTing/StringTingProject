@@ -17,8 +17,11 @@ import com.example.leeyun.stringting_android.API.ResponseApi;
 import com.example.leeyun.stringting_android.API.Rest_ApiService;
 import com.example.leeyun.stringting_android.API.userinfo;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Array;
+import java.lang.reflect.Member;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -42,8 +45,9 @@ public class Tab_Second extends Fragment implements View.OnClickListener {
     Rest_ApiService apiService;
     Retrofit retrofit;
     userinfo Userinfo= new userinfo();
+    Get_evalaccount get_evalaccount=new Get_evalaccount();
     String get_eval_account;
-
+    String generalInfoJson = "{'name': 'Future Studio Dev Team', 'website': 'https://futurestud.io', 'account': [{'name': 'Christian', 'flowerCount': 1 }, {'name': 'Marcus','flowerCount': 3 }, {'name': 'Norman','flowerCount': 2 }]}";
 
     Gson gson= new Gson();
 
@@ -59,21 +63,22 @@ public class Tab_Second extends Fragment implements View.OnClickListener {
         ViewPager pager= (ViewPager)result.findViewById(R.id.viewPager);
 
 
-        Call<Get_evalaccount> call = apiService.Get_evalaccount("male",1);
-        call.enqueue(new Callback<Get_evalaccount>() {
+
+        Call<List<Get_evalaccount>> call = apiService.Get_evalaccount("male",1);
+        call.enqueue(new Callback<List<Get_evalaccount>>() {
             @Override
-            public void onResponse(Call<Get_evalaccount> call, Response<Get_evalaccount> response) {
-                get_eval_account=response.body().toString();
-                Log.v("get_eval_account",get_eval_account);
+            public void onResponse(Call<List<Get_evalaccount>> call, Response<List<Get_evalaccount>> response) {
+
+                List<Get_evalaccount> get_eval_list=response.body();
+                Log.e("Get_evalaccount", String.valueOf(get_eval_list.get(1)));
 
             }
 
             @Override
-            public void onFailure(Call<Get_evalaccount> call, Throwable t) {
+            public void onFailure(Call<List<Get_evalaccount>> call, Throwable t) {
                 Log.v("onresponseImage2",t.toString());
             }
         });
-
 
 
 
@@ -95,6 +100,7 @@ public class Tab_Second extends Fragment implements View.OnClickListener {
         candy3.setOnClickListener(this);
         candy4.setOnClickListener(this);
         candy5.setOnClickListener(this);
+
 
 
 

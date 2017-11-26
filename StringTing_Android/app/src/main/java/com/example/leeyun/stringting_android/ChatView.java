@@ -15,17 +15,29 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.leeyun.stringting_android.API.Rest_ApiService;
+import com.example.leeyun.stringting_android.API.join;
 import com.example.leeyun.stringting_android.API.userinfo;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
+import static android.R.attr.data;
+
 public class ChatView extends Activity implements AdapterView.OnItemClickListener {
     ListView m_ListView;
     ChatCustom m_Adapter;
     userinfo Userinfo = new userinfo();
-
+    Rest_ApiService apiService;
+    Retrofit retrofit;
     static  int position;
+    public int account_id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,10 +47,10 @@ public class ChatView extends Activity implements AdapterView.OnItemClickListene
 
         ArrayList<String> Imageupload_countList=new ArrayList<>();
 
-        Imageupload_countList=intent.getExtras().getStringArrayList("ProfileFilepate");
+        Imageupload_countList=intent.getExtras().getStringArrayList("ProfileFilepath");
 
         for (int i=0;i<Imageupload_countList.size();i++){
-            Log.v("Imagefilepath",Imageupload_countList.get(i));
+            Log.e("Imagefilepath",Imageupload_countList.get(i));
         }
         Userinfo = (userinfo)getIntent().getSerializableExtra("UserInfo");
 
@@ -51,6 +63,8 @@ public class ChatView extends Activity implements AdapterView.OnItemClickListene
         Log.v("localdbtest",test);
 
 
+        retrofit = new Retrofit.Builder().baseUrl(Rest_ApiService.API_URL).addConverterFactory(GsonConverterFactory.create()).build();
+        apiService= retrofit.create(Rest_ApiService.class);
 
 
 
@@ -150,13 +164,40 @@ public class ChatView extends Activity implements AdapterView.OnItemClickListene
 
     }
 
-    public void onClick_TabbedBar(View v){               //basicinfo에서 불러온 정보들을 변수에 저장
+    public void onClick_TabbedBar(View v){
         Intent intent = new Intent(getApplicationContext(), TabbedBar.class);
-        intent.putExtra("Userinfo",Userinfo);
+
+        Call<join> getPostUserinfo = apiService.getPostUserinfo(Userinfo);
+        getPostUserinfo.enqueue(new Callback<join>() {
+            @Override
+            public void onResponse(Call<join> call, Response<join> response) {
+
+                join gsonresponse=response.body();
+                Log.v("onresponse", gsonresponse.getResult());
+                Log.v("onresponse", String.valueOf(response.code()));
+                Log.v("onresponse", "success");
+                account_id=gsonresponse.getAccount_id();
+                Log.e("account_id", String.valueOf(account_id));
+
+                save_accountid(account_id);
+                SharedPreferences pref = getSharedPreferences("Local_DB", MODE_PRIVATE);
+                int account_id_LOCALDB = pref.getInt("account_id", Integer.parseInt(String.valueOf(account_id)));
+                Log.v("localdbtest", String.valueOf(account_id_LOCALDB));
+
+            }
+
+            @Override
+            public void onFailure(Call<join> call, Throwable t) {
+                Log.d("sam", t.toString());
+            }
+
+        });
+
+
         startActivity(intent);
     }
 
-    // 값 저장하기
+    // local 값 저장하기
         public void savePreferences(String data){
         SharedPreferences pref = getSharedPreferences("Local_DB", MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
@@ -164,7 +205,12 @@ public class ChatView extends Activity implements AdapterView.OnItemClickListene
         editor.commit();
     }
 
-
+        public void save_accountid(int data){
+            SharedPreferences pref = getSharedPreferences("Local_DB", MODE_PRIVATE);
+            SharedPreferences.Editor editor = pref.edit();
+            editor.putInt("account_id",data);
+            editor.commit();
+        }
 
     //수정하기 버튼을 눌렀을때 position을 받아옴, 전송버튼을 수정버튼으로 바꿔줌
     public void modify(View view) {

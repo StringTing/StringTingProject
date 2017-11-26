@@ -2,37 +2,67 @@ package com.example.leeyun.stringting_android.API;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.io.Serializable;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-
-import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;
+import java.util.List;
 
 /**
- * Created by leeyun on 2017. 11. 1..
+ * Created by leeyun on 2017. 11. 26..
  */
 
-public class userinfo implements Serializable{
+public class Get_today_introduction {
 
-
-
+    @SerializedName("login_format")
     private String login_format;
+    @SerializedName("birthday")
     private String birthday;
+    @SerializedName("military_service_status")
     private String military_service_status;
+    @SerializedName("education")
     private String education;
+    @SerializedName("department")
     private String department;
+    @SerializedName("location")
     private String location;
+    @SerializedName("height")
     private int height;
+    @SerializedName("smoke")
     private boolean smoke;
-    private String drink;            //논의 필요
+    @SerializedName("drink")
+    private String drink;
+    @SerializedName("religion")
     private String religion;
+    @SerializedName("blood_type")
     private String blood_type;
+    @SerializedName("authenticated")
     private boolean authenticated;
+    @SerializedName("id_image")
     private String id_image;
+    @SerializedName("password")
     private String password;
+    @SerializedName("body_form")
     private String body_form;
+    @SerializedName("images")
+    private List<String>images;
 
+    public void setImages(List<String> images) {
+        this.images = images;
+    }
+
+    public void setOpened(boolean opened) {
+        this.opened = opened;
+    }
+
+    public List<String> getImages() {
+
+        return images;
+    }
+
+    public boolean isOpened() {
+        return opened;
+    }
+
+    @SerializedName("opened")
+
+    private boolean opened;
 
 
     public void setResult(String result) {
@@ -49,11 +79,6 @@ public class userinfo implements Serializable{
 
     private String email;
 
-
-
-    public userinfo() {
-
-    }
 
 
 
@@ -216,7 +241,6 @@ public class userinfo implements Serializable{
     public void setEmail(String email) {
         this.email = email;
     }
-
 
 
 }
