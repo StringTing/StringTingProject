@@ -29,6 +29,15 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
+            <TextView
+                android:id="@+id/bar_t1"
+                android:layout_width="50dp"
+                android:layout_height="4dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="#ffffff" />
+
+
             <ImageView
                 android:id="@+id/pic1"
                 android:layout_width="wrap_content"
@@ -57,6 +66,18 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
+            <TextView
+                android:id="@+id/bar_t2"
+                android:layout_width="50dp"
+                android:layout_height="4dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="#ffffff" />
+
+
+
+
+
             <ImageView
                 android:id="@+id/pic2"
                 android:layout_width="wrap_content"
@@ -83,6 +104,16 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/bar_t3"
+                android:layout_width="50dp"
+                android:layout_height="4dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="#ffffff" />
+
+
 
             <ImageView
                 android:id="@+id/pic3"
@@ -111,6 +142,16 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
+            <TextView
+                android:id="@+id/bar_t4"
+                android:layout_width="50dp"
+                android:layout_height="4dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="#ffffff" />
+
+
+
             <ImageView
                 android:id="@+id/pic4"
                 android:layout_width="wrap_content"
@@ -136,6 +177,16 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/bar_t5"
+                android:layout_width="50dp"
+                android:layout_height="4dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="#ffffff" />
+
+
 
             <ImageView
                 android:id="@+id/pic5"
@@ -179,6 +230,17 @@
             android:orientation="vertical"
             android:visibility="invisible">
 
+
+            <ImageView
+                android:id="@+id/bar1"
+                android:layout_width="50dp"
+                android:layout_height="4dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                app:srcCompat="@mipmap/tab" />
+
+
+
             <ImageView
                 android:id="@+id/on_pic1"
                 android:layout_width="wrap_content"
@@ -206,6 +268,15 @@
             android:layout_weight="1"
             android:orientation="vertical"
             android:visibility="invisible">
+
+            <ImageView
+                android:id="@+id/bar2"
+                android:layout_width="50dp"
+                android:layout_height="4dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                app:srcCompat="@mipmap/tab" />
+
 
             <ImageView
                 android:id="@+id/on_pic2"
@@ -236,6 +307,15 @@
             android:visibility="invisible">
 
             <ImageView
+                android:id="@+id/bar3"
+                android:layout_width="50dp"
+                android:layout_height="4dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                app:srcCompat="@mipmap/tab" />
+
+
+            <ImageView
                 android:id="@+id/on_pic3"
                 android:layout_width="wrap_content"
                 android:layout_height="23dp"
@@ -264,6 +344,15 @@
             android:visibility="invisible">
 
             <ImageView
+                android:id="@+id/bar4"
+                android:layout_width="50dp"
+                android:layout_height="4dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                app:srcCompat="@mipmap/tab" />
+
+
+            <ImageView
                 android:id="@+id/on_pic4"
                 android:layout_width="wrap_content"
                 android:layout_height="23dp"
@@ -289,6 +378,14 @@
             android:layout_weight="1"
             android:orientation="vertical"
             android:visibility="invisible">
+
+            <ImageView
+                android:id="@+id/bar5"
+                android:layout_width="50dp"
+                android:layout_height="4dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                app:srcCompat="@mipmap/tab" />
 
             <ImageView
                 android:id="@+id/on_pic5"
