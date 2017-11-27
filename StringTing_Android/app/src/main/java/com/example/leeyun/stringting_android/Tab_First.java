@@ -1,6 +1,7 @@
 package com.example.leeyun.stringting_android;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -20,6 +21,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 
+import java.util.zip.Inflater;
+
 import static com.facebook.FacebookSdk.getApplicationContext;
 
 
@@ -29,8 +32,20 @@ public class Tab_First extends Fragment {
 
     private Context mContext;
     private Resources mResources;
-    private ImageView mImageView , mImageView2 , l1,l2,l3;
-    private Bitmap mBitmap , lb1,lb2,lb3;
+
+    //메인이미지
+    private ImageView mImageView , mImageView2;
+    private Bitmap mBitmap, mBitmap2;
+
+
+    //작은이미지
+    private ImageView l1,l2,l3;
+    private Bitmap  lb1,lb2,lb3;
+
+    public void onPic(View v){
+        Intent i = new Intent(mContext, Personal_profile.class);
+        startActivity(i);
+    }
 
 
 
@@ -128,6 +143,8 @@ public class Tab_First extends Fragment {
         // Inflate the layout for this fragment
         return  v;
     }
+
+
 
 
 
