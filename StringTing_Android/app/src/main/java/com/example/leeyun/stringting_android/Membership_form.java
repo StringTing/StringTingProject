@@ -105,8 +105,7 @@ public class Membership_form extends Activity {
 
         Log.v("getName(postfile)",Postfile.getName());
 
-        MultipartBody.Part image =
-                MultipartBody.Part.createFormData("image", Postfile.getName(), requestFile);
+        MultipartBody.Part image = MultipartBody.Part.createFormData("image", Postfile.getName(), requestFile);
 
 
         Call<ResponseApi> call = apiService.getPostImage("male","1",image);
