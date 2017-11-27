@@ -43,13 +43,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/sb"
-        android:layout_above="@+id/next_btn"
         android:layout_marginTop="10dp"
         android:orientation="vertical">
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_above="@+id/next_btn"
+            >
 
             <LinearLayout
                 android:layout_width="match_parent"

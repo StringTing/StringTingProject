@@ -1,6 +1,8 @@
 package com.example.leeyun.stringting_android;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -48,8 +50,14 @@ public class Tab_Fourth extends Fragment {
         mAdapter = new Tab_Fourth_Custom(list);
         lv.setAdapter(mAdapter);
 
+  /*      ImageView pro= null;
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.kakao_default_profile_image);
+        pro.setBackgroundResource(R.drawable.circlr_border);
+        pro.setImageBitmap(bitmap);
+
+*/
         //데이터 넣는거
-        list.add(new listItem(R.drawable.circlr_border,"이름","내용","시간"));
+       // list.add(new listItem(iv,"이름","내용","시간"));
         list.add(new listItem(R.drawable.kakao_default_profile_image,"이름","내용","시간"));
         list.add(new listItem(R.drawable.kakao_default_profile_image,"이름","내용","시간"));
         list.add(new listItem(R.drawable.kakao_default_profile_image,"이름","내용","시간"));
@@ -119,6 +127,8 @@ public class Tab_Fourth extends Fragment {
                 TextView name = (TextView)v.findViewById(R.id.keyword);
                 TextView chat = (TextView)v.findViewById(R.id.text);
                 TextView date = (TextView)v.findViewById(R.id.date);
+
+
 
                 profile.setImageResource(getItem(pos).profile);
                 name.setText(getItem(pos).name);

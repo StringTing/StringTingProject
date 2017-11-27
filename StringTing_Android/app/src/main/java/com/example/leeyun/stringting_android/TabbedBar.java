@@ -1,6 +1,8 @@
 package com.example.leeyun.stringting_android;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v4.app.FragmentTransaction;
@@ -13,9 +15,12 @@ import android.widget.LinearLayout;
 
 import com.example.leeyun.stringting_android.API.ResponseApi;
 import com.example.leeyun.stringting_android.API.Rest_ApiService;
+import com.example.leeyun.stringting_android.API.join;
 import com.example.leeyun.stringting_android.API.userinfo;
 import com.google.gson.Gson;
 
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 
 import retrofit2.Call;
@@ -35,7 +40,6 @@ public class TabbedBar extends AppCompatActivity implements View.OnClickListener
     ViewPager pager;
 
 
-    ResponseApi responapi =new ResponseApi();
     Rest_ApiService apiService;
     Retrofit retrofit;
 
@@ -60,40 +64,10 @@ public class TabbedBar extends AppCompatActivity implements View.OnClickListener
         final String Userinfo_Json= new Gson().toJson(Userinfo);
         Log.e("Userinfo_Json",Userinfo_Json);
 
-        retrofit = new Retrofit.Builder().baseUrl(Rest_ApiService.API_URLTest).addConverterFactory(GsonConverterFactory.create()).build();
+        retrofit = new Retrofit.Builder().baseUrl(Rest_ApiService.API_URL).addConverterFactory(GsonConverterFactory.create()).build();
         apiService= retrofit.create(Rest_ApiService.class);
 
 
-
-
-
-        //userinfo 서버로 post
-        Call<userinfo>PostUserinfo = apiService.getPostUserinfo(Userinfo);
-        PostUserinfo.enqueue(new Callback<userinfo>() {
-            @Override
-            public void onResponse(Call<userinfo> call, Response<userinfo> response) {
-
-
-                userinfo gsonresponse=response.body();
-                Log.v("onresponse", gsonresponse.getResult());
-                Log.v("onresponse", String.valueOf(response.code()));
-                if("true".equals(gsonresponse.getResult())){
-                    Log.v("onresponse", "success");
-
-                }
-                else{
-                    Log.v("onresponse","fail");
-                }
-
-
-
-            }
-
-            @Override
-            public void onFailure(Call<userinfo> call, Throwable t) {
-                Log.d("sam", "fail");
-            }
-        });
 
 
         // 위젯에 대한 참조
@@ -227,4 +201,5 @@ public class TabbedBar extends AppCompatActivity implements View.OnClickListener
         }
 
     }
+
 }

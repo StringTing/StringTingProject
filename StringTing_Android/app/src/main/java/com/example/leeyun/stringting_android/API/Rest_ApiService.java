@@ -2,6 +2,8 @@ package com.example.leeyun.stringting_android.API;
 
 import android.media.Image;
 
+import java.util.List;
+
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
@@ -32,7 +34,7 @@ public interface Rest_ApiService {
 
 
         @POST("male/join/")
-        Call<userinfo> getPostUserinfo(@Body userinfo Userinfo);
+        Call<join> getPostUserinfo(@Body userinfo Userinfo);
 
         @POST("check/email/")
         Call<ResponseApi> getPostEmailStr1(@Body ResponseApi responseApi);
@@ -48,16 +50,17 @@ public interface Rest_ApiService {
         @POST("{sex}/register/get/message/")
         Call<register_message>getPostRegister_message(@Path("sex")String RegisterMessage_sex,@Body register_message registerMessage);
 
-        @GET("{sex}/{account_id}/get/detail")
+        @GET("{sex}/{account_id}/get/detail/")
         Call<Getdetail>Getdetail(@Path("sex")String Getdetail_sex, @Path("account_id")int Getdetail_accountid);
 
-        @GET("{sex}/{account_id}/get/last-5day_matched-account")
+        @GET("{sex}/{account_id}/get/last-5day_matched-account/")
         Call<Ger_last_5day_matched_account>Get_last_5day(@Path("sex")String GetLast5_sex,@Path("account_id")int GetLas5_accountid);
 
-        @GET("{sex}/{account_id}/get/eval-account")
-        Call<Get_evalaccount>Get_evalaccount(@Path("sex")String evalaccount_sex,@Path("account_id")int evalaccount_accountid);
+        @GET("{sex}/{account_id}/get/eval-account/")
+        Call<List<Get_evalaccount>>Get_evalaccount(@Path("sex")String evalaccount_sex, @Path("account_id")int evalaccount_accountid);
 
-
+        @GET("{sex}/{account_id}/get/today-introduction/")
+        Call<List<Get_today_introduction>>Get_today_introduction(@Path("sex")String today_introductiion_sex,@Path("account_id")int today_introduction_account_id);
 
     }
 

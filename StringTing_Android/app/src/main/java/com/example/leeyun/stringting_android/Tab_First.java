@@ -1,7 +1,7 @@
 package com.example.leeyun.stringting_android;
 
 import android.content.Context;
-import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -13,6 +13,7 @@ import android.renderscript.ScriptIntrinsicBlur;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.graphics.drawable.*;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,8 +22,22 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 
-import java.util.zip.Inflater;
+import com.example.leeyun.stringting_android.API.Get_evalaccount;
+import com.example.leeyun.stringting_android.API.Get_today_introduction;
+import com.example.leeyun.stringting_android.API.Rest_ApiService;
 
+import java.io.BufferedInputStream;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
+import static android.content.Context.MODE_PRIVATE;
 import static com.facebook.FacebookSdk.getApplicationContext;
 
 
@@ -32,22 +47,12 @@ public class Tab_First extends Fragment {
 
     private Context mContext;
     private Resources mResources;
-
-    //메인이미지
-    private ImageView mImageView , mImageView2;
-    private Bitmap mBitmap, mBitmap2;
-
-
-    //작은이미지
-    private ImageView l1,l2,l3;
-    private Bitmap  lb1,lb2,lb3;
-
-    public void onPic(View v){
-        Intent i = new Intent(mContext, Personal_profile.class);
-        startActivity(i);
-    }
-
-
+    private ImageView mImageView , mImageView2 , l1,l2,l3;
+    private Bitmap mBitmap , lb1,lb2,lb3;
+    public  int account_id;
+    Rest_ApiService apiService;
+    Retrofit retrofit;
+    float cornerRadius = 25f;
 
 
     public Tab_First() {
@@ -58,6 +63,46 @@ public class Tab_First extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.activity_tab_first, container, false);
+
+
+
+   /*     //api정의
+        retrofit = new Retrofit.Builder().baseUrl(Rest_ApiService.API_URL).addConverterFactory(GsonConverterFactory.create()).build();
+        apiService= retrofit.create(Rest_ApiService.class);
+
+
+
+        try {
+            Thread.sleep(4000);
+            SharedPreferences local_id = this.getActivity().getSharedPreferences("Local_DB", Context.MODE_PRIVATE);
+
+            account_id = local_id.getInt("account_id",1);
+            Log.v("localdbtest_account_id", String.valueOf(account_id));
+
+            if (account_id==0){
+                Log.e("localid is null","fail");
+
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+
+
+        Call<List<Get_today_introduction>> call = apiService.Get_today_introduction("male",34);
+        call.enqueue(new Callback<List<Get_today_introduction>>() {
+            @Override
+            public void onResponse(Call<List<Get_today_introduction>> call, Response<List<Get_today_introduction>> response) {
+
+                List<Get_today_introduction> get_eval_list=response.body();
+                Log.e("get_eval_list", String.valueOf(get_eval_list.get(1)));
+            }
+
+            @Override
+            public void onFailure(Call<List<Get_today_introduction>> call, Throwable t) {
+                Log.v("onresponseImage2",t.toString());
+            }
+        });*/
 
 
         // Get the application context
@@ -75,28 +120,41 @@ public class Tab_First extends Fragment {
 
 
 
-        // Get the bitmap from drawable resources
-        mBitmap = BitmapFactory.decodeResource(mResources, R.drawable.gametitle_01);
+       /* try {
+            URL url = new URL("이미지 주소");
+            URLConnection conn = url.openConnection();
+            conn.connect();
+            BufferedInputStream bis = new BufferedInputStream(conn.getInputStream());
+            mBitmap = BitmapFactory.decodeStream(bis);
+            bis.close();
+            // Display the bitmap in ImageView
+            mImageView.setImageBitmap(mBitmap);
+            mImageView2.setImageBitmap(mBitmap);
 
 
-        // Display the bitmap in ImageView
-        mImageView.setImageBitmap(mBitmap);
-        mImageView2.setImageBitmap(mBitmap);
+            // Define the ImageView corners radius
+
+            android.support.v4.graphics.drawable.RoundedBitmapDrawable roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(mResources, mBitmap);
 
 
-        // Define the ImageView corners radius
-        float cornerRadius = 25f;
+            roundedBitmapDrawable.setCornerRadius(cornerRadius);
 
-        android.support.v4.graphics.drawable.RoundedBitmapDrawable roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(mResources, mBitmap);
+            roundedBitmapDrawable.setAntiAlias(true);
 
 
-        roundedBitmapDrawable.setCornerRadius(cornerRadius);
+            // Set the ImageView image as drawable object
+            mImageView.setImageDrawable(roundedBitmapDrawable);
+            mImageView2.setImageDrawable(roundedBitmapDrawable);
 
-        roundedBitmapDrawable.setAntiAlias(true);
+        } catch (Exception e) {
+        }*/
 
-        // Set the ImageView image as drawable object
-        mImageView.setImageDrawable(roundedBitmapDrawable);
-        mImageView2.setImageDrawable(roundedBitmapDrawable);
+
+//        // Get the bitmap from drawable resources
+//        mBitmap = BitmapFactory.decodeResource(mResources, R.drawable.gametitle_01);
+//
+
+
 
 
 
@@ -133,11 +191,10 @@ public class Tab_First extends Fragment {
 
        /* //블러 라이브러리
         ImageView bluri = (ImageView) v.findViewById(R.id.pic1_background);
-
        Glide.with(mContext).load(R.drawable.gametitle_01).into(blur);
-
  //.bitmapTransform(new BlurTransformation(mContext)*/
 
+        //local_db에서 account_id가져옴
 
 
         // Inflate the layout for this fragment
@@ -146,6 +203,7 @@ public class Tab_First extends Fragment {
 
 
 
+    public void get_local_accoint_id(){
 
-
+    }
 }

@@ -146,9 +146,9 @@ public class MainActivity extends AppCompatActivity {
 
         //LocalDb
 
-        SharedPreferences test = getSharedPreferences("Local_DB", MODE_PRIVATE);
+        SharedPreferences local_id = getSharedPreferences("Local_DB", MODE_PRIVATE);
         try {
-            String getTEST=test.getString("ID","success");
+            String getTEST=local_id.getString("ID","success");
             Log.v("Localdbid",getTEST);
             if (getTEST.equals(null)){
                 Log.e("localid is null","fail");
@@ -187,7 +187,8 @@ public class MainActivity extends AppCompatActivity {
                             Log.e("email:",Email);
                             Intent intent = new Intent(MainActivity.this,  Basicinfo_Edit.class);
                             intent.putExtra("ID",Email);
-                            intent.putExtra("setid",'F');
+                                intent.putExtra("PW","-");
+                            intent.putExtra("setformat","FACEBOOK");
 
                             startActivity(intent);
                             finish();}
@@ -286,7 +287,8 @@ public class MainActivity extends AppCompatActivity {
 
                     Intent intent = new Intent(MainActivity.this,  Basicinfo_Edit.class);
                     intent.putExtra("ID",kakaoID);
-                    intent.putExtra("setid",'K');
+                    intent.putExtra("PW","-");
+                    intent.putExtra("setformat","KAKAO");
                     startActivity(intent);
                 }
             });

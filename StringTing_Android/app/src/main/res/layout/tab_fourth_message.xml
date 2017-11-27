@@ -11,12 +11,13 @@
         android:orientation="horizontal"
         >
 
-        <ImageView
+        <com.example.leeyun.stringting_android.CircleImageView
             android:id="@+id/profile_image"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginLeft="19dp"
-            app:srcCompat="@drawable/account" />
+            android:background="@drawable/circlr_border"
+             />
 
         <RelativeLayout
             android:id="@+id/chat_box"
