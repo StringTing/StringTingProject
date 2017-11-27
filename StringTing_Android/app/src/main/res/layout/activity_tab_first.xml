@@ -38,14 +38,15 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="328dp"
                     android:layout_height="match_parent"
                     android:layout_marginTop="18dp"
                     android:layout_marginBottom="19dp"
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
-                    android:layout_gravity="center">
+                    android:layout_gravity="center"
+                    android:orientation="horizontal">
 
 
                     <RelativeLayout
@@ -54,7 +55,6 @@
                         android:layout_height="255dp"
                         android:layout_marginRight="8dp"
                         android:background="@drawable/rounded"
-
                         >
 
 
@@ -73,7 +73,6 @@
                             android:id="@+id/white_text"
                             android:layout_width="155dp"
                             android:layout_height="16dp"
-                            android:layout_alignTop="@+id/t_pic1"
                             android:background="@drawable/gradient_background"
                             android:layout_marginTop="196dp"
                             android:paddingLeft="10dp"
@@ -90,6 +89,7 @@
                             android:layout_below="@+id/white_text"
                             android:layout_marginLeft="12dp"
                             android:layout_marginTop="7dp"
+                            android:textColor="#000000"
                             android:text="#서울 #기획자 #182 #기획자"
                             android:textSize="10sp" />
 
@@ -125,7 +125,6 @@
                             android:id="@+id/space"
                             android:layout_width="155dp"
                             android:layout_height="16dp"
-                            android:layout_alignTop="@+id/t_pic2"
                             android:background="@drawable/border_top"
                             android:layout_marginTop="196dp"
                             android:paddingLeft="10dp"
@@ -135,13 +134,14 @@
                             android:textSize="10sp" />
 
                         <TextView
-                            android:id="@+id/textView2"
+                            android:id="@+id/info2"
                             android:layout_width="71dp"
                             android:layout_height="27dp"
-                            android:layout_below="@+id/space"
                             android:layout_gravity="start"
+                            android:layout_below="@+id/space"
                             android:layout_marginLeft="12dp"
                             android:layout_marginTop="7dp"
+                            android:textColor="#000000"
                             android:text="#서울 #기획자 #182 #기획자"
                             android:textSize="10sp" />
 
@@ -158,7 +158,7 @@
                     </RelativeLayout>
 
 
-                </RelativeLayout>
+                </LinearLayout>
 
                 <ImageView
                     android:layout_width="326dp"
@@ -189,40 +189,152 @@
                         android:layout_height="match_parent"
                         android:layout_marginLeft="16dp"
                         android:layout_marginRight="16dp"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="16dp"
                         android:layout_gravity="center"
                         android:orientation="horizontal"
+                     >
 
-                        >
 
-                        <ImageView
-                            android:id="@+id/last1"
+                        <RelativeLayout
+                            android:id="@+id/l_pic1"
                             android:layout_width="94dp"
-                            android:layout_height="94dp"
-                            android:layout_gravity="center"
-                            android:layout_marginRight="11.5dp"
-                            android:background="@drawable/rounded"
-                            android:scaleType="fitXY"
-                            app:srcCompat="@drawable/kakao_default_profile_image" />
+                            android:layout_height="127dp"
+                            android:layout_marginRight="23dp"
+                            android:background="@drawable/rounded">
 
-                        <ImageView
-                            android:id="@+id/last2"
-                            android:layout_width="94dp"
-                            android:layout_height="94dp"
-                            android:layout_gravity="center"
-                            android:layout_marginLeft="11.5dp"
-                            android:layout_marginRight="11.5dp"
-                            android:background="@drawable/rounded"
-                            android:scaleType="fitXY" />
 
-                        <ImageView
-                            android:id="@+id/last3"
+                            <ImageView
+                                android:id="@+id/last1"
+                                android:layout_width="94dp"
+                                android:layout_height="98dp"
+                                android:padding="0dp"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/rounded" />
+
+
+                            <TextView
+                                android:id="@+id/l_white_text"
+                                android:layout_width="94dp"
+                                android:layout_height="12dp"
+                                android:layout_below="@+id/l_pic1"
+                                android:layout_marginTop="92dp"
+                                android:background="@drawable/gradient_background"
+                                android:paddingLeft="9dp"
+                                android:text="White Member"
+                                android:textColor="#ffffff"
+                                android:textSize="9sp" />
+
+                            <TextView
+                                android:id="@+id/l_textView"
+                                android:layout_width="49dp"
+                                android:layout_height="10dp"
+                                android:layout_below="@+id/l_white_text"
+                                android:layout_gravity="start"
+                                android:layout_marginLeft="9dp"
+                                android:layout_marginTop="7dp"
+                                android:text="#서울 #23세"
+                                android:textColor="#000000"
+                                android:textSize="9sp" />
+
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/l_pic2"
                             android:layout_width="94dp"
-                            android:layout_height="94dp"
-                            android:layout_gravity="center"
-                            android:layout_marginLeft="11.5dp"
+                            android:layout_height="127dp"
+                            android:layout_marginRight="23dp"
                             android:background="@drawable/rounded"
-                            android:scaleType="fitXY" />
+                            >
+
+
+                            <ImageView
+                                android:id="@+id/last2"
+                                android:layout_width="94dp"
+                                android:layout_height="98dp"
+                                android:padding="0dp"
+                                android:src="@drawable/rounded"
+                                android:scaleType="fitXY"
+                                />
+
+
+
+                            <TextView
+                                android:id="@+id/l_white_text2"
+                                android:layout_width="94dp"
+                                android:layout_height="12dp"
+                                android:layout_below="@+id/l_pic1"
+                                android:background="@drawable/gradient_background"
+                                android:layout_marginTop="92dp"
+                                android:paddingLeft="9dp"
+                                android:text="White Member"
+                                android:textColor="#ffffff"
+                                android:textSize="9sp" />
+
+                            <TextView
+                                android:id="@+id/l_textView2"
+                                android:layout_width="49dp"
+                                android:layout_height="10dp"
+                                android:layout_gravity="start"
+                                android:layout_below="@+id/l_white_text2"
+                                android:layout_marginLeft="9dp"
+                                android:layout_marginTop="7dp"
+                                android:textColor="#000000"
+                                android:text="#서울 #23세"
+                                android:textSize="9sp" />
+
+
+
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/l_pic3"
+                            android:layout_width="94dp"
+                            android:layout_height="127dp"
+                            android:background="@drawable/rounded"
+                            >
+
+
+                            <ImageView
+                                android:id="@+id/last3"
+                                android:layout_width="94dp"
+                                android:layout_height="98dp"
+                                android:padding="0dp"
+                                android:src="@drawable/rounded"
+                                android:scaleType="fitXY"
+                                />
+
+
+
+                            <TextView
+                                android:id="@+id/l_white_text3"
+                                android:layout_width="94dp"
+                                android:layout_height="12dp"
+                                android:layout_below="@+id/l_pic3"
+                                android:background="@drawable/border_top"
+                                android:layout_marginTop="92dp"
+                                android:paddingLeft="9dp"
+                                android:text="White Member"
+                                android:textColor="#00000000"
+                                android:textSize="9sp" />
+
+                            <TextView
+                                android:id="@+id/l_textView3"
+                                android:layout_width="49dp"
+                                android:layout_height="10dp"
+                                android:layout_gravity="start"
+                                android:layout_below="@+id/l_white_text3"
+                                android:layout_marginLeft="9dp"
+                                android:layout_marginTop="7dp"
+                                android:textColor="#000000"
+                                android:text="#서울 #23세"
+                                android:textSize="9sp" />
+
+
+
+
+                        </RelativeLayout>
 
                     </LinearLayout>
 
