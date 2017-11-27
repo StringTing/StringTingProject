@@ -2,7 +2,10 @@ package com.example.leeyun.stringting_android;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.LinearGradient;
+import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
@@ -30,6 +33,19 @@ public class CircleImageView extends android.support.v7.widget.AppCompatImageVie
 
     @Override
     protected void onDraw(Canvas canvas) {
+
+/*그라데이션 테두링
+
+        Paint p = new Paint();
+
+        LinearGradient s = new LinearGradient("ff2577","f433958");
+        p.setColor(0xffff0000);
+        p.setStyle(Paint.Style.STROKE);
+        p.setStrokeWidth(10);
+        Rect r = canvas.getClipBounds();
+        canvas.drawRect(r,p);
+*/
+
 
 
         Path clipPath = new Path();

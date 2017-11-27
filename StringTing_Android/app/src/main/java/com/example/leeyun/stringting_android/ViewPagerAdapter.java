@@ -72,6 +72,9 @@ public class ViewPagerAdapter extends PagerAdapter {
 
         //만들어질 View의 설계는 res폴더>>layout폴더>>viewpater_childview.xml 레이아웃 파일 사용
 
+
+
+
         view= inflater.inflate(R.layout.custom_viewpager, null);
 
 

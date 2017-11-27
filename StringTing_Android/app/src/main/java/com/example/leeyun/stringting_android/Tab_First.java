@@ -66,7 +66,7 @@ public class Tab_First extends Fragment {
 
 
 
-        //api정의
+   /*     //api정의
         retrofit = new Retrofit.Builder().baseUrl(Rest_ApiService.API_URL).addConverterFactory(GsonConverterFactory.create()).build();
         apiService= retrofit.create(Rest_ApiService.class);
 
@@ -103,7 +103,7 @@ public class Tab_First extends Fragment {
             public void onFailure(Call<List<Get_today_introduction>> call, Throwable t) {
                 Log.v("onresponseImage2",t.toString());
             }
-        });
+        });*/
 
 
         // Get the application context
@@ -121,7 +121,7 @@ public class Tab_First extends Fragment {
 
 
 
-        try {
+       /* try {
             URL url = new URL("이미지 주소");
             URLConnection conn = url.openConnection();
             conn.connect();
@@ -148,7 +148,7 @@ public class Tab_First extends Fragment {
             mImageView2.setImageDrawable(roundedBitmapDrawable);
 
         } catch (Exception e) {
-        }
+        }*/
 
 
 //        // Get the bitmap from drawable resources
@@ -192,9 +192,7 @@ public class Tab_First extends Fragment {
 
        /* //블러 라이브러리
         ImageView bluri = (ImageView) v.findViewById(R.id.pic1_background);
-
        Glide.with(mContext).load(R.drawable.gametitle_01).into(blur);
-
  //.bitmapTransform(new BlurTransformation(mContext)*/
 
         //local_db에서 account_id가져옴
