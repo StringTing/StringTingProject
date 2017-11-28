@@ -1,139 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/white">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.1">
+
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="50dp"
+            android:id="@+id/sb">
 
             <ImageButton
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:paddingTop="20dp"
-                android:src="@drawable/backbtn"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginLeft="20dp"
                 android:background="@android:color/transparent"
-                android:padding="0sp"
-                android:scaleType="centerCrop"
                 android:onClick="onClick_back"
-
-
+                android:layout_centerVertical="true"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/arrow_back"
                 />
 
             <TextView
+                android:id="@+id/textView21"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="로그인"
                 android:layout_centerHorizontal="true"
-                android:textSize="20dp"
-                android:paddingTop="10dp"/>
+                android:layout_centerVertical="true"
+                android:textColor="#de000000"
+                android:lineSpacingExtra="12sp"
+                android:text="로그인"
+                android:textSize="16sp" />
 
         </RelativeLayout>
 
-    </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.3"
-        android:orientation="vertical">
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.5"
+        android:layout_width="291dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="89dp"
+        android:layout_below="@+id/sb"
         >
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center"
-            >
+        <RelativeLayout
+            android:layout_width="291dp"
+            android:layout_height="42dp"
+            android:layout_marginBottom="35dp"
+            android:background="@drawable/rounded_20_edittext">
 
-            <TextView
+            <ImageView
                 android:id="@+id/text_id"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:paddingRight="13dp"
-                android:text="ID"
-                android:textSize="20dp" />
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginLeft="14dp"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/e"/>
 
             <EditText
                 android:id="@+id/id_Edit"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/text_id"
-                android:layout_gravity="center"
+                android:layout_width="179dp"
+                android:layout_height="28dp"
+                android:layout_centerVertical="true"
                 android:layout_toRightOf="@+id/text_id"
+                android:layout_marginLeft="50dp"
+                android:inputType="textEmailAddress"
                 android:text=""
-                android:textSize="20dp" />
+                android:background="#00000000"
+                android:textSize="20dp"/>
 
 
-        </LinearLayout>
+        </RelativeLayout>
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center">
+        <RelativeLayout
+            android:layout_width="291dp"
+            android:layout_height="42dp"
+            android:layout_marginBottom="35dp"
+            android:background="@drawable/rounded_20_edittext">
 
 
-
-
-            <TextView
+            <ImageView
                 android:id="@+id/Pw_text"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-
-                android:paddingRight="10dp"
-                android:paddingTop="20dp"
-                android:text="PW"
-                android:textSize="20dp"
-
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginLeft="14dp"
+                android:layout_centerVertical="true"
+                android:background="@mipmap/l_d"
                 />
 
             <EditText
                 android:id="@+id/Pw_edit"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:paddingTop="20dp"
+                android:layout_width="179dp"
+                android:layout_height="28dp"
+                android:layout_centerVertical="true"
+                android:inputType="textPassword"
+                android:layout_toRightOf="@+id/Pw_text"
+                android:layout_marginLeft="50dp"
                 android:text=""
+                android:background="#00000000"
                 android:textSize="20dp"
-
                 />
 
-        </LinearLayout>
+        </RelativeLayout>
 
         <Button
             android:id="@+id/button2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="로그인"
+
             android:onClick="onClick_login_check"
-            android:textSize="20sp" />
+            android:background="@drawable/rounded_membershipbtn"
+            android:text="로그인"
+            android:textColor="#ffffff"
+            android:textSize="14sp" />
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.3"
-        android:orientation="vertical">
-
-    </LinearLayout>
-
-</LinearLayout>
+</RelativeLayout>

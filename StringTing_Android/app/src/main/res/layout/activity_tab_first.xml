@@ -13,8 +13,6 @@
             android:layout_height="50dp"
             android:id="@+id/sb">
 
-
-
             <TextView
                 android:id="@+id/textView21"
                 android:layout_width="wrap_content"
@@ -216,7 +214,7 @@
                                 android:id="@+id/l_white_text"
                                 android:layout_width="94dp"
                                 android:layout_height="12dp"
-                                android:layout_below="@+id/l_pic1"
+
                                 android:layout_marginTop="92dp"
                                 android:background="@drawable/gradient_background"
                                 android:paddingLeft="9dp"
@@ -263,7 +261,7 @@
                                 android:id="@+id/l_white_text2"
                                 android:layout_width="94dp"
                                 android:layout_height="12dp"
-                                android:layout_below="@+id/l_pic1"
+
                                 android:background="@drawable/gradient_background"
                                 android:layout_marginTop="92dp"
                                 android:paddingLeft="9dp"
@@ -311,7 +309,6 @@
                                 android:id="@+id/l_white_text3"
                                 android:layout_width="94dp"
                                 android:layout_height="12dp"
-                                android:layout_below="@+id/l_pic3"
                                 android:background="@drawable/border_top"
                                 android:layout_marginTop="92dp"
                                 android:paddingLeft="9dp"

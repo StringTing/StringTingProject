@@ -65,8 +65,7 @@ public class Tab_First extends Fragment {
         View v = inflater.inflate(R.layout.activity_tab_first, container, false);
 
 
-
-   /*     //api정의
+    //api정의
         retrofit = new Retrofit.Builder().baseUrl(Rest_ApiService.API_URL).addConverterFactory(GsonConverterFactory.create()).build();
         apiService= retrofit.create(Rest_ApiService.class);
 
@@ -89,7 +88,10 @@ public class Tab_First extends Fragment {
 
 
 
-        Call<List<Get_today_introduction>> call = apiService.Get_today_introduction("male",12);
+
+   /*
+        Call<List<Get_today_introduction>> call = apiService.Get_today_introduction("male",34);
+
         call.enqueue(new Callback<List<Get_today_introduction>>() {
             @Override
             public void onResponse(Call<List<Get_today_introduction>> call, Response<List<Get_today_introduction>> response) {
@@ -121,7 +123,7 @@ public class Tab_First extends Fragment {
 
 
 
-       /* try {
+        try {
             URL url = new URL("이미지 주소");
             URLConnection conn = url.openConnection();
             conn.connect();
@@ -148,7 +150,7 @@ public class Tab_First extends Fragment {
             mImageView2.setImageDrawable(roundedBitmapDrawable);
 
         } catch (Exception e) {
-        }*/
+        }
 
 
 //        // Get the bitmap from drawable resources
