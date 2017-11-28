@@ -129,7 +129,7 @@ public class ChatCustom extends BaseAdapter{
             layout.setGravity(Gravity.LEFT);
             modify_layout.setVisibility(GONE);
         }else if(m_List.get(position).type == 1) {
-            modify_layout.setBackgroundResource(R.drawable.bubble_right);
+            modify_layout.setBackgroundResource(R.mipmap.r_b);
             btn.setGravity(CENTER);
             text_l.setVisibility(GONE);
             layout.setGravity(Gravity.RIGHT);

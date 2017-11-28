@@ -27,18 +27,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:maxWidth="200dp"
             android:text="text" />
 
         <Button
             android:id="@+id/modify_btn"
             android:onClick="modify"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_width="40dp"
+            android:layout_height="12dp"
             android:layout_gravity="center"
             android:layout_weight="1"
             android:background="#00ff0000"
-            android:text="수정하기" />
+            android:text="수정하기"
+            android:textSize="10sp"/>
     </LinearLayout>
 
 </RelativeLayout>
