@@ -91,6 +91,7 @@ public class Tab_First extends Fragment {
 
    /*
         Call<List<Get_today_introduction>> call = apiService.Get_today_introduction("male",34);
+
         call.enqueue(new Callback<List<Get_today_introduction>>() {
             @Override
             public void onResponse(Call<List<Get_today_introduction>> call, Response<List<Get_today_introduction>> response) {
