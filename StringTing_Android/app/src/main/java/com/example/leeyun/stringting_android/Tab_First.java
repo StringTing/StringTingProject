@@ -1,6 +1,7 @@
 package com.example.leeyun.stringting_android;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -16,6 +17,7 @@ import android.support.v4.graphics.drawable.*;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 
 import android.widget.ImageView;
@@ -41,7 +43,7 @@ import static android.content.Context.MODE_PRIVATE;
 import static com.facebook.FacebookSdk.getApplicationContext;
 
 
-public class Tab_First extends Fragment {
+public class Tab_First extends Fragment implements View.OnClickListener {
 
     private RelativeLayout mLayout;
 
@@ -55,6 +57,9 @@ public class Tab_First extends Fragment {
     float cornerRadius = 25f;
 
 
+
+
+
     public Tab_First() {
         // Required empty public constructor
     }
@@ -63,6 +68,7 @@ public class Tab_First extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.activity_tab_first, container, false);
+
 
 
     //api정의
@@ -197,6 +203,10 @@ public class Tab_First extends Fragment {
         //local_db에서 account_id가져옴
 
 
+        mLayout = (RelativeLayout) v.findViewById(R.id.t_pic1);
+        mLayout.setOnClickListener(this);
+
+
         // Inflate the layout for this fragment
         return  v;
     }
@@ -205,5 +215,12 @@ public class Tab_First extends Fragment {
 
     public void get_local_accoint_id(){
 
+    }
+
+
+    @Override
+    public void onClick(View v) {
+        Intent i = new Intent(getApplicationContext(),Personal_profile.class);
+        startActivity(i);
     }
 }
