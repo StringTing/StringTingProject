@@ -2,7 +2,6 @@ package com.example.leeyun.stringting_android.API;
 
 import com.google.gson.annotations.SerializedName;
 
-import io.realm.annotations.PrimaryKey;
 
 /**
  * Created by leeyun on 2017. 11. 7..
@@ -18,7 +17,6 @@ public class ResponseApi {
     @SerializedName("message")
     private String message;
     @SerializedName("result")
-    @PrimaryKey
     private String result;
 
 

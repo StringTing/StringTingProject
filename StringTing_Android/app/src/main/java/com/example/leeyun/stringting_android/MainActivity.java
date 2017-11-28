@@ -48,7 +48,6 @@ import com.kakao.usermgmt.response.model.UserProfile;
 import com.kakao.util.exception.KakaoException;
 import com.kakao.util.helper.log.Logger;
 
-import io.realm.Realm;
 
 import static com.kakao.auth.StringSet.error;
 
