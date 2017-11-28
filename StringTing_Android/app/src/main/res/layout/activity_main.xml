@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
-    tools:context="com.example.leeyun.stringting_android.MainActivity"
+    tools:context="com.string.leeyun.stringting_android.MainActivity"
     android:weightSum="1">
 
     <ImageView

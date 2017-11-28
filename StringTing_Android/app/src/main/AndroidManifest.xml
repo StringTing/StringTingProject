@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
-        android:name=".API.App"
+        android:name="com.string.leeyun.stringting_android.API.App"
          android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         >
-        <activity android:name=".MainActivity">
+        <activity android:name="com.string.leeyun.stringting_android.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,29 +22,29 @@
             </intent-filter>
 
         </activity>
-        <activity android:name=".Membership_form" ></activity>
-        <activity android:name=".Preexistence_Login"/>
-        <activity android:name=".Login_local"/>
-        <activity android:name=".Basicinfo_Edit"
+        <activity android:name="com.string.leeyun.stringting_android.Membership_form" ></activity>
+        <activity android:name="com.string.leeyun.stringting_android.Preexistence_Login"/>
+        <activity android:name="com.string.leeyun.stringting_android.Login_local"/>
+        <activity android:name="com.string.leeyun.stringting_android.Basicinfo_Edit"
             android:windowSoftInputMode="stateAlwaysHidden"/>
 
         <meta-data
         android:name="com.kakao.sdk.AppKey"
         android:value="@string/kakao_app_key" />
-        <activity android:name=".SuccessActivity"></activity>
-        <activity android:name=".ChatView" />
-        <activity android:name=".TabbedBar"/>
+        <activity android:name="com.string.leeyun.stringting_android.SuccessActivity"></activity>
+        <activity android:name="com.string.leeyun.stringting_android.ChatView" />
+        <activity android:name="com.string.leeyun.stringting_android.TabbedBar"/>
         <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id" />
 
 
         <service
-            android:name=".API.MyFirebaseMessagingService">
+            android:name="com.string.leeyun.stringting_android.API.MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT"/>
             </intent-filter>
         </service>
         <service
-            android:name=".API.MyFirebaseInstanceIDService">
+            android:name="com.string.leeyun.stringting_android.API.MyFirebaseInstanceIDService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
             </intent-filter>

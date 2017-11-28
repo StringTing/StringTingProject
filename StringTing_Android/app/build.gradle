@@ -7,7 +7,7 @@ android {
     compileSdkVersion 25
     buildToolsVersion '26.0.2'
     defaultConfig {
-        applicationId "com.example.leeyun.stringting_android"
+        applicationId "com.string.leeyun.stringting_android"
         minSdkVersion 23
         targetSdkVersion 23
         versionCode 1
