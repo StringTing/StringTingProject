@@ -15,13 +15,19 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.leeyun.stringting_android.API.ResponseApi;
 import com.example.leeyun.stringting_android.API.Rest_ApiService;
 import com.example.leeyun.stringting_android.API.join;
+import com.example.leeyun.stringting_android.API.register_image;
 import com.example.leeyun.stringting_android.API.userinfo;
 import com.google.gson.Gson;
 
+import java.io.File;
 import java.util.ArrayList;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -43,15 +49,83 @@ public class ChatView extends Activity implements AdapterView.OnItemClickListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_view);
 
+
+        retrofit = new Retrofit.Builder().baseUrl(Rest_ApiService.API_URL).addConverterFactory(GsonConverterFactory.create()).build();
+        apiService= retrofit.create(Rest_ApiService.class);
         Intent intent=getIntent();
 
+        //image resized ,small,middle,large
         ArrayList<String> Imageupload_countList=new ArrayList<>();
-
+        ArrayList<String>Imageresized_small=new ArrayList<>();
+        ArrayList<String>Imageresized_middle=new ArrayList<>();
+        ArrayList<String>Imageresized_large=new ArrayList<>();
         Imageupload_countList=intent.getExtras().getStringArrayList("ProfileFilepath");
+        ArrayList<String>Imageprofile1=new ArrayList<>();
+        ArrayList<String>Imageprofile2=new ArrayList<>();
+        ArrayList<String>Imageprofile3=new ArrayList<>();
 
-        for (int i=0;i<Imageupload_countList.size();i++){
-            Log.e("Imagefilepath",Imageupload_countList.get(i));
+       for (int i=0;i<Imageupload_countList.size();i++){
+           Imageresized_small.add(image_resize.bitmap_resized_small(Imageupload_countList.get(i)));
+            Imageresized_middle.add(image_resize.bitmap_resized_middle(Imageupload_countList.get(i)));
+           Imageresized_large.add(image_resize.bitmap_resized_large(Imageupload_countList.get(i)));
+
+           Log.e("image-small", Imageresized_small.get(i));
+           Log.e("image-middle", Imageresized_middle.get(i));
+           Log.e("image-large", Imageresized_middle.get(i));
+       }
+
+       if(Imageresized_small.get(0)!=null){
+           Imageprofile1.add(Imageresized_small.get(0));
+           Imageprofile1.add(Imageresized_middle.get(0));
+           Imageprofile1.add(Imageresized_large.get(0));
+       }
+       else if(Imageresized_small.get(1)!=null){
+
+           Imageprofile2.add(Imageresized_small.get(1));
+           Imageprofile2.add(Imageresized_middle.get(1));
+           Imageprofile2.add(Imageresized_large.get(1));
         }
+        else if(Imageresized_small.get(2)!=null){
+           Imageprofile3.add(Imageresized_large.get(2));
+           Imageprofile3.add(Imageresized_middle.get(2));
+           Imageprofile3.add(Imageresized_large.get(2));
+       }
+
+
+
+
+        ArrayList<String>keyvalue=new ArrayList<>();
+        keyvalue.add("-small");
+        keyvalue.add("-medium");
+        keyvalue.add("-large");
+
+        MultipartBody.Part[] images1 = new MultipartBody.Part[Imageprofile1.size()];
+
+        for (int index = 0; index < Imageprofile1.size(); index++) {
+            Log.e("Imageprofile1",Imageprofile1.get(index));
+            File file = new File(Imageprofile1.get(index));
+            RequestBody surveyBody = RequestBody.create(MediaType.parse("image/*"), file);
+            images1[index] = MultipartBody.Part.createFormData("image"+keyvalue.get(index), file.getName(), surveyBody);
+        }
+
+        Call<register_image> call = apiService.post_register_image("male","34",images1);
+        call.enqueue(new Callback<register_image>() {
+            @Override
+            public void onResponse(Call<register_image> call, Response<register_image> response) {
+                register_image imageresponse=response.body();
+                Log.e("onresponseImage",imageresponse.getResult());
+
+
+            }
+
+            @Override
+            public void onFailure(Call<register_image> call, Throwable t) {
+                Log.e("onresponseImage2",t.toString());
+            }
+        });
+
+
+
         Userinfo = (userinfo)getIntent().getSerializableExtra("UserInfo");
 
         final String Userinfo_Json= new Gson().toJson(Userinfo);
@@ -63,8 +137,7 @@ public class ChatView extends Activity implements AdapterView.OnItemClickListene
         Log.v("localdbtest",test);
 
 
-        retrofit = new Retrofit.Builder().baseUrl(Rest_ApiService.API_URL).addConverterFactory(GsonConverterFactory.create()).build();
-        apiService= retrofit.create(Rest_ApiService.class);
+
 
 
 
