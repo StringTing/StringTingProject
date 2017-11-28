@@ -12,9 +12,9 @@
         android:id="@+id/sb">
 
         <ImageButton
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginLeft="16dp"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginLeft="20dp"
             android:background="@android:color/transparent"
             android:onClick="onClick_back"
             android:layout_centerVertical="true"

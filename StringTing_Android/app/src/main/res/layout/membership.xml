@@ -1,217 +1,184 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/white">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.1">
+
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <ImageButton
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:paddingTop="20dp"
-                android:src="@drawable/backbtn"
-                android:background="@android:color/transparent"
-                android:padding="0sp"
-                android:scaleType="centerCrop"
-                android:onClick="onClick_back"
+            android:layout_height="50dp"
+            android:id="@+id/sb">
 
+            <ImageButton
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginLeft="20dp"
+                android:background="@android:color/transparent"
+                android:onClick="onClick_back"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/arrow_back"
                 />
 
             <TextView
+                android:id="@+id/textView21"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="회원가입"
                 android:layout_centerHorizontal="true"
-                android:textSize="20dp"
-                android:paddingTop="10dp"/>
+                android:layout_centerVertical="true"
+                android:textColor="#de000000"
+                android:lineSpacingExtra="12sp"
+                android:text="회원가입"
+                android:textSize="16sp" />
 
         </RelativeLayout>
 
-    </LinearLayout>
-
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_margin="20dp"
-        android:layout_weight="0.5"
+        android:layout_width="291dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/sb"
+        android:layout_marginTop="85dp"
         android:gravity="center"
+        android:layout_centerHorizontal="true"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="horizontal">
 
             <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center">
+                android:id="@+id/ch_1"
+                android:layout_width="291dp"
+                android:layout_height="42dp"
+                android:background="@drawable/rounded_20_edittext">
 
-                <TextView
+                <ImageView
                     android:id="@+id/text_id"
-                    android:layout_width="68dp"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_toStartOf="@+id/Email"
-                    android:text="Email"
-                    android:textSize="20dp" />
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_marginLeft="14dp"
+                    android:layout_centerVertical="true"
+                    android:src="@mipmap/e"/>
 
                 <EditText
                     android:id="@+id/Email"
-                    android:layout_width="250dp"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBaseline="@+id/text_id"
-                    android:layout_alignBottom="@+id/text_id"
-                    android:layout_alignParentEnd="true"
+                    android:layout_width="179dp"
+                    android:layout_height="28dp"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/text_id"
+                    android:layout_marginLeft="50dp"
                     android:inputType="textEmailAddress"
                     android:text=""
-                    android:textSize="20dp"
-                    android:paddingTop="5dp"/>
+                    android:background="#00000000"
+                    android:textSize="20dp" />
 
 
-                <TextView
-                    android:id="@+id/Email_checkText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="20dp"
-                    android:layout_alignLeft="@+id/Email"
-                    android:layout_below="@+id/Email"
-                    android:textColor="#F15F5F"
-                    android:textSize="15dp" />
+
 
             </RelativeLayout>
 
 
-        </LinearLayout>
+        <TextView
+            android:id="@+id/Email_checkText"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:textColor="#ff0066"
+            android:textSize="15sp" />
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal">
+        <RelativeLayout
+            android:id="@+id/ch_2"
+            android:layout_width="291dp"
+            android:layout_height="42dp"
+            android:layout_marginTop="34dp"
+            android:background="@drawable/rounded_20_edittext">
 
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center">
-
-                <TextView
+                <ImageView
                     android:id="@+id/Pw_text"
-                    android:layout_width="68dp"
-                    android:layout_height="wrap_content"
-
-                    android:layout_alignParentTop="true"
-                    android:layout_toStartOf="@+id/Pw_edit"
-                    android:paddingRight="10dp"
-                    android:paddingTop="20dp"
-
-                    android:text="PW"
-                    android:textSize="20dp" />
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_marginLeft="14dp"
+                    android:layout_centerVertical="true"
+                    android:background="@mipmap/l_d"/>
 
                 <EditText
                     android:id="@+id/Pw_edit"
-                    android:layout_width="250dp"
-                    android:layout_height="wrap_content"
-                    android:text=""
-                    android:textSize="20dp"
+                    android:layout_width="179dp"
+                    android:layout_height="28dp"
+                    android:layout_centerVertical="true"
                     android:inputType="textPassword"
-                    android:layout_alignBaseline="@+id/Pw_text"
-                    android:layout_alignBottom="@+id/Pw_text"
-                    android:layout_alignParentEnd="true" />
-                <TextView
-                    android:id="@+id/Pw_checkText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="20dp"
-                    android:layout_alignLeft="@+id/Pw_edit"
-                    android:layout_below="@+id/Pw_edit"
-                    android:textSize="15dp"
-                    android:textColor="#F15F5F"
+                    android:layout_toRightOf="@+id/Pw_text"
+                    android:layout_marginLeft="50dp"
+                    android:text=""
+                    android:background="#00000000"
+                    android:textSize="20dp" />
 
-                    android:text=""/>
+
 
 
             </RelativeLayout>
+        <TextView
+            android:id="@+id/Pw_checkText"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
 
-        </LinearLayout>
+            android:text=""
+            android:textColor="#ff0066"
+            android:textSize="15sp" />
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
 
+        <RelativeLayout
+            android:id="@+id/ch_3"
+            android:layout_width="291dp"
+            android:layout_height="42dp"
+            android:layout_marginTop="34dp"
+            android:background="@drawable/rounded_20_edittext">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center">
-
-                <TextView
-
+                <ImageView
                     android:id="@+id/Pw_check"
-                    android:layout_width="68dp"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_toStartOf="@+id/check_pw"
-                    android:paddingTop="20dp"
-
-                    android:text="확인"
-                    android:textSize="20dp" />
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_marginLeft="14dp"
+                    android:layout_centerVertical="true"
+                    android:background="@mipmap/lock" />
 
                 <EditText
                     android:id="@+id/check_pw"
-                    android:layout_width="250dp"
-                    android:layout_height="wrap_content"
-
-                    android:layout_alignParentEnd="true"
+                    android:layout_width="179dp"
+                    android:layout_height="28dp"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/Pw_check"
+                    android:layout_marginLeft="50dp"
+                    android:background="#00000000"
                     android:inputType="textPassword"
-                    android:layout_alignParentTop="true"
-                    android:paddingTop="20dp"
                     android:text=""
                     android:textSize="20dp" />
-                <TextView
-                    android:id="@+id/Pw_equalText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="20dp"
-                    android:layout_alignLeft="@+id/check_pw"
-                    android:layout_below="@+id/check_pw"
-                    android:textSize="15dp"
-                    android:textColor="#F15F5F"
 
-                    android:text=""/>
+
 
 
             </RelativeLayout>
 
-        </LinearLayout>
+        <TextView
+            android:id="@+id/Pw_equalText"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:text=""
+            android:textColor="#ff0066"
+            android:textSize="15sp" />
+
 
         <Button
             android:id="@+id/button3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_width="291dp"
+            android:layout_height="42dp"
+            android:layout_marginTop="34dp"
             android:onClick="onClick_Basicinfo_Edit"
-            android:text="회원가입"
-            android:textSize="20sp" />
+            android:background="@drawable/rounded_membershipbtn"
+            android:text="가입하기"
+            android:textColor="#ffffff"
+            android:textSize="14sp" />
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.3"
-        android:orientation="vertical">
-
-    </LinearLayout>
-
-</LinearLayout>
+</RelativeLayout>

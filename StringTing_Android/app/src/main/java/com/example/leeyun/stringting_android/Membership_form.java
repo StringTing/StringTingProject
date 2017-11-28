@@ -6,9 +6,12 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -64,6 +67,12 @@ public class Membership_form extends Activity {
     private Dialog dialog;
 
 
+
+
+
+
+
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.membership);
@@ -72,17 +81,47 @@ public class Membership_form extends Activity {
         apiService= retrofit.create(Rest_ApiService.class);
 
 
+   /*
+        //입력확인
+        Check_email.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (ce.length()>=1){
+                    c1.setBackgroundResource(R.drawable.rounded_check_20_edittext);
+                } else {
+                    c1.setBackgroundResource(R.drawable.rounded_20_edittext);
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+*/
+
     }
 
     public void onClick_Basicinfo_Edit(View v) throws MalformedURLException {
 
 
         EditText Check_email= (EditText)findViewById(Email);
+
         TextView Email_check_fail=(TextView)findViewById(Email_checkText);   //이메일과 패스워드가 정규식을 통과하지 못했을때.
         TextView Pw_check_fail=(TextView)findViewById(Pw_checkText);
         TextView Pw_equal_fail=(TextView)findViewById(Pw_equalText);
+
         EditText Check_pw=(EditText)findViewById(Pw_edit);
+
         EditText EqualCheck_pw=(EditText)findViewById(check_pw);
+
 
 
         String Email_CheckText="Email이 올바르지않은 형식입니다.";
