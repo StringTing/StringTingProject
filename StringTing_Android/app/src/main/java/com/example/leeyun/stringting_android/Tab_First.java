@@ -53,7 +53,7 @@ public class Tab_First extends Fragment {
     Rest_ApiService apiService;
     Retrofit retrofit;
     float cornerRadius = 25f;
-
+    public List<Get_today_introduction>get_today_introductions;
 
     public Tab_First() {
         // Required empty public constructor
@@ -72,11 +72,11 @@ public class Tab_First extends Fragment {
 
 
         try {
-            Thread.sleep(4000);
+            Thread.sleep(3000);
             SharedPreferences local_id = this.getActivity().getSharedPreferences("Local_DB", Context.MODE_PRIVATE);
 
             account_id = local_id.getInt("account_id",1);
-            Log.v("localdbtest_account_id", String.valueOf(account_id));
+            Log.e("localdbtest_account_id", String.valueOf(account_id));
 
             if (account_id==0){
                 Log.e("localid is null","fail");
@@ -88,14 +88,16 @@ public class Tab_First extends Fragment {
 
 
 
+
    /*
         Call<List<Get_today_introduction>> call = apiService.Get_today_introduction("male",34);
         call.enqueue(new Callback<List<Get_today_introduction>>() {
             @Override
             public void onResponse(Call<List<Get_today_introduction>> call, Response<List<Get_today_introduction>> response) {
 
-                List<Get_today_introduction> get_eval_list=response.body();
-                Log.e("get_eval_list", String.valueOf(get_eval_list.get(1)));
+                get_today_introductions=response.body();
+                Log.e("get_eval_list_image", String.valueOf(get_today_introductions.get(0).getImages()));
+
             }
 
             @Override

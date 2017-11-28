@@ -62,6 +62,11 @@ public interface Rest_ApiService {
         @GET("{sex}/{account_id}/get/today-introduction/")
         Call<List<Get_today_introduction>>Get_today_introduction(@Path("sex")String today_introductiion_sex,@Path("account_id")int today_introduction_account_id);
 
+        @Multipart
+        @POST("{sex}/{account_id}/register/image/")
+        Call<register_image>post_register_image(@Path("sex")String register_image_sex,@Path("account_id")String register_image_account_id,@Part MultipartBody.Part[] images);
+
     }
+
 
 

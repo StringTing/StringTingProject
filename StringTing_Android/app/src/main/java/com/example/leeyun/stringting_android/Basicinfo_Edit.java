@@ -2,6 +2,7 @@ package com.example.leeyun.stringting_android;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
@@ -75,6 +76,7 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
     String birthdayYear;
     String birthdayMonth;
     String birthdayDay;
+    String real_album_path;
 
     File Postfile;
 
@@ -336,6 +338,8 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
             case PICK_FROM_ALBUM: {
                 mImageCaptureUri = data.getData();
                 Log.d("SmartWheel", mImageCaptureUri.getPath().toString());
+                real_album_path= getPath(mImageCaptureUri);
+                Log.e("real_album_path",real_album_path);
             }
             case PICK_FROM_CAMERA: {
                 //이미지를 가져온 이후 리자이즈할 이미지 크기
@@ -344,10 +348,7 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
                 intent.setDataAndType(mImageCaptureUri, "image/*");
 
                 //CROP할 이미지 75*75(키울예정)
-                intent.putExtra("outputX", 75); //x축 크기
-                intent.putExtra("outputY", 75); //y축 크기
-                intent.putExtra("aspectX", 1); //x축 비율
-                intent.putExtra("aspectY", 1); //y축 비율
+
                 intent.putExtra("scale", true);
                 intent.putExtra("return-data", true);
                 startActivityForResult(intent, CROP_FROM_IMAGE);
@@ -366,7 +367,7 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
 
 
                 String filePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/SmartWheel" + System.currentTimeMillis() + ".jpg";
-                Imageupload_countList.add(filePath);
+                Imageupload_countList.add(real_album_path);
 
                 for (int i=0;i<Imageupload_countList.size();i++){
                     Log.e("imageupload_countList", String.valueOf(Imageupload_countList.get(i)));
@@ -429,6 +430,7 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
         BufferedOutputStream out=null;
 
         try{
+
             copyFile.createNewFile();
             out= new BufferedOutputStream(new FileOutputStream(copyFile));
             bitmap.compress(Bitmap.CompressFormat.JPEG,100,out);
@@ -443,6 +445,15 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
         }
 
     }
+    public String getPath(Uri uri) {
+        String[] projection = {MediaStore.Images.Media.DATA};
+        Cursor cursor = managedQuery(uri, projection, null, null, null);
+        startManagingCursor(cursor);
+        int columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        return cursor.getString(columnIndex);
+    }
+
 
     public void userinfo_save(){
 
