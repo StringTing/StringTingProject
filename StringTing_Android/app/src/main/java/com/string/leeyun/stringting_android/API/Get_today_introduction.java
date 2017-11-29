@@ -51,9 +51,9 @@ public class Get_today_introduction {
         this.opened = opened;
     }
 
-    public List<String> getImages() {
+    public String getImages(int i) {
 
-        return images;
+        return images.get(i);
     }
 
     public boolean isOpened() {

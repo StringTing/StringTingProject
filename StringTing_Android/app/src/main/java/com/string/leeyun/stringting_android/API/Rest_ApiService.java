@@ -5,6 +5,8 @@ import java.util.List;
 import okhttp3.MultipartBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
@@ -19,12 +21,16 @@ import retrofit2.http.Path;
 public interface Rest_ApiService {
 
         public  static  final String API_URL="http://115.68.226.54:3825/information/";
+        public static final String API_IMAGE_URL="http://115.68.226.54:3825/profile/";
         public  static  final String API_URLTest="http://192.168.0.8:8000/information/";
 
 
 
         @POST("male/join/")
         Call<join> getPostUserinfo(@Body userinfo Userinfo);
+
+        @POST("female/join/")
+        Call<join> getPostUserinfoF(@Body userinfo Userinfo);
 
         @POST("check/email/")
         Call<ResponseApi> getPostEmailStr1(@Body ResponseApi responseApi);
@@ -37,14 +43,15 @@ public interface Rest_ApiService {
         @POST("{sex}/register/like/")
         Call<register_like> getPostRegister_like(@Path("sex")String Registerlike_sex,@Body register_like registerLike);
 
-        @POST("{sex}/register/get/message/")
-        Call<register_message>getPostRegister_message(@Path("sex")String RegisterMessage_sex,@Body register_message registerMessage);
+
+        @POST("male/register/message/")
+        Call<register_message>get_post_register_message(@Body register_message RegisterMessage);
 
         @GET("{sex}/{account_id}/get/detail/")
         Call<Getdetail>Getdetail(@Path("sex")String Getdetail_sex, @Path("account_id")int Getdetail_accountid);
 
         @GET("{sex}/{account_id}/get/last-5day_matched-account/")
-        Call<Ger_last_5day_matched_account>Get_last_5day(@Path("sex")String GetLast5_sex,@Path("account_id")int GetLas5_accountid);
+        Call<List<Ger_last_5day_matched_account>>Get_last_5day(@Path("sex")String get_last5_sex,@Path("account_id")int get_last5_accountid);
 
         @GET("{sex}/{account_id}/get/eval-account/")
         Call<List<Get_evalaccount>>Get_evalaccount(@Path("sex")String evalaccount_sex, @Path("account_id")int evalaccount_accountid);

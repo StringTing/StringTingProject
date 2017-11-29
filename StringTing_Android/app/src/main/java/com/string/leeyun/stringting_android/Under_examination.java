@@ -14,7 +14,7 @@ public class Under_examination extends Activity{
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(findViewById(R.layout.under_examination));
+        setContentView(R.layout.under_examination);
 
 
     }

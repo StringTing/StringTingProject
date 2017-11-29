@@ -19,6 +19,7 @@ import com.example.leeyun.stringting_android.R;
 import com.string.leeyun.stringting_android.API.Rest_ApiService;
 import com.string.leeyun.stringting_android.API.join;
 import com.string.leeyun.stringting_android.API.register_image;
+import com.string.leeyun.stringting_android.API.register_message;
 import com.string.leeyun.stringting_android.API.userinfo;
 import com.google.gson.Gson;
 
@@ -38,6 +39,8 @@ public class ChatView extends Activity implements AdapterView.OnItemClickListene
     ListView m_ListView;
     ChatCustom m_Adapter;
     userinfo Userinfo = new userinfo();
+    register_message RegisterMessage =new register_message();
+
     Rest_ApiService apiService;
     Retrofit retrofit;
     static  int position;
@@ -51,6 +54,7 @@ public class ChatView extends Activity implements AdapterView.OnItemClickListene
         retrofit = new Retrofit.Builder().baseUrl(Rest_ApiService.API_URL).addConverterFactory(GsonConverterFactory.create()).build();
         apiService= retrofit.create(Rest_ApiService.class);
         Intent intent=getIntent();
+
 
         //image resized ,small,middle,large
         ArrayList<String> Imageupload_countList=new ArrayList<>();
@@ -90,7 +94,8 @@ public class ChatView extends Activity implements AdapterView.OnItemClickListene
        }
 
 
-
+        RegisterMessage.setGrounp_id(2);
+        RegisterMessage.setContents("아싸아싸아싸아싸");
 
         ArrayList<String>keyvalue=new ArrayList<>();
         keyvalue.add("-small");
@@ -122,6 +127,26 @@ public class ChatView extends Activity implements AdapterView.OnItemClickListene
             }
         });
 
+
+        Call<register_message> get_post_register = apiService.get_post_register_message(RegisterMessage);
+        get_post_register.enqueue(new Callback<register_message>() {
+            @Override
+            public void onResponse(Call<register_message> call, Response<register_message> response) {
+
+                register_message gsonresponse=response.body();
+                Log.e("onresponse", gsonresponse.getResult());
+                Log.e("onresponse", String.valueOf(response.code()));
+                Log.e("onresponse", "success");
+
+
+            }
+
+            @Override
+            public void onFailure(Call<register_message> call, Throwable t) {
+                Log.d("connectfail", t.toString());
+            }
+
+        });
 
 
         Userinfo = (userinfo)getIntent().getSerializableExtra("UserInfo");
@@ -237,6 +262,8 @@ public class ChatView extends Activity implements AdapterView.OnItemClickListene
 
     public void onClick_TabbedBar(View v){
         Intent intent = new Intent(getApplicationContext(), TabbedBar.class);
+
+
 
         Call<join> getPostUserinfo = apiService.getPostUserinfo(Userinfo);
         getPostUserinfo.enqueue(new Callback<join>() {

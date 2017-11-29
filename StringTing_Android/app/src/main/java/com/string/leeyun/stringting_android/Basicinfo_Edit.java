@@ -2,6 +2,7 @@ package com.string.leeyun.stringting_android;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -26,6 +27,7 @@ import android.support.v7.app.AlertDialog;
 import com.example.leeyun.stringting_android.R;
 import com.string.leeyun.stringting_android.API.ResponseApi;
 import com.string.leeyun.stringting_android.API.Rest_ApiService;
+import com.string.leeyun.stringting_android.API.message;
 import com.string.leeyun.stringting_android.API.userinfo;
 
 import java.io.BufferedOutputStream;
@@ -37,6 +39,7 @@ import java.util.ArrayList;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static android.R.attr.data;
 import static com.example.leeyun.stringting_android.R.id.Spinner_Tall;
 import static com.example.leeyun.stringting_android.R.id.Spinner_birthday1;
 import static com.example.leeyun.stringting_android.R.id.Spinner_birthday2;
@@ -72,6 +75,7 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
     String birthdayMonth;
     String birthdayDay;
     String real_album_path;
+    message Message = new message();
 
     File Postfile;
 
@@ -501,6 +505,8 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
 
                     body_male.setVisibility(View.VISIBLE);
                     body_female.setVisibility(View.GONE);
+
+
 
                 }
 

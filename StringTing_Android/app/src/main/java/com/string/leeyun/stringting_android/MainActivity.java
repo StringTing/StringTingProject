@@ -48,6 +48,15 @@ import com.kakao.usermgmt.callback.MeResponseCallback;
 import com.kakao.usermgmt.response.model.UserProfile;
 import com.kakao.util.exception.KakaoException;
 import com.kakao.util.helper.log.Logger;
+import com.string.leeyun.stringting_android.API.Rest_ApiService;
+import com.string.leeyun.stringting_android.API.join;
+import com.string.leeyun.stringting_android.API.register_message;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.example.leeyun.stringting_android.R.id.Provision_Linkify;
 
@@ -57,6 +66,8 @@ public class MainActivity extends AppCompatActivity {
 
     private Button CustomloginButton;
     private CallbackManager callbackManager;
+    Rest_ApiService apiService;
+    Retrofit retrofit;
 
     SessionCallback callback;
 
@@ -108,7 +119,8 @@ public class MainActivity extends AppCompatActivity {
 
         //이용약관 및 개인정보 취급방식에대한 링크
 
-
+        retrofit = new Retrofit.Builder().baseUrl(Rest_ApiService.API_URL).addConverterFactory(GsonConverterFactory.create()).build();
+        apiService= retrofit.create(Rest_ApiService.class);
 
 
         callback = new SessionCallback();
@@ -157,6 +169,9 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
             Log.e("can not get localid","fail");
         }
+
+
+
 
 
 

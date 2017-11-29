@@ -8,10 +8,10 @@ android {
     buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "com.string.leeyun.stringting_android"
-        minSdkVersion 23
+        minSdkVersion 18
         targetSdkVersion 23
-        versionCode 1
-        versionName "1.0"
+        versionCode 3
+        versionName "1.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
