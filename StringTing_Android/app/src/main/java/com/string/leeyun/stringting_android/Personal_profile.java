@@ -1,8 +1,10 @@
 package com.string.leeyun.stringting_android;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -23,27 +25,16 @@ public class Personal_profile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_profile);
 
-        //부모뷰
-        LinearLayout dynamic = (LinearLayout) findViewById(R.id.pic_view);
-        dynamic.setPadding(250, 0, 30, 0);
 
-        //새로운이미지
-        for (int i = 0; i < photo.length; i++) {
-            ImageView iv = new ImageView(this);
-            iv.setImageResource(R.drawable.kakao_default_profile_image);
-
-            // iv.setMinimumWidth(210);
-            // iv.setMinimumHeight(280);
-
-            //layout_width, layout_height, gravity 설정
-            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(500, 700, 1f);
-            lp.setMarginStart(30);
-            lp.setMarginEnd(30);
-            lp.gravity = Gravity.CENTER;
-            iv.setLayoutParams(lp);
-
-            dynamic.addView(iv);
+        // activity_main.xml에서 정의한 LinearLayout 객체 할당
+        LinearLayout inflatedLayout = (LinearLayout)findViewById(R.id.pic_view);
+        for(int i =0; i<photo.length;i++){
+            // LayoutInflater 객체 생성
+            LayoutInflater inflater =  (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            // Inflated_Layout.xml로 구성한 레이아웃을 inflatedLayout 영역으로 확장
+            inflater.inflate(R.layout.dynamic_personal_profile, inflatedLayout);
         }
+
 
         // 커스텀 어댑터 생성
         m_Adapter = new PersonalChatCustom();

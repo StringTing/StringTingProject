@@ -1,6 +1,7 @@
 package com.string.leeyun.stringting_android;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -177,6 +178,16 @@ public class Tab_Fourth extends Fragment {
                 chat.setText(getItem(pos).chat);
                 date.setText(getItem(pos).date);
             }
+
+            v.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    // 터치 시 해당 아이템 채팅방 불러오기
+                    Intent i = new Intent(getActivity(),Chatting.class);
+                    startActivity(i);
+                }
+            });
 
             return v;
         }

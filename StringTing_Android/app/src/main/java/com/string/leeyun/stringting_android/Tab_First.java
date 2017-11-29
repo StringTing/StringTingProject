@@ -1,6 +1,7 @@
 package com.string.leeyun.stringting_android;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -21,7 +22,6 @@ import com.string.leeyun.stringting_android.API.Get_today_introduction;
 import com.string.leeyun.stringting_android.API.Rest_ApiService;
 
 import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -38,7 +38,7 @@ import static com.string.leeyun.stringting_android.API.Rest_ApiService.API_URL;
 import static com.string.leeyun.stringting_android.R.mipmap.t;
 
 
-public class Tab_First extends Fragment {
+public class Tab_First extends Fragment  {
 
     private RelativeLayout mLayout;
 
@@ -94,7 +94,7 @@ public class Tab_First extends Fragment {
 
             @Override
             public void onResponse(Call<List<Get_today_introduction>> call, retrofit2.Response<List<Get_today_introduction>> response) {
-                get_today_introductions=response.body();
+                get_today_introductions = response.body();
                 try {
                     image_url_first = String.valueOf(get_today_introductions.get(0).getImages(0));
                     image_url_second = String.valueOf(get_today_introductions.get(1).getImages(0));
@@ -108,28 +108,18 @@ public class Tab_First extends Fragment {
                         Log.e("image_url_second", image_url_second);
                         image_url(v);
                     }
-                }catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
-                    Log.e("imageNULL","false");
+                    Log.e("imageNULL", "false");
                 }
 
-
             }
-
 
             @Override
             public void onFailure(Call<List<Get_today_introduction>> call, Throwable t) {
                 Log.v("onresponseImage2",t.toString());
             }
         });
-
-
-       /* //블러 라이브러리
-        ImageView bluri = (ImageView) v.findViewById(R.id.pic1_background);
-       Glide.with(mContext).load(R.drawable.gametitle_01).into(blur);
- //.bitmapTransform(new BlurTransformation(mContext)*/
-
-        //local_db에서 account_id가져옴
 
 
         // Inflate the layout for this fragment
@@ -259,9 +249,26 @@ public class Tab_First extends Fragment {
         l2.setImageDrawable(last_five_day2);
         l3.setImageDrawable(last_five_day3);
 
+
+
+        mLayout = (RelativeLayout) v.findViewById(R.id.t_pic1);
+
+
+        mLayout.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // 터치 시 해당 아이템 채팅방 불러오기
+                Intent i = new Intent(getActivity(),Personal_profile.class);
+                startActivity(i);
+            }
+        });
+
     }
 
     public void get_local_accoint_id(){
 
     }
+
+
 }
