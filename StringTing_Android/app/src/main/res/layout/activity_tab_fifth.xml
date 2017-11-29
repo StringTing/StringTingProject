@@ -4,138 +4,222 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="50dp"
+        android:id="@+id/sb">
 
-        <LinearLayout
-            android:id="@+id/sb1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/textView21"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:textColor="#de000000"
+            android:lineSpacingExtra="12sp"
+            android:text="내 정보"
+            android:textSize="16sp" />
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+    </RelativeLayout>
 
-                <TextView
-                    android:layout_width="51.1dp"
-                    android:layout_height="19dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="17.5dp"
-                    android:text="내 정보 "
-                    android:textSize="17.5dp" />
-
-            </RelativeLayout>
-
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_below="@+id/sb1"
-            android:layout_marginTop="35.5dp"
+            android:layout_below="@+id/sb"
+            android:layout_marginTop="24dp"
             android:layout_alignParentEnd="true">
 
-            <ImageView
+            <com.example.leeyun.stringting_android.CircleImageView
                 android:id="@+id/imageView18"
-                android:layout_width="105dp"
-                android:layout_height="105dp"
+                android:layout_width="88dp"
+                android:layout_height="88dp"
                 android:layout_gravity="center"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="31dp"
                 app:srcCompat="@drawable/circle" />
 
             <TextView
                 android:id="@+id/textView10"
-                android:layout_width="285dp"
-                android:layout_height="16.5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="내 프로필 보기 및 수정"
-                android:layout_marginBottom="18.89dp"
-                android:textSize="15dp"
+                android:text="#서울 #25세 #인서울4년제 #175 #대학생"
+                android:layout_marginBottom="11dp"
+                android:textSize="13sp"
+                android:textColor="#000000"
+                android:letterSpacing="0.05"
                 android:textAlignment="center" />
 
             <TextView
                 android:id="@+id/textView11"
-                android:layout_width="74.5dp"
-                android:layout_height="12.3dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:textSize="11dp"
-                android:text="코인 충전"
-                android:layout_marginBottom="30dp"
+                android:textSize="10sp"
+                android:text="내 프로필 수정"
+                android:textColor="#666666"
+                android:layout_marginBottom="18dp"
                 />
 
+            <ImageView
+                android:layout_width="325.4dp"
+                android:layout_height="50.5dp"
+                android:background="@drawable/whitemember"
+                android:layout_marginBottom="17.5dp"
+                android:layout_gravity="center"/>
 
 
             <View
-                android:layout_width="393dp"
-                android:layout_height="3.3dp"
-                android:background="#cecece"
+                android:layout_width="348dp"
+                android:layout_height="1dp"
+                android:background="#e5e5e5"
                 android:layout_gravity="center"/>
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_marginTop="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
                 android:orientation="horizontal"
+                android:layout_gravity="center_horizontal"
                 >
 
 
+            <RelativeLayout
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                >
 
-                <ImageButton
-                    android:id="@+id/textView16"
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
+                <ImageView
+                    android:id="@+id/coin"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
                     android:gravity="center"
-                    android:textAlignment="center"
-                    android:src="@drawable/xcopy43x"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/coin"
                    />
 
-                <ImageButton
-                    android:id="@+id/textView17"
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
-                    android:gravity="center"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/coin"
+                    android:textSize="10sp"
+                    android:layout_marginTop="25.5dp"
+                    android:layout_centerHorizontal="true"
                     android:textAlignment="center"
-                    android:src="@drawable/xcopy63x"
-                     />
+                    android:letterSpacing="0.04"
+                    android:text="코인 충전하기"/>
+            </RelativeLayout>
 
-                <ImageButton
-                    android:id="@+id/textView18"
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
-                    android:gravity="center"
-                    android:background="@drawable/border"
-                    android:textAlignment="center"
-                    android:src="@drawable/xcopy73x"
-                   />
+
+                <RelativeLayout
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:layout_marginLeft="55dp">
+
+                    <ImageView
+                        android:id="@+id/notice"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:gravity="center"
+                        android:layout_centerHorizontal="true"
+                        android:src="@drawable/notice"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/notice"
+                        android:textSize="10sp"
+                        android:layout_marginTop="25.5dp"
+                        android:layout_centerHorizontal="true"
+                        android:textAlignment="center"
+                        android:letterSpacing="0.04"
+                        android:text="공지사항"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:layout_marginLeft="55dp">
+
+                    <ImageView
+                        android:id="@+id/bell"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:gravity="center"
+                        android:layout_centerHorizontal="true"
+                        android:src="@drawable/bell"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/bell"
+                        android:textSize="10sp"
+                        android:layout_marginTop="25.5dp"
+                        android:layout_centerHorizontal="true"
+                        android:textAlignment="center"
+                        android:letterSpacing="0.04"
+                        android:text="푸시 설정"/>
+                </RelativeLayout>
 
             </LinearLayout>
+
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_marginTop="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
                 android:orientation="horizontal"
+                android:layout_gravity="center_horizontal"
                 >
 
 
+                <RelativeLayout
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    >
 
-                <ImageButton
-                    android:id="@+id/textView19"
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
-                    android:layout_gravity="left"
-                    android:src="@drawable/xcopy53x"
-                    />
+                    <ImageView
+                        android:id="@+id/question"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:gravity="center"
+                        android:layout_centerHorizontal="true"
+                        android:src="@drawable/question"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/question"
+                        android:textSize="10sp"
+                        android:layout_marginTop="25.5dp"
+                        android:layout_centerHorizontal="true"
+                        android:textAlignment="center"
+                        android:letterSpacing="0.04"
+                        android:text="문의하기"/>
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:layout_marginLeft="55dp"/>
+                <View
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:layout_marginLeft="55dp"/>
 
 
 
             </LinearLayout>
 
         </LinearLayout>
-
     </RelativeLayout>
 
 </FrameLayout>

@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
 
         TextView Provision_Linkify = (TextView) findViewById(R.id.Provision_Linkify);
 
-        String text = "가입하기 또는 로그인 버튼을 누루면 이용약관 및 개인정보취급방침에 동의하신 것이 됩니다.";
+        String text = "가입하기 또는 로그인 버튼을 누루면\n이용약관 및 개인정보취급방침에 동의하신 것이 됩니다.";
         Provision_Linkify.setText(text);
 
         Linkify.TransformFilter mTransform = new Linkify.TransformFilter() {

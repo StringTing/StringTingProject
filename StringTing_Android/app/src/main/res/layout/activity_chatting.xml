@@ -6,44 +6,57 @@
     android:layout_height="match_parent"
     tools:context="com.example.leeyun.stringting_android.Chatting">
 
+
+
     <RelativeLayout
-        android:id="@+id/profile_stat"
         android:layout_width="match_parent"
-        android:layout_height="50dp">
+        android:layout_height="100dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:id="@+id/sb">
+
+        <RelativeLayout
+            android:id="@+id/profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
         <ImageButton
-            android:id="@+id/imageButton2"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_centerVertical="true"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginLeft="20dp"
             android:background="@android:color/transparent"
-            android:onClick="onClick_back"
-            android:padding="0sp"
-            android:paddingTop="20dp"
+            android:layout_centerVertical="true"
             android:scaleType="centerCrop"
-            android:src="@drawable/backbtn" />
+            android:src="@mipmap/arrow_back"
+            />
 
         <com.example.leeyun.stringting_android.CircleImageView
             android:id="@+id/imageView5"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
             android:layout_centerHorizontal="true"
             app:srcCompat="@drawable/com_facebook_profile_picture_blank_square" />
+
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/key"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/imageView5"
+            android:layout_below="@+id/profile"
+            android:layout_marginTop="13dp"
             android:layout_centerHorizontal="true"
-            android:text="#서울 #21세" />
+            android:textSize="13sp"
+            android:text="#서울 #23세 #175cm" />
+
     </RelativeLayout>
+
 
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/profile_stat"
+        android:layout_below="@+id/sb"
         android:layout_above="@+id/enter_change"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
@@ -56,7 +69,7 @@
             android:layout_height="match_parent"
             android:cacheColorHint="#00000000"
             android:divider="@android:color/transparent"
-            android:dividerHeight="5dp"
+            android:dividerHeight="10dp"
             android:listSelector="#00000000"
             android:transcriptMode="alwaysScroll" />
     </FrameLayout>
@@ -70,28 +83,41 @@
 
         <LinearLayout
             android:id="@+id/enter_chatting"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true"
+            android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:orientation="horizontal"
             android:visibility="visible">
 
             <EditText
                 android:id="@+id/input_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="9"
+                android:layout_width="283dp"
+                android:layout_height="36dp"
+                android:layout_marginLeft="7dp"
+                android:layout_marginRight="7dp"
+                android:layout_marginBottom="7dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:layout_gravity="center"
                 android:ems="10"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:background="@drawable/rounded_edittext"/>
+
 
             <Button
                 android:id="@+id/send_btn"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_width="56dp"
+                android:layout_height="36dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="7dp"
+                android:layout_marginRight="7dp"
+                android:textColor="@color/white"
+                android:background="@drawable/rounded_sendbtn"
                 android:text="전송" />
+
         </LinearLayout>
 
     </FrameLayout>

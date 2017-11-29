@@ -21,6 +21,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 
@@ -40,6 +41,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import static android.content.Context.MODE_PRIVATE;
+import static android.view.View.GONE;
 import static com.facebook.FacebookSdk.getApplicationContext;
 
 
@@ -68,6 +70,9 @@ public class Tab_First extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.activity_tab_first, container, false);
+
+
+
 
 
 
@@ -133,6 +138,8 @@ public class Tab_First extends Fragment implements View.OnClickListener {
             BufferedInputStream bis = new BufferedInputStream(conn.getInputStream());
             mBitmap = BitmapFactory.decodeStream(bis);
             bis.close();
+
+
             // Display the bitmap in ImageView
             mImageView.setImageBitmap(mBitmap);
             mImageView2.setImageBitmap(mBitmap);
@@ -204,9 +211,27 @@ public class Tab_First extends Fragment implements View.OnClickListener {
 
 
         mLayout = (RelativeLayout) v.findViewById(R.id.t_pic1);
-        mLayout.setOnClickListener(this);
+      //  mLayout.setOnClickListener(this);
 
 
+
+/*
+        final LinearLayout dadd = (LinearLayout) v.findViewById(R.id.add_btn);
+
+        dadd.setOnClickListener(new LinearLayout.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+
+
+            dadd.setVisibility(GONE);
+                LinearLayout inflatedLayout = (LinearLayout)v.findViewById(R.id.addpic);
+                // LayoutInflater 객체 생성
+                LayoutInflater inflaterss =  (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                // Inflated_Layout.xml로 구성한 레이아웃을 inflatedLayout 영역으로 확장
+                RelativeLayout addlinear = (RelativeLayout) inflaterss.inflate(R.layout.addimg,inflatedLayout,true);
+
+            }
+        });*/
         // Inflate the layout for this fragment
         return  v;
     }
@@ -216,6 +241,8 @@ public class Tab_First extends Fragment implements View.OnClickListener {
     public void get_local_accoint_id(){
 
     }
+
+
 
 
     @Override

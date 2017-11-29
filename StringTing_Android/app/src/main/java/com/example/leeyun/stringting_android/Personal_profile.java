@@ -52,15 +52,9 @@ public class Personal_profile extends AppCompatActivity {
         m_ListView.setAdapter(m_Adapter);
 
 
-        m_Adapter.add("안녕하세요! \n" +
-                "회원정보를 입력하시느라 고생많으셨어요~\n" +
-                "이제 마지막 단계인데요!\n" +
-                "제가 하는 질문을 이상형인 사람이 질문한다고생각해주시고 정성스럽게 답장해주세요!", 0);
+        m_Adapter.add("TEST01", 0);
 
-        m_Adapter.add("안녕하세요! \n" +
-                "회원정보를 입력하시느라 고생많으셨어요~\n" +
-                "이제 마지막 단계인데요!\n" +
-                "제가 하는 질문을 이상형인 사람이 질문한다고생각해주시고 정성스럽게 답장해주세요!", 1);
+        m_Adapter.add("TEST01", 1);
 
         m_Adapter.add("안녕하세요! \n" +
                 "회원정보를 입력하시느라 고생많으셨어요~\n" +

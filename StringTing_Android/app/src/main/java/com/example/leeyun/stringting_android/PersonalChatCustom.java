@@ -93,11 +93,11 @@ public class PersonalChatCustom extends BaseAdapter{
 
 
         if( m_List.get(position).type == 0 ) {
-            text.setBackgroundResource(R.drawable.bubble_left);
+            text.setBackgroundResource(R.drawable.left_b);
             layout.setGravity(Gravity.LEFT);
 
         }else if(m_List.get(position).type == 1) {
-            text.setBackgroundResource(R.drawable.bubble_right);
+            text.setBackgroundResource(R.drawable.right_b);
             layout.setGravity(Gravity.RIGHT);
         }
 
