@@ -1,6 +1,7 @@
 package com.string.leeyun.stringting_android;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -16,13 +17,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
-
 import com.example.leeyun.stringting_android.R;
 import com.string.leeyun.stringting_android.API.Get_today_introduction;
 import com.string.leeyun.stringting_android.API.Rest_ApiService;
 
 import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -38,7 +37,7 @@ import static com.string.leeyun.stringting_android.API.Rest_ApiService.API_IMAGE
 import static com.string.leeyun.stringting_android.API.Rest_ApiService.API_URL;
 
 
-public class Tab_First extends Fragment {
+public class Tab_First extends Fragment  {
 
     private RelativeLayout mLayout;
 
@@ -95,18 +94,25 @@ public class Tab_First extends Fragment {
             @Override
             public void onResponse(Call<List<Get_today_introduction>> call, retrofit2.Response<List<Get_today_introduction>> response) {
                 get_today_introductions=response.body();
-                image_url_first= String.valueOf(get_today_introductions.get(0).getImages(0));
-                image_url_second= String.valueOf(get_today_introductions.get(1).getImages(0));
-                Log.e("get_eval_list_image", String.valueOf(get_today_introductions.get(0).getImages(0)));
-                String replace= "{}";
-                String medium="medium";
-                if (image_url_first!=null&&image_url_second!=null){
-                    image_url_first=  image_url_first.replace(replace,medium);
-                    image_url_second= image_url_second.replace(replace,medium);
-                    Log.e("image_url_first",image_url_first);
-                    Log.e("image_url_second",image_url_second);
-                    image_url(v);
+                try {
+                    image_url_first = String.valueOf(get_today_introductions.get(0).getImages(0));
+                    image_url_second = String.valueOf(get_today_introductions.get(1).getImages(0));
+                    Log.e("get_eval_list_image", String.valueOf(get_today_introductions.get(0).getImages(0)));
+                    String replace = "{}";
+                    String medium = "medium";
+                    if (image_url_first != null && image_url_second != null) {
+                        image_url_first = image_url_first.replace(replace, medium);
+                        image_url_second = image_url_second.replace(replace, medium);
+                        Log.e("image_url_first", image_url_first);
+                        Log.e("image_url_second", image_url_second);
+                        image_url(v);
+                    }
                 }
+                catch (Exception e){
+                    e.printStackTrace();
+
+                }
+
             }
 
 
@@ -115,14 +121,6 @@ public class Tab_First extends Fragment {
                 Log.v("onresponseImage2",t.toString());
             }
         });
-
-
-       /* //블러 라이브러리
-        ImageView bluri = (ImageView) v.findViewById(R.id.pic1_background);
-       Glide.with(mContext).load(R.drawable.gametitle_01).into(blur);
- //.bitmapTransform(new BlurTransformation(mContext)*/
-
-        //local_db에서 account_id가져옴
 
 
         // Inflate the layout for this fragment
@@ -252,9 +250,26 @@ public class Tab_First extends Fragment {
         l2.setImageDrawable(last_five_day2);
         l3.setImageDrawable(last_five_day3);
 
+
+
+        mLayout = (RelativeLayout) v.findViewById(R.id.t_pic1);
+
+
+        mLayout.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // 터치 시 해당 아이템 채팅방 불러오기
+                Intent i = new Intent(getActivity(),Personal_profile.class);
+                startActivity(i);
+            }
+        });
+
     }
 
     public void get_local_accoint_id(){
 
     }
+
+
 }

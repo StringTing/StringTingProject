@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/r_img"
+    android:layout_width="94dp"
+    android:layout_height="127dp"
+    android:layout_marginRight="23dp"
+    android:background="@drawable/rounded">
+
+
+
+    <ImageView
+        android:id="@+id/last1"
+        android:layout_width="94dp"
+        android:layout_height="98dp"
+        android:padding="0dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/rounded" />
+
+
+    <TextView
+        android:id="@+id/l_white_text"
+        android:layout_width="94dp"
+        android:layout_height="12dp"
+
+        android:layout_marginTop="92dp"
+        android:background="@drawable/gradient_background"
+        android:paddingLeft="9dp"
+        android:text="White Member"
+        android:textColor="#ffffff"
+        android:textSize="9sp" />
+
+    <TextView
+        android:id="@+id/l_textView"
+        android:layout_width="49dp"
+        android:layout_height="10dp"
+        android:layout_below="@+id/l_white_text"
+        android:layout_gravity="start"
+        android:layout_marginLeft="9dp"
+        android:layout_marginTop="7dp"
+        android:text="#서울 #23세"
+        android:textColor="#000000"
+        android:textSize="9sp" />
+
+
+</RelativeLayout>
