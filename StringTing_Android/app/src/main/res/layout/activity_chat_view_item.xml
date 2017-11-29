@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center_horizontal"
-
     android:id="@+id/layout"
     android:gravity="center">
 
@@ -13,13 +12,13 @@
         android:layout_height="wrap_content"
         android:maxWidth="200dp"
         android:breakStrategy="simple"
+        android:gravity="center_vertical"
         android:text="TextView" />
 
     <LinearLayout
         android:id="@+id/modify_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         android:orientation="vertical">
 
         <TextView
