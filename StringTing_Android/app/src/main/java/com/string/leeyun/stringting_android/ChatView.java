@@ -15,8 +15,8 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.leeyun.stringting_android.R;
 import com.string.leeyun.stringting_android.API.Rest_ApiService;
+import com.string.leeyun.stringting_android.API.get_matched_account;
 import com.string.leeyun.stringting_android.API.join;
 import com.string.leeyun.stringting_android.API.register_image;
 import com.string.leeyun.stringting_android.API.register_message;
@@ -40,7 +40,6 @@ public class ChatView extends Activity implements AdapterView.OnItemClickListene
     ChatCustom m_Adapter;
     userinfo Userinfo = new userinfo();
     register_message RegisterMessage =new register_message();
-
     Rest_ApiService apiService;
     Retrofit retrofit;
     static  int position;

@@ -24,7 +24,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-import com.example.leeyun.stringting_android.R;
 import com.string.leeyun.stringting_android.API.MyFirebaseInstanceIDService;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -58,7 +57,6 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static com.example.leeyun.stringting_android.R.id.Provision_Linkify;
 
 
 public class MainActivity extends AppCompatActivity {

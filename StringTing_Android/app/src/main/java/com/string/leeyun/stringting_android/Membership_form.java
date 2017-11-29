@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.leeyun.stringting_android.R;
 import com.string.leeyun.stringting_android.API.ResponseApi;
 import com.string.leeyun.stringting_android.API.Rest_ApiService;
 import com.string.leeyun.stringting_android.API.userinfo;
@@ -28,12 +27,12 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static com.example.leeyun.stringting_android.R.id.Email;
-import static com.example.leeyun.stringting_android.R.id.Email_checkText;
-import static com.example.leeyun.stringting_android.R.id.Pw_checkText;
-import static com.example.leeyun.stringting_android.R.id.Pw_edit;
-import static com.example.leeyun.stringting_android.R.id.Pw_equalText;
-import static com.example.leeyun.stringting_android.R.id.check_pw;
+import static com.string.leeyun.stringting_android.R.id.Email;
+import static com.string.leeyun.stringting_android.R.id.Email_checkText;
+import static com.string.leeyun.stringting_android.R.id.Pw_checkText;
+import static com.string.leeyun.stringting_android.R.id.Pw_edit;
+import static com.string.leeyun.stringting_android.R.id.Pw_equalText;
+import static com.string.leeyun.stringting_android.R.id.check_pw;
 
 
 /**
@@ -121,32 +120,6 @@ public class Membership_form extends Activity {
 
 
 
-        String root = Environment.getExternalStorageDirectory().toString();
-        Postfile = new File(root+"/Download/25576de222c603a.jpg");
-
-        RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), Postfile);
-
-
-        Log.v("getName(postfile)",Postfile.getName());
-
-        MultipartBody.Part image = MultipartBody.Part.createFormData("image", Postfile.getName(), requestFile);
-
-
-        Call<ResponseApi> call = apiService.getPostImage("male","1",image);
-        call.enqueue(new Callback<ResponseApi>() {
-            @Override
-            public void onResponse(Call<ResponseApi> call, Response<ResponseApi> response) {
-                ResponseApi imageresponse=response.body();
-                Log.v("onresponseImage",imageresponse.getResult());
-                Log.v("getName(postfile)",Postfile.getName());
-
-            }
-
-            @Override
-            public void onFailure(Call<ResponseApi> call, Throwable t) {
-                    Log.v("onresponseImage2",t.toString());
-            }
-        });
 
 
         Call<ResponseApi> comment = apiService.getPostEmailStr1(responapi);

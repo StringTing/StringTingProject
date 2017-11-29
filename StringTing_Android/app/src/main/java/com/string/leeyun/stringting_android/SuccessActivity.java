@@ -8,7 +8,6 @@ package com.string.leeyun.stringting_android;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.example.leeyun.stringting_android.R;
 
 public class SuccessActivity extends AppCompatActivity {
 

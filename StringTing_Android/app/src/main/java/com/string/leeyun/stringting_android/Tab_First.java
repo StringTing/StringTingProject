@@ -17,7 +17,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 
-import com.example.leeyun.stringting_android.R;
 import com.string.leeyun.stringting_android.API.Get_today_introduction;
 import com.string.leeyun.stringting_android.API.Rest_ApiService;
 
@@ -36,6 +35,7 @@ import retrofit2.Callback;
 import static com.facebook.FacebookSdk.getApplicationContext;
 import static com.string.leeyun.stringting_android.API.Rest_ApiService.API_IMAGE_URL;
 import static com.string.leeyun.stringting_android.API.Rest_ApiService.API_URL;
+import static com.string.leeyun.stringting_android.R.mipmap.t;
 
 
 public class Tab_First extends Fragment {
@@ -95,18 +95,25 @@ public class Tab_First extends Fragment {
             @Override
             public void onResponse(Call<List<Get_today_introduction>> call, retrofit2.Response<List<Get_today_introduction>> response) {
                 get_today_introductions=response.body();
-                image_url_first= String.valueOf(get_today_introductions.get(0).getImages(0));
-                image_url_second= String.valueOf(get_today_introductions.get(1).getImages(0));
-                Log.e("get_eval_list_image", String.valueOf(get_today_introductions.get(0).getImages(0)));
-                String replace= "{}";
-                String medium="medium";
-                if (image_url_first!=null&&image_url_second!=null){
-                    image_url_first=  image_url_first.replace(replace,medium);
-                    image_url_second= image_url_second.replace(replace,medium);
-                    Log.e("image_url_first",image_url_first);
-                    Log.e("image_url_second",image_url_second);
-                    image_url(v);
+                try {
+                    image_url_first = String.valueOf(get_today_introductions.get(0).getImages(0));
+                    image_url_second = String.valueOf(get_today_introductions.get(1).getImages(0));
+                    Log.e("get_eval_list_image", String.valueOf(get_today_introductions.get(0).getImages(0)));
+                    String replace = "{}";
+                    String medium = "medium";
+                    if (image_url_first != null && image_url_second != null) {
+                        image_url_first = image_url_first.replace(replace, medium);
+                        image_url_second = image_url_second.replace(replace, medium);
+                        Log.e("image_url_first", image_url_first);
+                        Log.e("image_url_second", image_url_second);
+                        image_url(v);
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
+                    Log.e("imageNULL","false");
                 }
+
+
             }
 
 

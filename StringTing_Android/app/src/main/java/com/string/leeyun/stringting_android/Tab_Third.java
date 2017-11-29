@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.leeyun.stringting_android.R;
 
 
 public class Tab_Third extends Fragment {

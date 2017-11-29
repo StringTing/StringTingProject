@@ -10,7 +10,6 @@ import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
-import com.example.leeyun.stringting_android.R;
 
 
 public class Personal_profile extends AppCompatActivity {

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,9 +13,24 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.leeyun.stringting_android.R;
+import com.string.leeyun.stringting_android.API.Rest_ApiService;
+import com.string.leeyun.stringting_android.API.get_matched_account;
+import com.string.leeyun.stringting_android.API.message;
+import com.string.leeyun.stringting_android.API.register_message;
+import com.string.leeyun.stringting_android.API.userinfo;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
+import static android.R.attr.data;
+import static com.string.leeyun.stringting_android.API.Rest_ApiService.API_URL;
 
 
 public class Tab_Fourth extends Fragment {
@@ -22,6 +38,9 @@ public class Tab_Fourth extends Fragment {
     private ListView lv;
     private Tab_Fourth_Custom mAdapter;
     private ArrayList<listItem> list;
+    public List<get_matched_account> get_matched_accountList;
+    Rest_ApiService apiService;
+    Retrofit retrofit;
 
     public Tab_Fourth() {
         // Required empty public constructor
@@ -49,6 +68,8 @@ public class Tab_Fourth extends Fragment {
         mAdapter = new Tab_Fourth_Custom(list);
         lv.setAdapter(mAdapter);
 
+        retrofit = new Retrofit.Builder().baseUrl(API_URL).addConverterFactory(GsonConverterFactory.create()).build();
+        apiService= retrofit.create(Rest_ApiService.class);
   /*      ImageView pro= null;
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.kakao_default_profile_image);
         pro.setBackgroundResource(R.drawable.circlr_border);
@@ -62,7 +83,29 @@ public class Tab_Fourth extends Fragment {
         list.add(new listItem(R.drawable.kakao_default_profile_image,"이름","내용","시간"));
         list.add(new listItem(R.drawable.kakao_default_profile_image,"이름","내용","시간"));
 
+        Call<List<get_matched_account>>get_matched_account = apiService.get_matched_account("male",34);
+        get_matched_account.enqueue(new Callback<List<get_matched_account>>() {
+            @Override
+            public void onResponse(Call<List<get_matched_account>> call, Response<List<get_matched_account>> response) {
+
+                get_matched_accountList=response.body();
+                String date= String.valueOf(get_matched_accountList.get(0).getCreatetime());
+                Log.e("createtime", String.valueOf(date));
+                Log.e("onresponse", String.valueOf(response.code()));
+                Log.e("onresponse", "success");
+
+
+            }
+
+            @Override
+            public void onFailure(Call<List<get_matched_account>> call, Throwable t) {
+                Log.d("connectfail", t.toString());
+            }
+
+        });
     }
+
+
 
     //리스트 아이템 클래스
     public class listItem{

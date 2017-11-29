@@ -15,7 +15,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
-import com.example.leeyun.stringting_android.R;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookSdk;
 import com.kakao.auth.Session;

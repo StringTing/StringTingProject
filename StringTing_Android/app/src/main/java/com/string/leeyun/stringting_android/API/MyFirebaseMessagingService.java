@@ -10,10 +10,10 @@ import android.util.Log;
 import android.support.v4.app.NotificationCompat;
 
 
-import com.example.leeyun.stringting_android.R;
 import com.string.leeyun.stringting_android.MainActivity;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
+import com.string.leeyun.stringting_android.R;
 
 /**
  * Created by leeyun on 2017. 11. 19..

@@ -10,7 +10,7 @@ import java.util.Date;
 public class message implements Serializable {
 
     private String sex;
-    private int groun_id;
+    private int grounp_id;
     private String contents;
     private Date createtime;
 
@@ -18,8 +18,8 @@ public class message implements Serializable {
         this.sex = sex;
     }
 
-    public void setGroun_id(int groun_id) {
-        this.groun_id = groun_id;
+    public void setGrounp_id(int groun_id) {
+        this.grounp_id = groun_id;
     }
 
     public void setContents(String contents) {
@@ -35,8 +35,8 @@ public class message implements Serializable {
         return sex;
     }
 
-    public int getGroun_id() {
-        return groun_id;
+    public int getGrounp_id() {
+        return grounp_id;
     }
 
     public String getContents() {

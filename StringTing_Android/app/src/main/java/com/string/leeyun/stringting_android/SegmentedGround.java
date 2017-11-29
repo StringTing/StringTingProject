@@ -23,7 +23,6 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
-import com.example.leeyun.stringting_android.R;
 
 import java.util.HashMap;
 

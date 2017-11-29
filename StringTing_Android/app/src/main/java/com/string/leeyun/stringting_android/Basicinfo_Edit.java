@@ -24,7 +24,6 @@ import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.support.v7.app.AlertDialog;
 
-import com.example.leeyun.stringting_android.R;
 import com.string.leeyun.stringting_android.API.ResponseApi;
 import com.string.leeyun.stringting_android.API.Rest_ApiService;
 import com.string.leeyun.stringting_android.API.message;
@@ -39,21 +38,19 @@ import java.util.ArrayList;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static android.R.attr.data;
-import static com.example.leeyun.stringting_android.R.id.Spinner_Tall;
-import static com.example.leeyun.stringting_android.R.id.Spinner_birthday1;
-import static com.example.leeyun.stringting_android.R.id.Spinner_birthday2;
-import static com.example.leeyun.stringting_android.R.id.Spinner_birthday3;
-import static com.example.leeyun.stringting_android.R.id.Spinner_blood;
-import static com.example.leeyun.stringting_android.R.id.Spinner_body_form_female;
-import static com.example.leeyun.stringting_android.R.id.Spinner_body_form_male;
-import static com.example.leeyun.stringting_android.R.id.Spinner_city;
-import static com.example.leeyun.stringting_android.R.id.Spinner_drink;
-import static com.example.leeyun.stringting_android.R.id.Spinner_education;
-import static com.example.leeyun.stringting_android.R.id.Spinner_religion;
-import static com.example.leeyun.stringting_android.R.layout.spinner_item;
+import static com.string.leeyun.stringting_android.R.id.Spinner_Tall;
+import static com.string.leeyun.stringting_android.R.id.Spinner_birthday1;
+import static com.string.leeyun.stringting_android.R.id.Spinner_birthday2;
+import static com.string.leeyun.stringting_android.R.id.Spinner_birthday3;
+import static com.string.leeyun.stringting_android.R.id.Spinner_blood;
+import static com.string.leeyun.stringting_android.R.id.Spinner_body_form_female;
+import static com.string.leeyun.stringting_android.R.id.Spinner_body_form_male;
+import static com.string.leeyun.stringting_android.R.id.Spinner_city;
+import static com.string.leeyun.stringting_android.R.id.Spinner_drink;
+import static com.string.leeyun.stringting_android.R.id.Spinner_education;
+import static com.string.leeyun.stringting_android.R.id.Spinner_religion;
+import static com.string.leeyun.stringting_android.R.layout.spinner_item;
 
-import static java.lang.Integer.parseInt;
 
 /**
  * Created by leeyun on 2017. 9. 16..
@@ -478,17 +475,17 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
         final RadioButton Radio_smoking= (RadioButton)findViewById(R.id.Radio_smokingO);
         final RadioButton Radio_Notsmoking= (RadioButton)findViewById(R.id.RadioNot_smoking);
 
-        final Spinner spinnerbir1 = (Spinner)findViewById(R.id.Spinner_birthday1);
-        final Spinner spinnerbir2 = (Spinner)findViewById(R.id.Spinner_birthday2);
-        final Spinner spinnerbir3 = (Spinner)findViewById(R.id.Spinner_birthday3);
-        final Spinner spinnerbodyform_male=(Spinner)findViewById(R.id.Spinner_body_form_male);
-        final Spinner spinnerbodyform_female=(Spinner)findViewById(R.id.Spinner_body_form_female);
-        final Spinner spinnerCity = (Spinner)findViewById(R.id.Spinner_city);
-        final Spinner spinnerBlood = (Spinner)findViewById(R.id.Spinner_blood);
-        final Spinner spinnerDrink=(Spinner)findViewById(R.id.Spinner_drink);
-        final Spinner spinnerReligion=(Spinner)findViewById(R.id.Spinner_religion);
-        final Spinner spinnerEducation=(Spinner)findViewById(R.id.Spinner_education);
-        final Spinner spinnerTall=(Spinner)findViewById(R.id.Spinner_Tall);
+        final Spinner spinnerbir1 = (Spinner)findViewById(Spinner_birthday1);
+        final Spinner spinnerbir2 = (Spinner)findViewById(Spinner_birthday2);
+        final Spinner spinnerbir3 = (Spinner)findViewById(Spinner_birthday3);
+        final Spinner spinnerbodyform_male=(Spinner)findViewById(Spinner_body_form_male);
+        final Spinner spinnerbodyform_female=(Spinner)findViewById(Spinner_body_form_female);
+        final Spinner spinnerCity = (Spinner)findViewById(Spinner_city);
+        final Spinner spinnerBlood = (Spinner)findViewById(Spinner_blood);
+        final Spinner spinnerDrink=(Spinner)findViewById(Spinner_drink);
+        final Spinner spinnerReligion=(Spinner)findViewById(Spinner_religion);
+        final Spinner spinnerEducation=(Spinner)findViewById(Spinner_education);
+        final Spinner spinnerTall=(Spinner)findViewById(Spinner_Tall);
 
 
 
@@ -500,8 +497,8 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
                     b1.setBackgroundResource(R.drawable.press_round_btn);
                     RelativeLayout army = (RelativeLayout)findViewById(R.id.army);
                     army.setVisibility(View.VISIBLE);
-                    Spinner body_male=(Spinner)findViewById(R.id.Spinner_body_form_male);
-                    Spinner body_female=(Spinner)findViewById(R.id.Spinner_body_form_female);
+                    Spinner body_male=(Spinner)findViewById(Spinner_body_form_male);
+                    Spinner body_female=(Spinner)findViewById(Spinner_body_form_female);
 
                     body_male.setVisibility(View.VISIBLE);
                     body_female.setVisibility(View.GONE);
@@ -521,8 +518,8 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
 
                     RelativeLayout army = (RelativeLayout) findViewById(R.id.army);
                     army.setVisibility(View.GONE);
-                    Spinner body_male=(Spinner)findViewById(R.id.Spinner_body_form_male);
-                    Spinner body_female=(Spinner)findViewById(R.id.Spinner_body_form_female);
+                    Spinner body_male=(Spinner)findViewById(Spinner_body_form_male);
+                    Spinner body_female=(Spinner)findViewById(Spinner_body_form_female);
 
                     body_male.setVisibility(View.GONE);
                     body_female.setVisibility(View.VISIBLE);

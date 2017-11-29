@@ -11,7 +11,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.leeyun.stringting_android.R;
 
 import java.util.ArrayList;
 
