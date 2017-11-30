@@ -102,8 +102,9 @@ public class MainActivity extends AppCompatActivity {
 
         TextView Provision_Linkify = (TextView) findViewById(R.id.Provision_Linkify);
 
-        String text = "가입하기 또는 로그인 버튼을 누루면 이용약관 및 개인정보취급방침에 동의하신 것이 됩니다.";
+        String text = "가입하기 또는 로그인 버튼을 누르면\n이용약관 및 개인정보취급방침에 동의하신 것이 됩니다.";
         Provision_Linkify.setText(text);
+
 
         Linkify.TransformFilter mTransform = new Linkify.TransformFilter() {
             @Override
@@ -155,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
         MyFirebaseInstanceIDService myFirebaseInstanceIDService =new MyFirebaseInstanceIDService();
         myFirebaseInstanceIDService.onTokenRefresh();
         String refreshedToken = FirebaseInstanceId.getInstance().getToken();
-        Log.e("refreshedToken",refreshedToken);
+  //      Log.e("refreshedToken",refreshedToken);
 
         SharedPreferences pref = getSharedPreferences("Local_DB", MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
@@ -169,7 +170,7 @@ public class MainActivity extends AppCompatActivity {
             String getTEST=local_id.getString("ID","success");
             Log.v("Localdbid",getTEST);
             if (getTEST.equals(null)){
-                Log.e("localid is null","fail");
+  //              Log.e("localid is null","fail");
 
             }
         }catch (Exception e){
