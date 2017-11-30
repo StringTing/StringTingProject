@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
-import com.example.leeyun.stringting_android.R;
 
 public class Chatting extends AppCompatActivity  {
 

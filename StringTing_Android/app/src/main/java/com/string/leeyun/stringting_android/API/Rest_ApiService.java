@@ -50,7 +50,7 @@ public interface Rest_ApiService {
         @GET("{sex}/{account_id}/get/detail/")
         Call<Getdetail>Getdetail(@Path("sex")String Getdetail_sex, @Path("account_id")int Getdetail_accountid);
 
-        @GET("{sex}/{account_id}/get/last-5day_matched-account/")
+        @GET("{sex}/{account_id}/get/last-5day-matched-account/")
         Call<List<Ger_last_5day_matched_account>>Get_last_5day(@Path("sex")String get_last5_sex,@Path("account_id")int get_last5_accountid);
 
         @GET("{sex}/{account_id}/get/eval-account/")
@@ -64,7 +64,7 @@ public interface Rest_ApiService {
         Call<register_image>post_register_image(@Path("sex")String register_image_sex,@Path("account_id")String register_image_account_id,@Part MultipartBody.Part[] images);
 
 
-        @GET("{sex}/{account_id}/get/register/matched-account/")
+        @GET("{sex}/{account_id}/get/matched-account/")
         Call<List<get_matched_account>>get_matched_account(@Path("sex")String matched_sex,@Path("account_id")int matched_account_id);
     }
 

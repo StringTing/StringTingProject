@@ -44,6 +44,7 @@ public class ChatView extends Activity implements AdapterView.OnItemClickListene
     Retrofit retrofit;
     static  int position;
     public int account_id;
+    public  String fcm_token;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +54,8 @@ public class ChatView extends Activity implements AdapterView.OnItemClickListene
         retrofit = new Retrofit.Builder().baseUrl(Rest_ApiService.API_URL).addConverterFactory(GsonConverterFactory.create()).build();
         apiService= retrofit.create(Rest_ApiService.class);
         Intent intent=getIntent();
+
+        //local에 있는 fcm token 가져옴
 
 
         //image resized ,small,middle,large
@@ -133,7 +136,7 @@ public class ChatView extends Activity implements AdapterView.OnItemClickListene
             public void onResponse(Call<register_message> call, Response<register_message> response) {
 
                 register_message gsonresponse=response.body();
-                Log.e("onresponse", gsonresponse.getResult());
+                Log.e("OnRegisterMessage", gsonresponse.getResult());
                 Log.e("onresponse", String.valueOf(response.code()));
                 Log.e("onresponse", "success");
 
@@ -270,11 +273,12 @@ public class ChatView extends Activity implements AdapterView.OnItemClickListene
             public void onResponse(Call<join> call, Response<join> response) {
 
                 join gsonresponse=response.body();
-                Log.v("onresponse", gsonresponse.getResult());
-                Log.v("onresponse", String.valueOf(response.code()));
-                Log.v("onresponse", "success");
+                Log.e("onresponse", gsonresponse.getResult());
+                Log.e("onresponse", String.valueOf(response.code()));
+                Log.e("onresponse", "success");
                 account_id=gsonresponse.getAccount_id();
                 Log.e("account_id", String.valueOf(account_id));
+                Log.e("fcm_token",String.valueOf(Userinfo.getFcm_token()));
 
                 save_accountid(account_id);
                 SharedPreferences pref = getSharedPreferences("Local_DB", MODE_PRIVATE);
@@ -298,7 +302,7 @@ public class ChatView extends Activity implements AdapterView.OnItemClickListene
         public void savePreferences(String data){
         SharedPreferences pref = getSharedPreferences("Local_DB", MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
-        editor.putString("Id",data);
+        editor.putString("ID",data);
         editor.commit();
     }
 

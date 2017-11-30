@@ -31,6 +31,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import static android.R.attr.data;
+import static android.media.CamcorderProfile.get;
 import static com.string.leeyun.stringting_android.API.Rest_ApiService.API_URL;
 
 
@@ -84,14 +85,15 @@ public class Tab_Fourth extends Fragment {
         list.add(new listItem(R.drawable.kakao_default_profile_image,"이름","내용","시간"));
         list.add(new listItem(R.drawable.kakao_default_profile_image,"이름","내용","시간"));
 
-        Call<List<get_matched_account>>get_matched_account = apiService.get_matched_account("male",34);
+        final Call<List<get_matched_account>>get_matched_account = apiService.get_matched_account("male",34);
         get_matched_account.enqueue(new Callback<List<get_matched_account>>() {
             @Override
             public void onResponse(Call<List<get_matched_account>> call, Response<List<get_matched_account>> response) {
 
                 get_matched_accountList=response.body();
-                String date= String.valueOf(get_matched_accountList.get(0).getCreatetime());
-                Log.e("createtime", String.valueOf(date));
+                Log.e("get_matched_accountList", String.valueOf(response.body()));
+                int grounpId=get_matched_accountList.get(0).last_message.getGrounp_id();
+                Log.e("data", String.valueOf(grounpId));
                 Log.e("onresponse", String.valueOf(response.code()));
                 Log.e("onresponse", "success");
 

@@ -463,6 +463,21 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
         UserInfo.setPassword(PW);
         UserInfo.setLogin_format(Setting_id);
         UserInfo.setEmail(id);
+        SharedPreferences fcm = getSharedPreferences("Local_DB", MODE_PRIVATE);
+        try {
+            String fcm_token = fcm.getString("fcm_token", "success");
+            Log.v("fcm_token",fcm_token);
+            UserInfo.setFcm_token(fcm_token);
+            if (fcm_token.equals(null)){
+                Log.e("localid is null","fail");
+
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            Log.e("can not get localid","fail");
+        }
+
+
 
     }
         // RadioButton을  checked 하는 함수

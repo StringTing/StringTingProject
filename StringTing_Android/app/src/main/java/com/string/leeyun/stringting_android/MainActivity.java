@@ -24,6 +24,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.string.leeyun.stringting_android.API.MyFirebaseInstanceIDService;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -57,6 +58,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static android.R.attr.data;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -66,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
     private CallbackManager callbackManager;
     Rest_ApiService apiService;
     Retrofit retrofit;
+
 
     SessionCallback callback;
 
@@ -151,7 +154,13 @@ public class MainActivity extends AppCompatActivity {
         //fcm token
         MyFirebaseInstanceIDService myFirebaseInstanceIDService =new MyFirebaseInstanceIDService();
         myFirebaseInstanceIDService.onTokenRefresh();
+        String refreshedToken = FirebaseInstanceId.getInstance().getToken();
+        Log.e("refreshedToken",refreshedToken);
 
+        SharedPreferences pref = getSharedPreferences("Local_DB", MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putString("fcm_token",refreshedToken);
+        editor.commit();
 
         //LocalDb
 

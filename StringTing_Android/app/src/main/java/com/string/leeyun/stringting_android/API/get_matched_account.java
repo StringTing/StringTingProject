@@ -10,280 +10,307 @@ import java.util.List;
 public class get_matched_account {
 
 
-    @SerializedName("login_format")
-    private String login_format;
-    @SerializedName("birthday")
-    private String birthday;
-    @SerializedName("military_service_status")
-    private String military_service_status;
-    @SerializedName("education")
-    private String education;
-    @SerializedName("department")
-    private String department;
-    @SerializedName("location")
-    private String location;
-    @SerializedName("height")
-    private int height;
-    @SerializedName("smoke")
-    private boolean smoke;
-    @SerializedName("drink")
-    private String drink;
-    @SerializedName("religion")
-    private String religion;
-    @SerializedName("blood_type")
-    private String blood_type;
-    @SerializedName("authenticated")
-    private boolean authenticated;
-    @SerializedName("id_image")
-    private String id_image;
-    @SerializedName("password")
-    private String password;
-    @SerializedName("body_form")
-    private String body_form;
-    @SerializedName("images")
-    private List<String>images;
-    @SerializedName("sex")
-    private String sex;
-    @SerializedName("group_id")
-    private int grounp_id;
-    @SerializedName("contents")
-    private String contents;
-    @SerializedName("createtime")
-    private Date createtime;
+    @SerializedName("account")
+    public account account;
 
-
-    public void setImages(List<String> images) {
-        this.images = images;
+    public void setLast_message(get_matched_account.last_message last_message) {
+        this.last_message = last_message;
     }
 
-    public void setOpened(boolean opened) {
-        this.opened = opened;
+    public get_matched_account.last_message getLast_message() {
+
+        return last_message;
     }
 
-    public String getImages(int i) {
+    @SerializedName("last_message")
+    public last_message last_message;
 
-        return images.get(i);
+    public void setAccount(get_matched_account.account account) {
+        this.account = account;
     }
 
-    public boolean isOpened() {
-        return opened;
+    public get_matched_account.account getAccount() {
+
+        return account;
     }
 
-    @SerializedName("opened")
+    public  class  account {
+            @SerializedName("login_format")
+            private String login_format;
+            @SerializedName("birthday")
+            private String birthday;
+            @SerializedName("military_service_status")
+            private String military_service_status;
+            @SerializedName("education")
+            private String education;
+            @SerializedName("department")
+            private String department;
+            @SerializedName("location")
+            private String location;
+            @SerializedName("height")
+            private int height;
+            @SerializedName("smoke")
+            private boolean smoke;
+            @SerializedName("drink")
+            private String drink;
+            @SerializedName("religion")
+            private String religion;
+            @SerializedName("blood_type")
+            private String blood_type;
+            @SerializedName("authenticated")
+            private boolean authenticated;
+            @SerializedName("id_image")
+            private String id_image;
+            @SerializedName("password")
+            private String password;
+            @SerializedName("body_form")
+            private String body_form;
+            @SerializedName("images")
+            private List<String> images;
 
-    private boolean opened;
 
+            public void setImages(List<String> images) {
+                this.images = images;
+            }
 
-    public void setResult(String result) {
-        this.result = result;
-    }
+            public void setOpened(boolean opened) {
+                this.opened = opened;
+            }
 
-    public String getResult() {
+            public String getImages(int i) {
 
-        return result;
-    }
+                return images.get(i);
+            }
 
-    private String result;
+            public boolean isOpened() {
+                return opened;
+            }
 
+            @SerializedName("opened")
 
-    private String email;
+            private boolean opened;
 
 
+            public void setResult(String result) {
+                this.result = result;
+            }
 
+            public String getResult() {
 
-    public String getPassword() {
-        return password;
-    }
+                return result;
+            }
 
-    public String getLogin_format() {
-        return login_format;
-    }
+            private String result;
 
 
-    public String getBirthday() {
-        return birthday;
-    }
+            private String email;
 
-    public String getMilitary_service_status() {
-        return military_service_status;
-    }
 
-    public String getEducation() {
-        return education;
-    }
+            public String getPassword() {
+                return password;
+            }
 
-    public String getEmail() {
-        return email;
-    }
+            public String getLogin_format() {
+                return login_format;
+            }
 
 
+            public String getBirthday() {
+                return birthday;
+            }
 
-    public void setId_image(String id_image) {
-        this.id_image = id_image;
-    }
+            public String getMilitary_service_status() {
+                return military_service_status;
+            }
 
-    public void setAuthenticated(boolean authenticated) {
+            public String getEducation() {
+                return education;
+            }
 
-        this.authenticated = authenticated;
-    }
+            public String getEmail() {
+                return email;
+            }
 
-    public void setBlood_type(String blood_type) {
 
-        this.blood_type = blood_type;
-    }
+            public void setId_image(String id_image) {
+                this.id_image = id_image;
+            }
 
-    public void setReligion(String religion) {
+            public void setAuthenticated(boolean authenticated) {
 
-        this.religion = religion;
-    }
+                this.authenticated = authenticated;
+            }
 
-    public void setDrink(String drink) {
+            public void setBlood_type(String blood_type) {
 
-        this.drink = drink;
-    }
+                this.blood_type = blood_type;
+            }
 
-    public void setSmoke(boolean smoke) {
+            public void setReligion(String religion) {
 
-        this.smoke = smoke;
-    }
+                this.religion = religion;
+            }
 
-    public void setBody_form(String body_form) {
+            public void setDrink(String drink) {
 
-        this.body_form = body_form;
-    }
+                this.drink = drink;
+            }
 
-    public void setheight(int height) {
+            public void setSmoke(boolean smoke) {
 
-        this.height = height;
-    }
+                this.smoke = smoke;
+            }
 
-    public void setLocation(String location) {
+            public void setBody_form(String body_form) {
 
-        this.location = location;
-    }
+                this.body_form = body_form;
+            }
 
-    public void setDepartment(String department) {
+            public void setheight(int height) {
 
-        this.department = department;
-    }
+                this.height = height;
+            }
 
-    public void setEducation(String education) {
+            public void setLocation(String location) {
 
-        this.education = education;
-    }
+                this.location = location;
+            }
 
-    public void setMilitary_service_status(String military_service_status) {
+            public void setDepartment(String department) {
 
-        this.military_service_status = military_service_status;
-    }
+                this.department = department;
+            }
 
-    public void setBirthday(String birthday) {
+            public void setEducation(String education) {
 
-        this.birthday = birthday;
-    }
+                this.education = education;
+            }
 
-    public void setLogin_format(String login_format) {
+            public void setMilitary_service_status(String military_service_status) {
 
-        this.login_format = login_format;
-    }
+                this.military_service_status = military_service_status;
+            }
 
-    public void setPassword(String password) {
+            public void setBirthday(String birthday) {
 
-        this.password = password;
-    }
+                this.birthday = birthday;
+            }
 
+            public void setLogin_format(String login_format) {
 
+                this.login_format = login_format;
+            }
 
+            public void setPassword(String password) {
 
-    public String getId_image() {
+                this.password = password;
+            }
 
-        return id_image;
-    }
 
-    public boolean getAuthenticated() {
+            public String getId_image() {
 
-        return authenticated;
-    }
+                return id_image;
+            }
 
-    public String getBlood_type() {
+            public boolean getAuthenticated() {
 
-        return blood_type;
-    }
+                return authenticated;
+            }
 
-    public String getReligion() {
+            public String getBlood_type() {
 
-        return religion;
-    }
+                return blood_type;
+            }
 
-    public String getDrink() {
+            public String getReligion() {
 
-        return drink;
-    }
+                return religion;
+            }
 
-    public boolean isSmoke() {
+            public String getDrink() {
 
-        return smoke;
-    }
+                return drink;
+            }
 
-    public String getBody_form() {
+            public boolean isSmoke() {
 
-        return body_form;
-    }
+                return smoke;
+            }
 
-    public int getheight() {
+            public String getBody_form() {
 
-        return height;
-    }
+                return body_form;
+            }
 
-    public String getLocation() {
+            public int getheight() {
 
-        return location;
-    }
+                return height;
+            }
 
-    public String getDepartment() {
+            public String getLocation() {
 
-        return department;
-    }
+                return location;
+            }
 
+            public String getDepartment() {
 
+                return department;
+            }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
 
+            public void setEmail(String email) {
+                this.email = email;
+            }
+        }
 
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
 
-    public void setGrounp_id(int groun_id) {
-        this.grounp_id = groun_id;
-    }
+        public class last_message {
 
-    public void setContents(String contents) {
-        this.contents = contents;
-    }
+            @SerializedName("sex")
+            private String sex;
+            @SerializedName("group_id")
+            private int grounp_id;
+            @SerializedName("contents")
+            private String contents;
+            @SerializedName("create_time")
+            private Date create_time;
 
-    public void setCreatetime(Date createtime) {
-        this.createtime = createtime;
-    }
+            public void setSex(String sex) {
+                this.sex = sex;
+            }
 
-    public String getSex() {
+            public void setGrounp_id(int groun_id) {
+                this.grounp_id = groun_id;
+            }
 
-        return sex;
-    }
+            public void setContents(String contents) {
+                this.contents = contents;
+            }
 
-    public int getGrounp_id() {
-        return grounp_id;
-    }
+            public void setCreatetime(Date createtime) {
+                this.create_time = createtime;
+            }
 
-    public String getContents() {
-        return contents;
-    }
+            public String getSex() {
 
-    public Date getCreatetime() {
-        return createtime;
-    }
+                return sex;
+            }
+
+            public int getGrounp_id() {
+                return grounp_id;
+            }
+
+            public String getContents() {
+                return contents;
+            }
+
+            public Date getCreatetime() {
+                return create_time;
+            }
+
+        }
+
+
 
 
 
