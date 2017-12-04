@@ -37,7 +37,7 @@
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:layout_width="328dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginTop="18dp"
                     android:layout_marginBottom="19dp"
@@ -45,14 +45,24 @@
                     android:layout_marginRight="16dp"
                     android:layout_gravity="center"
                     android:orientation="horizontal">
-
-
-                    <RelativeLayout
+                    <FrameLayout
                         android:id="@+id/t_pic1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <View
+                            android:id="@+id/shadow"
+                            android:layout_width="155dp"
+                            android:layout_height="255dp"
+                            android:layout_marginTop="17dp"
+                            android:layout_marginLeft="22dp"
+                            android:background="@drawable/p_shadow"/>
+                    <RelativeLayout
+
                         android:layout_width="155dp"
                         android:layout_height="255dp"
                         android:layout_marginRight="8dp"
-                        android:background="@drawable/rounded"
+                        android:background="@drawable/rounded_noline"
                         >
 
 
@@ -61,11 +71,9 @@
                             android:layout_width="155dp"
                             android:layout_height="201dp"
                             android:padding="0dp"
-                            android:src="@drawable/rounded"
+
                             android:scaleType="fitXY"
                             />
-                        
-
 
                         <TextView
                             android:id="@+id/white_text"
@@ -94,10 +102,22 @@
 
                     </RelativeLayout>
 
+                    </FrameLayout>
 
 
 
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
+
+            <View
+                android:id="@+id/shadow2"
+                android:layout_width="155dp"
+                android:layout_height="255dp"
+                android:layout_marginTop="17dp"
+                android:layout_marginLeft="22dp"
+                android:background="@drawable/p_shadow"/>
 
 
                     <RelativeLayout
@@ -106,7 +126,7 @@
                         android:layout_height="255dp"
                         android:layout_toRightOf="@+id/t_pic1"
                         android:layout_marginLeft="8dp"
-                        android:background="@drawable/rounded"
+                        android:background="@drawable/rounded_noline"
                         >
 
 
@@ -152,10 +172,9 @@
                             android:layout_alignParentEnd="true"
                             android:layout_alignParentBottom="true"
                             app:srcCompat="@mipmap/x" />
-
                     </RelativeLayout>
 
-
+        </FrameLayout>
                 </LinearLayout>
 
                 <ImageView
@@ -208,14 +227,13 @@
                                 android:layout_height="98dp"
                                 android:padding="0dp"
                                 android:scaleType="fitXY"
-                                android:src="@drawable/rounded" />
+                              />
 
 
                             <TextView
                                 android:id="@+id/l_white_text"
                                 android:layout_width="94dp"
                                 android:layout_height="12dp"
-
                                 android:layout_marginTop="92dp"
                                 android:background="@drawable/gradient_background"
                                 android:paddingLeft="9dp"
@@ -226,7 +244,7 @@
                             <TextView
                                 android:id="@+id/l_textView"
                                 android:layout_width="49dp"
-                                android:layout_height="10dp"
+                                android:layout_height="wrap_content"
                                 android:layout_below="@+id/l_white_text"
                                 android:layout_gravity="start"
                                 android:layout_marginLeft="9dp"
@@ -252,7 +270,6 @@
                                 android:layout_width="94dp"
                                 android:layout_height="98dp"
                                 android:padding="0dp"
-                                android:src="@drawable/rounded"
                                 android:scaleType="fitXY"
                                 />
 
@@ -262,7 +279,6 @@
                                 android:id="@+id/l_white_text2"
                                 android:layout_width="94dp"
                                 android:layout_height="12dp"
-
                                 android:background="@drawable/gradient_background"
                                 android:layout_marginTop="92dp"
                                 android:paddingLeft="9dp"
@@ -270,10 +286,11 @@
                                 android:textColor="#ffffff"
                                 android:textSize="9sp" />
 
+
                             <TextView
                                 android:id="@+id/l_textView2"
                                 android:layout_width="49dp"
-                                android:layout_height="10dp"
+                                android:layout_height="wrap_content"
                                 android:layout_gravity="start"
                                 android:layout_below="@+id/l_white_text2"
                                 android:layout_marginLeft="9dp"
@@ -281,11 +298,8 @@
                                 android:textColor="#000000"
                                 android:text="#서울 #23세"
                                 android:textSize="9sp" />
-
-
-
-
                         </RelativeLayout>
+
 
                         <RelativeLayout
                             android:id="@+id/l_pic3"
@@ -300,27 +314,22 @@
                                 android:layout_width="94dp"
                                 android:layout_height="98dp"
                                 android:padding="0dp"
-                                android:src="@drawable/rounded"
                                 android:scaleType="fitXY"
                                 />
-
 
 
                             <TextView
                                 android:id="@+id/l_white_text3"
                                 android:layout_width="94dp"
                                 android:layout_height="12dp"
-                                android:background="@drawable/border_top"
+                                android:background="@drawable/border_top_side"
                                 android:layout_marginTop="92dp"
-                                android:paddingLeft="9dp"
-                                android:text="White Member"
-                                android:textColor="#00000000"
                                 android:textSize="9sp" />
 
                             <TextView
                                 android:id="@+id/l_textView3"
                                 android:layout_width="49dp"
-                                android:layout_height="10dp"
+                                android:layout_height="wrap_content"
                                 android:layout_gravity="start"
                                 android:layout_below="@+id/l_white_text3"
                                 android:layout_marginLeft="9dp"
@@ -328,9 +337,6 @@
                                 android:textColor="#000000"
                                 android:text="#서울 #23세"
                                 android:textSize="9sp" />
-
-
-
 
                         </RelativeLayout>
 
@@ -369,17 +375,41 @@
 
                     </LinearLayout>
 
+                    <!--   <LinearLayout
+                          android:id="@+id/addpic"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_marginTop="22dp"
+                          android:layout_marginLeft="16dp"
+                          android:layout_marginRight="16dp"
+                          android:layout_marginBottom="16dp"
+                          android:layout_gravity="center"
+                          android:orientation="horizontal">
+
+                      </LinearLayout>
+
+
+                     <GridLayout
+                          android:id="@+id/addpic2"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_marginTop="22dp"
+                          android:layout_marginLeft="16dp"
+                          android:layout_marginRight="16dp"
+                          android:layout_marginBottom="16dp"
+                          android:layout_gravity="center"
+                          android:orientation="horizontal">
+                      </GridLayout>-->
+
                     <LinearLayout
                         android:id="@+id/addpic"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginRight="16dp"
-                        android:layout_marginBottom="16dp"
                         android:layout_gravity="center"
                         android:orientation="horizontal">
 
                     </LinearLayout>
+
 
                 </LinearLayout>
 

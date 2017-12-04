@@ -14,8 +14,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
+import android.widget.LinearLayout;
 
 
 import com.google.gson.Gson;
@@ -40,18 +41,22 @@ import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.Callback;
+import retrofit2.http.HEAD;
 
 import static android.media.CamcorderProfile.get;
 import static com.facebook.FacebookSdk.getApplicationContext;
 import static com.string.leeyun.stringting_android.API.Rest_ApiService.API_IMAGE_URL;
 import static com.string.leeyun.stringting_android.API.Rest_ApiService.API_URL;
+<<<<<<< HEAD
 import static com.string.leeyun.stringting_android.R.mipmap.c;
 import static com.string.leeyun.stringting_android.R.mipmap.t;
+=======
+>>>>>>> 9491556207c23623a62485e59ce8abd6b284a1ea
 
 
-public class Tab_First extends Fragment  {
+public class Tab_First extends Fragment implements View.OnClickListener {
 
-    private RelativeLayout mLayout;
+    private FrameLayout mLayout;
 
     private Context mContext;
     private Resources mResources;
@@ -75,14 +80,44 @@ public class Tab_First extends Fragment  {
         // Required empty public constructor
     }
 
+
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View v = inflater.inflate(R.layout.activity_tab_first, container, false);
 
+        //추가할 부모 뷰
+        final LinearLayout inflatedLayout = (LinearLayout) v.findViewById(R.id.addpic);
+
+        //더보기 버튼
+        final LinearLayout addbtn = (LinearLayout) v.findViewById(R.id.add_btn);
+
+        //이미지 들어오는거
+        final int[] p = {1,2,3};
+
+        addbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addbtn.setVisibility(View.GONE);
+                // activity_main.xml에서 정의한 LinearLayout 객체 할당
+
+                if(p.length<3) {
+                    // Inflated_Layout.xml로 구성한 레이아웃을 inflatedLayout 영역으로 확장
+                    inflater.inflate(R.layout.addimg, inflatedLayout);
+                }
+                inflater.inflate(R.layout.addimg_2, inflatedLayout);
+            }
+        });
+
 
         //api정의
+<<<<<<< HEAD
 
+=======
+        retrofit = new Retrofit.Builder().baseUrl(API_URL).addConverterFactory(GsonConverterFactory.create()).build();
+        apiService= retrofit.create(Rest_ApiService.class);
+>>>>>>> 9491556207c23623a62485e59ce8abd6b284a1ea
 
 
         OkHttpClient.Builder client = new OkHttpClient.Builder();
@@ -202,10 +237,20 @@ public class Tab_First extends Fragment  {
             }
         });
 
+        mLayout = (FrameLayout) v.findViewById(R.id.t_pic1);
+        mLayout.setOnClickListener(this);
+
 
 
         // Inflate the layout for this fragment
         return  v;
+    }
+
+
+    @Override
+    public void onClick(View v) {
+        Intent i = new Intent(getActivity(),Personal_profile.class);
+        startActivity(i);
     }
 
 
@@ -240,6 +285,7 @@ public class Tab_First extends Fragment  {
                     URL url_last_day_first=new URL(API_IMAGE_URL+last_image_url_first);
                     URL url_last_day_second=new URL(API_IMAGE_URL+last_image_url_second);
                     URL url_last_day_third =new URL(API_IMAGE_URL+last_image_url_third);
+
 
                     Log.e("image_url", String.valueOf(url_frist));
                     URLConnection conn = url_frist.openConnection();
@@ -353,26 +399,9 @@ public class Tab_First extends Fragment  {
         l2.setImageDrawable(last_five_day2);
         l3.setImageDrawable(last_five_day3);
 
-
-
-        mLayout = (RelativeLayout) v.findViewById(R.id.t_pic1);
-
-
-        mLayout.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                // 터치 시 해당 아이템 채팅방 불러오기
-                Intent i = new Intent(getActivity(),Personal_profile.class);
-                startActivity(i);
-            }
-        });
-
     }
 
     public void get_local_accoint_id(){
 
     }
-
-
 }

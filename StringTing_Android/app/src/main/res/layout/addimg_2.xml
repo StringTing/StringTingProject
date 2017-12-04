@@ -3,8 +3,6 @@
     android:id="@+id/r_img"
     android:layout_width="94dp"
     android:layout_height="127dp"
-    android:layout_marginRight="23dp"
-    android:layout_marginTop="22dp"
     android:background="@drawable/rounded">
 
 

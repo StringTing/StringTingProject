@@ -188,7 +188,7 @@ public class Tab_Fourth extends Fragment {
                 @Override
                 public void onClick(View v) {
                     // 터치 시 해당 아이템 채팅방 불러오기
-                    Intent i = new Intent(getActivity(),Chatting.class);
+                    Intent i = new Intent(getContext(),Chatting.class);
                     startActivity(i);
                 }
             });
