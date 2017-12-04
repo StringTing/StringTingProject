@@ -64,7 +64,7 @@ public interface Rest_ApiService {
 
         @Multipart
         @POST("{sex}/{account_id}/register/image/")
-        Call<register_image>post_register_image(@Path("sex")String register_image_sex,@Path("account_id")String register_image_account_id,@Part MultipartBody.Part[] images);
+        Call<register_image>post_register_image(@Path("sex")String register_image_sex, @Path("account_id") int register_image_account_id, @Part MultipartBody.Part[] images);
 
 
         @GET("{sex}/{account_id}/get/matched-account/")

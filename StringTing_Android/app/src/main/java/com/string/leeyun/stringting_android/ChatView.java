@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -18,22 +19,30 @@ import android.widget.Toast;
 import com.string.leeyun.stringting_android.API.Rest_ApiService;
 import com.string.leeyun.stringting_android.API.get_matched_account;
 import com.string.leeyun.stringting_android.API.join;
+import com.string.leeyun.stringting_android.API.okhttp_intercepter_token;
 import com.string.leeyun.stringting_android.API.register_image;
 import com.string.leeyun.stringting_android.API.register_message;
 import com.string.leeyun.stringting_android.API.userinfo;
 import com.google.gson.Gson;
 
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+
+import static com.string.leeyun.stringting_android.API.Rest_ApiService.API_IMAGE_URL;
+import static com.string.leeyun.stringting_android.API.Rest_ApiService.API_URL;
 
 public class ChatView extends Activity implements AdapterView.OnItemClickListener {
     ListView m_ListView;
@@ -51,7 +60,25 @@ public class ChatView extends Activity implements AdapterView.OnItemClickListene
         setContentView(R.layout.activity_chat_view);
 
 
-        retrofit = new Retrofit.Builder().baseUrl(Rest_ApiService.API_URL).addConverterFactory(GsonConverterFactory.create()).build();
+        Userinfo = (userinfo)getIntent().getSerializableExtra("UserInfo");
+
+        final String Userinfo_Json= new Gson().toJson(Userinfo);
+        Log.e("TestUserinfoGson",Userinfo_Json);            //userinfo정보를 json타입으로 변환
+
+        savePreferences(Userinfo.getEmail());
+        SharedPreferences pref = getSharedPreferences("Local_DB", MODE_PRIVATE);
+        String test = pref.getString("ID","success");
+        Log.v("localdbtest",test);
+        
+        OkHttpClient.Builder client = new OkHttpClient.Builder();
+        okhttp_intercepter_token Okhttp_intercepter =new okhttp_intercepter_token();
+//        Okhttp_intercepter.setAccount_id(account_id);
+        client.addInterceptor(new okhttp_intercepter_token());
+        retrofit = new Retrofit.Builder()
+                .baseUrl(API_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(client.build())
+                .build();
         apiService= retrofit.create(Rest_ApiService.class);
         Intent intent=getIntent();
 
@@ -96,9 +123,6 @@ public class ChatView extends Activity implements AdapterView.OnItemClickListene
        }
 
 
-        RegisterMessage.setGrounp_id(2);
-        RegisterMessage.setContents("아싸아싸아싸아싸");
-
         ArrayList<String>keyvalue=new ArrayList<>();
         keyvalue.add("-small");
         keyvalue.add("-medium");
@@ -113,21 +137,88 @@ public class ChatView extends Activity implements AdapterView.OnItemClickListene
             images1[index] = MultipartBody.Part.createFormData("image"+keyvalue.get(index), file.getName(), surveyBody);
         }
 
-        Call<register_image> call = apiService.post_register_image("male","1",images1);
-        call.enqueue(new Callback<register_image>() {
-            @Override
-            public void onResponse(Call<register_image> call, Response<register_image> response) {
-                register_image imageresponse=response.body();
-                Log.e("onresponseImage",imageresponse.getResult());
+        RegisterMessage.setGrounp_id(2);
+        RegisterMessage.setContents("아싸아싸아싸아싸");
 
 
+
+
+        Thread mTread =new Thread() {
+            public void run() {
+                try
+
+                {
+                    Call<join> getPostUserinfo = apiService.getPostUserinfo(Userinfo);
+                    getPostUserinfo.enqueue(new Callback<join>() {
+                        @Override
+                        public void onResponse(Call<join> call, Response<join> response) {
+
+                            join gsonresponse=response.body();
+                            Log.e("onresponse_join", gsonresponse.getResult());
+                            Log.e("onresponse", String.valueOf(response.code()));
+                            Log.e("onresponse", "success");
+                            account_id=gsonresponse.getAccount_id();
+                            Log.e("account_id", String.valueOf(account_id));
+                            Log.e("fcm_token",String.valueOf(Userinfo.getFcm_token()));
+                            Log.e("token",Userinfo.getToken());
+                            if (gsonresponse.getToken()!=null){
+                                save_token(gsonresponse.getToken());
+                            }
+                            save_accountid(account_id);
+                            save_token(Userinfo.getToken());
+                            SharedPreferences pref = getSharedPreferences("Local_DB", MODE_PRIVATE);
+                            int account_id_LOCALDB = pref.getInt("account_id", Integer.parseInt(String.valueOf(account_id)));
+                            String token_localdb=pref.getString("token","?");
+                            Log.e("local_account", String.valueOf(account_id_LOCALDB));
+                            Log.e("loacal_token",String.valueOf(token_localdb));
+
+
+
+                        }
+
+                        @Override
+                        public void onFailure(Call<join> call, Throwable t) {
+                            Log.d("sam", t.toString());
+                        }
+
+                    });
+
+                } catch (Exception e)
+
+                {
+
+                }
             }
+        };
 
-            @Override
-            public void onFailure(Call<register_image> call, Throwable t) {
-                Log.e("onresponseImage2",t.toString());
-            }
-        });
+        mTread.start();
+        try {
+            mTread.join();
+
+            Call<register_image> call = apiService.post_register_image("male",account_id,images1);
+            call.enqueue(new Callback<register_image>() {
+                @Override
+                public void onResponse(Call<register_image> call, Response<register_image> response) {
+                    register_image imageresponse=response.body();
+                    Log.e("onregistImage",imageresponse.getResult());
+
+
+                }
+
+                @Override
+                public void onFailure(Call<register_image> call, Throwable t) {
+                    Log.e("onregistImage_fail",t.toString());
+                }
+            });
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+
+
+
+
 
 
         Call<register_message> get_post_register = apiService.get_post_register_message(RegisterMessage);
@@ -151,15 +242,7 @@ public class ChatView extends Activity implements AdapterView.OnItemClickListene
         });
 
 
-        Userinfo = (userinfo)getIntent().getSerializableExtra("UserInfo");
 
-        final String Userinfo_Json= new Gson().toJson(Userinfo);
-        Log.e("TestUserinfoGson",Userinfo_Json);            //userinfo정보를 json타입으로 변환
-
-        savePreferences(Userinfo.getEmail());
-        SharedPreferences pref = getSharedPreferences("Local_DB", MODE_PRIVATE);
-        String test = pref.getString("ID","success");
-        Log.v("localdbtest",test);
 
 
 
@@ -267,38 +350,7 @@ public class ChatView extends Activity implements AdapterView.OnItemClickListene
 
 
 
-        Call<join> getPostUserinfo = apiService.getPostUserinfo(Userinfo);
-        getPostUserinfo.enqueue(new Callback<join>() {
-            @Override
-            public void onResponse(Call<join> call, Response<join> response) {
 
-                join gsonresponse=response.body();
-                Log.e("onresponse", gsonresponse.getResult());
-                Log.e("onresponse", String.valueOf(response.code()));
-                Log.e("onresponse", "success");
-                account_id=gsonresponse.getAccount_id();
-                Log.e("account_id", String.valueOf(account_id));
-                Log.e("fcm_token",String.valueOf(Userinfo.getFcm_token()));
-                if (gsonresponse.getToken()!=null){
-                    save_token(gsonresponse.getToken());
-                }
-                save_accountid(account_id);
-                SharedPreferences pref = getSharedPreferences("Local_DB", MODE_PRIVATE);
-                int account_id_LOCALDB = pref.getInt("account_id", Integer.parseInt(String.valueOf(account_id)));
-                String token_localdb=pref.getString("token","?");
-                Log.e("local_account", String.valueOf(account_id_LOCALDB));
-                Log.e("loacal_token",String.valueOf(token_localdb));
-
-
-
-            }
-
-            @Override
-            public void onFailure(Call<join> call, Throwable t) {
-                Log.d("sam", t.toString());
-            }
-
-        });
 
 
         startActivity(intent);
@@ -319,6 +371,13 @@ public class ChatView extends Activity implements AdapterView.OnItemClickListene
             editor.clear();
             editor.commit();
         }
+    public void save_token(int data){
+        SharedPreferences pref = getSharedPreferences("Local_DB", MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putInt("token",data);
+        editor.clear();
+        editor.commit();
+    }
     public void save_token(String data){
         SharedPreferences pref = getSharedPreferences("Local_DB", MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();

@@ -22,6 +22,7 @@ import android.widget.LinearLayout;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
+import com.string.leeyun.stringting_android.API.Ger_last_5day_matched_account;
 import com.string.leeyun.stringting_android.API.Get_today_introduction;
 import com.string.leeyun.stringting_android.API.Im_get_today_introduction;
 import com.string.leeyun.stringting_android.API.Rest_ApiService;
@@ -47,7 +48,7 @@ import static android.media.CamcorderProfile.get;
 import static com.facebook.FacebookSdk.getApplicationContext;
 import static com.string.leeyun.stringting_android.API.Rest_ApiService.API_IMAGE_URL;
 import static com.string.leeyun.stringting_android.API.Rest_ApiService.API_URL;
-
+import static com.string.leeyun.stringting_android.R.mipmap.e;
 
 
 public class Tab_First extends Fragment implements View.OnClickListener {
@@ -70,6 +71,7 @@ public class Tab_First extends Fragment implements View.OnClickListener {
     public String last_image_url_second;
     public String last_image_url_third;
     ArrayList<Get_today_introduction> im_get_today;
+    ArrayList<Ger_last_5day_matched_account>im_get_last_5day;
 
 
     public Tab_First() {
@@ -111,25 +113,15 @@ public class Tab_First extends Fragment implements View.OnClickListener {
 
 
 
-        OkHttpClient.Builder client = new OkHttpClient.Builder();
-            okhttp_intercepter_token Okhttp_intercepter =new okhttp_intercepter_token();
-              Okhttp_intercepter.setAccount_id(account_id);
 //              if (token.equals(null)){
 //           Okhttp_intercepter.setToken(token);
 //
 //        }
 
-        client.addInterceptor(new okhttp_intercepter_token());
-        retrofit = new Retrofit.Builder()
-                .baseUrl(API_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .client(client.build())
-                .build();
-        apiService= retrofit.create(Rest_ApiService.class);
 
 
         try {
-            Thread.sleep(1300);
+            Thread.sleep(2000);
             SharedPreferences local_id = this.getActivity().getSharedPreferences("Local_DB", Context.MODE_PRIVATE);
 
             account_id = local_id.getInt("account_id",1);
@@ -148,6 +140,16 @@ public class Tab_First extends Fragment implements View.OnClickListener {
             e.printStackTrace();
         }
 
+        OkHttpClient.Builder client = new OkHttpClient.Builder();
+        okhttp_intercepter_token Okhttp_intercepter =new okhttp_intercepter_token();
+//        Okhttp_intercepter.setAccount_id(account_id);
+        client.addInterceptor(new okhttp_intercepter_token());
+        retrofit = new Retrofit.Builder()
+                .baseUrl(API_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(client.build())
+                .build();
+        apiService= retrofit.create(Rest_ApiService.class);
 
 
         Call<Im_get_today_introduction> call = apiService.Get_today_introduction("female",1);
@@ -162,9 +164,15 @@ public class Tab_First extends Fragment implements View.OnClickListener {
                 Log.e("today_introduction", String.valueOf(response.code()));
 
                 try {
-                    today_image_url_first = String.valueOf(im_get_today.get(0).getImages(0));
-                    today_image_url_second = String.valueOf(im_get_today.get(1).getImages(0));
-                    Log.e("get_eval_list_image", String.valueOf(im_get_today.get(0).getImages(0)));
+                    if (im_get_today.get(0).getImages(0)!=null) {
+                        today_image_url_first = String.valueOf(im_get_today.get(0).getImages(0));
+                        Log.e("get_eval_list_image", String.valueOf(im_get_today.get(0).getImages(0)));
+
+                    }
+                    else if (im_get_today.get(1).getImages(0)!=null){
+                        today_image_url_second = String.valueOf(im_get_today.get(1).getImages(0));
+
+                    }
                     String replace = "{}";
                     String medium = "medium";
                     String small= "small";
@@ -188,6 +196,8 @@ public class Tab_First extends Fragment implements View.OnClickListener {
             }
         });
 
+
+
         Call<get_last_5days_matched_accountList> call5day = apiService.Get_last_5day("female",1);
         call5day.enqueue(new Callback<get_last_5days_matched_accountList>() {
 
@@ -197,11 +207,11 @@ public class Tab_First extends Fragment implements View.OnClickListener {
                 Log.e("last-5day", String.valueOf(response.body()));
                 Log.e("last-5day", String.valueOf(response.code()));
 
+                im_get_last_5day=response.body().getGet_last_5day_matched_account();
                 try {
-                    last_image_url_first = String.valueOf(im_get_today.get(0).getImages(0));
-                    last_image_url_second = String.valueOf(im_get_today.get(1).getImages(0));
-                    last_image_url_third = String.valueOf(im_get_today.get(2).getImages(0));
-                    last_image_url_second = String.valueOf(im_get_today.get(3).getImages(0));
+                    last_image_url_first = String.valueOf(im_get_last_5day.get(0).getImages().get(0));
+                    last_image_url_second = String.valueOf(im_get_last_5day.get(1).getImages().get(0));
+                    last_image_url_third = String.valueOf(im_get_last_5day.get(2).getImages().get(0));
 
                     Log.e("get_eval_list_image", String.valueOf(im_get_today.get(0).getImages(0)));
                     String replace = "{}";

@@ -56,7 +56,6 @@ public class okhttp_intercepter_token implements Interceptor {
         Request newRequest;
 
 
-
         newRequest = builder.newBuilder()
                 .addHeader("Context-Type","application/json")
                 .addHeader("access-token","DGQYJH2DQO3364SZP3IS6KD3RZKOROUM")

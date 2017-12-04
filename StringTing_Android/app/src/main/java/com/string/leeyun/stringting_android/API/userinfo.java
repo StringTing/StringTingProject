@@ -33,7 +33,7 @@ public class userinfo implements Serializable{
     private String password;
     private String body_form;
     private String fcm_token;
-
+    private String token;
 
     public void setFcm_token(String fcm_token) {
         this.fcm_token = fcm_token;
@@ -227,5 +227,17 @@ public class userinfo implements Serializable{
     }
 
 
+    public void setToken(String token) {
+        this.token = token;
+    }
 
+    public String getToken() {
+
+        return token;
+    }
+
+    public int getHeight() {
+
+        return height;
+    }
 }

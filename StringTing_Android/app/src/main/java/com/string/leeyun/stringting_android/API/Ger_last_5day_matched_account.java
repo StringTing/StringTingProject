@@ -37,14 +37,15 @@ public class Ger_last_5day_matched_account {
     private String blood_type;
     @SerializedName("authenticated")
     private boolean authenticated;
+    @SerializedName("images")
+    private List<String>images;
     @SerializedName("id_image")
     private String id_image;
     @SerializedName("password")
     private String password;
     @SerializedName("body_form")
     private String body_form;
-    @SerializedName("images")
-    private List<String>images;
+
 
     public void setImages(List<String> images) {
         this.images = images;
