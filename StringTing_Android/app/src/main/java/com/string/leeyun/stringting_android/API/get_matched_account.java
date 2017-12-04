@@ -1,5 +1,7 @@
 package com.string.leeyun.stringting_android.API;
 
+import android.accounts.Account;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.util.Date;
@@ -10,31 +12,6 @@ import java.util.List;
 public class get_matched_account {
 
 
-    @SerializedName("account")
-    public account account;
-
-    public void setLast_message(get_matched_account.last_message last_message) {
-        this.last_message = last_message;
-    }
-
-    public get_matched_account.last_message getLast_message() {
-
-        return last_message;
-    }
-
-    @SerializedName("last_message")
-    public last_message last_message;
-
-    public void setAccount(get_matched_account.account account) {
-        this.account = account;
-    }
-
-    public get_matched_account.account getAccount() {
-
-        return account;
-    }
-
-    public  class  account {
             @SerializedName("login_format")
             private String login_format;
             @SerializedName("birthday")
@@ -261,10 +238,9 @@ public class get_matched_account {
             public void setEmail(String email) {
                 this.email = email;
             }
-        }
 
 
-        public class last_message {
+
 
             @SerializedName("sex")
             private String sex;
@@ -307,9 +283,6 @@ public class get_matched_account {
             public Date getCreatetime() {
                 return create_time;
             }
-
-        }
-
 
 
 

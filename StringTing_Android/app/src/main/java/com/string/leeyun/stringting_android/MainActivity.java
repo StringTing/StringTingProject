@@ -161,14 +161,19 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences pref = getSharedPreferences("Local_DB", MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
         editor.putString("fcm_token",refreshedToken);
+        Log.e("fcm_token",refreshedToken);
         editor.commit();
 
         //LocalDb
 
         SharedPreferences local_id = getSharedPreferences("Local_DB", MODE_PRIVATE);
         try {
-            String getTEST=local_id.getString("ID","success");
-            Log.v("Localdbid",getTEST);
+            String getTEST=local_id.getString("ID","0");
+            String get_local_token= local_id.getString("token","0");
+            String get_local_account_id=local_id.getString("account_id","0");
+            Log.e("Localdbid",getTEST);
+            Log.e("local_token",get_local_token);
+            Log.e("local_account_id",get_local_account_id);
             if (getTEST.equals(null)){
   //              Log.e("localid is null","fail");
 
@@ -177,9 +182,6 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
             Log.e("can not get localid","fail");
         }
-
-
-
 
 
 

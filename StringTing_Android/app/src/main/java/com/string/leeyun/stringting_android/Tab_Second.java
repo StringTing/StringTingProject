@@ -12,16 +12,22 @@ import android.widget.ImageView;
 import com.string.leeyun.stringting_android.API.Get_evalaccount;
 import com.string.leeyun.stringting_android.API.ResponseApi;
 import com.string.leeyun.stringting_android.API.Rest_ApiService;
+import com.string.leeyun.stringting_android.API.get_eval_accountList;
+import com.string.leeyun.stringting_android.API.okhttp_intercepter_token;
 import com.string.leeyun.stringting_android.API.userinfo;
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+
+import static com.string.leeyun.stringting_android.R.mipmap.t;
 
 
 public class Tab_Second extends Fragment implements View.OnClickListener {
@@ -34,7 +40,8 @@ public class Tab_Second extends Fragment implements View.OnClickListener {
     Rest_ApiService apiService;
     Retrofit retrofit;
     userinfo Userinfo= new userinfo();
-    Get_evalaccount get_evalaccount=new Get_evalaccount();
+    public int account_id;
+    ArrayList<Get_evalaccount> get_eval_accountLists;
     String get_eval_account;
     String generalInfoJson = "{'name': 'Future Studio Dev Team', 'website': 'https://futurestud.io', 'account': [{'name': 'Christian', 'flowerCount': 1 }, {'name': 'Marcus','flowerCount': 3 }, {'name': 'Norman','flowerCount': 2 }]}";
 
@@ -44,7 +51,17 @@ public class Tab_Second extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        retrofit = new Retrofit.Builder().baseUrl(Rest_ApiService.API_URL).addConverterFactory(GsonConverterFactory.create()).build();
+        OkHttpClient.Builder client = new OkHttpClient.Builder();
+        okhttp_intercepter_token Okhttp_intercepter =new okhttp_intercepter_token();
+        Okhttp_intercepter.setAccount_id(account_id);
+
+        client.addInterceptor(new okhttp_intercepter_token());
+
+        retrofit = new Retrofit.Builder()
+                .baseUrl(Rest_ApiService.API_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(client.build())
+                .build();
         apiService= retrofit.create(Rest_ApiService.class);
 
         View result=inflater.inflate(R.layout.activity_tab_second, container, false);
@@ -53,18 +70,18 @@ public class Tab_Second extends Fragment implements View.OnClickListener {
 
 
 
-        Call<List<Get_evalaccount>> call = apiService.Get_evalaccount("male",1);
-        call.enqueue(new Callback<List<Get_evalaccount>>() {
+        Call<get_eval_accountList> call = apiService.Get_evalaccount("male",2);
+        call.enqueue(new Callback<get_eval_accountList>() {
             @Override
-            public void onResponse(Call<List<Get_evalaccount>> call, Response<List<Get_evalaccount>> response) {
+            public void onResponse(Call<get_eval_accountList> call, Response<get_eval_accountList> response) {
 
-                List<Get_evalaccount> get_eval_list=response.body();
-                Log.e("Get_evalaccount", String.valueOf(get_eval_list.get(1)));
+                get_eval_accountLists=response.body().getEvalaccount_list();
+                Log.e("Get_evalaccount", String.valueOf(get_eval_accountLists.get(0)));
 
             }
 
             @Override
-            public void onFailure(Call<List<Get_evalaccount>> call, Throwable t) {
+            public void onFailure(Call<get_eval_accountList> call, Throwable t) {
                 Log.v("onresponseImage2",t.toString());
             }
         });

@@ -1,5 +1,8 @@
 package com.string.leeyun.stringting_android.API;
 
+import com.google.gson.JsonArray;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.MultipartBody;
@@ -51,13 +54,13 @@ public interface Rest_ApiService {
         Call<Getdetail>Getdetail(@Path("sex")String Getdetail_sex, @Path("account_id")int Getdetail_accountid);
 
         @GET("{sex}/{account_id}/get/last-5day-matched-account/")
-        Call<List<Ger_last_5day_matched_account>>Get_last_5day(@Path("sex")String get_last5_sex,@Path("account_id")int get_last5_accountid);
+        Call<get_last_5days_matched_accountList>Get_last_5day(@Path("sex")String get_last5_sex,@Path("account_id")int get_last5_accountid);
 
         @GET("{sex}/{account_id}/get/eval-account/")
-        Call<List<Get_evalaccount>>Get_evalaccount(@Path("sex")String evalaccount_sex, @Path("account_id")int evalaccount_accountid);
+        Call<get_eval_accountList>Get_evalaccount(@Path("sex")String evalaccount_sex, @Path("account_id")int evalaccount_accountid);
 
         @GET("{sex}/{account_id}/get/today-introduction/")
-        Call<List<Get_today_introduction>>Get_today_introduction(@Path("sex")String today_introductiion_sex,@Path("account_id")int today_introduction_account_id);
+        Call<Im_get_today_introduction>Get_today_introduction(@Path("sex")String today_intro_sex, @Path("account_id")int today_introduction_id);
 
         @Multipart
         @POST("{sex}/{account_id}/register/image/")

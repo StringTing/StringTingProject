@@ -113,7 +113,7 @@ public class ChatView extends Activity implements AdapterView.OnItemClickListene
             images1[index] = MultipartBody.Part.createFormData("image"+keyvalue.get(index), file.getName(), surveyBody);
         }
 
-        Call<register_image> call = apiService.post_register_image("male","34",images1);
+        Call<register_image> call = apiService.post_register_image("male","1",images1);
         call.enqueue(new Callback<register_image>() {
             @Override
             public void onResponse(Call<register_image> call, Response<register_image> response) {
@@ -279,11 +279,17 @@ public class ChatView extends Activity implements AdapterView.OnItemClickListene
                 account_id=gsonresponse.getAccount_id();
                 Log.e("account_id", String.valueOf(account_id));
                 Log.e("fcm_token",String.valueOf(Userinfo.getFcm_token()));
-
+                if (gsonresponse.getToken()!=null){
+                    save_token(gsonresponse.getToken());
+                }
                 save_accountid(account_id);
                 SharedPreferences pref = getSharedPreferences("Local_DB", MODE_PRIVATE);
                 int account_id_LOCALDB = pref.getInt("account_id", Integer.parseInt(String.valueOf(account_id)));
-                Log.v("localdbtest", String.valueOf(account_id_LOCALDB));
+                String token_localdb=pref.getString("token","?");
+                Log.e("local_account", String.valueOf(account_id_LOCALDB));
+                Log.e("loacal_token",String.valueOf(token_localdb));
+
+
 
             }
 
@@ -310,8 +316,16 @@ public class ChatView extends Activity implements AdapterView.OnItemClickListene
             SharedPreferences pref = getSharedPreferences("Local_DB", MODE_PRIVATE);
             SharedPreferences.Editor editor = pref.edit();
             editor.putInt("account_id",data);
+            editor.clear();
             editor.commit();
         }
+    public void save_token(String data){
+        SharedPreferences pref = getSharedPreferences("Local_DB", MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putString("token",data);
+        editor.clear();
+        editor.commit();
+    }
 
     //수정하기 버튼을 눌렀을때 position을 받아옴, 전송버튼을 수정버튼으로 바꿔줌
     public void modify(View view) {

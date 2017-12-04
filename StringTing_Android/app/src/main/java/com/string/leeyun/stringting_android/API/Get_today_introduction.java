@@ -10,10 +10,7 @@ import java.util.List;
 
 public class Get_today_introduction {
 
-    @SerializedName("login_format")
-    private String login_format;
-    @SerializedName("birthday")
-    private String birthday;
+
     @SerializedName("military_service_status")
     private String military_service_status;
     @SerializedName("education")
@@ -24,6 +21,9 @@ public class Get_today_introduction {
     private String location;
     @SerializedName("height")
     private int height;
+    @SerializedName("age")
+    private int age;
+
     @SerializedName("smoke")
     private boolean smoke;
     @SerializedName("drink")
@@ -42,6 +42,44 @@ public class Get_today_introduction {
     private String body_form;
     @SerializedName("images")
     private List<String>images;
+    @SerializedName("opened")
+    private boolean opened;
+    @SerializedName("score")
+    private int score;
+    private int id;
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getHeight() {
+
+        return height;
+    }
+
+    public boolean isAuthenticated() {
+        return authenticated;
+    }
+
+    public List<String> getImages() {
+        return images;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public int getId() {
+        return id;
+    }
 
     public void setImages(List<String> images) {
         this.images = images;
@@ -60,9 +98,7 @@ public class Get_today_introduction {
         return opened;
     }
 
-    @SerializedName("opened")
 
-    private boolean opened;
 
 
     public void setResult(String result) {
@@ -86,14 +122,7 @@ public class Get_today_introduction {
         return password;
     }
 
-    public String getLogin_format() {
-        return login_format;
-    }
 
-
-    public String getBirthday() {
-        return birthday;
-    }
 
     public String getMilitary_service_status() {
         return military_service_status;
@@ -168,15 +197,7 @@ public class Get_today_introduction {
         this.military_service_status = military_service_status;
     }
 
-    public void setBirthday(String birthday) {
 
-        this.birthday = birthday;
-    }
-
-    public void setLogin_format(String login_format) {
-
-        this.login_format = login_format;
-    }
 
     public void setPassword(String password) {
 
@@ -184,6 +205,16 @@ public class Get_today_introduction {
     }
 
 
+
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+
+        this.age = age;
+    }
 
 
     public String getId_image() {

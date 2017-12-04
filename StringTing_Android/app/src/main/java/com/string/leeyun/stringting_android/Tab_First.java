@@ -18,23 +18,34 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
 import com.string.leeyun.stringting_android.API.Get_today_introduction;
+import com.string.leeyun.stringting_android.API.Im_get_today_introduction;
 import com.string.leeyun.stringting_android.API.Rest_ApiService;
+import com.string.leeyun.stringting_android.API.get_last_5days_matched_accountList;
+import com.string.leeyun.stringting_android.API.okhttp_intercepter_token;
 
 import java.io.BufferedInputStream;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.Callback;
+
+import static android.media.CamcorderProfile.get;
 import static com.facebook.FacebookSdk.getApplicationContext;
 import static com.string.leeyun.stringting_android.API.Rest_ApiService.API_IMAGE_URL;
 import static com.string.leeyun.stringting_android.API.Rest_ApiService.API_URL;
+import static com.string.leeyun.stringting_android.R.mipmap.c;
 import static com.string.leeyun.stringting_android.R.mipmap.t;
 
 
@@ -47,12 +58,18 @@ public class Tab_First extends Fragment  {
     private ImageView mImageView , mImageView2 , l1,l2,l3;
     private Bitmap today_Bitmap1,today_Bitmap2 , lb1,lb2,lb3;
     public  int account_id;
+    public String token;
+    public String sex;
     Rest_ApiService apiService;
     Retrofit retrofit;
     float cornerRadius = 25f;
-    public List<Get_today_introduction>get_today_introductions;
-    public String image_url_first;
-    public String image_url_second;
+    public String today_image_url_first;
+    public String today_image_url_second;
+    public String last_image_url_first;
+    public String last_image_url_second;
+    public String last_image_url_third;
+    ArrayList<Get_today_introduction> im_get_today;
+
 
     public Tab_First() {
         // Required empty public constructor
@@ -64,21 +81,41 @@ public class Tab_First extends Fragment  {
         final View v = inflater.inflate(R.layout.activity_tab_first, container, false);
 
 
-    //api정의
-        retrofit = new Retrofit.Builder().baseUrl(API_URL).addConverterFactory(GsonConverterFactory.create()).build();
+        //api정의
+
+
+
+        OkHttpClient.Builder client = new OkHttpClient.Builder();
+            okhttp_intercepter_token Okhttp_intercepter =new okhttp_intercepter_token();
+              Okhttp_intercepter.setAccount_id(account_id);
+//              if (token.equals(null)){
+//           Okhttp_intercepter.setToken(token);
+//
+//        }
+
+        client.addInterceptor(new okhttp_intercepter_token());
+        retrofit = new Retrofit.Builder()
+                .baseUrl(API_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(client.build())
+                .build();
         apiService= retrofit.create(Rest_ApiService.class);
 
 
-
         try {
-            Thread.sleep(3000);
+            Thread.sleep(2000);
             SharedPreferences local_id = this.getActivity().getSharedPreferences("Local_DB", Context.MODE_PRIVATE);
 
             account_id = local_id.getInt("account_id",1);
+            token =local_id.getString("token","0");
             Log.e("localdbtest_account_id", String.valueOf(account_id));
 
             if (account_id==0){
                 Log.e("localid is null","fail");
+
+            }
+            else if(token.equals(null)){
+                Log.e("local_token is null","fail");
 
             }
         } catch (InterruptedException e) {
@@ -87,25 +124,29 @@ public class Tab_First extends Fragment  {
 
 
 
+        Call<Im_get_today_introduction> call = apiService.Get_today_introduction("female",1);
 
-        Call<List<Get_today_introduction>> call = apiService.Get_today_introduction("male",34);
-
-        call.enqueue(new Callback<List<Get_today_introduction>>() {
+        call.enqueue(new Callback<Im_get_today_introduction>() {
 
             @Override
-            public void onResponse(Call<List<Get_today_introduction>> call, retrofit2.Response<List<Get_today_introduction>> response) {
-                get_today_introductions = response.body();
+            public void onResponse(Call<Im_get_today_introduction> call, retrofit2.Response<Im_get_today_introduction> response) {
+                im_get_today=response.body().getGet_today_introductions();
+                Log.e("today_introduction", String.valueOf(response.raw()));
+                Log.e("today_introduction", String.valueOf(response.body()));
+                Log.e("today_introduction", String.valueOf(response.code()));
+
                 try {
-                    image_url_first = String.valueOf(get_today_introductions.get(0).getImages(0));
-                    image_url_second = String.valueOf(get_today_introductions.get(1).getImages(0));
-                    Log.e("get_eval_list_image", String.valueOf(get_today_introductions.get(0).getImages(0)));
+                    today_image_url_first = String.valueOf(im_get_today.get(0).getImages(0));
+                    today_image_url_second = String.valueOf(im_get_today.get(1).getImages(0));
+                    Log.e("get_eval_list_image", String.valueOf(im_get_today.get(0).getImages(0)));
                     String replace = "{}";
                     String medium = "medium";
-                    if (image_url_first != null && image_url_second != null) {
-                        image_url_first = image_url_first.replace(replace, medium);
-                        image_url_second = image_url_second.replace(replace, medium);
-                        Log.e("image_url_first", image_url_first);
-                        Log.e("image_url_second", image_url_second);
+                    String small= "small";
+                    if (today_image_url_first != null && today_image_url_second != null) {
+                        today_image_url_first = today_image_url_first.replace(replace, small);
+                        today_image_url_second = today_image_url_second.replace(replace, small);
+                        Log.e("image_url_first", today_image_url_first);
+                        Log.e("image_url_second", today_image_url_second);
                         image_url(v);
                     }
                 } catch (Exception e) {
@@ -116,10 +157,51 @@ public class Tab_First extends Fragment  {
             }
 
             @Override
-            public void onFailure(Call<List<Get_today_introduction>> call, Throwable t) {
-                Log.v("onresponseImage2",t.toString());
+            public void onFailure(Call<Im_get_today_introduction> call, Throwable t) {
+                Log.e("today-introduction-fail",t.toString());
             }
         });
+
+        Call<get_last_5days_matched_accountList> call5day = apiService.Get_last_5day("female",1);
+        call5day.enqueue(new Callback<get_last_5days_matched_accountList>() {
+
+            @Override
+            public void onResponse(Call<get_last_5days_matched_accountList> call5day, retrofit2.Response<get_last_5days_matched_accountList> response) {
+                Log.e("last-5day", String.valueOf(response.raw()));
+                Log.e("last-5day", String.valueOf(response.body()));
+                Log.e("last-5day", String.valueOf(response.code()));
+
+                try {
+                    last_image_url_first = String.valueOf(im_get_today.get(0).getImages(0));
+                    last_image_url_second = String.valueOf(im_get_today.get(1).getImages(0));
+                    last_image_url_third = String.valueOf(im_get_today.get(2).getImages(0));
+                    last_image_url_second = String.valueOf(im_get_today.get(3).getImages(0));
+
+                    Log.e("get_eval_list_image", String.valueOf(im_get_today.get(0).getImages(0)));
+                    String replace = "{}";
+                    String medium = "medium";
+                    String small= "small";
+                    if (last_image_url_first != null && last_image_url_second != null) {
+                        last_image_url_first = last_image_url_first.replace(replace, small);
+                        last_image_url_second = last_image_url_second.replace(replace, small);
+                        last_image_url_third =last_image_url_third.replace(replace,small);
+                        Log.e("image_url_first", last_image_url_first);
+                        Log.e("image_url_second", last_image_url_second);
+                        image_url(v);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Log.e("imageNULL", "false");
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<get_last_5days_matched_accountList> call, Throwable t) {
+                Log.e("today-introduction-fail",t.toString());
+            }
+        });
+
 
 
         // Inflate the layout for this fragment
@@ -133,22 +215,18 @@ public class Tab_First extends Fragment  {
 
         // Get the application context
         mContext = getApplicationContext();
-
-
         // Get the Resources
         mResources = getResources();
-
         // Get the widgets reference from XML layout
         //mRelativeLayout = (RelativeLayout) v.findViewById(R.id.rl);
         mImageView = (ImageView) v.findViewById(R.id.ph1);
         mImageView2 = (ImageView) v.findViewById(R.id.ph2);
+        l1 = (ImageView) v.findViewById(R.id.last1);
+        l2 = (ImageView) v.findViewById(R.id.last2);
+        l3 = (ImageView) v.findViewById(R.id.last3);
+
         //mBTN = (Button) v.findViewById(R.id.btn);
 
-
-        HttpURLConnection connection = null;
-        InputStream is = null;
-
-        Bitmap retBitmap = null;
 
 
         Thread mTread =new Thread() {
@@ -157,21 +235,43 @@ public class Tab_First extends Fragment  {
 
                 {
 
-
-                    URL url_frist = new URL(API_IMAGE_URL + image_url_first);
-                    URL url_second = new URL(API_IMAGE_URL+image_url_second);
+                    URL url_frist = new URL(API_IMAGE_URL + today_image_url_first);
+                    URL url_second = new URL(API_IMAGE_URL+today_image_url_second);
+                    URL url_last_day_first=new URL(API_IMAGE_URL+last_image_url_first);
+                    URL url_last_day_second=new URL(API_IMAGE_URL+last_image_url_second);
+                    URL url_last_day_third =new URL(API_IMAGE_URL+last_image_url_third);
 
                     Log.e("image_url", String.valueOf(url_frist));
                     URLConnection conn = url_frist.openConnection();
                     URLConnection conn1 = url_second.openConnection();
+                    URLConnection conn2 =url_last_day_first.openConnection();
+                    URLConnection conn3 =url_last_day_second.openConnection();
+                    URLConnection conn4=url_last_day_third.openConnection();
+
                     conn.connect();
                     conn1.connect();
+                    conn2.connect();
+                    conn3.connect();
+                    conn4.connect();
+
                     BufferedInputStream bis = new BufferedInputStream(conn.getInputStream());
                     BufferedInputStream bis1= new BufferedInputStream(conn1.getInputStream());
+                    BufferedInputStream bis2= new BufferedInputStream(conn2.getInputStream());
+                    BufferedInputStream bis3= new BufferedInputStream(conn3.getInputStream());
+                    BufferedInputStream bis4= new BufferedInputStream(conn4.getInputStream());
+
                     today_Bitmap1 = BitmapFactory.decodeStream(bis);
                     today_Bitmap2= BitmapFactory.decodeStream(bis1);
+                    lb1 =  BitmapFactory.decodeStream(bis2);
+                    lb2 =  BitmapFactory.decodeStream(bis3);
+                    lb3 =  BitmapFactory.decodeStream(bis4);
+
+
                     bis.close();
                     bis1.close();
+                    bis2.close();
+                    bis3.close();
+                    bis4.close();
                 } catch (Exception e)
 
                 {
@@ -185,29 +285,41 @@ public class Tab_First extends Fragment  {
             mTread.join();
             mImageView.setImageBitmap(today_Bitmap1);
             mImageView2.setImageBitmap(today_Bitmap2);
+            l1.setImageBitmap(lb1);
+            l2.setImageBitmap(lb2);
+            l1.setImageBitmap(lb3);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         // Display the bitmap in ImageView
 
 
+        // Define the ImageView corners radius
 
-
-
-            // Define the ImageView corners radius
-
-            android.support.v4.graphics.drawable.RoundedBitmapDrawable roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(mResources, today_Bitmap1);
+        android.support.v4.graphics.drawable.RoundedBitmapDrawable roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(mResources, today_Bitmap1);
         android.support.v4.graphics.drawable.RoundedBitmapDrawable roundedBitmapDrawable1 = RoundedBitmapDrawableFactory.create(mResources, today_Bitmap2);
+        android.support.v4.graphics.drawable.RoundedBitmapDrawable roundedBitmapDrawable2 = RoundedBitmapDrawableFactory.create(mResources, lb1);
+        android.support.v4.graphics.drawable.RoundedBitmapDrawable roundedBitmapDrawable3 = RoundedBitmapDrawableFactory.create(mResources, lb2);
+        android.support.v4.graphics.drawable.RoundedBitmapDrawable roundedBitmapDrawable4 = RoundedBitmapDrawableFactory.create(mResources, lb3);
 
 
-            roundedBitmapDrawable.setCornerRadius(cornerRadius);
-            roundedBitmapDrawable.setCornerRadius(cornerRadius);
-            roundedBitmapDrawable.setAntiAlias(true);
-            roundedBitmapDrawable1.setAntiAlias(true);
+        roundedBitmapDrawable.setCornerRadius(cornerRadius);
+        roundedBitmapDrawable1.setCornerRadius(cornerRadius);
+        roundedBitmapDrawable2.setCornerRadius(cornerRadius);
+        roundedBitmapDrawable3.setCornerRadius(cornerRadius);
+        roundedBitmapDrawable4.setCornerRadius(cornerRadius);
+        roundedBitmapDrawable.setAntiAlias(true);
+        roundedBitmapDrawable1.setAntiAlias(true);
+        roundedBitmapDrawable2.setAntiAlias(true);
+        roundedBitmapDrawable3.setAntiAlias(true);
+        roundedBitmapDrawable4.setAntiAlias(true);
+        // Set the ImageView image as drawable object
+        mImageView.setImageDrawable(roundedBitmapDrawable);
+        mImageView2.setImageDrawable(roundedBitmapDrawable1);
+        l1.setImageDrawable(roundedBitmapDrawable2);
+        l2.setImageDrawable(roundedBitmapDrawable3);
+        l3.setImageDrawable(roundedBitmapDrawable4);
 
-            // Set the ImageView image as drawable object
-            mImageView.setImageDrawable(roundedBitmapDrawable);
-            mImageView2.setImageDrawable(roundedBitmapDrawable1);
 
 
 
@@ -219,17 +331,9 @@ public class Tab_First extends Fragment  {
 
 
         //last pic
-        l1 = (ImageView) v.findViewById(R.id.last1);
-        l2 = (ImageView) v.findViewById(R.id.last2);
-        l3 = (ImageView) v.findViewById(R.id.last3);
 
-        lb1 =  BitmapFactory.decodeResource(mResources, R.drawable.kakao_default_profile_image);
-        lb2 =  BitmapFactory.decodeResource(mResources, R.drawable.kakao_default_profile_image);
-        lb3 =  BitmapFactory.decodeResource(mResources, R.drawable.kakao_default_profile_image);
 
-        l1.setImageBitmap(lb1);
-        l2.setImageBitmap(lb2);
-        l3.setImageBitmap(lb3);
+
 
         android.support.v4.graphics.drawable.RoundedBitmapDrawable last_five_day1 = RoundedBitmapDrawableFactory.create(mResources, lb1);
         android.support.v4.graphics.drawable.RoundedBitmapDrawable last_five_day2 = RoundedBitmapDrawableFactory.create(mResources, lb2);

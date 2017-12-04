@@ -77,6 +77,7 @@ public class Tab_Fourth extends Fragment {
         pro.setBackgroundResource(R.drawable.circlr_border);
         pro.setImageBitmap(bitmap);
 
+
 */
         //데이터 넣는거
        // list.add(new listItem(iv,"이름","내용","시간"));
@@ -85,15 +86,16 @@ public class Tab_Fourth extends Fragment {
         list.add(new listItem(R.drawable.kakao_default_profile_image,"이름","내용","시간"));
         list.add(new listItem(R.drawable.kakao_default_profile_image,"이름","내용","시간"));
 
-        final Call<List<get_matched_account>>get_matched_account = apiService.get_matched_account("male",34);
+
+        Call<List<get_matched_account>>get_matched_account = apiService.get_matched_account("male",1);
         get_matched_account.enqueue(new Callback<List<get_matched_account>>() {
             @Override
             public void onResponse(Call<List<get_matched_account>> call, Response<List<get_matched_account>> response) {
 
                 get_matched_accountList=response.body();
                 Log.e("get_matched_accountList", String.valueOf(response.body()));
-                int grounpId=get_matched_accountList.get(0).last_message.getGrounp_id();
-                Log.e("data", String.valueOf(grounpId));
+
+
                 Log.e("onresponse", String.valueOf(response.code()));
                 Log.e("onresponse", "success");
 

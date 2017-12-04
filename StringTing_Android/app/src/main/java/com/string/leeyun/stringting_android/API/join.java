@@ -6,6 +6,17 @@ package com.string.leeyun.stringting_android.API;
 
 public class join {
     private int account_id;
+    private String token;
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public String getToken() {
+
+        return token;
+    }
+
     private String result;
 
     public void setAccount_id(int account_id) {
