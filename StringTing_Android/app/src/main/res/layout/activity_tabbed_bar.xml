@@ -29,13 +29,13 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <TextView
+            <View
                 android:id="@+id/bar_t1"
                 android:layout_width="50dp"
                 android:layout_height="4dp"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:background="#ffffff" />
+         />
 
 
             <ImageView
@@ -66,16 +66,13 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <TextView
+            <View
                 android:id="@+id/bar_t2"
                 android:layout_width="50dp"
                 android:layout_height="4dp"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:background="#ffffff" />
-
-
-
+                />
 
 
             <ImageView
@@ -105,13 +102,13 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <TextView
+            <View
                 android:id="@+id/bar_t3"
                 android:layout_width="50dp"
                 android:layout_height="4dp"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:background="#ffffff" />
+              />
 
 
 
@@ -142,13 +139,12 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <TextView
+            <View
                 android:id="@+id/bar_t4"
                 android:layout_width="50dp"
                 android:layout_height="4dp"
                 android:layout_gravity="center"
-                android:layout_weight="1"
-                android:background="#ffffff" />
+                android:layout_weight="1" />
 
 
 
@@ -178,13 +174,12 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <TextView
+            <View
                 android:id="@+id/bar_t5"
                 android:layout_width="50dp"
                 android:layout_height="4dp"
                 android:layout_gravity="center"
-                android:layout_weight="1"
-                android:background="#ffffff" />
+                android:layout_weight="1" />
 
 
 
@@ -237,6 +232,7 @@
                 android:layout_height="4dp"
                 android:layout_gravity="center"
                 android:layout_weight="1"
+                android:scaleType="fitXY"
                 app:srcCompat="@mipmap/tab" />
 
 
@@ -275,6 +271,7 @@
                 android:layout_height="4dp"
                 android:layout_gravity="center"
                 android:layout_weight="1"
+                android:scaleType="fitXY"
                 app:srcCompat="@mipmap/tab" />
 
 
@@ -312,6 +309,7 @@
                 android:layout_height="4dp"
                 android:layout_gravity="center"
                 android:layout_weight="1"
+                android:scaleType="fitXY"
                 app:srcCompat="@mipmap/tab" />
 
 
@@ -349,6 +347,7 @@
                 android:layout_height="4dp"
                 android:layout_gravity="center"
                 android:layout_weight="1"
+                android:scaleType="fitXY"
                 app:srcCompat="@mipmap/tab" />
 
 
