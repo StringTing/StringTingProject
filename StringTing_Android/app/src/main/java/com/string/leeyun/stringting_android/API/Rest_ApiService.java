@@ -68,7 +68,7 @@ public interface Rest_ApiService {
 
 
         @GET("{sex}/{account_id}/get/matched-account/")
-        Call<List<get_matched_account>>get_matched_account(@Path("sex")String matched_sex,@Path("account_id")int matched_account_id);
+        Call<get_matched_accountList> get_matched_account(@Path("sex")String matched_sex, @Path("account_id")int matched_account_id);
     }
 
 

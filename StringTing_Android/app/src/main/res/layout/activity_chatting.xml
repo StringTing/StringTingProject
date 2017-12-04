@@ -116,6 +116,7 @@
                 android:layout_marginRight="7dp"
                 android:textColor="@color/white"
                 android:background="@drawable/rounded_sendbtn"
+                android:onClick="send_message"
                 android:text="전송" />
 
         </LinearLayout>

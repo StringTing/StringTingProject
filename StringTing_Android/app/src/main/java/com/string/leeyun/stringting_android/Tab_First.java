@@ -47,11 +47,7 @@ import static android.media.CamcorderProfile.get;
 import static com.facebook.FacebookSdk.getApplicationContext;
 import static com.string.leeyun.stringting_android.API.Rest_ApiService.API_IMAGE_URL;
 import static com.string.leeyun.stringting_android.API.Rest_ApiService.API_URL;
-<<<<<<< HEAD
-import static com.string.leeyun.stringting_android.R.mipmap.c;
-import static com.string.leeyun.stringting_android.R.mipmap.t;
-=======
->>>>>>> 9491556207c23623a62485e59ce8abd6b284a1ea
+
 
 
 public class Tab_First extends Fragment implements View.OnClickListener {
@@ -112,12 +108,7 @@ public class Tab_First extends Fragment implements View.OnClickListener {
 
 
         //api정의
-<<<<<<< HEAD
 
-=======
-        retrofit = new Retrofit.Builder().baseUrl(API_URL).addConverterFactory(GsonConverterFactory.create()).build();
-        apiService= retrofit.create(Rest_ApiService.class);
->>>>>>> 9491556207c23623a62485e59ce8abd6b284a1ea
 
 
         OkHttpClient.Builder client = new OkHttpClient.Builder();
@@ -138,7 +129,7 @@ public class Tab_First extends Fragment implements View.OnClickListener {
 
 
         try {
-            Thread.sleep(2000);
+            Thread.sleep(1300);
             SharedPreferences local_id = this.getActivity().getSharedPreferences("Local_DB", Context.MODE_PRIVATE);
 
             account_id = local_id.getInt("account_id",1);
@@ -233,7 +224,7 @@ public class Tab_First extends Fragment implements View.OnClickListener {
 
             @Override
             public void onFailure(Call<get_last_5days_matched_accountList> call, Throwable t) {
-                Log.e("today-introduction-fail",t.toString());
+                Log.e("last-introduction-fail",t.toString());
             }
         });
 

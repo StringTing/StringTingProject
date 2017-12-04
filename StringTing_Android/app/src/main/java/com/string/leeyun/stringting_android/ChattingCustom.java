@@ -38,6 +38,7 @@ public class ChattingCustom extends BaseAdapter{
     }
 
     private ArrayList<ListContents> m_List;
+
     public ChattingCustom() {
         m_List = new ArrayList<ListContents>();
     }

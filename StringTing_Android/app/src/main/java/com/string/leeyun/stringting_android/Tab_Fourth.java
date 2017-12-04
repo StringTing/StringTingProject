@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.string.leeyun.stringting_android.API.Rest_ApiService;
 import com.string.leeyun.stringting_android.API.get_matched_account;
+import com.string.leeyun.stringting_android.API.get_matched_accountList;
 import com.string.leeyun.stringting_android.API.message;
 import com.string.leeyun.stringting_android.API.register_message;
 import com.string.leeyun.stringting_android.API.userinfo;
@@ -33,6 +34,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import static android.R.attr.data;
 import static android.media.CamcorderProfile.get;
 import static com.string.leeyun.stringting_android.API.Rest_ApiService.API_URL;
+import static com.string.leeyun.stringting_android.R.mipmap.t;
 
 
 public class Tab_Fourth extends Fragment {
@@ -40,9 +42,9 @@ public class Tab_Fourth extends Fragment {
     private ListView lv;
     private Tab_Fourth_Custom mAdapter;
     private ArrayList<listItem> list;
-    public List<get_matched_account> get_matched_accountList;
     Rest_ApiService apiService;
     Retrofit retrofit;
+    ArrayList<get_matched_account>get_matched_accounts;
 
     public Tab_Fourth() {
         // Required empty public constructor
@@ -81,30 +83,40 @@ public class Tab_Fourth extends Fragment {
 */
         //데이터 넣는거
        // list.add(new listItem(iv,"이름","내용","시간"));
+
         list.add(new listItem(R.drawable.kakao_default_profile_image,"이름","내용","시간"));
         list.add(new listItem(R.drawable.kakao_default_profile_image,"이름","내용","시간"));
         list.add(new listItem(R.drawable.kakao_default_profile_image,"이름","내용","시간"));
         list.add(new listItem(R.drawable.kakao_default_profile_image,"이름","내용","시간"));
 
 
-        Call<List<get_matched_account>>get_matched_account = apiService.get_matched_account("male",1);
-        get_matched_account.enqueue(new Callback<List<get_matched_account>>() {
+        final Call<get_matched_accountList>get_matched_account = apiService.get_matched_account("male",1);
+        get_matched_account.enqueue(new Callback<get_matched_accountList>() {
+
             @Override
-            public void onResponse(Call<List<get_matched_account>> call, Response<List<get_matched_account>> response) {
+            public void onResponse(Call<get_matched_accountList> call, Response<get_matched_accountList> response) {
+                if (response.body()!=null) {
+                    Log.e("get_matched_account","응답성공");
+                    try {
 
-                get_matched_accountList=response.body();
-                Log.e("get_matched_accountList", String.valueOf(response.body()));
+                        get_matched_accounts = response.body().getGet_matched_accounts();
+                        for (int i = 0; i < get_matched_accounts.size(); i++) {
+                            get_matched_accounts.get(i).getAccount();
+                            get_matched_accounts.get(i).getLast_message().getContents();
+                        }
+                        Log.e("get_matched_accountList", String.valueOf(response.body()));
+                        Log.e("onresponse", String.valueOf(response.code()));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        Log.e("get_matehced_account","응답은 성공했지만 값이안들어옴");
+                    }
 
-
-                Log.e("onresponse", String.valueOf(response.code()));
-                Log.e("onresponse", "success");
-
-
+                }
             }
 
             @Override
-            public void onFailure(Call<List<get_matched_account>> call, Throwable t) {
-                Log.d("connectfail", t.toString());
+            public void onFailure(Call<get_matched_accountList> call, Throwable t) {
+                Log.d("matched_account_fail", t.toString());
             }
 
         });
@@ -189,6 +201,7 @@ public class Tab_Fourth extends Fragment {
                 public void onClick(View v) {
                     // 터치 시 해당 아이템 채팅방 불러오기
                     Intent i = new Intent(getContext(),Chatting.class);
+                    //여기다 그룹아이디 넣어주기 그럼 채팅방이랑연결
                     startActivity(i);
                 }
             });
