@@ -69,22 +69,22 @@ public class Tab_Second extends Fragment implements View.OnClickListener {
         ViewPager pager= (ViewPager)result.findViewById(R.id.viewPager);
 
 
-
-        Call<get_eval_accountList> call = apiService.Get_evalaccount("male",2);
-        call.enqueue(new Callback<get_eval_accountList>() {
-            @Override
-            public void onResponse(Call<get_eval_accountList> call, Response<get_eval_accountList> response) {
-
-                get_eval_accountLists=response.body().getEvalaccount_list();
-                Log.e("Get_evalaccount", String.valueOf(get_eval_accountLists.get(0)));
-
-            }
-
-            @Override
-            public void onFailure(Call<get_eval_accountList> call, Throwable t) {
-                Log.v("onresponseImage2",t.toString());
-            }
-        });
+//
+//        Call<get_eval_accountList> call = apiService.Get_evalaccount("male",2);
+//        call.enqueue(new Callback<get_eval_accountList>() {
+//            @Override
+//            public void onResponse(Call<get_eval_accountList> call, Response<get_eval_accountList> response) {
+//
+//                get_eval_accountLists=response.body().getEvalaccount_list();
+//                Log.e("Get_evalaccount", String.valueOf(get_eval_accountLists.get(0)));
+//
+//            }
+//
+//            @Override
+//            public void onFailure(Call<get_eval_accountList> call, Throwable t) {
+//                Log.v("onresponseImage2",t.toString());
+//            }
+//        });
 
 
 

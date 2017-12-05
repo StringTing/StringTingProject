@@ -515,6 +515,8 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
                     Spinner body_male=(Spinner)findViewById(Spinner_body_form_male);
                     Spinner body_female=(Spinner)findViewById(Spinner_body_form_female);
 
+
+                    save_sex("male");
                     body_male.setVisibility(View.VISIBLE);
                     body_female.setVisibility(View.GONE);
 
@@ -535,7 +537,7 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
                     army.setVisibility(View.GONE);
                     Spinner body_male=(Spinner)findViewById(Spinner_body_form_male);
                     Spinner body_female=(Spinner)findViewById(Spinner_body_form_female);
-
+                    save_sex("female");
                     body_male.setVisibility(View.GONE);
                     body_female.setVisibility(View.VISIBLE);
 
@@ -872,6 +874,14 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
 
 
 
+    }
+
+    public void save_sex(String data){
+        SharedPreferences pref = getSharedPreferences("Local_DB", MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putString("sex",data);
+        editor.clear();
+        editor.commit();
     }
 
 

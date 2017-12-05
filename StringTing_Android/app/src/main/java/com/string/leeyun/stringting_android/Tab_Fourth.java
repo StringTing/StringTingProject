@@ -202,6 +202,7 @@ public class Tab_Fourth extends Fragment {
                     // 터치 시 해당 아이템 채팅방 불러오기
                     Intent i = new Intent(getContext(),Chatting.class);
                     //여기다 그룹아이디 넣어주기 그럼 채팅방이랑연결
+                    i.putExtra("group_id",1);
                     startActivity(i);
                 }
             });

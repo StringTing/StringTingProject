@@ -24,6 +24,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
+import com.facebook.AccessToken;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.string.leeyun.stringting_android.API.MyFirebaseInstanceIDService;
 import com.facebook.CallbackManager;
@@ -73,6 +74,8 @@ public class MainActivity extends AppCompatActivity {
     SessionCallback callback;
 
     static String Email;
+    static String sex;
+
 
 
 
@@ -208,8 +211,12 @@ public class MainActivity extends AppCompatActivity {
                             try{
                             Log.e("user profile", user.toString());
                             Email   = response.getJSONObject().getString("id").toString();
+                                sex= response.getJSONObject().getString("gender".toString());
                             Log.e("email:",Email);
+                                Log.e("sex",sex);
+                                save_sex(sex);
                             Intent intent = new Intent(MainActivity.this,  Basicinfo_Edit.class);
+                                Log.e("facebook_token", String.valueOf(AccessToken.getCurrentAccessToken()));
                             intent.putExtra("ID",Email);
                                 intent.putExtra("PW","-");
                             intent.putExtra("setformat","FACEBOOK");
@@ -334,6 +341,13 @@ public class MainActivity extends AppCompatActivity {
 
             return false;
         }
+    public void save_sex(String data){
+        SharedPreferences pref = getSharedPreferences("Local_DB", MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putString("sex",data);
+        editor.clear();
+        editor.commit();
+    }
 }
 
 

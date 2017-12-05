@@ -69,6 +69,11 @@ public interface Rest_ApiService {
 
         @GET("{sex}/{account_id}/get/matched-account/")
         Call<get_matched_accountList> get_matched_account(@Path("sex")String matched_sex, @Path("account_id")int matched_account_id);
+
+        @GET("{sex}/get/message-list/{group_id}/")
+        Call<get_message_list>get_message_list(@Path("group_id")int group_id);
+
+
     }
 
 

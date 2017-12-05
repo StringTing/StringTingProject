@@ -44,6 +44,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.Callback;
 import retrofit2.http.HEAD;
 
+import static android.content.Context.MODE_PRIVATE;
 import static android.media.CamcorderProfile.get;
 import static com.facebook.FacebookSdk.getApplicationContext;
 import static com.string.leeyun.stringting_android.API.Rest_ApiService.API_IMAGE_URL;
@@ -122,10 +123,10 @@ public class Tab_First extends Fragment implements View.OnClickListener {
 
         try {
             Thread.sleep(2000);
-            SharedPreferences local_id = this.getActivity().getSharedPreferences("Local_DB", Context.MODE_PRIVATE);
-
+            SharedPreferences local_id = this.getActivity().getSharedPreferences("Local_DB", MODE_PRIVATE);
             account_id = local_id.getInt("account_id",1);
             token =local_id.getString("token","0");
+            sex= local_id.getString("sex","?");
             Log.e("localdbtest_account_id", String.valueOf(account_id));
 
             if (account_id==0){
@@ -134,6 +135,10 @@ public class Tab_First extends Fragment implements View.OnClickListener {
             }
             else if(token.equals(null)){
                 Log.e("local_token is null","fail");
+
+            }
+            else if(sex.equals(null)){
+                Log.e("local_sex is null","fail");
 
             }
         } catch (InterruptedException e) {
@@ -152,7 +157,7 @@ public class Tab_First extends Fragment implements View.OnClickListener {
         apiService= retrofit.create(Rest_ApiService.class);
 
 
-        Call<Im_get_today_introduction> call = apiService.Get_today_introduction("female",1);
+        Call<Im_get_today_introduction> call = apiService.Get_today_introduction("female",2);
 
         call.enqueue(new Callback<Im_get_today_introduction>() {
 
@@ -169,10 +174,9 @@ public class Tab_First extends Fragment implements View.OnClickListener {
                         Log.e("get_eval_list_image", String.valueOf(im_get_today.get(0).getImages(0)));
 
                     }
-                    else if (im_get_today.get(1).getImages(0)!=null){
                         today_image_url_second = String.valueOf(im_get_today.get(1).getImages(0));
 
-                    }
+
                     String replace = "{}";
                     String medium = "medium";
                     String small= "small";
@@ -181,11 +185,10 @@ public class Tab_First extends Fragment implements View.OnClickListener {
                         today_image_url_second = today_image_url_second.replace(replace, small);
                         Log.e("image_url_first", today_image_url_first);
                         Log.e("image_url_second", today_image_url_second);
-                        image_url(v);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Log.e("imageNULL", "false");
+                    Log.e("imagenull_today", "false");
                 }
 
             }
@@ -198,7 +201,7 @@ public class Tab_First extends Fragment implements View.OnClickListener {
 
 
 
-        Call<get_last_5days_matched_accountList> call5day = apiService.Get_last_5day("female",1);
+        Call<get_last_5days_matched_accountList> call5day = apiService.Get_last_5day("female",2);
         call5day.enqueue(new Callback<get_last_5days_matched_accountList>() {
 
             @Override
@@ -211,7 +214,7 @@ public class Tab_First extends Fragment implements View.OnClickListener {
                 try {
                     last_image_url_first = String.valueOf(im_get_last_5day.get(0).getImages().get(0));
                     last_image_url_second = String.valueOf(im_get_last_5day.get(1).getImages().get(0));
-                    last_image_url_third = String.valueOf(im_get_last_5day.get(2).getImages().get(0));
+//                    last_image_url_third = String.valueOf(im_get_last_5day.get(2).getImages().get(0));
 
                     Log.e("get_eval_list_image", String.valueOf(im_get_today.get(0).getImages(0)));
                     String replace = "{}";
@@ -220,14 +223,15 @@ public class Tab_First extends Fragment implements View.OnClickListener {
                     if (last_image_url_first != null && last_image_url_second != null) {
                         last_image_url_first = last_image_url_first.replace(replace, small);
                         last_image_url_second = last_image_url_second.replace(replace, small);
-                        last_image_url_third =last_image_url_third.replace(replace,small);
+//                        last_image_url_third =last_image_url_third.replace(replace,small);
                         Log.e("image_url_first", last_image_url_first);
                         Log.e("image_url_second", last_image_url_second);
                         image_url(v);
                     }
+
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Log.e("imageNULL", "false");
+                    Log.e("imageNULL_last5", "false");
                 }
 
             }
@@ -278,14 +282,13 @@ public class Tab_First extends Fragment implements View.OnClickListener {
         Thread mTread =new Thread() {
             public void run() {
                 try
-
                 {
 
                     URL url_frist = new URL(API_IMAGE_URL + today_image_url_first);
                     URL url_second = new URL(API_IMAGE_URL+today_image_url_second);
                     URL url_last_day_first=new URL(API_IMAGE_URL+last_image_url_first);
                     URL url_last_day_second=new URL(API_IMAGE_URL+last_image_url_second);
-                    URL url_last_day_third =new URL(API_IMAGE_URL+last_image_url_third);
+//                    URL url_last_day_third =new URL(API_IMAGE_URL+last_image_url_third);
 
 
                     Log.e("image_url", String.valueOf(url_frist));
@@ -293,36 +296,41 @@ public class Tab_First extends Fragment implements View.OnClickListener {
                     URLConnection conn1 = url_second.openConnection();
                     URLConnection conn2 =url_last_day_first.openConnection();
                     URLConnection conn3 =url_last_day_second.openConnection();
-                    URLConnection conn4=url_last_day_third.openConnection();
+//                    URLConnection conn4=url_last_day_third.openConnection();
+                    try{
+                        conn.connect();
+                        conn1.connect();
+                        conn2.connect();
+                        conn3.connect();
+//                    conn4.connect();
 
-                    conn.connect();
-                    conn1.connect();
-                    conn2.connect();
-                    conn3.connect();
-                    conn4.connect();
+                        BufferedInputStream bis = new BufferedInputStream(conn.getInputStream());
+                        BufferedInputStream bis1= new BufferedInputStream(conn1.getInputStream());
+                        BufferedInputStream bis2= new BufferedInputStream(conn2.getInputStream());
+                        BufferedInputStream bis3= new BufferedInputStream(conn3.getInputStream());
+//                    BufferedInputStream bis4= new BufferedInputStream(conn4.getInputStream());
 
-                    BufferedInputStream bis = new BufferedInputStream(conn.getInputStream());
-                    BufferedInputStream bis1= new BufferedInputStream(conn1.getInputStream());
-                    BufferedInputStream bis2= new BufferedInputStream(conn2.getInputStream());
-                    BufferedInputStream bis3= new BufferedInputStream(conn3.getInputStream());
-                    BufferedInputStream bis4= new BufferedInputStream(conn4.getInputStream());
-
-                    today_Bitmap1 = BitmapFactory.decodeStream(bis);
-                    today_Bitmap2= BitmapFactory.decodeStream(bis1);
-                    lb1 =  BitmapFactory.decodeStream(bis2);
-                    lb2 =  BitmapFactory.decodeStream(bis3);
-                    lb3 =  BitmapFactory.decodeStream(bis4);
+                        today_Bitmap1 = BitmapFactory.decodeStream(bis);
+                        today_Bitmap2= BitmapFactory.decodeStream(bis1);
+                        lb1 =  BitmapFactory.decodeStream(bis2);
+                        lb2 =  BitmapFactory.decodeStream(bis3);
+//                    lb3 =  BitmapFactory.decodeStream(bis4);
 
 
-                    bis.close();
-                    bis1.close();
-                    bis2.close();
-                    bis3.close();
-                    bis4.close();
+                        bis.close();
+                        bis1.close();
+                        bis2.close();
+                        bis3.close();
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+
+
+//                    bis4.close();
                 } catch (Exception e)
 
                 {
-
+                        e.printStackTrace();
                 }
             }
         };
@@ -334,7 +342,7 @@ public class Tab_First extends Fragment implements View.OnClickListener {
             mImageView2.setImageBitmap(today_Bitmap2);
             l1.setImageBitmap(lb1);
             l2.setImageBitmap(lb2);
-            l1.setImageBitmap(lb3);
+//            l1.setImageBitmap(lb3);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -347,25 +355,25 @@ public class Tab_First extends Fragment implements View.OnClickListener {
         android.support.v4.graphics.drawable.RoundedBitmapDrawable roundedBitmapDrawable1 = RoundedBitmapDrawableFactory.create(mResources, today_Bitmap2);
         android.support.v4.graphics.drawable.RoundedBitmapDrawable roundedBitmapDrawable2 = RoundedBitmapDrawableFactory.create(mResources, lb1);
         android.support.v4.graphics.drawable.RoundedBitmapDrawable roundedBitmapDrawable3 = RoundedBitmapDrawableFactory.create(mResources, lb2);
-        android.support.v4.graphics.drawable.RoundedBitmapDrawable roundedBitmapDrawable4 = RoundedBitmapDrawableFactory.create(mResources, lb3);
+//        android.support.v4.graphics.drawable.RoundedBitmapDrawable roundedBitmapDrawable4 = RoundedBitmapDrawableFactory.create(mResources, lb3);
 
 
         roundedBitmapDrawable.setCornerRadius(cornerRadius);
         roundedBitmapDrawable1.setCornerRadius(cornerRadius);
         roundedBitmapDrawable2.setCornerRadius(cornerRadius);
         roundedBitmapDrawable3.setCornerRadius(cornerRadius);
-        roundedBitmapDrawable4.setCornerRadius(cornerRadius);
+//        roundedBitmapDrawable4.setCornerRadius(cornerRadius);
         roundedBitmapDrawable.setAntiAlias(true);
         roundedBitmapDrawable1.setAntiAlias(true);
         roundedBitmapDrawable2.setAntiAlias(true);
         roundedBitmapDrawable3.setAntiAlias(true);
-        roundedBitmapDrawable4.setAntiAlias(true);
+//        roundedBitmapDrawable4.setAntiAlias(true);
         // Set the ImageView image as drawable object
         mImageView.setImageDrawable(roundedBitmapDrawable);
         mImageView2.setImageDrawable(roundedBitmapDrawable1);
         l1.setImageDrawable(roundedBitmapDrawable2);
         l2.setImageDrawable(roundedBitmapDrawable3);
-        l3.setImageDrawable(roundedBitmapDrawable4);
+//        l3.setImageDrawable(roundedBitmapDrawable4);
 
 
 
@@ -405,4 +413,7 @@ public class Tab_First extends Fragment implements View.OnClickListener {
     public void get_local_accoint_id(){
 
     }
+
+
+
 }
