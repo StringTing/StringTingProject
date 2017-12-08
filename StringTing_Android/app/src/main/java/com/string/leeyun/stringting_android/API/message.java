@@ -1,5 +1,7 @@
 package com.string.leeyun.stringting_android.API;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -8,9 +10,9 @@ import java.util.Date;
  */
 
 public class message implements Serializable {
-
+    @SerializedName("sex")
     private String sex;
-    private int grounp_id;
+    private int group_id;
     private String contents;
     private Date createtime;
 
@@ -18,8 +20,8 @@ public class message implements Serializable {
         this.sex = sex;
     }
 
-    public void setGrounp_id(int groun_id) {
-        this.grounp_id = groun_id;
+    public void setGrounp_id(int group_id) {
+        this.group_id = group_id;
     }
 
     public void setContents(String contents) {
@@ -36,7 +38,7 @@ public class message implements Serializable {
     }
 
     public int getGrounp_id() {
-        return grounp_id;
+        return group_id;
     }
 
     public String getContents() {

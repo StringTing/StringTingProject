@@ -7,6 +7,8 @@ import com.google.gson.annotations.SerializedName;
  */
 
 public class join {
+
+
     private int account_id;
     private String token;
 

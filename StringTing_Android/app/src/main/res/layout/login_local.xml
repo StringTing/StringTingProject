@@ -92,7 +92,7 @@
                 />
 
             <EditText
-                android:id="@+id/Pw_edit"
+                android:id="@+id/pw_edit"
                 android:layout_width="179dp"
                 android:layout_height="28dp"
                 android:layout_centerVertical="true"

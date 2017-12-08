@@ -30,6 +30,7 @@ import com.string.leeyun.stringting_android.API.get_last_5days_matched_accountLi
 import com.string.leeyun.stringting_android.API.okhttp_intercepter_token;
 
 import java.io.BufferedInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -37,7 +38,9 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -60,9 +63,9 @@ public class Tab_First extends Fragment implements View.OnClickListener {
     private Resources mResources;
     private ImageView mImageView , mImageView2 , l1,l2,l3;
     private Bitmap today_Bitmap1,today_Bitmap2 , lb1,lb2,lb3;
-    public  int account_id;
-    public String token;
-    public String sex;
+      int account_id;
+     String token;
+     String sex;
     Rest_ApiService apiService;
     Retrofit retrofit;
     float cornerRadius = 25f;
@@ -114,21 +117,16 @@ public class Tab_First extends Fragment implements View.OnClickListener {
 
 
 
-//              if (token.equals(null)){
-//           Okhttp_intercepter.setToken(token);
-//
-//        }
-
-
 
         try {
             Thread.sleep(2000);
-            SharedPreferences local_id = this.getActivity().getSharedPreferences("Local_DB", MODE_PRIVATE);
-            account_id = local_id.getInt("account_id",1);
-            token =local_id.getString("token","0");
-            sex= local_id.getString("sex","?");
-            Log.e("localdbtest_account_id", String.valueOf(account_id));
-
+            SharedPreferences pref = this.getActivity().getSharedPreferences("Local_DB", MODE_PRIVATE);
+            sex=pref.getString("sex","notfound");
+            Log.e("sex",sex);
+            account_id = pref.getInt("account_id",0);
+            Log.e("local_account", String.valueOf(account_id));
+            token=pref.getString("token","?");
+            Log.e("loacal_token",String.valueOf(token));
             if (account_id==0){
                 Log.e("localid is null","fail");
 
@@ -145,103 +143,122 @@ public class Tab_First extends Fragment implements View.OnClickListener {
             e.printStackTrace();
         }
 
-        OkHttpClient.Builder client = new OkHttpClient.Builder();
-        okhttp_intercepter_token Okhttp_intercepter =new okhttp_intercepter_token();
-//        Okhttp_intercepter.setAccount_id(account_id);
-        client.addInterceptor(new okhttp_intercepter_token());
-        retrofit = new Retrofit.Builder()
-                .baseUrl(API_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .client(client.build())
-                .build();
-        apiService= retrofit.create(Rest_ApiService.class);
-
-
-        Call<Im_get_today_introduction> call = apiService.Get_today_introduction("female",2);
-
-        call.enqueue(new Callback<Im_get_today_introduction>() {
-
+        OkHttpClient.Builder client1 = new OkHttpClient.Builder();
+        client1.addInterceptor(new Interceptor() {
             @Override
-            public void onResponse(Call<Im_get_today_introduction> call, retrofit2.Response<Im_get_today_introduction> response) {
-                im_get_today=response.body().getGet_today_introductions();
-                Log.e("today_introduction", String.valueOf(response.raw()));
-                Log.e("today_introduction", String.valueOf(response.body()));
-                Log.e("today_introduction", String.valueOf(response.code()));
+            public okhttp3.Response intercept(Chain chain) throws IOException {
 
-                try {
-                    if (im_get_today.get(0).getImages(0)!=null) {
-                        today_image_url_first = String.valueOf(im_get_today.get(0).getImages(0));
-                        Log.e("get_eval_list_image", String.valueOf(im_get_today.get(0).getImages(0)));
+                Request builder = chain.request();
+                Request newRequest;
 
-                    }
+
+                newRequest = builder.newBuilder()
+                        .addHeader("access-token",token)
+                        .addHeader("account-id", String.valueOf(account_id))
+                        .addHeader("account-sex",sex)
+                        .addHeader("Content-Type","application/json")
+                        .build();
+
+
+                return chain.proceed(newRequest);
+
+            }
+        });
+
+        try {
+            Call<Im_get_today_introduction> call = apiService.Get_today_introduction(sex, account_id);
+
+            call.enqueue(new Callback<Im_get_today_introduction>() {
+
+                @Override
+                public void onResponse(Call<Im_get_today_introduction> call, retrofit2.Response<Im_get_today_introduction> response) {
+                    im_get_today = response.body().getGet_today_introductions();
+                    Log.e("today_introduction", String.valueOf(response.raw()));
+                    Log.e("today_introduction", String.valueOf(response.body()));
+                    Log.e("today_introduction", String.valueOf(response.code()));
+
+                    try {
+                        if (im_get_today.get(0).getImages(0) != null) {
+                            today_image_url_first = String.valueOf(im_get_today.get(0).getImages(0));
+                            Log.e("get_eval_list_image", String.valueOf(im_get_today.get(0).getImages(0)));
+
+                        }
                         today_image_url_second = String.valueOf(im_get_today.get(1).getImages(0));
 
 
-                    String replace = "{}";
-                    String medium = "medium";
-                    String small= "small";
-                    if (today_image_url_first != null && today_image_url_second != null) {
-                        today_image_url_first = today_image_url_first.replace(replace, small);
-                        today_image_url_second = today_image_url_second.replace(replace, small);
-                        Log.e("image_url_first", today_image_url_first);
-                        Log.e("image_url_second", today_image_url_second);
+                        String replace = "{}";
+                        String medium = "medium";
+                        String small = "small";
+                        if (today_image_url_first != null && today_image_url_second != null) {
+                            today_image_url_first = today_image_url_first.replace(replace, small);
+                            today_image_url_second = today_image_url_second.replace(replace, small);
+                            Log.e("image_url_first", today_image_url_first);
+                            Log.e("image_url_second", today_image_url_second);
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        Log.e("imagenull_today", "false");
                     }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    Log.e("imagenull_today", "false");
+
                 }
 
-            }
+                @Override
+                public void onFailure(Call<Im_get_today_introduction> call, Throwable t) {
+                    Log.e("today-introduction-fail", t.toString());
+                }
+            });
+        }catch (Exception e){
+            e.printStackTrace();
+            Log.e("today-introductuon","null");
+        }
 
-            @Override
-            public void onFailure(Call<Im_get_today_introduction> call, Throwable t) {
-                Log.e("today-introduction-fail",t.toString());
-            }
-        });
 
+        try {
+            Call<get_last_5days_matched_accountList> call5day = apiService.Get_last_5day(sex, account_id);
+            call5day.enqueue(new Callback<get_last_5days_matched_accountList>() {
 
+                @Override
+                public void onResponse(Call<get_last_5days_matched_accountList> call5day, retrofit2.Response<get_last_5days_matched_accountList> response) {
+                    Log.e("last-5day", String.valueOf(response.raw()));
+                    Log.e("last-5day", String.valueOf(response.body()));
+                    Log.e("last-5day", String.valueOf(response.code()));
 
-        Call<get_last_5days_matched_accountList> call5day = apiService.Get_last_5day("female",2);
-        call5day.enqueue(new Callback<get_last_5days_matched_accountList>() {
-
-            @Override
-            public void onResponse(Call<get_last_5days_matched_accountList> call5day, retrofit2.Response<get_last_5days_matched_accountList> response) {
-                Log.e("last-5day", String.valueOf(response.raw()));
-                Log.e("last-5day", String.valueOf(response.body()));
-                Log.e("last-5day", String.valueOf(response.code()));
-
-                im_get_last_5day=response.body().getGet_last_5day_matched_account();
-                try {
-                    last_image_url_first = String.valueOf(im_get_last_5day.get(0).getImages().get(0));
-                    last_image_url_second = String.valueOf(im_get_last_5day.get(1).getImages().get(0));
+                    im_get_last_5day = response.body().getGet_last_5day_matched_account();
+                    try {
+                        last_image_url_first = String.valueOf(im_get_last_5day.get(0).getImages().get(0));
+                        last_image_url_second = String.valueOf(im_get_last_5day.get(1).getImages().get(0));
 //                    last_image_url_third = String.valueOf(im_get_last_5day.get(2).getImages().get(0));
 
-                    Log.e("get_eval_list_image", String.valueOf(im_get_today.get(0).getImages(0)));
-                    String replace = "{}";
-                    String medium = "medium";
-                    String small= "small";
-                    if (last_image_url_first != null && last_image_url_second != null) {
-                        last_image_url_first = last_image_url_first.replace(replace, small);
-                        last_image_url_second = last_image_url_second.replace(replace, small);
+                        Log.e("get_eval_list_image", String.valueOf(im_get_today.get(0).getImages(0)));
+                        String replace = "{}";
+                        String medium = "medium";
+                        String small = "small";
+                        if (last_image_url_first != null && last_image_url_second != null) {
+                            last_image_url_first = last_image_url_first.replace(replace, small);
+                            last_image_url_second = last_image_url_second.replace(replace, small);
 //                        last_image_url_third =last_image_url_third.replace(replace,small);
-                        Log.e("image_url_first", last_image_url_first);
-                        Log.e("image_url_second", last_image_url_second);
-                        image_url(v);
+                            Log.e("image_url_first", last_image_url_first);
+                            Log.e("image_url_second", last_image_url_second);
+                            image_url(v);
+                        }
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        Log.e("imageNULL_last5", "false");
                     }
 
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    Log.e("imageNULL_last5", "false");
                 }
 
-            }
+                @Override
+                public void onFailure(Call<get_last_5days_matched_accountList> call, Throwable t) {
+                    Log.e("last-introduction-fail", t.toString());
+                }
+            });
 
-            @Override
-            public void onFailure(Call<get_last_5days_matched_accountList> call, Throwable t) {
-                Log.e("last-introduction-fail",t.toString());
-            }
-        });
-
+        }catch (Exception e){
+            e.printStackTrace();
+            Log.e("last_introduction","null");
+        }
         mLayout = (FrameLayout) v.findViewById(R.id.t_pic1);
         mLayout.setOnClickListener(this);
 

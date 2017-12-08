@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 
 public class get_message_list {
-    @SerializedName("message")
+    @SerializedName("messages")
     ArrayList<message>messages;
 
     public ArrayList<message> getMessages() {

@@ -34,6 +34,7 @@ public class userinfo implements Serializable{
     private String body_form;
     private String fcm_token;
     private String token;
+    private String sex;
 
     public void setFcm_token(String fcm_token) {
         this.fcm_token = fcm_token;
@@ -239,5 +240,22 @@ public class userinfo implements Serializable{
     public int getHeight() {
 
         return height;
+    }
+
+    public boolean isAuthenticated() {
+        return authenticated;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public String getSex() {
+
+        return sex;
     }
 }

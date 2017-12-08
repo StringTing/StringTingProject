@@ -15,6 +15,9 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
+import retrofit2.http.Url;
+
+import static com.string.leeyun.stringting_android.R.id.sex;
 
 /**
  * Created by leeyun on 2017. 11. 3..
@@ -29,25 +32,28 @@ public interface Rest_ApiService {
 
 
 
-        @POST("male/join/")
+        @POST("join/")
         Call<join> getPostUserinfo(@Body userinfo Userinfo);
-
-        @POST("female/join/")
-        Call<join> getPostUserinfoF(@Body userinfo Userinfo);
 
         @POST("check/email/")
         Call<ResponseApi> getPostEmailStr1(@Body ResponseApi responseApi);
 
+        @POST("check/login/")
+        Call<check_login>post_check_login(@Body check_login CheckLogin);
+
+        @POST("register/introdiction-qna/")
+        Call<post_qna_list>post_qna_list(@Body post_qna_list postQnaList);
+
         @Multipart
-        @POST("{sex}/{account_id}/register/image/")
+        @POST("register/image/")
         Call<ResponseApi> getPostImage(@Path("sex")String RegisterImage_sex,@Path("account_id")String account_id,@Part MultipartBody.Part image);
 
 
-        @POST("{sex}/register/like/")
+        @POST("register/like/")
         Call<register_like> getPostRegister_like(@Path("sex")String Registerlike_sex,@Body register_like registerLike);
 
 
-        @POST("male/register/message/")
+        @POST("register/message/")
         Call<register_message>get_post_register_message(@Body register_message RegisterMessage);
 
         @GET("{sex}/{account_id}/get/detail/")
@@ -64,7 +70,7 @@ public interface Rest_ApiService {
 
         @Multipart
         @POST("{sex}/{account_id}/register/image/")
-        Call<register_image>post_register_image(@Path("sex")String register_image_sex, @Path("account_id") int register_image_account_id, @Part MultipartBody.Part[] images);
+        Call<register_image>post_register_image(@Part MultipartBody.Part[] images);
 
 
         @GET("{sex}/{account_id}/get/matched-account/")
@@ -73,7 +79,12 @@ public interface Rest_ApiService {
         @GET("{sex}/get/message-list/{group_id}/")
         Call<get_message_list>get_message_list(@Path("group_id")int group_id);
 
+        @GET("{sex}/{account-id}/get/introduction-qna")
+        Call<get_introduction_qnalist>get_introduction_qnalist(@Path("sex")String introduction_sex, @Path("account-id") int introduction_account);
 
+
+        @GET("{get}/introduction-questions/")
+        Call<get_introduction_questionlist>get_introduction_questionlist(@Path("get")String get);
     }
 
 

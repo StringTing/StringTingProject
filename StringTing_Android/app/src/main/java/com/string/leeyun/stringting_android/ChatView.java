@@ -5,7 +5,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -17,10 +19,13 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.string.leeyun.stringting_android.API.Rest_ApiService;
-import com.string.leeyun.stringting_android.API.get_matched_account;
+import com.string.leeyun.stringting_android.API.get_introduction_qna;
+import com.string.leeyun.stringting_android.API.get_introduction_qnalist;
+import com.string.leeyun.stringting_android.API.get_introduction_question;
+import com.string.leeyun.stringting_android.API.get_introduction_questionlist;
 import com.string.leeyun.stringting_android.API.join;
-import com.string.leeyun.stringting_android.API.okhttp_intercepter_token;
-import com.string.leeyun.stringting_android.API.register_image;
+import com.string.leeyun.stringting_android.API.post_qna;
+import com.string.leeyun.stringting_android.API.post_qna_list;
 import com.string.leeyun.stringting_android.API.register_message;
 import com.string.leeyun.stringting_android.API.userinfo;
 import com.google.gson.Gson;
@@ -33,7 +38,6 @@ import java.util.ArrayList;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
-import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -43,9 +47,14 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.string.leeyun.stringting_android.API.Rest_ApiService.API_IMAGE_URL;
 import static com.string.leeyun.stringting_android.API.Rest_ApiService.API_URL;
-import static com.string.leeyun.stringting_android.R.id.ll;
+import static com.string.leeyun.stringting_android.R.mipmap.e;
+import static java.lang.reflect.Array.getInt;
 
 public class ChatView extends Activity implements AdapterView.OnItemClickListener {
+    int question_id1;
+    int question_id2;
+    int question_id3;
+
     ListView m_ListView;
     ChatCustom m_Adapter;
     userinfo Userinfo = new userinfo();
@@ -58,6 +67,25 @@ public class ChatView extends Activity implements AdapterView.OnItemClickListene
     public int account_id_localdb;
     String token_localdb;
     String sex;
+    public int question_id;
+    post_qna PostQna;
+    ArrayList<String> Imageupload_countList;
+    ArrayList<get_introduction_question>GetIntroductionQuestion;
+
+    post_qna_list postQnaList;
+
+
+    String contents1;
+    String contents2;
+    String contents3;
+
+
+    ArrayList<Integer>question_id_array=new ArrayList<Integer>();
+
+    ArrayList<String>question_contents=new ArrayList<String>();
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,212 +100,27 @@ public class ChatView extends Activity implements AdapterView.OnItemClickListene
         savePreferences(Userinfo.getEmail());
         SharedPreferences pref = getSharedPreferences("Local_DB", MODE_PRIVATE);
         String test = pref.getString("ID","success");
+        int account_id= pref.getInt("account_id",0);
+        sex= pref.getString("sex","?");
         Log.v("localdbtest",test);
 
 
 
-        OkHttpClient.Builder client = new OkHttpClient.Builder();
-        okhttp_intercepter_token Okhttp_intercepter =new okhttp_intercepter_token();
-        Okhttp_intercepter.setAccount_id(account_id);
-        client.addInterceptor(new okhttp_intercepter_token());
         retrofit = new Retrofit.Builder()
                 .baseUrl(API_URL)
                 .addConverterFactory(GsonConverterFactory.create())
-                .client(client.build())
+//                .client(client.build())
                 .build();
         apiService= retrofit.create(Rest_ApiService.class);
         Intent intent=getIntent();
 
-        //local에 있는 fcm token 가져옴
-
-
-        //image resized ,small,middle,large
-        ArrayList<String> Imageupload_countList=new ArrayList<>();
-        ArrayList<String>Imageresized_small=new ArrayList<>();
-        ArrayList<String>Imageresized_middle=new ArrayList<>();
-        ArrayList<String>Imageresized_large=new ArrayList<>();
         Imageupload_countList=intent.getExtras().getStringArrayList("ProfileFilepath");
-        ArrayList<String>Imageprofile1=new ArrayList<>();
-        ArrayList<String>Imageprofile2=new ArrayList<>();
-        ArrayList<String>Imageprofile3=new ArrayList<>();
 
-       for (int i=0;i<Imageupload_countList.size();i++){
-           Imageresized_small.add(image_resize.bitmap_resized_small(Imageupload_countList.get(i)));
-            Imageresized_middle.add(image_resize.bitmap_resized_middle(Imageupload_countList.get(i)));
-           Imageresized_large.add(image_resize.bitmap_resized_large(Imageupload_countList.get(i)));
-
-           Log.e("image-small", Imageresized_small.get(i));
-           Log.e("image-middle", Imageresized_middle.get(i));
-           Log.e("image-large", Imageresized_middle.get(i));
-       }
-
-       if(Imageresized_small.get(0)!=null){
-           Imageprofile1.add(Imageresized_small.get(0));
-           Imageprofile1.add(Imageresized_middle.get(0));
-           Imageprofile1.add(Imageresized_large.get(0));
-       }
-       else if(Imageresized_small.get(1)!=null){
-
-           Imageprofile2.add(Imageresized_small.get(1));
-           Imageprofile2.add(Imageresized_middle.get(1));
-           Imageprofile2.add(Imageresized_large.get(1));
-        }
-        else if(Imageresized_small.get(2)!=null){
-           Imageprofile3.add(Imageresized_large.get(2));
-           Imageprofile3.add(Imageresized_middle.get(2));
-           Imageprofile3.add(Imageresized_large.get(2));
-       }
-
-
-        ArrayList<String>keyvalue=new ArrayList<>();
-        keyvalue.add("-small");
-        keyvalue.add("-medium");
-        keyvalue.add("-large");
-
-        MultipartBody.Part[] images1 = new MultipartBody.Part[Imageprofile1.size()];
-
-        for (int index = 0; index < Imageprofile1.size(); index++) {
-            Log.e("Imageprofile1",Imageprofile1.get(index));
-            File file = new File(Imageprofile1.get(index));
-            RequestBody surveyBody = RequestBody.create(MediaType.parse("image/*"), file);
-            images1[index] = MultipartBody.Part.createFormData("image"+keyvalue.get(index), file.getName(), surveyBody);
-        }
 
 
 
         sex=local_sex();
         Log.e("sex",sex);
-
-
-        Thread mTread =new Thread() {
-            public void run() {
-                try
-
-                {
-                    if (sex.equals("male")){
-                        Call<join> getPostUserinfo = apiService.getPostUserinfo(Userinfo);
-                        getPostUserinfo.enqueue(new Callback<join>() {
-                            @Override
-                            public void onResponse(Call<join> call, Response<join> response) {
-
-                                join gsonresponse=response.body();
-                                Log.e("onresponse_join", gsonresponse.getResult());
-                                Log.e("onresponse", String.valueOf(response.code()));
-                                Log.e("onresponse", "success");
-                                account_id=gsonresponse.getAccount_id();
-                                Log.e("account_id", String.valueOf(account_id));
-                                Log.e("fcm_token",String.valueOf(Userinfo.getFcm_token()));
-
-                                if (gsonresponse.getToken()!=null){
-                                    save_token(gsonresponse.getToken());
-                                }
-                                save_accountid(gsonresponse.getAccount_id());
-                                save_token(gsonresponse.getToken());
-                                SharedPreferences pref = getSharedPreferences("Local_DB", MODE_PRIVATE);
-                                account_id_localdb = pref.getInt("account_id",0);
-                                Log.e("local_account", Integer.toString(account_id_localdb));
-                                token_localdb=pref.getString("token","?");
-                                Log.e("local_token",String.valueOf(token_localdb));
-
-
-
-                            }
-
-                            @Override
-                            public void onFailure(Call<join> call, Throwable t) {
-                                Log.d("sam", t.toString());
-                            }
-
-                        });
-
-                    }
-                    else{
-                        Call<join> getPostUserinfo = apiService.getPostUserinfoF(Userinfo);
-                        getPostUserinfo.enqueue(new Callback<join>() {
-                            @Override
-                            public void onResponse(Call<join> call, Response<join> response) {
-
-                                join gsonresponse=response.body();
-                                Log.e("onresponse_join", gsonresponse.getResult());
-                                Log.e("onresponse", String.valueOf(response.code()));
-                                Log.e("onresponse", "success");
-                                account_id=gsonresponse.getAccount_id();
-                                Log.e("account_id", String.valueOf(account_id));
-                                Log.e("fcm_token",String.valueOf(Userinfo.getFcm_token()));
-
-                                if (gsonresponse.getToken()!=null){
-                                    save_token(gsonresponse.getToken());
-                                }
-                                if (gsonresponse.getAccount_id()!=0){
-                                    save_accountid(gsonresponse.getAccount_id());
-                                }
-                                save_accountid(gsonresponse.getAccount_id());
-                                save_token(gsonresponse.getToken());
-                                SharedPreferences pref = getSharedPreferences("Local_DB", MODE_PRIVATE);
-                                account_id_localdb = pref.getInt("account_id",0);
-                                Log.e("local_account", String.valueOf(account_id_localdb));
-                                token_localdb=pref.getString("token","?");
-                                Log.e("loacal_token",String.valueOf(token_localdb));
-
-                            }
-
-                            @Override
-                            public void onFailure(Call<join> call, Throwable t) {
-                                Log.d("sam", t.toString());
-                            }
-
-                        });
-                    }
-
-
-                } catch (Exception e)
-
-                {
-
-                }
-            }
-        };
-
-
-
-        mTread.start();
-        OkHttpClient.Builder client1 = new OkHttpClient.Builder();
-        okhttp_intercepter_token Okhttp_intercepter1 =new okhttp_intercepter_token();
-        Okhttp_intercepter1.setAccount_id(account_id_localdb);
-        Okhttp_intercepter1.setToken(token_localdb);
-        client.addInterceptor(new okhttp_intercepter_token());
-        retrofit = new Retrofit.Builder()
-                .baseUrl(API_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .client(client1.build())
-                .build();
-        apiService= retrofit.create(Rest_ApiService.class);
-        try {
-
-            mTread.join();
-
-            Call<register_image> call = apiService.post_register_image(sex,account_id,images1);
-            call.enqueue(new Callback<register_image>() {
-                @Override
-                public void onResponse(Call<register_image> call, Response<register_image> response) {
-                    register_image imageresponse=response.body();
-                    Log.e("onregistImage",imageresponse.getResult());
-
-
-                }
-
-                @Override
-                public void onFailure(Call<register_image> call, Throwable t) {
-                    Log.e("onregistImage_fail",t.toString());
-                }
-            });
-
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-
-
 
 
 
@@ -290,27 +133,88 @@ public class ChatView extends Activity implements AdapterView.OnItemClickListene
         // ListView에 어댑터 연결
         m_ListView.setAdapter(m_Adapter);
 
-        m_Adapter.add("안녕하세요! \n" +
-                "회원정보를 입력하시느라 고생많으셨어요~\n" +
-                "이제 마지막 단계인데요!\n" +
-                "제가 하는 질문을 이상형인 사람이 질문한다고생각해주시고 정성스럽게 답장해주세요!", 0);
 
+
+
+
+
+
+        Thread mTread_add_question =new Thread() {
+            public void run() {
+                try
+                {
+
+                    try{
+
+                        get_introduction_excute asyncTask = new get_introduction_excute();
+                        asyncTask.execute();
+                        asyncTask.getStatus();
+
+                        if (asyncTask.getStatus() == android.os.AsyncTask.Status.PENDING) {
+                            SharedPreferences pref = getSharedPreferences("Local_DB", MODE_PRIVATE);
+                            question_id_array.add(pref.getInt("question1",0));
+                            Log.e("ss", String.valueOf(question_id_array.get(0)));
+                            asyncTask.execute();
+                        } else if (asyncTask.getStatus() == android.os.AsyncTask.Status.FINISHED) {
+                            SharedPreferences pref = getSharedPreferences("Local_DB", MODE_PRIVATE);
+                            question_id_array.add(pref.getInt("question1",0));
+                            Log.e("ss", String.valueOf(question_id_array.get(0)));
+                            set_question_excute asyncTask_set=new set_question_excute();
+                            asyncTask_set.execute();
+                        }else{
+                            SharedPreferences pref = getSharedPreferences("Local_DB", MODE_PRIVATE);
+                            question_id_array.add(pref.getInt("question1",0));
+                            Log.e("ss", String.valueOf(question_id_array.get(0)));
+                            set_question_excute asyncTask_set=new set_question_excute();
+                            asyncTask_set.execute();
+                        }
+
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+
+
+                } catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+            }
+
+        };
+
+        mTread_add_question.start();
+        try {
+            mTread_add_question.join();
+
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
 
 
         findViewById(R.id.send_btn).setOnClickListener(new Button.OnClickListener() {
-            int i=1;
+            int i=0;
             @Override
             public void onClick(View v) {
 
+
                     EditText editText = (EditText) findViewById(R.id.input_text);
                     String inputValue = editText.getText().toString();
-                    if(inputValue.length()>=5){
+                    PostQna.setQuestion_id(question_id_array.get(i));
+                    PostQna.setAnswer(inputValue);
+                    postQnaList.getPostQna().add(PostQna);
+
+
+                if(inputValue.length()>=5){
+
                         editText.setText("");
                         refresh(inputValue, 1);
-                        m_Adapter.add("case" + i, 0);
-                        i++;
+                     m_Adapter.add(question_contents.get(i+1), 0);
+
+                    i++;
                     }
                 if(i==5){
                     //키보드 내려가는거
@@ -354,10 +258,7 @@ public class ChatView extends Activity implements AdapterView.OnItemClickListene
             }
         );
 
-
     }
-
-
 
 
     private void refresh (String inputValue, int _str) {
@@ -377,13 +278,33 @@ public class ChatView extends Activity implements AdapterView.OnItemClickListene
     }
 
     public void onClick_TabbedBar(View v){
-        Intent intent = new Intent(getApplicationContext(), TabbedBar.class);
+        Intent intent = new Intent(getApplicationContext(), Mediate.class);
+
+       intent.putExtra("ProfileFilepath",Imageupload_countList);
+        try {
+            Call<post_qna_list> PostQnaList1 = apiService.post_qna_list(postQnaList);
+            PostQnaList1.enqueue(new Callback<post_qna_list>() {
+                @Override
+                public void onResponse(Call<post_qna_list> call, Response<post_qna_list> response) {
+
+                    post_qna_list gsonresponse = response.body();
+                    Log.e("onresponse_join", gsonresponse.getResult());
+                    Log.e("onresponse", String.valueOf(response.code()));
+                    Log.e("onresponse", "success");
 
 
+                }
 
+                @Override
+                public void onFailure(Call<post_qna_list> call, Throwable t) {
+                    Log.d("sam", t.toString());
+                }
 
+            });
 
-
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         startActivity(intent);
     }
 
@@ -395,18 +316,20 @@ public class ChatView extends Activity implements AdapterView.OnItemClickListene
         editor.commit();
     }
 
-        public void save_accountid(int data){
+    public void save_accountid(int data){
             SharedPreferences pref = getSharedPreferences("Local_DB", MODE_PRIVATE);
             SharedPreferences.Editor editor = pref.edit();
             editor.putInt("account_id",data);
             editor.clear();
             editor.commit();
-        }
+    }
 
-    public void save_token(String data){
+    public void save_token(String token,int account_id,String sex){
         SharedPreferences pref = getSharedPreferences("Local_DB", MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
-        editor.putString("token",data);
+        editor.putString("token",token);
+        editor.putInt("account_id",account_id);
+        editor.putString("sex",sex);
         editor.clear();
         editor.commit();
     }
@@ -444,7 +367,7 @@ public class ChatView extends Activity implements AdapterView.OnItemClickListene
 
     public String local_sex(){
         SharedPreferences pref=getSharedPreferences("Local_DB", MODE_PRIVATE);
-        String get_sex=pref.getString("sex","male");
+        String get_sex=pref.getString("sex","notfound");
         return get_sex;
     }
 
@@ -454,4 +377,130 @@ public class ChatView extends Activity implements AdapterView.OnItemClickListene
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
     }
+
+    public void save_get_question(String token,int account_id,String sex){
+        SharedPreferences pref = getSharedPreferences("Local_DB", MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putString("token",token);
+        editor.putInt("account_id",account_id);
+        editor.putString("sex",sex);
+        editor.clear();
+        editor.commit();
+    }
+
+
+    class get_introduction_excute extends AsyncTask<String, Integer, Long> {
+     @Override
+     protected void onCancelled()
+    {
+         super.onCancelled();
+      }
+        @Override
+        protected void onPostExecute(Long result) {
+             super.onPostExecute(result);
+
+
+
+
+
+        }
+             @Override
+         protected void onPreExecute() {
+
+             super.onPreExecute();
+            }
+            @Override
+            protected void onProgressUpdate(Integer... values) {
+
+
+            }
+         @Override protected Long doInBackground(String... params) {
+             String get="get";
+
+
+             Call<get_introduction_questionlist> PostQnaList = apiService.get_introduction_questionlist(get);
+             PostQnaList.enqueue(new Callback<get_introduction_questionlist>() {
+                 @Override
+                 public void onResponse(Call<get_introduction_questionlist> call, Response<get_introduction_questionlist> response) {
+                     GetIntroductionQuestion = response.body().getQuestions();
+
+
+                     question_id1=GetIntroductionQuestion.get(0).getId();
+                     question_id2=GetIntroductionQuestion.get(1).getId();
+                     question_id3=GetIntroductionQuestion.get(2).getId();
+                     contents1=GetIntroductionQuestion.get(0).getContents();
+                     contents2=GetIntroductionQuestion.get(1).getContents();
+                     contents3=GetIntroductionQuestion.get(2).getContents();
+
+                     Log.e("onresponse_get_question", GetIntroductionQuestion.get(0).getContents());
+
+                     Log.e("onresponse_get_ques" +
+                             "tion", String.valueOf(GetIntroductionQuestion.get(0).getId()));
+
+
+                     SharedPreferences pref = getSharedPreferences("Local_DB", MODE_PRIVATE);
+                     SharedPreferences.Editor editor = pref.edit();
+                     editor.putInt("question1",question_id1);
+                     editor.putInt("question2",question_id2);
+                     editor.putInt("question3",question_id3);
+                     editor.putString("contents1",contents1);
+                     editor.putString("contents2",contents2);
+                     editor.putString("contents3",contents3);
+                     editor.putString("sex",sex);
+                     editor.clear();
+                     editor.commit();
+
+                     m_Adapter.add(GetIntroductionQuestion.get(0).getContents(),0);
+
+
+
+                 }
+
+                 @Override
+                 public void onFailure(Call<get_introduction_questionlist> call, Throwable t) {
+                     Log.d("sam", t.toString());
+                 }
+
+             });
+
+             return null ;
+         }
+    }
+
+
+    class set_question_excute extends AsyncTask<String, Integer, Long> {
+        @Override
+        protected void onCancelled()
+        {
+            super.onCancelled();
+        }
+        @Override
+        protected void onPostExecute(Long result) {
+            super.onPostExecute(result);
+
+        }
+        @Override
+        protected void onPreExecute() {
+
+            super.onPreExecute();
+        }
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+
+
+        }
+        @Override protected Long doInBackground(String... params) {
+            SharedPreferences pref = getSharedPreferences("Local_DB", MODE_PRIVATE);
+            question_id_array.add(pref.getInt("question1",0));
+            question_id_array.add(question_id2=pref.getInt("question2",0));
+            question_id_array.add(question_id3=pref.getInt("question3",0));
+            question_contents.add(contents1=pref.getString("contents1","0"));
+            question_contents.add(contents2=pref.getString("contents2","0"));
+            question_contents.add(contents3=pref.getString("contents3","0"));
+            Log.e("question_id1", String.valueOf(question_id1));
+            return null ;
+        }
+    }
+
+
 }

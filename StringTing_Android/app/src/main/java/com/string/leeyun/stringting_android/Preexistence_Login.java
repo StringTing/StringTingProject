@@ -39,7 +39,6 @@ import org.json.JSONObject;
 
 import java.util.Arrays;
 
-import static com.string.leeyun.stringting_android.MainActivity.Email;
 
 /**
  * Created by leeyun on 2017. 8. 24..
@@ -49,7 +48,7 @@ public class Preexistence_Login extends Activity {
 
 
     private CallbackManager callbackManager;
-
+    String Email;
     SessionCallback callback;
 
 

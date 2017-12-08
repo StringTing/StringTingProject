@@ -26,6 +26,7 @@ import android.support.v7.app.AlertDialog;
 
 import com.string.leeyun.stringting_android.API.ResponseApi;
 import com.string.leeyun.stringting_android.API.Rest_ApiService;
+import com.string.leeyun.stringting_android.API.join;
 import com.string.leeyun.stringting_android.API.message;
 import com.string.leeyun.stringting_android.API.userinfo;
 
@@ -35,6 +36,9 @@ import java.io.FileOutputStream;
 import java.util.ArrayList;
 
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -49,6 +53,7 @@ import static com.string.leeyun.stringting_android.R.id.Spinner_city;
 import static com.string.leeyun.stringting_android.R.id.Spinner_drink;
 import static com.string.leeyun.stringting_android.R.id.Spinner_education;
 import static com.string.leeyun.stringting_android.R.id.Spinner_religion;
+import static com.string.leeyun.stringting_android.R.id.sex;
 import static com.string.leeyun.stringting_android.R.layout.spinner_item;
 
 
@@ -72,6 +77,10 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
     String birthdayMonth;
     String birthdayDay;
     String real_album_path;
+    int account_id;
+    String sex;
+    String token_localdb;
+    int account_id_localdb;
     message Message = new message();
 
     File Postfile;
@@ -90,6 +99,48 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
         Intent intent = new Intent(getApplicationContext(), ChatView.class);
         intent.putExtra("UserInfo",UserInfo);
         intent.putExtra("ProfileFilepath",Imageupload_countList);
+        SharedPreferences pref = getSharedPreferences("Local_DB", MODE_PRIVATE);
+        sex = pref.getString("sex","sex");
+        UserInfo.setSex(sex);
+
+        try {
+
+            Call<join> getPostUserinfo = apiService.getPostUserinfo(UserInfo);
+            getPostUserinfo.enqueue(new Callback<join>() {
+                @Override
+                public void onResponse(Call<join> call, Response<join> response) {
+
+                    join gsonresponse=response.body();
+                    Log.e("onresponse_join", gsonresponse.getResult());
+                    Log.e("onresponse", String.valueOf(response.code()));
+                    Log.e("onresponse", "success");
+                    account_id=gsonresponse.getAccount_id();
+                    Log.e("account_id", String.valueOf(account_id));
+                    Log.e("fcm_token",String.valueOf(UserInfo.getFcm_token()));
+
+                    if (gsonresponse.getToken()!=null){
+                        save_token(gsonresponse.getToken(),gsonresponse.getAccount_id(),sex);
+                    }
+                    SharedPreferences pref = getSharedPreferences("Local_DB", MODE_PRIVATE);
+                    account_id_localdb = pref.getInt("account_id",0);
+                    Log.e("local_account", Integer.toString(account_id_localdb));
+                    token_localdb=pref.getString("token","?");
+                    Log.e("local_token",String.valueOf(token_localdb));
+
+                }
+
+                @Override
+                public void onFailure(Call<join> call, Throwable t) {
+                    Log.d("sam", t.toString());
+                }
+
+            });
+
+        } catch (Exception e)
+
+        {
+
+        }
         startActivity(intent);
     }
 
@@ -457,21 +508,24 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
         String id=i.getExtras().getString("ID");
         String PW=i.getExtras().getString("PW");
         String Setting_id=i.getExtras().getString("setformat");
+        String fcm_token=i.getExtras().getString("fcm_token");
         Log.e("Test", id);
         Log.e("Test1", String.valueOf(Setting_id));
+
         UserInfo.setEmail(id);
         UserInfo.setPassword(PW);
         UserInfo.setLogin_format(Setting_id);
         UserInfo.setEmail(id);
         SharedPreferences fcm = getSharedPreferences("Local_DB", MODE_PRIVATE);
         try {
-            String fcm_token = fcm.getString("fcm_token", "success");
+            fcm_token = fcm.getString("fcm_token", "success");
             Log.v("fcm_token",fcm_token);
-            UserInfo.setFcm_token(fcm_token);
-            if (fcm_token.equals(null)){
-                Log.e("localid is null","fail");
 
-            }
+                Log.e("localid is null","fail");
+                UserInfo.setFcm_token(fcm_token);
+
+
+
         }catch (Exception e){
             e.printStackTrace();
             Log.e("can not get localid","fail");
@@ -883,6 +937,16 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
         editor.clear();
         editor.commit();
     }
+    public void save_token(String token,int account_id,String sex){
+        SharedPreferences pref = getSharedPreferences("Local_DB", MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putString("token",token);
+        editor.putInt("account_id",account_id);
+        editor.putString("sex",sex);
+        editor.clear();
+        editor.commit();
+    }
+
 
 
 }

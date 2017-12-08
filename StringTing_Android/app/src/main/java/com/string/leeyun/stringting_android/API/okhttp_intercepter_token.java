@@ -58,9 +58,9 @@ public class okhttp_intercepter_token implements Interceptor {
 
         newRequest = builder.newBuilder()
                 .addHeader("Context-Type","application/json")
-                .addHeader("access-token","DGQYJH2DQO3364SZP3IS6KD3RZKOROUM")
-                .addHeader("account-id", String.valueOf(37))
-                .addHeader("account-sex","male")
+                .addHeader("access-token",token)
+                .addHeader("account-id", String.valueOf(account_id))
+                .addHeader("account-sex",sex)
                 .build();
 
 
