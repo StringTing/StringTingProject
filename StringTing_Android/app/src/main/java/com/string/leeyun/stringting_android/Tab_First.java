@@ -116,8 +116,6 @@ public class Tab_First extends Fragment implements View.OnClickListener {
         //api정의
 
 
-
-
         try {
             Thread.sleep(2000);
             SharedPreferences pref = this.getActivity().getSharedPreferences("Local_DB", MODE_PRIVATE);
@@ -164,6 +162,15 @@ public class Tab_First extends Fragment implements View.OnClickListener {
 
             }
         });
+
+        retrofit = new Retrofit.Builder()
+                .baseUrl(API_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(client1.build())
+                .build();
+
+
+        apiService= retrofit.create(Rest_ApiService.class);
 
         try {
             Call<Im_get_today_introduction> call = apiService.Get_today_introduction(sex, account_id);

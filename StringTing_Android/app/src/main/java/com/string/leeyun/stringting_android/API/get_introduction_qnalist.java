@@ -14,6 +14,7 @@ public class get_introduction_qnalist {
     ArrayList<get_introduction_qna>qna_list;
 
 
+
     public ArrayList<get_introduction_qna> getQna_list() {
         return qna_list;
     }

@@ -30,7 +30,7 @@ public interface Rest_ApiService {
 
         public  static  final String API_URL="http://115.68.226.54:3825/information/";
         public static final String API_IMAGE_URL="http://115.68.226.54:3825/profile/";
-        public  static  final String API_URLTest="http://192.168.0.8:8000/information/";
+        public  static  final String API_URLTest="http://172.30.1.7:3825/information/";
 
 
 
@@ -44,7 +44,7 @@ public interface Rest_ApiService {
         Call<check_login>post_check_login(@Body check_login CheckLogin);
 
         @POST("register/introduction-qna/")
-        Call<post_qna_list>post_qna_list(@Body String postQnaList);
+        Call<post_qna_list>post_qna_list(@Body post_qna_list postQnaList);
 
 
 
@@ -76,8 +76,8 @@ public interface Rest_ApiService {
         @GET("{sex}/{account_id}/get/matched-account/")
         Call<get_matched_accountList> get_matched_account(@Path("sex")String matched_sex, @Path("account_id")int matched_account_id);
 
-        @GET("{sex}/get/message-list/{group_id}/")
-        Call<get_message_list>get_message_list(@Path("group_id")int group_id);
+        @GET("get/message-list/{group_id}/")
+        Call<get_message_list>get_message_list_api(@Path("group_id")int group_id);
 
         @GET("{sex}/{account-id}/get/introduction-qna")
         Call<get_introduction_qnalist>get_introduction_qnalist(@Path("sex")String introduction_sex, @Path("account-id") int introduction_account);

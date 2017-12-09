@@ -141,7 +141,8 @@ public class Login_local extends Activity {
                             intent_ghost.putExtra("setformat", "EMAIL");
                             startActivity(intent_ghost);
                         } else if (gsonresponse.getStatus().equals("INREVIEW")) {
-                            startActivity(intent_interview);
+                            //test때문에 active로 바꿔둠
+                            startActivity(intent_activate);
                         } else if (gsonresponse.getStatus().equals("REJECTED")) {
 
                         }

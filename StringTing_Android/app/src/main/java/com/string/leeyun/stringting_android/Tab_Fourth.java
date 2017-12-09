@@ -2,6 +2,7 @@ package com.string.leeyun.stringting_android;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -21,10 +22,14 @@ import com.string.leeyun.stringting_android.API.message;
 import com.string.leeyun.stringting_android.API.register_message;
 import com.string.leeyun.stringting_android.API.userinfo;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import okhttp3.Interceptor;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -32,6 +37,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import static android.R.attr.data;
+import static android.content.Context.MODE_PRIVATE;
 import static android.media.CamcorderProfile.get;
 import static com.string.leeyun.stringting_android.API.Rest_ApiService.API_URL;
 import static com.string.leeyun.stringting_android.R.mipmap.t;
@@ -45,6 +51,10 @@ public class Tab_Fourth extends Fragment {
     Rest_ApiService apiService;
     Retrofit retrofit;
     ArrayList<get_matched_account>get_matched_accounts;
+    String token;
+    int account_id;
+    String sex;
+
 
     public Tab_Fourth() {
         // Required empty public constructor
@@ -53,6 +63,7 @@ public class Tab_Fourth extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        get_local_data();
     }
 
     @Override
@@ -72,15 +83,39 @@ public class Tab_Fourth extends Fragment {
         mAdapter = new Tab_Fourth_Custom(list);
         lv.setAdapter(mAdapter);
 
-        retrofit = new Retrofit.Builder().baseUrl(API_URL).addConverterFactory(GsonConverterFactory.create()).build();
+
+        OkHttpClient.Builder client1 = new OkHttpClient.Builder();
+        client1.addInterceptor(new Interceptor() {
+            @Override
+            public okhttp3.Response intercept(Chain chain) throws IOException {
+
+                Request builder = chain.request();
+                Request newRequest;
+
+
+                newRequest = builder.newBuilder()
+                        .addHeader("access-token",token)
+                        .addHeader("account-id", String.valueOf(account_id))
+                        .addHeader("account-sex",sex)
+                        .addHeader("Content-Type","application/json")
+                        .build();
+
+
+                return chain.proceed(newRequest);
+
+            }
+        });
+
+        retrofit = new Retrofit.Builder()
+                .baseUrl(API_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(client1.build())
+                .build();
+
+
         apiService= retrofit.create(Rest_ApiService.class);
-  /*      ImageView pro= null;
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.kakao_default_profile_image);
-        pro.setBackgroundResource(R.drawable.circlr_border);
-        pro.setImageBitmap(bitmap);
 
 
-*/
         //데이터 넣는거
        // list.add(new listItem(iv,"이름","내용","시간"));
 
@@ -211,5 +246,14 @@ public class Tab_Fourth extends Fragment {
         }
 
 
+    }
+
+    public void get_local_data(){
+        SharedPreferences pref = this.getActivity().getSharedPreferences("Local_DB", MODE_PRIVATE);
+        account_id = pref.getInt("account_id",0);
+        Log.e("local_account", Integer.toString(account_id));
+        token=pref.getString("token","?");
+        sex=pref.getString("sex","0");
+        Log.e("local_token",String.valueOf(token));
     }
 }

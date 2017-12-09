@@ -26,6 +26,7 @@ import com.string.leeyun.stringting_android.API.get_introduction_questionlist;
 import com.string.leeyun.stringting_android.API.join;
 import com.string.leeyun.stringting_android.API.post_qna;
 import com.string.leeyun.stringting_android.API.post_qna_list;
+import com.string.leeyun.stringting_android.API.post_qna_list_json;
 import com.string.leeyun.stringting_android.API.register_message;
 import com.string.leeyun.stringting_android.API.userinfo;
 import com.google.gson.Gson;
@@ -40,6 +41,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import okhttp3.Interceptor;
 import okhttp3.MediaType;
@@ -53,8 +55,10 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
 import static com.string.leeyun.stringting_android.API.Rest_ApiService.API_IMAGE_URL;
 import static com.string.leeyun.stringting_android.API.Rest_ApiService.API_URL;
+import static com.string.leeyun.stringting_android.API.Rest_ApiService.API_URLTest;
 import static com.string.leeyun.stringting_android.R.mipmap.e;
 import static java.lang.reflect.Array.getInt;
 
@@ -77,10 +81,19 @@ public class ChatView extends Activity implements AdapterView.OnItemClickListene
     post_qna PostQna=new post_qna();
     ArrayList<String> Imageupload_countList;
     ArrayList<get_introduction_question>GetIntroductionQuestion;
-    ArrayList<post_qna>postQnaList=new ArrayList<post_qna>();
+
+
+    public ArrayList<post_qna>postQnaList=new ArrayList<post_qna>();
 
 
 
+    public ArrayList<post_qna> getPostQnaList() {
+        return postQnaList;
+    }
+
+
+
+    post_qna_list postQnaList1=new post_qna_list();
     ArrayList<Integer>question_id_array;
 
     ArrayList<String>question_contents=new ArrayList<String>();
@@ -91,6 +104,8 @@ public class ChatView extends Activity implements AdapterView.OnItemClickListene
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_view);
+
+
 
 
         Userinfo = (userinfo)getIntent().getSerializableExtra("UserInfo");
@@ -219,7 +234,7 @@ public class ChatView extends Activity implements AdapterView.OnItemClickListene
 
     public void onClick_TabbedBar(View v){
         Intent intent = new Intent(getApplicationContext(), Mediate.class);
-
+        get_local_data();
        intent.putExtra("ProfileFilepath",Imageupload_countList);
         JSONObject obj = new JSONObject();
         try {
@@ -240,6 +255,7 @@ public class ChatView extends Activity implements AdapterView.OnItemClickListene
         }
 
         Log.e("account-id", String.valueOf(account_id));
+
 
 
         OkHttpClient.Builder client1 = new OkHttpClient.Builder();
@@ -263,11 +279,21 @@ public class ChatView extends Activity implements AdapterView.OnItemClickListene
 
             }
         });
+        retrofit = new Retrofit.Builder()
+                .baseUrl(API_URLTest)
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(client1.build())
+                .build();
+
         apiService1= retrofit.create(Rest_ApiService.class);
 
 
+
+
+//172.30.1.7:3825
+        //test server
         try {
-            final Call<post_qna_list> PostQnaList1 = apiService1.post_qna_list(String.valueOf(obj));
+            final Call<post_qna_list> PostQnaList1 = apiService1.post_qna_list(postQnaList1);
             PostQnaList1.enqueue(new Callback<post_qna_list>() {
                 @Override
                 public void onResponse(Call<post_qna_list> call, Response<post_qna_list> response) {
@@ -277,7 +303,6 @@ public class ChatView extends Activity implements AdapterView.OnItemClickListene
                     Log.e("onresponse_post_qna_list", gsonresponse.getResult());
                     Log.e("onresponse", String.valueOf(response.code()));
                     Log.e("onresponse", "success");
-                    Log.e("onresponse",gsonresponse.getMessage());
 
 
                 }
@@ -389,12 +414,13 @@ public class ChatView extends Activity implements AdapterView.OnItemClickListene
         EditText editText = (EditText) findViewById(R.id.input_text);
         String inputValue = editText.getText().toString();
 
+
         PostQna.setQuestion_id(question_id_array.get(0));
         Log.e("dd", String.valueOf(question_id_array.get(0)));
         Log.e("dd1",inputValue);
         PostQna.setAnswer(inputValue);
         postQnaList.add(PostQna);
-
+        postQnaList1.getPostQna().add(PostQna);
 
         if(inputValue.length()>=5){
 
