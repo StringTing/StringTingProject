@@ -93,6 +93,7 @@
             <RelativeLayout
                 android:layout_width="75dp"
                 android:layout_height="75dp"
+                android:id="@+id/coin_charge"
                 >
 
                 <ImageView
@@ -120,7 +121,8 @@
                 <RelativeLayout
                     android:layout_width="75dp"
                     android:layout_height="75dp"
-                    android:layout_marginLeft="55dp">
+                    android:layout_marginLeft="55dp"
+                    android:id="@id/notice">
 
                     <ImageView
                         android:id="@+id/notice"
@@ -146,7 +148,8 @@
                 <RelativeLayout
                     android:layout_width="75dp"
                     android:layout_height="75dp"
-                    android:layout_marginLeft="55dp">
+                    android:layout_marginLeft="55dp"
+                    android:id="@+id/push_setting">
 
                     <ImageView
                         android:id="@+id/bell"
@@ -183,6 +186,7 @@
                 <RelativeLayout
                     android:layout_width="75dp"
                     android:layout_height="75dp"
+                    android:id="@+id/inquire"
                     >
 
                     <ImageView
