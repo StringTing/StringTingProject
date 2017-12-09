@@ -2,6 +2,8 @@ package com.string.leeyun.stringting_android.API;
 
 import com.google.gson.JsonArray;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,12 +43,10 @@ public interface Rest_ApiService {
         @POST("check/login/")
         Call<check_login>post_check_login(@Body check_login CheckLogin);
 
-        @POST("register/introdiction-qna/")
-        Call<post_qna_list>post_qna_list(@Body post_qna_list postQnaList);
+        @POST("register/introduction-qna/")
+        Call<post_qna_list>post_qna_list(@Body String postQnaList);
 
-        @Multipart
-        @POST("register/image/")
-        Call<ResponseApi> getPostImage(@Path("sex")String RegisterImage_sex,@Path("account_id")String account_id,@Part MultipartBody.Part image);
+
 
 
         @POST("register/like/")
@@ -69,7 +69,7 @@ public interface Rest_ApiService {
         Call<Im_get_today_introduction>Get_today_introduction(@Path("sex")String today_intro_sex, @Path("account_id")int today_introduction_id);
 
         @Multipart
-        @POST("{sex}/{account_id}/register/image/")
+        @POST("register/image/")
         Call<register_image>post_register_image(@Part MultipartBody.Part[] images);
 
 

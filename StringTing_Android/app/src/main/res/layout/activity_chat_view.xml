@@ -115,6 +115,7 @@
                 android:layout_marginBottom="7dp"
                 android:layout_marginRight="7dp"
                 android:textColor="@color/white"
+                android:onClick="send_question"
                 android:background="@drawable/rounded_sendbtn"
                 android:text="전송" />
 

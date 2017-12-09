@@ -10,6 +10,17 @@ public class post_qna_list {
 
     private ArrayList<post_qna>PostQna;
     private String result;
+    private String message;
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+
+        this.message = message;
+    }
+
     public void setPostQna(ArrayList<post_qna> postQna) {
         PostQna = postQna;
     }

@@ -30,14 +30,22 @@ import com.string.leeyun.stringting_android.API.register_message;
 import com.string.leeyun.stringting_android.API.userinfo;
 import com.google.gson.Gson;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 
+import okhttp3.Interceptor;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -51,36 +59,29 @@ import static com.string.leeyun.stringting_android.R.mipmap.e;
 import static java.lang.reflect.Array.getInt;
 
 public class ChatView extends Activity implements AdapterView.OnItemClickListener {
-    int question_id1;
-    int question_id2;
-    int question_id3;
 
+    int i=0;
     ListView m_ListView;
     ChatCustom m_Adapter;
     userinfo Userinfo = new userinfo();
     register_message RegisterMessage =new register_message();
     Rest_ApiService apiService;
+    Rest_ApiService apiService1;
     Retrofit retrofit;
     static  int position;
-    public int account_id;
-    public  String fcm_token;
-    public int account_id_localdb;
-    String token_localdb;
+     int account_id;
+    String fcm_token;
+    String token;
     String sex;
     public int question_id;
-    post_qna PostQna;
+    post_qna PostQna=new post_qna();
     ArrayList<String> Imageupload_countList;
     ArrayList<get_introduction_question>GetIntroductionQuestion;
-
-    post_qna_list postQnaList;
-
-
-    String contents1;
-    String contents2;
-    String contents3;
+    ArrayList<post_qna>postQnaList=new ArrayList<post_qna>();
 
 
-    ArrayList<Integer>question_id_array=new ArrayList<Integer>();
+
+    ArrayList<Integer>question_id_array;
 
     ArrayList<String>question_contents=new ArrayList<String>();
 
@@ -99,8 +100,9 @@ public class ChatView extends Activity implements AdapterView.OnItemClickListene
 
         savePreferences(Userinfo.getEmail());
         SharedPreferences pref = getSharedPreferences("Local_DB", MODE_PRIVATE);
-        String test = pref.getString("ID","success");
-        int account_id= pref.getInt("account_id",0);
+        String test = pref.getString("ID","fail");
+        account_id= pref.getInt("account_id",0);
+        token = pref.getString("token","0");
         sex= pref.getString("sex","?");
         Log.v("localdbtest",test);
 
@@ -134,103 +136,44 @@ public class ChatView extends Activity implements AdapterView.OnItemClickListene
         m_ListView.setAdapter(m_Adapter);
 
 
+        question_id_array=new ArrayList<Integer>();
 
-
-
-
-
-        Thread mTread_add_question =new Thread() {
-            public void run() {
-                try
-                {
-
-                    try{
-
-                        get_introduction_excute asyncTask = new get_introduction_excute();
-                        asyncTask.execute();
-                        asyncTask.getStatus();
-
-                        if (asyncTask.getStatus() == android.os.AsyncTask.Status.PENDING) {
-                            SharedPreferences pref = getSharedPreferences("Local_DB", MODE_PRIVATE);
-                            question_id_array.add(pref.getInt("question1",0));
-                            Log.e("ss", String.valueOf(question_id_array.get(0)));
-                            asyncTask.execute();
-                        } else if (asyncTask.getStatus() == android.os.AsyncTask.Status.FINISHED) {
-                            SharedPreferences pref = getSharedPreferences("Local_DB", MODE_PRIVATE);
-                            question_id_array.add(pref.getInt("question1",0));
-                            Log.e("ss", String.valueOf(question_id_array.get(0)));
-                            set_question_excute asyncTask_set=new set_question_excute();
-                            asyncTask_set.execute();
-                        }else{
-                            SharedPreferences pref = getSharedPreferences("Local_DB", MODE_PRIVATE);
-                            question_id_array.add(pref.getInt("question1",0));
-                            Log.e("ss", String.valueOf(question_id_array.get(0)));
-                            set_question_excute asyncTask_set=new set_question_excute();
-                            asyncTask_set.execute();
-                        }
-
-                    }catch (Exception e){
-                        e.printStackTrace();
-                    }
-
-
-                } catch (Exception e)
-                {
-                    e.printStackTrace();
-                }
-            }
-
-        };
-
-        mTread_add_question.start();
-        try {
-            mTread_add_question.join();
-
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-
-
-
-        findViewById(R.id.send_btn).setOnClickListener(new Button.OnClickListener() {
-            int i=0;
+        String get="get";
+        Call<get_introduction_questionlist> PostQnaList = apiService.get_introduction_questionlist(get);
+        PostQnaList.enqueue(new Callback<get_introduction_questionlist>() {
             @Override
-            public void onClick(View v) {
+            public void onResponse(Call<get_introduction_questionlist> call, Response<get_introduction_questionlist> response) {
+                GetIntroductionQuestion = response.body().getQuestions();
 
 
-                    EditText editText = (EditText) findViewById(R.id.input_text);
-                    String inputValue = editText.getText().toString();
-                    PostQna.setQuestion_id(question_id_array.get(i));
-                    PostQna.setAnswer(inputValue);
-                    postQnaList.getPostQna().add(PostQna);
+                Log.e("onresponse_get_question", GetIntroductionQuestion.get(0).getContents());
+
+                Log.e("onresponse_get_ques" +
+                        "tion", String.valueOf(GetIntroductionQuestion.get(0).getId()));
 
 
-                if(inputValue.length()>=5){
-
-                        editText.setText("");
-                        refresh(inputValue, 1);
-                     m_Adapter.add(question_contents.get(i+1), 0);
-
-                    i++;
-                    }
-                if(i==5){
-                    //키보드 내려가는거
-                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
-
-                    //버튼 바뀌는거
-                    LinearLayout ll = (LinearLayout)findViewById(R.id.enter_chatting);
-                    ll.setVisibility(View.INVISIBLE);
-                    Button btn =(Button) findViewById(R.id.next_btn);
-                    btn.setVisibility(View.VISIBLE);
-
+                for (int i=0;i<3;i++){
+                    question_id_array.add(GetIntroductionQuestion.get(i).getId());
+                    question_contents.add(GetIntroductionQuestion.get(i).getContents());
                 }
+
+
+                m_Adapter.add(GetIntroductionQuestion.get(0).getContents(),0);
+
+
+
             }
-        }
-        );
+
+            @Override
+            public void onFailure(Call<get_introduction_questionlist> call, Throwable t) {
+                Log.d("sam", t.toString());
+            }
+
+        });
+
+
+
+
         //수정 버튼을 클릭하면 edittext를 받아서 listview에 세팅해줌
         findViewById(R.id.modify_sendbtn).setOnClickListener(new Button.OnClickListener() {
             int i=1;
@@ -261,10 +204,7 @@ public class ChatView extends Activity implements AdapterView.OnItemClickListene
     }
 
 
-    private void refresh (String inputValue, int _str) {
-        m_Adapter.add(inputValue,_str) ;
-        m_Adapter.notifyDataSetChanged();
-    }
+
 /*
     private void replacee (String inputValue ,int _str){
         m_Adapter.remove(_str);
@@ -281,16 +221,63 @@ public class ChatView extends Activity implements AdapterView.OnItemClickListene
         Intent intent = new Intent(getApplicationContext(), Mediate.class);
 
        intent.putExtra("ProfileFilepath",Imageupload_countList);
+        JSONObject obj = new JSONObject();
         try {
-            Call<post_qna_list> PostQnaList1 = apiService.post_qna_list(postQnaList);
+            JSONArray jArray = new JSONArray();//배열이 필요할때
+            for (int i = 0; i < postQnaList.size(); i++)//배열
+            {
+                JSONObject sObject = new JSONObject();//배열 내에 들어갈 json
+                sObject.put("question_id", postQnaList.get(i).getQuestion_id());
+                sObject.put("answer", postQnaList.get(i).getAnswer());
+                jArray.put(sObject);
+            }
+            obj.put("qna_list", jArray);//배열을 넣음
+
+            System.out.println(obj.toString());
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Log.e("account-id", String.valueOf(account_id));
+
+
+        OkHttpClient.Builder client1 = new OkHttpClient.Builder();
+        client1.addInterceptor(new Interceptor() {
+            @Override
+            public okhttp3.Response intercept(Chain chain) throws IOException {
+
+                Request builder = chain.request();
+                Request newRequest;
+
+
+                newRequest = builder.newBuilder()
+                        .addHeader("access-token",token)
+                        .addHeader("account-id", String.valueOf(account_id))
+                        .addHeader("account-sex",sex)
+                        .addHeader("Content-Type","application/json")
+                        .build();
+
+
+                return chain.proceed(newRequest);
+
+            }
+        });
+        apiService1= retrofit.create(Rest_ApiService.class);
+
+
+        try {
+            final Call<post_qna_list> PostQnaList1 = apiService1.post_qna_list(String.valueOf(obj));
             PostQnaList1.enqueue(new Callback<post_qna_list>() {
                 @Override
                 public void onResponse(Call<post_qna_list> call, Response<post_qna_list> response) {
 
                     post_qna_list gsonresponse = response.body();
-                    Log.e("onresponse_join", gsonresponse.getResult());
+
+                    Log.e("onresponse_post_qna_list", gsonresponse.getResult());
                     Log.e("onresponse", String.valueOf(response.code()));
                     Log.e("onresponse", "success");
+                    Log.e("onresponse",gsonresponse.getMessage());
 
 
                 }
@@ -332,6 +319,14 @@ public class ChatView extends Activity implements AdapterView.OnItemClickListene
         editor.putString("sex",sex);
         editor.clear();
         editor.commit();
+    }
+
+    public void get_local_data(){
+        SharedPreferences pref = getSharedPreferences("Local_DB", MODE_PRIVATE);
+        account_id = pref.getInt("account_id",0);
+        Log.e("local_account", Integer.toString(account_id));
+        token=pref.getString("token","?");
+        Log.e("local_token",String.valueOf(token));
     }
 
     //수정하기 버튼을 눌렀을때 position을 받아옴, 전송버튼을 수정버튼으로 바꿔줌
@@ -388,119 +383,43 @@ public class ChatView extends Activity implements AdapterView.OnItemClickListene
         editor.commit();
     }
 
-
-    class get_introduction_excute extends AsyncTask<String, Integer, Long> {
-     @Override
-     protected void onCancelled()
-    {
-         super.onCancelled();
-      }
-        @Override
-        protected void onPostExecute(Long result) {
-             super.onPostExecute(result);
+    public void send_question(View v){
 
 
+        EditText editText = (EditText) findViewById(R.id.input_text);
+        String inputValue = editText.getText().toString();
+
+        PostQna.setQuestion_id(question_id_array.get(0));
+        Log.e("dd", String.valueOf(question_id_array.get(0)));
+        Log.e("dd1",inputValue);
+        PostQna.setAnswer(inputValue);
+        postQnaList.add(PostQna);
 
 
+        if(inputValue.length()>=5){
+
+            editText.setText("");
+            m_Adapter.add(inputValue,1) ;
+            m_Adapter.notifyDataSetChanged();
+            if (i<2) {
+                m_Adapter.add(question_contents.get(i + 1), 0);
+            }
+            i++;
+        }
+        if(i==3){
+            //키보드 내려가는거
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
+            //버튼 바뀌는거
+            LinearLayout ll = (LinearLayout)findViewById(R.id.enter_chatting);
+            ll.setVisibility(View.INVISIBLE);
+            Button btn =(Button) findViewById(R.id.next_btn);
+            btn.setVisibility(View.VISIBLE);
 
         }
-             @Override
-         protected void onPreExecute() {
-
-             super.onPreExecute();
-            }
-            @Override
-            protected void onProgressUpdate(Integer... values) {
-
-
-            }
-         @Override protected Long doInBackground(String... params) {
-             String get="get";
-
-
-             Call<get_introduction_questionlist> PostQnaList = apiService.get_introduction_questionlist(get);
-             PostQnaList.enqueue(new Callback<get_introduction_questionlist>() {
-                 @Override
-                 public void onResponse(Call<get_introduction_questionlist> call, Response<get_introduction_questionlist> response) {
-                     GetIntroductionQuestion = response.body().getQuestions();
-
-
-                     question_id1=GetIntroductionQuestion.get(0).getId();
-                     question_id2=GetIntroductionQuestion.get(1).getId();
-                     question_id3=GetIntroductionQuestion.get(2).getId();
-                     contents1=GetIntroductionQuestion.get(0).getContents();
-                     contents2=GetIntroductionQuestion.get(1).getContents();
-                     contents3=GetIntroductionQuestion.get(2).getContents();
-
-                     Log.e("onresponse_get_question", GetIntroductionQuestion.get(0).getContents());
-
-                     Log.e("onresponse_get_ques" +
-                             "tion", String.valueOf(GetIntroductionQuestion.get(0).getId()));
-
-
-                     SharedPreferences pref = getSharedPreferences("Local_DB", MODE_PRIVATE);
-                     SharedPreferences.Editor editor = pref.edit();
-                     editor.putInt("question1",question_id1);
-                     editor.putInt("question2",question_id2);
-                     editor.putInt("question3",question_id3);
-                     editor.putString("contents1",contents1);
-                     editor.putString("contents2",contents2);
-                     editor.putString("contents3",contents3);
-                     editor.putString("sex",sex);
-                     editor.clear();
-                     editor.commit();
-
-                     m_Adapter.add(GetIntroductionQuestion.get(0).getContents(),0);
-
-
-
-                 }
-
-                 @Override
-                 public void onFailure(Call<get_introduction_questionlist> call, Throwable t) {
-                     Log.d("sam", t.toString());
-                 }
-
-             });
-
-             return null ;
-         }
     }
 
 
-    class set_question_excute extends AsyncTask<String, Integer, Long> {
-        @Override
-        protected void onCancelled()
-        {
-            super.onCancelled();
-        }
-        @Override
-        protected void onPostExecute(Long result) {
-            super.onPostExecute(result);
-
-        }
-        @Override
-        protected void onPreExecute() {
-
-            super.onPreExecute();
-        }
-        @Override
-        protected void onProgressUpdate(Integer... values) {
-
-
-        }
-        @Override protected Long doInBackground(String... params) {
-            SharedPreferences pref = getSharedPreferences("Local_DB", MODE_PRIVATE);
-            question_id_array.add(pref.getInt("question1",0));
-            question_id_array.add(question_id2=pref.getInt("question2",0));
-            question_id_array.add(question_id3=pref.getInt("question3",0));
-            question_contents.add(contents1=pref.getString("contents1","0"));
-            question_contents.add(contents2=pref.getString("contents2","0"));
-            question_contents.add(contents3=pref.getString("contents3","0"));
-            Log.e("question_id1", String.valueOf(question_id1));
-            return null ;
-        }
-    }
 
 
 }

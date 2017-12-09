@@ -113,14 +113,6 @@ get_matched_account account1;
 
 
 
-        SharedPreferences pref1 = getSharedPreferences("Local_DB", MODE_PRIVATE);
-
-        account_id_localdb = pref1.getInt("account_id",0);
-        Log.e("local_account", String.valueOf(account_id_localdb));
-        token_localdb=pref1.getString("token","?");
-        Log.e("loacal_token",String.valueOf(token_localdb));
-
-
 
 
         OkHttpClient.Builder client1 = new OkHttpClient.Builder();
