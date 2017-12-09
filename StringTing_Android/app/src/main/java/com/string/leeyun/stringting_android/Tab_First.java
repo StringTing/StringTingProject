@@ -17,6 +17,8 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 
 
 import com.google.gson.Gson;
@@ -77,6 +79,10 @@ public class Tab_First extends Fragment implements View.OnClickListener {
     ArrayList<Get_today_introduction> im_get_today;
     ArrayList<Ger_last_5day_matched_account>im_get_last_5day;
 
+    TableRow tr;
+    ImageView img_pic ;
+
+
 
     public Tab_First() {
         // Required empty public constructor
@@ -90,13 +96,14 @@ public class Tab_First extends Fragment implements View.OnClickListener {
         final View v = inflater.inflate(R.layout.activity_tab_first, container, false);
 
         //추가할 부모 뷰
-        final LinearLayout inflatedLayout = (LinearLayout) v.findViewById(R.id.addpic);
+        //final TableLayout inflatedLayout = (TableLayout) v.findViewById(R.id.addpic);
+        final TableLayout tableLayout = (TableLayout) v.findViewById(R.id.addpic);
 
         //더보기 버튼
         final LinearLayout addbtn = (LinearLayout) v.findViewById(R.id.add_btn);
 
         //이미지 들어오는거
-        final int[] p = {1,2,3};
+        final int[] p = {1,2,3,4,5};
 
         addbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,13 +111,35 @@ public class Tab_First extends Fragment implements View.OnClickListener {
                 addbtn.setVisibility(View.GONE);
                 // activity_main.xml에서 정의한 LinearLayout 객체 할당
 
-                if(p.length<3) {
-                    // Inflated_Layout.xml로 구성한 레이아웃을 inflatedLayout 영역으로 확장
-                    inflater.inflate(R.layout.addimg, inflatedLayout);
+                for(int i=0; i<p.length/3; ++i) {
+                    tr = new TableRow(getApplicationContext());
+                    tr.setPadding(0,23,0,0);
+                    for (int j = 0; j < 3; j++) {
+                        // Inflated_Layout.xml로 구성한 레이아웃을 inflatedLayout 영역으로 확장
+                        View img = inflater.inflate(R.layout.addimg, null);
+                        //img_pic = (ImageView) addimg_table.findViewById(R.id.last1);
+                        tr.addView(img);
+                        if(j<=1){
+                            img.setPadding(0,0,23,0);
+                        }
+                    }
+                    tableLayout.addView(tr);
+                    if(p.length%3 != 0) {
+                        tr = new TableRow(getApplicationContext());
+                        tr.setPadding(0,23,0,0);
+                        for (i=0; i<p.length%3; ++i){
+                            // Inflated_Layout.xml로 구성한 레이아웃을 inflatedLayout 영역으로 확장
+                            View img = inflater.inflate(R.layout.addimg, null);
+                            //img_pic = (ImageView) addimg_table.findViewById(R.id.last1);
+                            tr.addView(img);
+                        }
+                        tableLayout.addView(tr);
+                    }
                 }
-                inflater.inflate(R.layout.addimg_2, inflatedLayout);
+                //inflater.inflate(R.layout.addimg_2, inflatedLayout);
             }
         });
+
 
 
         //api정의
