@@ -5,9 +5,12 @@
     android:layout_height="127dp"
     android:layout_marginRight="23dp"
     android:layout_marginTop="22dp"
+    >
+
+<FrameLayout
+    android:layout_width="94dp"
+    android:layout_height="127dp"
     android:background="@drawable/rounded">
-
-
 
     <ImageView
         android:id="@+id/last1"
@@ -22,7 +25,6 @@
         android:id="@+id/l_white_text"
         android:layout_width="94dp"
         android:layout_height="12dp"
-
         android:layout_marginTop="92dp"
         android:background="@drawable/gradient_background"
         android:paddingLeft="9dp"
@@ -34,13 +36,14 @@
         android:id="@+id/l_textView"
         android:layout_width="49dp"
         android:layout_height="10dp"
-        android:layout_below="@+id/l_white_text"
         android:layout_gravity="start"
         android:layout_marginLeft="9dp"
-        android:layout_marginTop="7dp"
+        android:layout_marginTop="109dp"
         android:text="#서울 #23세"
         android:textColor="#000000"
         android:textSize="9sp" />
+
+</FrameLayout>
 
 
 </RelativeLayout>
