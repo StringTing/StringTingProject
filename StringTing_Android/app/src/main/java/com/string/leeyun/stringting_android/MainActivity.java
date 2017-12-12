@@ -5,6 +5,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
@@ -18,7 +19,10 @@ import android.widget.Toast;
 
 import org.json.JSONObject;
 
+import java.io.BufferedInputStream;
 import java.io.IOException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.regex.Matcher;
@@ -69,6 +73,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import static android.R.attr.data;
 import static android.R.attr.sessionService;
 import static android.telecom.DisconnectCause.REJECTED;
+import static com.string.leeyun.stringting_android.API.Rest_ApiService.API_IMAGE_URL;
 import static com.string.leeyun.stringting_android.API.Rest_ApiService.API_URL;
 import static com.string.leeyun.stringting_android.R.mipmap.t;
 
@@ -161,16 +166,35 @@ public class MainActivity extends AppCompatActivity {
 
 
         //fcm token
-        MyFirebaseInstanceIDService myFirebaseInstanceIDService =new MyFirebaseInstanceIDService();
-        myFirebaseInstanceIDService.onTokenRefresh();
-        refreshedToken = FirebaseInstanceId.getInstance().getToken();
-  //      Log.e("refreshedToken",refreshedToken);
 
-        SharedPreferences pref = getSharedPreferences("Local_DB", MODE_PRIVATE);
-        SharedPreferences.Editor editor = pref.edit();
-        editor.putString("fcm_token",refreshedToken);
-        Log.e("fcm_token",refreshedToken);
-        editor.commit();
+
+
+        Thread mTread =new Thread() {
+            public void run() {
+                try
+                {
+                    refreshedToken = FirebaseInstanceId.getInstance().getToken();
+
+                } catch (Exception e)
+
+                {
+                    e.printStackTrace();
+                }
+            }
+        };
+
+        mTread.start();
+        try {
+            mTread.join();
+            SharedPreferences pref = getSharedPreferences("Local_DB", MODE_PRIVATE);
+            SharedPreferences.Editor editor = pref.edit();
+            editor.putString("fcm_token",refreshedToken);
+            editor.commit();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+
+        }
+
 
         //LocalDb
 
@@ -317,8 +341,19 @@ public class MainActivity extends AppCompatActivity {
                                     Intent intent_interview=new Intent(MainActivity.this, Mediate.class);
                                     check_login gsonresponse = response.body();
                                     Log.e("onresponse_check_login", gsonresponse.getResult());
-                                    if (gsonresponse.getStatus()!=null){
-                                        if (gsonresponse.getStatus().equals("ACTIVATE")){
+                                    if (gsonresponse.getStatus()==null) {
+
+                                        Log.e("get_status","등록되지않은 이메일입니다");
+                                        startActivity(intent_ghost);
+                                    }
+                                    else
+                                    {
+                                        Log.e("onresponse", gsonresponse.getStatus());
+                                        Log.e("onresponse", String.valueOf(response.code()));
+                                        Log.e("onresponse", "success");
+
+                                        if (gsonresponse.getStatus().equals("ACTIVATE"))
+                                        {
 
                                             startActivity(intent_activate);
                                         }
@@ -334,13 +369,15 @@ public class MainActivity extends AppCompatActivity {
                                         else if(gsonresponse.getStatus().equals("REJECTED")){
 
                                         }
-                                    }else{
-                                        intent_ghost.putExtra("ID",Email);
-                                        intent_ghost.putExtra("PW"," ");
-                                        intent_ghost.putExtra("setformat","FACEBOOK");
-                                        intent_ghost.putExtra("fcm_token",refreshedToken);
-                                        startActivity(intent_ghost);
+                                        else{
+                                            intent_ghost.putExtra("ID",Email);
+                                            intent_ghost.putExtra("PW"," ");
+                                            intent_ghost.putExtra("setformat","FACEBOOK");
+                                            intent_ghost.putExtra("fcm_token",refreshedToken);
+                                            startActivity(intent_ghost);
+                                        }
                                     }
+
 
 
 

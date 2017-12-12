@@ -26,7 +26,6 @@ import com.string.leeyun.stringting_android.API.get_introduction_questionlist;
 import com.string.leeyun.stringting_android.API.join;
 import com.string.leeyun.stringting_android.API.post_qna;
 import com.string.leeyun.stringting_android.API.post_qna_list;
-import com.string.leeyun.stringting_android.API.post_qna_list_json;
 import com.string.leeyun.stringting_android.API.register_message;
 import com.string.leeyun.stringting_android.API.userinfo;
 import com.google.gson.Gson;

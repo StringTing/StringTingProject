@@ -48,7 +48,8 @@
                     <FrameLayout
                         android:id="@+id/t_pic1"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:onClick="onClick_today_pic_first">
 
                         <View
                             android:id="@+id/shadow"
@@ -107,6 +108,7 @@
 
 
         <FrameLayout
+            android:id="@+id/t_pic2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
@@ -121,7 +123,7 @@
 
 
                     <RelativeLayout
-                        android:id="@+id/t_pic2"
+                        android:id="@+id/t_pic"
                         android:layout_width="155dp"
                         android:layout_height="255dp"
                         android:layout_toRightOf="@+id/t_pic1"

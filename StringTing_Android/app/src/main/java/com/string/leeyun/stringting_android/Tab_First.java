@@ -59,7 +59,8 @@ import static com.string.leeyun.stringting_android.R.mipmap.e;
 
 public class Tab_First extends Fragment implements View.OnClickListener {
 
-    private FrameLayout mLayout;
+    private FrameLayout today_pic_first;
+    private FrameLayout today_pic_second;
 
     private Context mContext;
     private Resources mResources;
@@ -142,11 +143,10 @@ public class Tab_First extends Fragment implements View.OnClickListener {
 
 
 
-        //api정의
 
 
         try {
-            Thread.sleep(2000);
+
             SharedPreferences pref = this.getActivity().getSharedPreferences("Local_DB", MODE_PRIVATE);
             sex=pref.getString("sex","notfound");
             Log.e("sex",sex);
@@ -166,7 +166,7 @@ public class Tab_First extends Fragment implements View.OnClickListener {
                 Log.e("local_sex is null","fail");
 
             }
-        } catch (InterruptedException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -295,8 +295,11 @@ public class Tab_First extends Fragment implements View.OnClickListener {
             e.printStackTrace();
             Log.e("last_introduction","null");
         }
-        mLayout = (FrameLayout) v.findViewById(R.id.t_pic1);
-        mLayout.setOnClickListener(this);
+        today_pic_first = (FrameLayout) v.findViewById(R.id.t_pic1);
+        today_pic_second=(FrameLayout)v.findViewById(R.id.t_pic2);
+        today_pic_first.setOnClickListener(this);
+        today_pic_second.setOnClickListener(this);
+
 
 
 
@@ -307,8 +310,19 @@ public class Tab_First extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        Intent i = new Intent(getActivity(),Personal_profile.class);
-        startActivity(i);
+        switch (v.getId()){
+            case R.id.t_pic1 :
+                Intent i = new Intent(getActivity(),Personal_profile.class);
+                startActivity(i);
+                break;
+            case R.id.t_pic2 :
+                Intent e = new Intent(getActivity(),Personal_profile.class);
+                startActivity(e);
+                break;
+        }
+
+
+
     }
 
 

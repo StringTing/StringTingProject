@@ -31,6 +31,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.string.leeyun.stringting_android.API.Rest_ApiService.API_URL;
+import static com.string.leeyun.stringting_android.R.mipmap.t;
 
 
 public class Chatting extends AppCompatActivity  {
@@ -112,9 +113,12 @@ public class Chatting extends AppCompatActivity  {
 
                 messages=response.body().getMessages();
 
-                Log.e("ongetmessage",String.valueOf(messages.get(0).getContents()));
-                Log.e("onresponse", String.valueOf(response.code()));
-                Log.e("onresponse", "success");
+                if (response.body()!=null){
+                    Log.e("ongetmessage",String.valueOf(messages.get(0).getContents()));
+                    Log.e("onresponse", String.valueOf(response.code()));
+                    Log.e("onresponse", "success");
+
+
                 try {
                     for (int i=0;i<messages.size();i++){
                         if (sex.equals(messages.get(i).getSex())){
@@ -131,6 +135,7 @@ public class Chatting extends AppCompatActivity  {
 
                 }catch (Exception e) {
                     e.printStackTrace();
+                }
                 }
 
             }

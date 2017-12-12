@@ -135,6 +135,7 @@ public class Login_local extends Activity {
                         if (gsonresponse.getStatus().equals("ACTIVATE")) {
 
                             startActivity(intent_activate);
+
                         } else if (gsonresponse.getStatus().equals("GHOST")) {
                             intent_ghost.putExtra("ID", Edit_id);
                             intent_ghost.putExtra("PW", Edit_pw);

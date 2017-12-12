@@ -57,7 +57,7 @@ public interface Rest_ApiService {
         Call<register_message>get_post_register_message(@Body register_message RegisterMessage);
 
         @GET("{sex}/{account_id}/get/detail/")
-        Call<Getdetail>Getdetail(@Path("sex")String Getdetail_sex, @Path("account_id")int Getdetail_accountid);
+        Call<Getdetail>get_detail(@Path("sex")String Getdetail_sex, @Path("account_id")int Getdetail_accountid);
 
         @GET("{sex}/{account_id}/get/last-5day-matched-account/")
         Call<get_last_5days_matched_accountList>Get_last_5day(@Path("sex")String get_last5_sex,@Path("account_id")int get_last5_accountid);
@@ -72,7 +72,6 @@ public interface Rest_ApiService {
         @POST("register/image/")
         Call<register_image>post_register_image(@Part MultipartBody.Part[] images);
 
-
         @GET("{sex}/{account_id}/get/matched-account/")
         Call<get_matched_accountList> get_matched_account(@Path("sex")String matched_sex, @Path("account_id")int matched_account_id);
 
@@ -81,7 +80,6 @@ public interface Rest_ApiService {
 
         @GET("{sex}/{account-id}/get/introduction-qna")
         Call<get_introduction_qnalist>get_introduction_qnalist(@Path("sex")String introduction_sex, @Path("account-id") int introduction_account);
-
 
         @GET("{get}/introduction-questions/")
         Call<get_introduction_questionlist>get_introduction_questionlist(@Path("get")String get);

@@ -125,7 +125,7 @@ public class Tab_Fourth extends Fragment {
         list.add(new listItem(R.drawable.kakao_default_profile_image,"이름","내용","시간"));
 
 
-        final Call<get_matched_accountList>get_matched_account = apiService.get_matched_account("male",1);
+        final Call<get_matched_accountList>get_matched_account = apiService.get_matched_account(sex,account_id);
         get_matched_account.enqueue(new Callback<get_matched_accountList>() {
 
             @Override

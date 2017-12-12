@@ -504,19 +504,23 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
 
     public void userinfo_save(){
 
-        final Intent i =getIntent();                      // facebook 또는 kakao의 아이디, 메신저타입을 받아와 변수에 저장
-        String id=i.getExtras().getString("ID");
-        String PW=i.getExtras().getString("PW");
-        String Setting_id=i.getExtras().getString("setformat");
-        String fcm_token=i.getExtras().getString("fcm_token");
-        Log.e("Test", id);
-        Log.e("Test1", String.valueOf(Setting_id));
+
+        try {
+            final Intent i = getIntent();                      // facebook 또는 kakao의 아이디, 메신저타입을 받아와 변수에 저장
+            String id = i.getExtras().getString("ID");
+            String PW = i.getExtras().getString("PW");
+            String Setting_id = i.getExtras().getString("setformat");
+            String fcm_token = i.getExtras().getString("fcm_token");
+            Log.e("Test", id);
+            Log.e("Test1", String.valueOf(Setting_id));
 
         UserInfo.setEmail(id);
         UserInfo.setPassword(PW);
         UserInfo.setLogin_format(Setting_id);
         UserInfo.setEmail(id);
+
         SharedPreferences fcm = getSharedPreferences("Local_DB", MODE_PRIVATE);
+
         try {
             fcm_token = fcm.getString("fcm_token", "success");
             Log.v("fcm_token",fcm_token);
@@ -530,7 +534,9 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
             e.printStackTrace();
             Log.e("can not get localid","fail");
         }
-
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
 
     }
