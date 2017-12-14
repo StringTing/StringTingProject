@@ -83,11 +83,12 @@ public class MainActivity extends AppCompatActivity {
 
     private Button CustomloginButton;
     private CallbackManager callbackManager;
-    Rest_ApiService apiService;
-    Retrofit retrofit;
+
     String refreshedToken;
     SessionCallback callback;
 
+    Rest_ApiService apiService;
+    Retrofit retrofit;
      String Email;
      String sex;
     public check_login CheckLogin=new check_login();
@@ -436,7 +437,7 @@ public class MainActivity extends AppCompatActivity {
     }
     public void onClick_login_firstpage(View v){
         Intent exintent = new Intent(getApplicationContext(),Preexistence_Login.class);
-
+        exintent.putExtra("fcm_token",refreshedToken);
         startActivity(exintent);
 
     }

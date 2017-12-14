@@ -1,6 +1,7 @@
 package com.string.leeyun.stringting_android;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
@@ -23,6 +24,9 @@ import com.squareup.picasso.Picasso;
 import com.string.leeyun.stringting_android.API.Getdetail;
 import com.string.leeyun.stringting_android.API.Im_get_today_introduction;
 import com.string.leeyun.stringting_android.API.Rest_ApiService;
+import com.string.leeyun.stringting_android.API.get_introduction_qna;
+import com.string.leeyun.stringting_android.API.get_introduction_qnalist;
+import com.string.leeyun.stringting_android.API.get_introduction_questionlist;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -31,6 +35,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import retrofit2.Call;
 import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -54,14 +59,24 @@ public class Personal_profile extends AppCompatActivity {
     Getdetail getdetail;
     ImageView personfile_image;
     ArrayList<String>profile_image_list;
+    ArrayList<String>profile_image_replace;
+    int macthing_account;
+    String macthing_sex;
+
+    ArrayList<String>question_array;
+    ArrayList<String>answer_array;
     ArrayList<String>profile_image_full_url=new ArrayList<String>();
-    ;
+    ArrayList<get_introduction_qna> GetIntroDuction;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_profile);
+
+        Intent intent=getIntent();
+        macthing_account= (int) intent.getSerializableExtra("matching_account");
+        macthing_sex= (String) intent.getSerializableExtra("matching_sex");
 
 
         get_local_data();
@@ -99,7 +114,7 @@ public class Personal_profile extends AppCompatActivity {
         apiService= retrofit.create(Rest_ApiService.class);
 
         try {
-            Call<Getdetail> call = apiService.get_detail(sex, account_id);
+            Call<Getdetail> call = apiService.get_detail(macthing_sex, macthing_account);
 
             call.enqueue(new Callback<Getdetail>() {
 
@@ -112,15 +127,16 @@ public class Personal_profile extends AppCompatActivity {
                     getdetail=new Getdetail();
                     getdetail=response.body();
                     profile_image_list=new ArrayList<String>();
+                    profile_image_replace=new ArrayList<String>();
                     try {
                         detail_photo=new ArrayList<Integer>();
 
                         if (getdetail.getImages().get(0) != null) {
                             for (int i=0;i<getdetail.getImages().size();i++){
-                                profile_image_list.add(String.valueOf(getdetail.getImages(i)));
+                                profile_image_list.add(String.valueOf(getdetail.getImages().get(i)));
                             }
 
-                            Log.e("get_eval_list_image", String.valueOf(getdetail.getImages(0)));
+                            Log.e("get_eval_list_image", String.valueOf(getdetail.getImages().get(0)));
 
                         }
 
@@ -128,12 +144,12 @@ public class Personal_profile extends AppCompatActivity {
                         String medium = "medium";
                         String large="large";
                         String small = "small";
-                        if (getdetail.getImages(0) != null && getdetail.getImages(1) != null) {
+                        if (getdetail.getImages().get(0) != null) {
                             for (int i=0;i<getdetail.getImages().size();i++){
-                                profile_image_list.get(i).replace(replace,large);
+                               profile_image_replace.add(profile_image_list.get(i).replace(replace,large));
                             }
 
-                            Log.e("image_url_first", profile_image_list.get(0));
+                            Log.e("image_url_first", profile_image_replace.get(0));
                         }
 
                         image_url_add(profile_image_list);
@@ -141,6 +157,7 @@ public class Personal_profile extends AppCompatActivity {
                         LinearLayout inflatedLayout = (LinearLayout)findViewById(R.id.pic_view);
                         LayoutInflater inflater =  (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
+                        //imageview 동적으로 생성하는 부분 라운드처리해줘야함
 
                         for(int x=0;x<profile_image_full_url.size();x++) {
 
@@ -164,10 +181,6 @@ public class Personal_profile extends AppCompatActivity {
                         }
 
 
-
-
-
-
                     } catch (Exception e) {
                         e.printStackTrace();
                         Log.e("imagenull_today", "false");
@@ -177,7 +190,7 @@ public class Personal_profile extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<Getdetail> call, Throwable t) {
-                    Log.e("today-introduction-fail", t.toString());
+                    Log.e("getdatail-fail", t.toString());
                 }
             });
         }catch (Exception e){
@@ -187,40 +200,67 @@ public class Personal_profile extends AppCompatActivity {
 
 
 
-        // 커스텀 어댑터 생성
-        m_Adapter = new PersonalChatCustom();
+        Call<get_introduction_qnalist> PostQnaList = apiService.get_introduction_qnalist(macthing_sex,macthing_account);
+        PostQnaList.enqueue(new Callback<get_introduction_qnalist>() {
+            @Override
+            public void onResponse(Call<get_introduction_qnalist> call, Response<get_introduction_qnalist> response) {
+
+                GetIntroDuction=response.body().getQna_list();
+
+                question_array=new ArrayList<String>();
+                answer_array=new ArrayList<String>();
 
 
-        // Xml에서 추가한 ListView 연결
-        m_ListView = (ListView) findViewById(R.id.listView1);
+                Log.e("onresponse_get_question", GetIntroDuction.get(0).getQuestion());
+
+                Log.e("onresponse_get_answer", String.valueOf(GetIntroDuction.get(0).getAnswer()));
+
+
+                for (int i=0;i<3;i++){
+                    question_array.add(GetIntroDuction.get(i).getQuestion());
+                    answer_array.add(GetIntroDuction.get(i).getAnswer());
+                }
 
 
 
-        // ListView에 어댑터 연결
-        m_ListView.setAdapter(m_Adapter);
+                // 커스텀 어댑터 생성
+                m_Adapter = new PersonalChatCustom();
 
 
-        m_Adapter.add("안녕하세요! \n" +
-                "회원정보를 입력하시느라 고생많으셨어요~\n" +
-                "이제 마지막 단계인데요!\n" +
-                "제가 하는 질문을 이상형인 사람이 질문한다고생각해주시고 정성스럽게 답장해주세요!", 0);
+                // Xml에서 추가한 ListView 연결
+                m_ListView = (ListView) findViewById(R.id.listView1);
 
-        m_Adapter.add("안녕하세요! \n" +
-                "회원정보를 입력하시느라 고생많으셨어요~\n" +
-                "이제 마지막 단계인데요!\n" +
-                "제가 하는 질문을 이상형인 사람이 질문한다고생각해주시고 정성스럽게 답장해주세요!", 1);
 
-        m_Adapter.add("안녕하세요! \n" +
-                "회원정보를 입력하시느라 고생많으셨어요~\n" +
-                "이제 마지막 단계인데요!\n" +
-                "제가 하는 질문을 이상형인 사람이 질문한다고생각해주시고 정성스럽게 답장해주세요!", 0);
 
-        m_Adapter.add("안녕하세요! \n" +
-                "회원정보를 입력하시느라 고생많으셨어요~\n" +
-                "이제 마지막 단계인데요!\n" +
-                "제가 하는 질문을 이상형인 사람이 질문한다고생각해주시고 정성스럽게 답장해주세요!", 0);
+                // ListView에 어댑터 연결
+                m_ListView.setAdapter(m_Adapter);
 
-        setListViewHeightBasedOnItems(m_ListView);
+
+                m_Adapter.add(question_array.get(0), 0);
+
+                m_Adapter.add(answer_array.get(0), 1);
+
+                m_Adapter.add(question_array.get(1), 0);
+
+                m_Adapter.add(answer_array.get(1), 1);
+
+                m_Adapter.add(question_array.get(2), 0);
+
+                m_Adapter.add(answer_array.get(2), 1);
+                setListViewHeightBasedOnItems(m_ListView);
+
+            }
+
+            @Override
+            public void onFailure(Call<get_introduction_qnalist> call, Throwable t) {
+                Log.d("sam", t.toString());
+            }
+
+        });
+
+
+
+
 
     }
 
@@ -260,9 +300,9 @@ public class Personal_profile extends AppCompatActivity {
     }
 
     public void image_url_add(ArrayList<String> profile_image_list){
-        for (int i=0;i<profile_image_list.size();i++){
-            profile_image_full_url.add(API_IMAGE_URL+profile_image_list.get(i));
-
+        for (int i=0;i<profile_image_replace.size();i++){
+            profile_image_full_url.add(API_IMAGE_URL+profile_image_replace.get(i));
+            Log.e("profile_image_full_url",profile_image_full_url.get(0));
         }
     }
 }

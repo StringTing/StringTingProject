@@ -143,7 +143,7 @@ public class Login_local extends Activity {
                             startActivity(intent_ghost);
                         } else if (gsonresponse.getStatus().equals("INREVIEW")) {
                             //test때문에 active로 바꿔둠
-                            startActivity(intent_activate);
+                            startActivity(intent_interview);
                         } else if (gsonresponse.getStatus().equals("REJECTED")) {
 
                         }
