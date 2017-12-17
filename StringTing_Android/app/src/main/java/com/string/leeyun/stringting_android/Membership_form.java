@@ -2,6 +2,7 @@ package com.string.leeyun.stringting_android;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import com.string.leeyun.stringting_android.API.ResponseApi;
 import com.string.leeyun.stringting_android.API.Rest_ApiService;
 import com.string.leeyun.stringting_android.API.userinfo;
+import com.tsengvn.typekit.TypekitContextWrapper;
 
 import java.io.File;
 import java.net.MalformedURLException;
@@ -52,7 +54,10 @@ public class Membership_form extends Activity {
 
 
 
-
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
+    }
 
 
 

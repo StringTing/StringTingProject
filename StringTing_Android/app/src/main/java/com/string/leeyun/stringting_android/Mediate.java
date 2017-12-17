@@ -1,5 +1,6 @@
 package com.string.leeyun.stringting_android;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import com.string.leeyun.stringting_android.API.Rest_ApiService;
 import com.string.leeyun.stringting_android.API.get_matched_account;
 import com.string.leeyun.stringting_android.API.register_image;
 import com.string.leeyun.stringting_android.API.userinfo;
+import com.tsengvn.typekit.TypekitContextWrapper;
 
 import java.io.File;
 import java.io.IOException;
@@ -39,6 +41,14 @@ get_matched_account account1;
     Rest_ApiService apiService;
     Retrofit retrofit;
     String sex;
+
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

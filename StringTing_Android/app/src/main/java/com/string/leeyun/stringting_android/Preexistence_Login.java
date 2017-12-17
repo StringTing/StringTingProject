@@ -12,8 +12,10 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.text.util.Linkify;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import com.facebook.CallbackManager;
 import com.facebook.FacebookSdk;
@@ -34,10 +36,13 @@ import com.kakao.usermgmt.callback.MeResponseCallback;
 import com.kakao.usermgmt.response.model.UserProfile;
 import com.kakao.util.exception.KakaoException;
 import com.kakao.util.helper.log.Logger;
+import com.tsengvn.typekit.TypekitContextWrapper;
 
 import org.json.JSONObject;
 
 import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 /**
@@ -52,13 +57,41 @@ public class Preexistence_Login extends Activity {
     SessionCallback callback;
 
 
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(getApplicationContext()); // SDK 초기화 (setContentView 보다 먼저 실행되어야합니다. 안그럼 에러납니다.)
         setContentView(R.layout.preexistence_login);
 
-       
+
+        TextView Provision_Linkify = (TextView) findViewById(R.id.Provision_Linkify);
+
+        String text = "가입하기 또는 로그인 버튼을 누르면\n이용약관 및 개인정보취급방침에 동의하신 것이 됩니다.";
+        Provision_Linkify.setText(text);
+
+
+        Linkify.TransformFilter mTransform = new Linkify.TransformFilter() {
+            @Override
+            public String transformUrl(Matcher match, String url) {
+                return "";
+            }
+        };
+
+        Pattern pattern1 = Pattern.compile("이용약관");
+        Pattern pattern2 = Pattern.compile("개인정보취급방침");
+
+        Linkify.addLinks(Provision_Linkify, pattern1, "http://www.naver.com", null, mTransform);
+        Linkify.addLinks(Provision_Linkify, pattern2, "http://gun0912.tistory.com/", null, mTransform);
+
+        //이용약관 및 개인정보 취급방식에대한 링크
+
 
 
 
@@ -220,4 +253,15 @@ public class Preexistence_Login extends Activity {
 
         return false;
     }
+
+    public void onClick_main_firstpage(View v){
+        onBackPressed();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }
+
+

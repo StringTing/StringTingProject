@@ -1,5 +1,6 @@
 package com.string.leeyun.stringting_android;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +18,7 @@ import com.string.leeyun.stringting_android.API.get_message_list;
 import com.string.leeyun.stringting_android.API.message;
 import com.string.leeyun.stringting_android.API.okhttp_intercepter_token;
 import com.string.leeyun.stringting_android.API.register_message;
+import com.tsengvn.typekit.TypekitContextWrapper;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -50,6 +52,14 @@ public class Chatting extends AppCompatActivity  {
     int account_id;
     String sex;
     String token;
+
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
