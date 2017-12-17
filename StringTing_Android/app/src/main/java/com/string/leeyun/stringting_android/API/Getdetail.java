@@ -70,9 +70,6 @@ public class Getdetail {
         return authenticated;
     }
 
-    public List<String> getImages() {
-        return images;
-    }
 
     public int getScore() {
         return score;
@@ -90,9 +87,8 @@ public class Getdetail {
         this.opened = opened;
     }
 
-    public String getImages(int i) {
-
-        return images.get(i);
+    public List<String> getImages() {
+        return images;
     }
 
     public boolean isOpened() {
