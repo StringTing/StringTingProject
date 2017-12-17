@@ -24,9 +24,13 @@ import com.squareup.picasso.Picasso;
 import com.string.leeyun.stringting_android.API.Getdetail;
 import com.string.leeyun.stringting_android.API.Im_get_today_introduction;
 import com.string.leeyun.stringting_android.API.Rest_ApiService;
+
+import com.tsengvn.typekit.TypekitContextWrapper;
+
 import com.string.leeyun.stringting_android.API.get_introduction_qna;
 import com.string.leeyun.stringting_android.API.get_introduction_qnalist;
 import com.string.leeyun.stringting_android.API.get_introduction_questionlist;
+
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -67,6 +71,12 @@ public class Personal_profile extends AppCompatActivity {
     ArrayList<String>answer_array;
     ArrayList<String>profile_image_full_url=new ArrayList<String>();
     ArrayList<get_introduction_qna> GetIntroDuction;
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
+    }
+
 
 
     @Override

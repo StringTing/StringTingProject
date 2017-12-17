@@ -60,8 +60,11 @@
 
 
         <FrameLayout
+            android:id="@+id/loginBtn2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
+
+
         <com.kakao.usermgmt.LoginButton
             android:id="@+id/com_kakao_login"
             android:layout_width="200dp"
@@ -71,7 +74,7 @@
             />
 
             <RelativeLayout
-                android:id="@+id/loginBtn2"
+
                 android:layout_width="218dp"
                 android:layout_height="45dp"
                 android:layout_marginTop="11dp"
@@ -134,6 +137,7 @@
     </LinearLayout>
 
     <TextView
+        android:onClick="onClick_main_firstpage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="12sp"
@@ -152,14 +156,13 @@
         android:background="#e5e5e5"/>
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/Provision_Linkify"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:textSize="9sp"
-        android:textColor="#666666"
         android:layout_gravity="center"
         android:gravity="center"
-        android:text="가입하기 또는 로그인 버튼을 누르면
-서비스이용약관 및 개인정보취급방침에 동의하신 것이 됩니다."
+        android:textSize="9sp"
+        android:textColor="#666666"
         />
     </LinearLayout>
 

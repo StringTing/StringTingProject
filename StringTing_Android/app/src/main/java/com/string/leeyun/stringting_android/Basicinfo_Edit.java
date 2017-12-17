@@ -1,5 +1,6 @@
 package com.string.leeyun.stringting_android;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -29,6 +30,7 @@ import com.string.leeyun.stringting_android.API.Rest_ApiService;
 import com.string.leeyun.stringting_android.API.join;
 import com.string.leeyun.stringting_android.API.message;
 import com.string.leeyun.stringting_android.API.userinfo;
+import com.tsengvn.typekit.TypekitContextWrapper;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -84,6 +86,13 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
     message Message = new message();
 
     File Postfile;
+
+
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
+    }
 
 
 

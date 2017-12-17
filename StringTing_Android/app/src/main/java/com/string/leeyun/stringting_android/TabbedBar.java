@@ -1,5 +1,6 @@
 package com.string.leeyun.stringting_android;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +13,7 @@ import android.widget.LinearLayout;
 import com.string.leeyun.stringting_android.API.Rest_ApiService;
 import com.string.leeyun.stringting_android.API.userinfo;
 import com.google.gson.Gson;
+import com.tsengvn.typekit.TypekitContextWrapper;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -36,6 +38,12 @@ public class TabbedBar extends AppCompatActivity implements View.OnClickListener
 
 
     private LinearLayout on_tab1,on_tab2,on_tab3,on_tab4,on_tab5;
+
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
+    }
 
 
     @Override

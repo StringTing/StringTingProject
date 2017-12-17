@@ -14,6 +14,7 @@ import com.kakao.auth.IApplicationConfig;
 import com.kakao.auth.ISessionConfig;
 import com.kakao.auth.KakaoAdapter;
 import com.kakao.auth.KakaoSDK;
+import com.tsengvn.typekit.Typekit;
 
 
 import static com.kakao.util.helper.Utility.getPackageInfo;
@@ -21,11 +22,6 @@ import static com.kakao.util.helper.Utility.getPackageInfo;
 import static com.kakao.util.helper.Utility.getKeyHash;
 
 public class App extends Application {
-
-
-
-
-
 
 
     private class KakaoSDKAdapter extends KakaoAdapter {
@@ -76,6 +72,9 @@ public class App extends Application {
             super.onCreate();
             KakaoSDK.init(new KakaoSDKAdapter());
             Log.e("Key Hash : ", getKeyHash(this));
+            Typekit.getInstance()
+                    .addNormal(Typekit.createFromAsset(this, "font/nanum.ttf"))
+                    .addBold(Typekit.createFromAsset(this, "font/nanum.ttf"));
         }
     //Application이 가지고있는 정보를 얻기위한 interface.
 

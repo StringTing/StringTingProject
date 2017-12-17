@@ -10,7 +10,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:maxWidth="200dp"
-        android:gravity="center_vertical"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
         android:text="text" />
 
 </RelativeLayout>

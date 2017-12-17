@@ -5,7 +5,6 @@ import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
@@ -14,25 +13,20 @@ import android.text.util.Linkify;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONObject;
 
-import java.io.BufferedInputStream;
 import java.io.IOException;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-import com.facebook.AccessToken;
-import com.facebook.LoggingBehavior;
 import com.google.firebase.iid.FirebaseInstanceId;
-import com.string.leeyun.stringting_android.API.MyFirebaseInstanceIDService;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -58,8 +52,8 @@ import com.kakao.util.helper.log.Logger;
 import com.string.leeyun.stringting_android.API.ResponseApi;
 import com.string.leeyun.stringting_android.API.Rest_ApiService;
 import com.string.leeyun.stringting_android.API.check_login;
-import com.string.leeyun.stringting_android.API.join;
-import com.string.leeyun.stringting_android.API.register_message;
+import com.tsengvn.typekit.Typekit;
+import com.tsengvn.typekit.TypekitContextWrapper;
 
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -70,12 +64,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static android.R.attr.data;
-import static android.R.attr.sessionService;
-import static android.telecom.DisconnectCause.REJECTED;
-import static com.string.leeyun.stringting_android.API.Rest_ApiService.API_IMAGE_URL;
 import static com.string.leeyun.stringting_android.API.Rest_ApiService.API_URL;
-import static com.string.leeyun.stringting_android.R.mipmap.t;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -110,6 +99,13 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+    @Override
+    protected void attachBaseContext(Context newBase) {
+
+        super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
+
+    }
+
 
 
     @Override
@@ -117,6 +113,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(getApplicationContext()); // SDK 초기화 (setContentView 보다 먼저 실행되어야합니다. 안그럼 에러납니다.)
         setContentView(R.layout.activity_main);
+
+
+
+        FrameLayout kakaologin = (FrameLayout) findViewById(R.id.loginBtn2);
+        kakaologin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Session.getCurrentSession().addCallback(callback);
+            }
+        });
 
         //Restrofit_test
 
@@ -441,8 +447,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(exintent);
 
     }
-
-    
 
     public class SessionCallback implements ISessionCallback {
 

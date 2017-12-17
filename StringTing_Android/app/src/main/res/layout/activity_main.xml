@@ -67,6 +67,7 @@
 
 
         <FrameLayout
+            android:id="@+id/loginBtn2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
@@ -80,7 +81,7 @@
 
 
             <RelativeLayout
-                android:id="@+id/loginBtn2"
+
                 android:layout_width="218dp"
                 android:layout_height="45dp"
                 android:layout_marginTop="11dp"
@@ -163,6 +164,7 @@
 
 
     <TextView
+
         android:id="@+id/Provision_Linkify"
         android:layout_width="300dp"
         android:layout_height="wrap_content"

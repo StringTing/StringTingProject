@@ -29,6 +29,7 @@ import com.string.leeyun.stringting_android.API.post_qna_list;
 import com.string.leeyun.stringting_android.API.register_message;
 import com.string.leeyun.stringting_android.API.userinfo;
 import com.google.gson.Gson;
+import com.tsengvn.typekit.TypekitContextWrapper;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -96,6 +97,13 @@ public class ChatView extends Activity implements AdapterView.OnItemClickListene
     ArrayList<Integer>question_id_array;
 
     ArrayList<String>question_contents=new ArrayList<String>();
+
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
+    }
+
 
 
 
