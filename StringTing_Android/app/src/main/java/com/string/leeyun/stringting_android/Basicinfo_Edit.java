@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -14,7 +15,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -24,6 +27,7 @@ import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.support.v7.app.AlertDialog;
+import android.widget.TextView;
 
 import com.string.leeyun.stringting_android.API.ResponseApi;
 import com.string.leeyun.stringting_android.API.Rest_ApiService;
@@ -189,6 +193,7 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
 
 
         ArrayAdapter adapter= ArrayAdapter.createFromResource(this, R.array.birthday1, spinner_item);
+
         ArrayAdapter adapter_bir2 = ArrayAdapter.createFromResource(this, R.array.birthday2, spinner_item);
         ArrayAdapter adapter_bir3 = ArrayAdapter.createFromResource(this, R.array.birthday3, spinner_item);
 
@@ -200,6 +205,7 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
         ArrayAdapter adapter7 = ArrayAdapter.createFromResource(this, R.array.Tall, spinner_item);
         ArrayAdapter adapter8 = ArrayAdapter.createFromResource(this, R.array.body_form_male,spinner_item);
         ArrayAdapter adapter9 = ArrayAdapter.createFromResource(this, R.array.body_form_female,spinner_item);
+
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         birthday1.setAdapter(adapter);
@@ -219,6 +225,7 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
 
 
     }
+
 
     public void onClick_photo_upload(View v) {
 
@@ -677,6 +684,7 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
         });
 
         spinnerbir1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Log.e("birthdayYear", (String) spinnerbir1.getItemAtPosition(position));
@@ -726,9 +734,8 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
 
             }
         });
+
         spinnerCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Log.e("City", (String) spinnerCity.getItemAtPosition(position));
@@ -764,6 +771,7 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
 
             }
         });
+
         spinnerDrink.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -854,12 +862,13 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
             }
         });
 
+
         spinnerbodyform_male.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Log.e("BODY_form", (String) spinnerbodyform_male.getItemAtPosition(position));
                 UserInfo.setBody_form(spinnerbodyform_male.getItemAtPosition(position).toString());
-                Button b1 = (Button) findViewById(R.id.r_btn3);
+                Button b1 = (Button) findViewById(R.id.r_btn12);
                 if("--".equals(UserInfo.getBody_form())!=true) {
                     b1.setBackgroundResource(R.drawable.press_round_btn);
                 } else {
@@ -962,6 +971,5 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
         editor.commit();
     }
 
-
-
 }
+

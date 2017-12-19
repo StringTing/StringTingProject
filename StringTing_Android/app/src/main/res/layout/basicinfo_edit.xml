@@ -44,12 +44,14 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/sb"
         android:layout_marginTop="10dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        >
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@+id/next_btn"
+            android:scrollbars="none"
             >
 
             <LinearLayout
@@ -61,6 +63,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
+
                     android:orientation="vertical">
 
                     <TextView
@@ -89,7 +93,8 @@
                     <HorizontalScrollView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginTop="15dp">
+                        android:layout_marginTop="15dp"
+                        android:scrollbars="none">
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -213,7 +218,6 @@
                         android:layout_alignParentRight="true"
                         android:orientation="horizontal"
                         android:layout_centerVertical="true"
-                        android:background="@drawable/spinner_rectangle_border"
                         segmentedgroup:sc_border_width="1dp"
                         segmentedgroup:sc_corner_radius="8dp">
 
@@ -222,13 +226,16 @@
                             style="@style/RadioButton"
                             android:layout_width="100dp"
                             android:layout_height="match_parent"
-                            android:text="남자" />
+                            android:textSize="11sp"
+                            android:text="남자"
+                           />
 
                         <RadioButton
                             android:id="@+id/RadioWoman"
                             style="@style/RadioButton"
                             android:layout_width="100dp"
                             android:layout_height="match_parent"
+                            android:textSize="11sp"
                             android:text="여자" />
 
                     </info.hoang8f.android.segmented.SegmentedGroup>
@@ -275,7 +282,6 @@
                         android:layout_alignParentRight="true"
                         android:orientation="horizontal"
                         android:layout_centerVertical="true"
-                        android:background="@drawable/spinner_rectangle_border"
                         segmentedgroup:sc_border_width="1dp"
                         segmentedgroup:sc_corner_radius="8dp">>
 
@@ -284,6 +290,7 @@
                             style="@style/RadioButton"
                             android:layout_width="67dp"
                             android:layout_height="match_parent"
+                            android:textSize="11sp"
                             android:text="군필" />
 
                         <RadioButton
@@ -291,6 +298,7 @@
                             style="@style/RadioButton"
                             android:layout_width="66dp"
                             android:layout_height="match_parent"
+                            android:textSize="11sp"
                             android:text="미필" />
 
                         <RadioButton
@@ -298,6 +306,7 @@
                             style="@style/RadioButton"
                             android:layout_width="67dp"
                             android:layout_height="match_parent"
+                            android:textSize="11sp"
                             android:text="해당없음" />
                     </info.hoang8f.android.segmented.SegmentedGroup>
 
@@ -335,12 +344,14 @@
                         android:id="@+id/Spinner_education"
                         android:layout_width="200dp"
                         android:layout_height="30dp"
+                        android:paddingLeft="10dp"
                         android:layout_alignParentRight="true"
                         android:layout_alignTop="@+id/text_id00"
                         android:layout_gravity="center"
                         android:layout_marginRight="17dp"
                         android:background="@drawable/spinner_rectangle_border"
-                        android:prompt="@string/education_prompt">
+                        android:textSize="11sp"
+                        >
 
                     </Spinner>
 
@@ -382,6 +393,7 @@
                         android:id="@+id/InputCarrea"
                         android:layout_width="200dp"
                         android:layout_height="30dp"
+                        android:paddingLeft="10dp"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="17dp"
                         android:layout_gravity="center"
@@ -420,8 +432,10 @@
 
                     <Spinner
                         android:id="@+id/Spinner_birthday1"
+                        android:textSize="11sp"
                         android:layout_width="60dp"
                         android:layout_height="30dp"
+                        android:paddingLeft="10dp"
                         android:layout_toLeftOf="@+id/bir1"
                         android:layout_gravity="center"
                         android:background="@drawable/spinner_rectangle_border"
@@ -443,10 +457,11 @@
 
                     <Spinner
                     android:id="@+id/Spinner_birthday2"
+                        android:textSize="11sp"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                         android:layout_toLeftOf="@+id/bir2"
-
+                        android:paddingLeft="10dp"
                     android:layout_gravity="center"
                     android:background="@drawable/spinner_rectangle_border"
                     android:prompt="@string/age_prompt">
@@ -467,10 +482,12 @@
 
                     <Spinner
                         android:id="@+id/Spinner_birthday3"
+                        android:textSize="11sp"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_toLeftOf="@+id/bir3"
                         android:layout_gravity="center"
+                        android:paddingLeft="10dp"
                         android:background="@drawable/spinner_rectangle_border"
                         android:prompt="@string/age_prompt">
 
@@ -529,6 +546,8 @@
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="17dp"
                         android:layout_gravity="center"
+                        android:textSize="11sp"
+                        android:paddingLeft="10dp"
                         android:background="@drawable/spinner_rectangle_border"
                         android:prompt="@string/blood_prompt">
 
@@ -575,7 +594,9 @@
                         android:layout_height="30dp"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="17dp"
+                        android:textSize="11sp"
                         android:layout_gravity="center"
+                        android:paddingLeft="10dp"
                         android:background="@drawable/spinner_rectangle_border"
                         />
 
@@ -624,8 +645,10 @@
                         android:layout_width="200dp"
                         android:layout_height="30dp"
                         android:layout_gravity="center"
+                        android:paddingLeft="10dp"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="17dp"
+                        android:textSize="11sp"
                         android:background="@drawable/spinner_rectangle_border"
                         android:prompt="@string/blood_prompt">
 
@@ -680,12 +703,14 @@
                             style="@style/RadioButton"
                             android:layout_width="100dp"
                             android:layout_height="match_parent"
+                            android:textSize="11sp"
                             android:text="흡연" />
 
                         <RadioButton
                             android:id="@+id/RadioNot_smoking"
                             style="@style/RadioButton"
                             android:layout_width="100dp"
+                            android:textSize="11sp"
                             android:layout_height="match_parent"
                             android:text="비흡연" />
 
@@ -734,9 +759,11 @@
                         android:layout_height="30dp"
                         android:layout_gravity="center"
                         android:layout_alignParentRight="true"
+                        android:paddingLeft="10dp"
+                        android:textSize="11sp"
                         android:layout_marginRight="17dp"
                         android:background="@drawable/spinner_rectangle_border"
-                        android:prompt="@string/blood_prompt">
+                       >
 
                     </Spinner>
 
@@ -782,6 +809,8 @@
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="17dp"
                         android:layout_gravity="center"
+                        android:paddingLeft="10dp"
+                        android:textSize="11sp"
                         android:background="@drawable/spinner_rectangle_border"
                         android:prompt="@string/religion_prompt">
 
@@ -830,7 +859,8 @@
                         android:layout_marginRight="17dp"
                         android:layout_gravity="center"
                         android:background="@drawable/spinner_rectangle_border"
-                        android:prompt="@string/religion_prompt"
+                        android:paddingLeft="10dp"
+                        android:textSize="11sp"
                         android:visibility="visible">
 
                     </Spinner>
@@ -843,7 +873,8 @@
                         android:layout_marginRight="17dp"
                         android:layout_gravity="center"
                         android:background="@drawable/spinner_rectangle_border"
-                        android:prompt="@string/religion_prompt"
+                        android:paddingLeft="10dp"
+                        android:textSize="11sp"
                         android:visibility="gone">
 
 
