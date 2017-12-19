@@ -384,7 +384,7 @@
                         android:letterSpacing="-0.02"
                         android:textSize="11sp"
                         android:layout_toRightOf="@+id/r_btn4"
-                        android:text="커리어"
+                        android:text="학과/커리어"
                         />
 
 
@@ -398,7 +398,8 @@
                         android:layout_marginRight="17dp"
                         android:layout_gravity="center"
                         android:background="@drawable/spinner_rectangle_border"
-                        android:text=""
+                        android:hint="ex)00전자 마케팅 or 00대 컴퓨터학과"
+                        android:textColorHint="#dddcdc"
                         android:textSize="11sp" />
 
                 </RelativeLayout>
@@ -418,12 +419,12 @@
                         android:layout_centerVertical="true"
                         android:background="@drawable/round_btn" />
 
+
                     <TextView
                         android:id="@+id/text_id4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignBaseline="@+id/r_btn5"
-                        android:layout_alignBottom="@+id/r_btn5"
+                        android:layout_centerVertical="true"
                         android:layout_toEndOf="@+id/r_btn5"
                         android:letterSpacing="-0.02"
                         android:paddingLeft="11dp"

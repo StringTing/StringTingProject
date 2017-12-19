@@ -30,7 +30,7 @@
     </string-array>
 
     <string-array name="birthday2">
-        <item>00</item>
+        <item>월</item>
         <item>01</item>
         <item>02</item>
         <item>03</item>
@@ -47,7 +47,7 @@
     </string-array>
 
     <string-array name="birthday3">
-        <item>00</item>
+        <item>일</item>
         <item>01</item>
         <item>02</item>
         <item>03</item>
@@ -82,7 +82,7 @@
 
     </string-array>
     <string-array name="city">
-        <item>--</item>
+        <item>지역을 선택해주세요.</item>
         <item>서울</item>
         <item>부산</item>
         <item>인천</item>
@@ -101,7 +101,7 @@
 
     </string-array>
     <string-array name="body_form_male">
-        <item>--</item>
+        <item>체형을 선택해주세요.</item>
         <item>마름</item>
         <item>슬림</item>
         <item>보통</item>
@@ -110,7 +110,7 @@
     </string-array>
 
     <string-array name="body_form_female">
-        <item>--</item>
+        <item>체형을 선택해주세요.</item>
         <item>마름</item>
         <item>슬림</item>
         <item>보통</item>
@@ -119,7 +119,7 @@
     </string-array>
 
     <string-array name="blood">
-        <item>--</item>
+        <item>혈액형을 선택해주세요.</item>
         <item>A</item>
         <item>B</item>
         <item>O</item>
@@ -127,7 +127,7 @@
     </string-array>
 
     <string-array name="religion">
-        <item>--</item>
+        <item>종교를 선택해주세요.</item>
         <item>없음</item>
         <item>기독교</item>
         <item>천주교</item>
@@ -137,14 +137,14 @@
 
     </string-array>
     <string-array name="drink">
-        <item>--</item>
+        <item>음주스타일을 선택해주세요.</item>
         <item>알코올 몰라요</item>
         <item>적당히즐김</item>
         <item>술고래</item>
     </string-array>
 
     <string-array name="education">
-        <item>--</item>
+        <item>학력사항을 선택해주세요.</item>
         <item>인서울상위</item>
         <item>인서울4년제</item>
         <item>수도권4년</item>
@@ -155,7 +155,7 @@
     </string-array>
 
     <string-array name="Tall">
-        <item>00</item>
+        <item>키를 선택해주세요.</item>
         <item>140</item>
         <item>141</item>
         <item>142</item>
