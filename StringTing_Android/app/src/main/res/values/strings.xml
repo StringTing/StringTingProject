@@ -12,7 +12,7 @@
 
 
     <string-array name="birthday1">
-        <item>00</item>
+        <item>년도</item>
         <item>1987</item>
         <item>1988</item>
         <item>1989</item>
@@ -151,7 +151,7 @@
         <item>전문대</item>
         <item>4년제</item>
         <item>해외대학</item>
-        <item>고등학</item>
+        <item>고등학교</item>
     </string-array>
 
     <string-array name="Tall">
