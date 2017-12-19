@@ -11,6 +11,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -40,6 +42,8 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 
 import retrofit2.Call;
@@ -48,6 +52,9 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static android.graphics.Color.BLACK;
+import static android.graphics.Color.GRAY;
+import static android.graphics.Color.WHITE;
 import static com.string.leeyun.stringting_android.R.id.Spinner_Tall;
 import static com.string.leeyun.stringting_android.R.id.Spinner_birthday1;
 import static com.string.leeyun.stringting_android.R.id.Spinner_birthday2;
@@ -179,7 +186,7 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
         iv_UserPhoto6 = (ImageView) this.findViewById(R.id.photo6);
 
 
-        Spinner birthday1 = (Spinner) findViewById(Spinner_birthday1);          //Spinner Setting
+        Spinner birthday1 = (Spinner) findViewById(Spinner_birthday1);//Spinner Setting
         Spinner birthday2 = (Spinner) findViewById(Spinner_birthday2);
         Spinner birthday3 = (Spinner) findViewById(Spinner_birthday3);
         Spinner city = (Spinner) findViewById(Spinner_city);
@@ -191,8 +198,7 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
         Spinner body_form_male=(Spinner)findViewById(Spinner_body_form_male);
         Spinner body_form_female=(Spinner)findViewById(Spinner_body_form_female);
 
-
-        ArrayAdapter adapter= ArrayAdapter.createFromResource(this, R.array.birthday1, spinner_item);
+        ArrayAdapter adapter= ArrayAdapter.createFromResource(this, R.array.birthday1, R.layout.spinner_item);
 
         ArrayAdapter adapter_bir2 = ArrayAdapter.createFromResource(this, R.array.birthday2, spinner_item);
         ArrayAdapter adapter_bir3 = ArrayAdapter.createFromResource(this, R.array.birthday3, spinner_item);
@@ -208,6 +214,7 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
 
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
         birthday1.setAdapter(adapter);
         birthday2.setAdapter(adapter_bir2);
         birthday3.setAdapter(adapter_bir3);
@@ -556,6 +563,7 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
 
 
     }
+
         // RadioButton을  checked 하는 함수
     public void RadioChecked_SpinnerCheck(){
         final RadioButton RadioMan_checked = (RadioButton) findViewById(R.id.RadioMan);
@@ -683,6 +691,7 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
             }
         });
 
+
         spinnerbir1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             @Override
@@ -690,7 +699,11 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
                 Log.e("birthdayYear", (String) spinnerbir1.getItemAtPosition(position));
                 birthdayYear= (String) spinnerbir1.getItemAtPosition(position);
                 Button b1 = (Button) findViewById(R.id.r_btn5);
-
+                if (position == 0) {
+                    ((TextView) view).setTextColor(Color.rgb(221,220,220));
+                } else {
+                    ((TextView) view).setTextColor(BLACK);
+                }
             }
 
             @Override
@@ -700,13 +713,18 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
         });
 
 
+
         spinnerbir2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Log.e("birthdayMonth", (String) spinnerbir2.getItemAtPosition(position));
                 birthdayMonth= (String) spinnerbir2.getItemAtPosition(position);
                 Button b1 = (Button) findViewById(R.id.r_btn5);
-
+                if (position == 0) {
+                    ((TextView) view).setTextColor(Color.rgb(221,220,220));
+                } else {
+                    ((TextView) view).setTextColor(BLACK);
+                }
             }
 
             @Override
@@ -722,7 +740,12 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
                 UserInfo.setBirthday(birthdayYear+"-"+birthdayMonth+"-"+birthdayDay);
                 Log.v("SETBIRTHDAY",UserInfo.getBirthday());
                 Button b1 = (Button) findViewById(R.id.r_btn5);
-                if(UserInfo.getBirthday().contains("00") == false) {
+                if (position == 0) {
+                    ((TextView) view).setTextColor(Color.rgb(221,220,220));
+                } else {
+                    ((TextView) view).setTextColor(BLACK);
+                }
+                if(UserInfo.getBirthday().contains("년도")&&UserInfo.getBirthday().contains("월")&&UserInfo.getBirthday().contains("일") == false) {
                     b1.setBackgroundResource(R.drawable.press_round_btn);
                 } else {
                     b1.setBackgroundResource(R.drawable.round_btn);
@@ -741,10 +764,12 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
                 Log.e("City", (String) spinnerCity.getItemAtPosition(position));
                 UserInfo.setLocation(spinnerCity.getItemAtPosition(position).toString());
                 Button b1 = (Button) findViewById(R.id.r_btn6);
-                if("--".equals(UserInfo.getLocation())!=true) {
-                    b1.setBackgroundResource(R.drawable.press_round_btn);
-                } else  {
+                if (position == 0) {
+                    ((TextView) view).setTextColor(Color.rgb(221,220,220));
                     b1.setBackgroundResource(R.drawable.round_btn);
+                } else {
+                    ((TextView) view).setTextColor(BLACK);
+                    b1.setBackgroundResource(R.drawable.press_round_btn);
                 }
             }
 
@@ -759,10 +784,12 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
                 Log.e("Blood", (String) spinnerBlood.getItemAtPosition(position));
                 UserInfo.setBlood_type(spinnerBlood.getItemAtPosition(position).toString());
                 Button b1 = (Button) findViewById(R.id.r_btn8);
-                if("--".equals(UserInfo.getBlood_type())!=true) {
-                    b1.setBackgroundResource(R.drawable.press_round_btn);
-                } else {
+                if (position == 0) {
+                    ((TextView) view).setTextColor(Color.rgb(221,220,220));
                     b1.setBackgroundResource(R.drawable.round_btn);
+                } else {
+                    ((TextView) view).setTextColor(BLACK);
+                    b1.setBackgroundResource(R.drawable.press_round_btn);
                 }
             }
 
@@ -778,10 +805,12 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
                 Log.e("Drink", (String) spinnerDrink.getItemAtPosition(position));
                 UserInfo.setDrink(spinnerDrink.getItemAtPosition(position).toString());
                 Button b1 = (Button)findViewById(R.id.r_btn10);
-                if("--".equals(UserInfo.getDrink())!=true){
-                    b1.setBackgroundResource(R.drawable.press_round_btn);
-                } else {
+                if (position == 0) {
+                    ((TextView) view).setTextColor(Color.rgb(221,220,220));
                     b1.setBackgroundResource(R.drawable.round_btn);
+                } else {
+                    ((TextView) view).setTextColor(BLACK);
+                    b1.setBackgroundResource(R.drawable.press_round_btn);
                 }
             }
 
@@ -799,39 +828,48 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
                 UserInfo.setReligion(CheckSpinnerReligion);
                 Button b1 = (Button)findViewById(R.id.r_btn11);
 
-                if("--".equals(CheckSpinnerReligion)){
+                if (position == 0) {
                     InputUserinfoReligion='P';
+                    ((TextView) view).setTextColor(Color.rgb(221,220,220));
                     b1.setBackgroundResource(R.drawable.round_btn);
                 }
+
                 else if("기독교".equals(CheckSpinnerReligion)){
                     InputUserinfoReligion='P';
+                    ((TextView) view).setTextColor(BLACK);
                     b1.setBackgroundResource(R.drawable.press_round_btn);
                 }
                 else if("불교".equals(CheckSpinnerReligion)){
                     InputUserinfoReligion='B';
+                    ((TextView) view).setTextColor(BLACK);
                     b1.setBackgroundResource(R.drawable.press_round_btn);
                 }
                 else if("가톨릭".equals(CheckSpinnerReligion)){
                     InputUserinfoReligion='C';
+                    ((TextView) view).setTextColor(BLACK);
                     b1.setBackgroundResource(R.drawable.press_round_btn);
                 }
                 else if("이슬람".equals(CheckSpinnerReligion)){
                     InputUserinfoReligion='I';
+                    ((TextView) view).setTextColor(BLACK);
                     b1.setBackgroundResource(R.drawable.press_round_btn);
 
                 }
                 else if("없음".equals(CheckSpinnerReligion)){
                     InputUserinfoReligion='N';
+                    ((TextView) view).setTextColor(BLACK);
                     b1.setBackgroundResource(R.drawable.press_round_btn);
                 }
                 else if("기타".equals(CheckSpinnerReligion)){
                     InputUserinfoReligion='N';
+                    ((TextView) view).setTextColor(BLACK);
                     b1.setBackgroundResource(R.drawable.press_round_btn);
                 }
 
 
                 else{
                     InputUserinfoReligion='O';
+
                     b1.setBackgroundResource(R.drawable.round_btn);
 
                 }
@@ -849,10 +887,12 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
                 Log.e("education", (String) spinnerEducation.getItemAtPosition(position));
                 UserInfo.setEducation(spinnerEducation.getItemAtPosition(position).toString());
                 Button b1 = (Button) findViewById(R.id.r_btn3);
-                if("--".equals(UserInfo.getEducation())!=true) {
-                    b1.setBackgroundResource(R.drawable.press_round_btn);
-                } else {
+                if (position == 0) {
+                    ((TextView) view).setTextColor(Color.rgb(221,220,220));
                     b1.setBackgroundResource(R.drawable.round_btn);
+                } else {
+                    ((TextView) view).setTextColor(BLACK);
+                    b1.setBackgroundResource(R.drawable.press_round_btn);
                 }
             }
 
@@ -869,10 +909,12 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
                 Log.e("BODY_form", (String) spinnerbodyform_male.getItemAtPosition(position));
                 UserInfo.setBody_form(spinnerbodyform_male.getItemAtPosition(position).toString());
                 Button b1 = (Button) findViewById(R.id.r_btn12);
-                if("--".equals(UserInfo.getBody_form())!=true) {
-                    b1.setBackgroundResource(R.drawable.press_round_btn);
-                } else {
+                if (position == 0) {
+                    ((TextView) view).setTextColor(Color.rgb(221,220,220));
                     b1.setBackgroundResource(R.drawable.round_btn);
+                } else {
+                    ((TextView) view).setTextColor(BLACK);
+                    b1.setBackgroundResource(R.drawable.press_round_btn);
                 }
             }
 
@@ -887,10 +929,12 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
                 Log.e("BODY_form", (String) spinnerbodyform_female.getItemAtPosition(position));
                 UserInfo.setBody_form(spinnerbodyform_female.getItemAtPosition(position).toString());
                 Button b1 = (Button) findViewById(R.id.r_btn3);
-                if("--".equals(UserInfo.getBody_form())!=true) {
-                    b1.setBackgroundResource(R.drawable.press_round_btn);
-                } else {
+                if (position == 0) {
+                    ((TextView) view).setTextColor(Color.rgb(221,220,220));
                     b1.setBackgroundResource(R.drawable.round_btn);
+                } else {
+                    ((TextView) view).setTextColor(BLACK);
+                    b1.setBackgroundResource(R.drawable.press_round_btn);
                 }
             }
 
@@ -903,14 +947,16 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Log.e("Tall", (String) spinnerTall.getItemAtPosition(position));
-                UserInfo.setheight(Integer.parseInt(spinnerTall.getItemAtPosition(position).toString()));
+//                UserInfo.setheight(Integer.parseInt(spinnerTall.getItemAtPosition(position).toString()));
 
 
                 Button b1 = (Button) findViewById(R.id.r_btn7);
-                if(UserInfo.getheight() != 00){
-                    b1.setBackgroundResource(R.drawable.press_round_btn);
-                } else {
+                if (position == 0) {
+                    ((TextView) view).setTextColor(Color.rgb(221,220,220));
                     b1.setBackgroundResource(R.drawable.round_btn);
+                } else {
+                    ((TextView) view).setTextColor(BLACK);
+                    b1.setBackgroundResource(R.drawable.press_round_btn);
                 }
             }
 
@@ -919,9 +965,10 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
 
             }
         });
-        EditText InputCareea=(EditText)findViewById(R.id.InputCarrea);
+        final EditText InputCareea=(EditText)findViewById(R.id.InputCarrea);
         String Check_InputCareea=InputCareea.getText().toString();
         UserInfo.setDepartment(Check_InputCareea);
+
 
         InputCareea.addTextChangedListener(new TextWatcher() {
             // 입력되는 텍스트에 변화가 있을 때
@@ -930,6 +977,7 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
                 Button b1 = (Button) findViewById(R.id.r_btn4);
                 if (s.length() >= 1) {
                     b1.setBackgroundResource(R.drawable.press_round_btn);
+                    InputCareea.setTextColor(BLACK);
                 } else {
                     b1.setBackgroundResource(R.drawable.round_btn);
                 }
@@ -971,5 +1019,6 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
         editor.commit();
     }
 
-}
 
+
+}
