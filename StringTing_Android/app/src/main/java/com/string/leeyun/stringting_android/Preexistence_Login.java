@@ -97,6 +97,14 @@ public class Preexistence_Login extends Activity {
         FacebookSdk.sdkInitialize(getApplicationContext()); // SDK 초기화 (setContentView 보다 먼저 실행되어야합니다. 안그럼 에러납니다.)
         setContentView(R.layout.preexistence_login);
 
+        FrameLayout kakaologin = (FrameLayout) findViewById(R.id.loginBtn_ka);
+        kakaologin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Session.getCurrentSession().addCallback(callback);
+            }
+        });
+
 
 
         FrameLayout kakaologin = (FrameLayout) findViewById(R.id.loginBtn2);
