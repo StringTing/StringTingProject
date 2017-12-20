@@ -178,7 +178,7 @@ public class Personal_profile extends AppCompatActivity {
 
                             LinearLayout.LayoutParams paramlinear = new LinearLayout.LayoutParams(width,height);
 
-                            paramlinear.setMargins(0,0,30,0);
+                            paramlinear.setMargins(0,0,50,0);
 
                             image.setLayoutParams(paramlinear);
 
@@ -189,6 +189,12 @@ public class Personal_profile extends AppCompatActivity {
                             inflatedLayout.addView(image, paramlinear);
 
                         }
+
+                            ImageView profile=(ImageView)findViewById(R.id.detail_profile);
+                            Picasso.with(Personal_profile.this)
+                                .load(profile_image_full_url.get(0))
+                                .into(profile);
+
 
 
                     } catch (Exception e) {

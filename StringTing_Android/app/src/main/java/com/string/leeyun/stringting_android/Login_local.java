@@ -125,6 +125,7 @@ public class Login_local extends Activity {
                             Log.e("onresponse", gsonresponse.getStatus());
                             Log.e("onresponse", String.valueOf(response.code()));
                             Log.e("onresponse", "success");
+                            get_total_data_save(gsonresponse.getToken(), Integer.parseInt(gsonresponse.getId()),gsonresponse.getSex());
                         }
                         else
                         {
@@ -171,5 +172,16 @@ public class Login_local extends Activity {
         super.onBackPressed(); // or super.finish();
 
     }
+
+    public void get_total_data_save(String token,int account_id,String sex){
+        SharedPreferences pref = getSharedPreferences("Local_DB", MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putString("token",token);
+        editor.putInt("account_id",account_id);
+        editor.putString("sex",sex);
+        editor.clear();
+        editor.commit();
+    }
+
 
 }

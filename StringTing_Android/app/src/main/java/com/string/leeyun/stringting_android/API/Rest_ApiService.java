@@ -20,6 +20,7 @@ import retrofit2.http.Path;
 import retrofit2.http.Url;
 
 import static com.string.leeyun.stringting_android.R.id.sex;
+import static com.string.leeyun.stringting_android.R.mipmap.t;
 
 /**
  * Created by leeyun on 2017. 11. 3..
@@ -46,7 +47,8 @@ public interface Rest_ApiService {
         @POST("register/introduction-qna/")
         Call<post_qna_list>post_qna_list(@Body post_qna_list postQnaList);
 
-
+        @POST("register/open-profile/")
+        Call<open_id>post_open_id(@Body open_id OpenId);
 
 
         @POST("register/like/")

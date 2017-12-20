@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
+import android.widget.TextView;
 
 
 import com.google.gson.Gson;
@@ -31,6 +32,7 @@ import com.string.leeyun.stringting_android.API.Im_get_today_introduction;
 import com.string.leeyun.stringting_android.API.Rest_ApiService;
 import com.string.leeyun.stringting_android.API.get_last_5days_matched_accountList;
 import com.string.leeyun.stringting_android.API.okhttp_intercepter_token;
+import com.string.leeyun.stringting_android.API.open_id;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -224,6 +226,16 @@ public class Tab_First extends Fragment implements View.OnClickListener {
                             for (int i=0;i<im_get_today.size();i++){
                                 matching_account.add(im_get_today.get(i).getId());
 
+                                TextView today_info_text=(TextView)getView().findViewById(R.id.today_info_text);
+                                TextView today_info_text1=(TextView)getView().findViewById(R.id.today_info_text1);
+
+                                String shp=" #";
+
+                                String set_info_text= String.valueOf(shp+im_get_today.get(0).getHeight())+shp+im_get_today.get(0).getDrink()+shp+im_get_today.get(0).getDepartment();
+                                String set_info_text1= String.valueOf(shp+im_get_today.get(1).getHeight())+shp+im_get_today.get(1).getDrink()+shp+im_get_today.get(1).getDepartment();
+
+                                today_info_text.setText(set_info_text);
+                                today_info_text1.setText(set_info_text1);
                             }
 
                         }
@@ -333,6 +345,33 @@ public class Tab_First extends Fragment implements View.OnClickListener {
                     i.putExtra("matching_sex","male");
 
                 }
+
+                open_id OpenId=new open_id();
+                OpenId.setOpen_id(matching_account.get(0));
+                //추가팝업개발
+                try {
+                    Call<open_id> post_open_id = apiService.post_open_id(OpenId);
+                    post_open_id.enqueue(new Callback<open_id>() {
+
+                        @Override
+                        public void onResponse(Call<open_id> call5day, retrofit2.Response<open_id> response) {
+                            open_id response_open=new open_id();
+                            response_open=response.body();
+                            Log.e("response_open_result",response_open.getResult());
+
+                        }
+
+                        @Override
+                        public void onFailure(Call<open_id> call, Throwable t) {
+                            Log.e("open_id 실패", t.toString());
+                        }
+                    });
+
+                }catch (Exception e){
+                    e.printStackTrace();
+                    Log.e("last_introduction","null");
+                }
+
                 startActivity(i);
                 break;
             case R.id.t_pic2 :
@@ -488,19 +527,6 @@ public class Tab_First extends Fragment implements View.OnClickListener {
 //        l3.setImageDrawable(roundedBitmapDrawable4);
 
         }
-
-
-
-
-
-//        // Get the bitmap from drawable resources
-//        mBitmap = BitmapFactory.decodeResource(mResources, R.drawable.gametitle_01);
-//
-
-
-
-        //last pic
-
 
 
 

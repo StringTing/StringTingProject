@@ -60,7 +60,7 @@
                     android:layout_marginLeft="24dp">
 
                 <ImageView
-                    android:id="@+id/pic_id"
+                    android:id="@+id/detail_profile"
                     android:layout_width="42dp"
                     android:layout_height="42dp"
                     android:layout_centerVertical="true"
@@ -71,7 +71,7 @@
                     android:id="@+id/textView1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_toRightOf="@+id/pic_id"
+                    android:layout_toRightOf="@+id/detail_profile"
                     android:layout_marginLeft="11dp"
                     android:textColor="#000000"
                     android:layout_centerVertical="true"

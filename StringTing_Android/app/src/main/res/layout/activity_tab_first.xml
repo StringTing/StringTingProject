@@ -89,7 +89,7 @@
                             android:textSize="10sp" />
 
                         <TextView
-                            android:id="@+id/textView"
+                            android:id="@+id/today_info_text"
                             android:layout_width="71dp"
                             android:layout_height="27dp"
                             android:layout_gravity="start"
@@ -97,9 +97,19 @@
                             android:layout_marginLeft="12dp"
                             android:layout_marginTop="7dp"
                             android:textColor="#000000"
-                            android:text="#서울 #기획자 #182 #기획자"
+                            android:text=""
                             android:textSize="10sp" />
 
+
+                        <ImageView
+                            android:id="@+id/today_rock_img"
+                            android:layout_width="13.9dp"
+                            android:layout_height="19.1dp"
+                            android:layout_marginRight="10.1dp"
+                            android:layout_marginBottom="10.6dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentBottom="true"
+                            app:srcCompat="@mipmap/x" />
 
                     </RelativeLayout>
 
@@ -154,7 +164,7 @@
                             android:textSize="10sp" />
 
                         <TextView
-                            android:id="@+id/info2"
+                            android:id="@+id/today_info_text1"
                             android:layout_width="71dp"
                             android:layout_height="27dp"
                             android:layout_gravity="start"
@@ -162,11 +172,11 @@
                             android:layout_marginLeft="12dp"
                             android:layout_marginTop="7dp"
                             android:textColor="#000000"
-                            android:text="#서울 #기획자 #182 #기획자"
+                            android:text=""
                             android:textSize="10sp" />
 
                         <ImageView
-                            android:id="@+id/imageView"
+                            android:id="@+id/today_rock_img"
                             android:layout_width="13.9dp"
                             android:layout_height="19.1dp"
                             android:layout_marginRight="10.1dp"

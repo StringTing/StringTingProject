@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.text.util.Linkify;
 import android.util.Log;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.facebook.CallbackManager;
@@ -97,6 +98,16 @@ public class Preexistence_Login extends Activity {
         setContentView(R.layout.preexistence_login);
 
 
+
+        FrameLayout kakaologin = (FrameLayout) findViewById(R.id.loginBtn2);
+        kakaologin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Session.getCurrentSession().addCallback(callback);
+            }
+        });
+
+
         TextView Provision_Linkify = (TextView) findViewById(R.id.Provision_Linkify);
 
         String text = "가입하기 또는 로그인 버튼을 누르면\n이용약관 및 개인정보취급방침에 동의하신 것이 됩니다.";
@@ -125,8 +136,6 @@ public class Preexistence_Login extends Activity {
 
 
 
-        callback = new SessionCallback();
-        Session.getCurrentSession().addCallback(callback);
 
     }
     public void onClick_login_local(View v){
@@ -349,6 +358,7 @@ public class Preexistence_Login extends Activity {
 
     }
 
+
     public void onClick_membership(View v){
         Intent intent = new Intent(getApplicationContext(),Membership_form.class);
 
@@ -434,7 +444,7 @@ public class Preexistence_Login extends Activity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-
+    }
     public void save_sex(String data){
         SharedPreferences pref = getSharedPreferences("Local_DB", MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();

@@ -26,6 +26,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
+import com.facebook.AccessToken;
+import com.facebook.FacebookAuthorizationException;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -65,6 +67,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.string.leeyun.stringting_android.API.Rest_ApiService.API_URL;
+import static com.string.leeyun.stringting_android.R.mipmap.e;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -411,6 +414,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onError(FacebookException error) {
                 Log.e("test", "Error: " + error);
+                if (error instanceof FacebookAuthorizationException) {
+                    if (AccessToken.getCurrentAccessToken() != null) {
+                        LoginManager.getInstance().logOut();
+                    }
+                }
                 //finish();
             }
 
