@@ -79,15 +79,13 @@
 
                     <TextView
                         android:id="@+id/textView9"
-                        android:layout_width="wrap_content"
+                        android:layout_width="300dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
                         android:letterSpacing="-0.02"
                         android:textColor="#616060"
                         android:layout_marginLeft="39dp"
-                        android:text="상대방에게 보여질 사진입니다. 정성스럽게 올려주세요!
-본인의 사진이 아니거나, 알아보기 힘든 사진일 경우,
-반려사유가 될 수 있습니다. (최소 3장 이상)"
+                        android:text="당신의 인생샷을 보여주세요!\n\n본인의 사진이 아니거나, 알아보기 힘든 사진일 경우,\n반려사유가 될 수 있습니다. (최소 2장 이상)"
                         android:textSize="11sp"/>
 
                     <HorizontalScrollView
@@ -177,7 +175,7 @@
                     android:id="@+id/textView8"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="2. 상세 정보 "
+                    android:text="2. 기본 정보 "
                     android:letterSpacing="-0.02"
                     android:layout_marginLeft="28dp"
                     android:layout_marginTop="12dp"
@@ -243,16 +241,13 @@
                 </RelativeLayout>
 
                 <RelativeLayout
-                    android:id="@+id/army"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="10dp"
                     android:orientation="horizontal">
 
-
-
                     <Button
-                        android:id="@+id/r_btn2"
+                        android:id="@+id/r_btn5"
                         android:layout_alignParentLeft="true"
                         android:layout_marginLeft="33dp"
                         android:layout_width="20dp"
@@ -262,56 +257,94 @@
 
 
                     <TextView
-                        android:id="@+id/text_id2"
+                        android:id="@+id/text_id4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
+                        android:layout_toEndOf="@+id/r_btn5"
+                        android:letterSpacing="-0.02"
                         android:paddingLeft="11dp"
+                        android:text="생년월일"
+                        android:textSize="11sp" />
+
+                    <Spinner
+                        android:id="@+id/Spinner_birthday1"
+                        android:textSize="11sp"
+                        android:layout_width="60dp"
+                        android:layout_height="30dp"
+                        android:paddingLeft="10dp"
+                        android:layout_toLeftOf="@+id/bir1"
+                        android:layout_gravity="center"
+                        android:background="@drawable/spinner_rectangle_border"
+                        android:prompt="@string/age_prompt">
+
+                    </Spinner>
+
+                    <TextView
+                        android:id="@+id/bir1"
+                        android:layout_width="20dp"
+                        android:layout_height="wrap_content"
+                        android:layout_toLeftOf="@+id/Spinner_birthday2"
+                        android:layout_marginRight="10dp"
+                        android:textAlignment="textEnd"
+                        android:layout_centerVertical="true"
                         android:letterSpacing="-0.02"
                         android:textSize="11sp"
-                        android:layout_toRightOf="@+id/r_btn2"
-                        android:text="병역"
-                        />
+                        android:text="년" />
 
+                    <Spinner
+                        android:id="@+id/Spinner_birthday2"
+                        android:textSize="11sp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_toLeftOf="@+id/bir2"
+                        android:paddingLeft="10dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/spinner_rectangle_border"
+                        android:prompt="@string/age_prompt">
 
-                    <info.hoang8f.android.segmented.SegmentedGroup xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
-                        android:id="@+id/RadioArmy"
-                        android:layout_width="200dp"
-                        android:layout_height="29dp"
-                        android:layout_marginRight="17dp"
-                        android:layout_alignParentRight="true"
-                        android:orientation="horizontal"
+                    </Spinner>
+
+                    <TextView
+                        android:id="@+id/bir2"
+                        android:layout_width="20dp"
+                        android:layout_height="wrap_content"
+                        android:layout_toLeftOf="@+id/Spinner_birthday3"
+                        android:letterSpacing="-0.02"
+                        android:textAlignment="textEnd"
+                        android:layout_marginRight="10dp"
                         android:layout_centerVertical="true"
-                        segmentedgroup:sc_border_width="1dp"
-                        segmentedgroup:sc_corner_radius="8dp">>
+                        android:textSize="11sp"
+                        android:text="월" />
 
-                        <RadioButton
-                            android:id="@+id/RadioArmy_Complete"
-                            style="@style/RadioButton"
-                            android:layout_width="67dp"
-                            android:layout_height="match_parent"
-                            android:textSize="11sp"
-                            android:text="군필" />
+                    <Spinner
+                        android:id="@+id/Spinner_birthday3"
+                        android:textSize="11sp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_toLeftOf="@+id/bir3"
+                        android:layout_gravity="center"
+                        android:paddingLeft="10dp"
+                        android:background="@drawable/spinner_rectangle_border"
+                        android:prompt="@string/age_prompt">
 
-                        <RadioButton
-                            android:id="@+id/RadioArmy_InComplete"
-                            style="@style/RadioButton"
-                            android:layout_width="66dp"
-                            android:layout_height="match_parent"
-                            android:textSize="11sp"
-                            android:text="미필" />
+                    </Spinner>
 
-                        <RadioButton
-                            android:id="@+id/RadioArmy_Notduty"
-                            style="@style/RadioButton"
-                            android:layout_width="67dp"
-                            android:layout_height="match_parent"
-                            android:textSize="11sp"
-                            android:text="해당없음" />
-                    </info.hoang8f.android.segmented.SegmentedGroup>
+                    <TextView
+                        android:id="@+id/bir3"
+                        android:layout_width="20dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="17dp"
+                        android:textAlignment="textEnd"
+                        android:layout_centerVertical="true"
+                        android:letterSpacing="-0.02"
+                        android:textSize="11sp"
+                        android:text="일" />
 
 
                 </RelativeLayout>
+
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -404,110 +437,6 @@
 
                 </RelativeLayout>
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="10dp"
-                    android:orientation="horizontal">
-
-                    <Button
-                        android:id="@+id/r_btn5"
-                        android:layout_alignParentLeft="true"
-                        android:layout_marginLeft="33dp"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_centerVertical="true"
-                        android:background="@drawable/round_btn" />
-
-
-                    <TextView
-                        android:id="@+id/text_id4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_toEndOf="@+id/r_btn5"
-                        android:letterSpacing="-0.02"
-                        android:paddingLeft="11dp"
-                        android:text="생년월일"
-                        android:textSize="11sp" />
-
-                    <Spinner
-                        android:id="@+id/Spinner_birthday1"
-                        android:textSize="11sp"
-                        android:layout_width="60dp"
-                        android:layout_height="30dp"
-                        android:paddingLeft="10dp"
-                        android:layout_toLeftOf="@+id/bir1"
-                        android:layout_gravity="center"
-                        android:background="@drawable/spinner_rectangle_border"
-                        android:prompt="@string/age_prompt">
-
-                    </Spinner>
-
-                    <TextView
-                        android:id="@+id/bir1"
-                        android:layout_width="20dp"
-                        android:layout_height="wrap_content"
-                        android:layout_toLeftOf="@+id/Spinner_birthday2"
-                        android:layout_marginRight="10dp"
-                        android:textAlignment="textEnd"
-                        android:layout_centerVertical="true"
-                        android:letterSpacing="-0.02"
-                        android:textSize="11sp"
-                        android:text="년" />
-
-                    <Spinner
-                    android:id="@+id/Spinner_birthday2"
-                        android:textSize="11sp"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                        android:layout_toLeftOf="@+id/bir2"
-                        android:paddingLeft="10dp"
-                    android:layout_gravity="center"
-                    android:background="@drawable/spinner_rectangle_border"
-                    android:prompt="@string/age_prompt">
-
-                    </Spinner>
-
-                    <TextView
-                        android:id="@+id/bir2"
-                        android:layout_width="20dp"
-                        android:layout_height="wrap_content"
-                        android:layout_toLeftOf="@+id/Spinner_birthday3"
-                        android:letterSpacing="-0.02"
-                        android:textAlignment="textEnd"
-                        android:layout_marginRight="10dp"
-                        android:layout_centerVertical="true"
-                        android:textSize="11sp"
-                        android:text="월" />
-
-                    <Spinner
-                        android:id="@+id/Spinner_birthday3"
-                        android:textSize="11sp"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_toLeftOf="@+id/bir3"
-                        android:layout_gravity="center"
-                        android:paddingLeft="10dp"
-                        android:background="@drawable/spinner_rectangle_border"
-                        android:prompt="@string/age_prompt">
-
-                    </Spinner>
-
-                    <TextView
-                        android:id="@+id/bir3"
-                        android:layout_width="20dp"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="17dp"
-                        android:textAlignment="textEnd"
-                        android:layout_centerVertical="true"
-                        android:letterSpacing="-0.02"
-                        android:textSize="11sp"
-                        android:text="일" />
-
-
-                </RelativeLayout>
 
 
 
@@ -652,6 +581,70 @@
                         android:textSize="11sp"
                         android:background="@drawable/spinner_rectangle_border"
                         android:prompt="@string/blood_prompt">
+
+                    </Spinner>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+
+
+                    <Button
+                        android:id="@+id/r_btn12"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginLeft="33dp"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/round_btn" />
+
+
+
+                    <TextView
+                        android:id="@+id/text_id12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:paddingLeft="11dp"
+                        android:letterSpacing="-0.02"
+                        android:textSize="11sp"
+                        android:layout_toRightOf="@+id/r_btn12"
+                        android:text="체형"
+                        />
+
+
+
+                    <Spinner
+                        android:id="@+id/Spinner_body_form_male"
+                        android:layout_width="200dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="17dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/spinner_rectangle_border"
+                        android:paddingLeft="10dp"
+                        android:textSize="11sp"
+                        android:visibility="visible">
+
+                    </Spinner>
+
+                    <Spinner
+                        android:id="@+id/Spinner_body_form_female"
+                        android:layout_width="200dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="17dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/spinner_rectangle_border"
+                        android:paddingLeft="10dp"
+                        android:textSize="11sp"
+                        android:visibility="gone">
+
 
                     </Spinner>
 
@@ -819,7 +812,9 @@
 
                 </RelativeLayout>
 
+
                 <RelativeLayout
+                    android:id="@+id/army"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="10dp"
@@ -828,7 +823,7 @@
 
 
                     <Button
-                        android:id="@+id/r_btn12"
+                        android:id="@+id/r_btn2"
                         android:layout_alignParentLeft="true"
                         android:layout_marginLeft="33dp"
                         android:layout_width="20dp"
@@ -837,52 +832,59 @@
                         android:background="@drawable/round_btn" />
 
 
-
                     <TextView
-                        android:id="@+id/text_id12"
+                        android:id="@+id/text_id2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:paddingLeft="11dp"
                         android:letterSpacing="-0.02"
                         android:textSize="11sp"
-                        android:layout_toRightOf="@+id/r_btn12"
-                        android:text="바디타입"
+                        android:layout_toRightOf="@+id/r_btn2"
+                        android:text="병역"
                         />
 
 
-
-                    <Spinner
-                        android:id="@+id/Spinner_body_form_male"
+                    <info.hoang8f.android.segmented.SegmentedGroup xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/RadioArmy"
                         android:layout_width="200dp"
-                        android:layout_height="30dp"
-                        android:layout_alignParentRight="true"
+                        android:layout_height="29dp"
                         android:layout_marginRight="17dp"
-                        android:layout_gravity="center"
-                        android:background="@drawable/spinner_rectangle_border"
-                        android:paddingLeft="10dp"
-                        android:textSize="11sp"
-                        android:visibility="visible">
-
-                    </Spinner>
-
-                    <Spinner
-                        android:id="@+id/Spinner_body_form_female"
-                        android:layout_width="200dp"
-                        android:layout_height="30dp"
                         android:layout_alignParentRight="true"
-                        android:layout_marginRight="17dp"
-                        android:layout_gravity="center"
-                        android:background="@drawable/spinner_rectangle_border"
-                        android:paddingLeft="10dp"
-                        android:textSize="11sp"
-                        android:visibility="gone">
+                        android:orientation="horizontal"
+                        android:layout_centerVertical="true"
+                        segmentedgroup:sc_border_width="1dp"
+                        segmentedgroup:sc_corner_radius="8dp">>
 
+                        <RadioButton
+                            android:id="@+id/RadioArmy_Complete"
+                            style="@style/RadioButton"
+                            android:layout_width="67dp"
+                            android:layout_height="match_parent"
+                            android:textSize="11sp"
+                            android:text="군필" />
 
-                    </Spinner>
+                        <RadioButton
+                            android:id="@+id/RadioArmy_InComplete"
+                            style="@style/RadioButton"
+                            android:layout_width="66dp"
+                            android:layout_height="match_parent"
+                            android:textSize="11sp"
+                            android:text="미필" />
+
+                        <RadioButton
+                            android:id="@+id/RadioArmy_Notduty"
+                            style="@style/RadioButton"
+                            android:layout_width="67dp"
+                            android:layout_height="match_parent"
+                            android:textSize="11sp"
+                            android:text="해당없음" />
+                    </info.hoang8f.android.segmented.SegmentedGroup>
+
 
                 </RelativeLayout>
                 <RelativeLayout
+                    android:id="@+id/army_txt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
@@ -896,7 +898,8 @@
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="17dp"
                         android:layout_marginTop="8dp"
-                        android:text="* 공익 또는 대체복무 등의 경우, 해당없음을 선택해주세요!" />
+                        android:textAlignment="textEnd"
+                        android:text="* 병역 정보는 공개되지 않는 정보입니다.\n* 공익 또는 대체복무 등의 경우, 해당없음을 선택해주세요." />
 
                 </RelativeLayout>
 
