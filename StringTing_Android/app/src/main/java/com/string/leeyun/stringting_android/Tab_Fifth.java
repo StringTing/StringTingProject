@@ -24,7 +24,7 @@ public class Tab_Fifth extends Fragment  {
         View v = inflater.inflate(R.layout.activity_tab_fifth, container, false);
 
         coin = (RelativeLayout) v.findViewById(R.id.coin_charge);
-    //    notice = (RelativeLayout) v.findViewById(R.id.notice);
+        notice = (RelativeLayout) v.findViewById(R.id.notice);
         push = (RelativeLayout) v.findViewById(R.id.push_setting);
         inquire = (RelativeLayout) v.findViewById(R.id.inquire);
 

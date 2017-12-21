@@ -22,7 +22,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="심사중입니다!"/>
+                android:textColor="#000000"
+                android:text="회원님의 프로필을 심사하고 있어요!\n심사가 완료되면 알림드릴게요!"/>
 
 
         </LinearLayout>
