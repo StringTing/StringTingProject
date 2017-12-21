@@ -84,6 +84,8 @@ public class Tab_Fourth extends Fragment {
         lv.setAdapter(mAdapter);
 
 
+
+
         OkHttpClient.Builder client1 = new OkHttpClient.Builder();
         client1.addInterceptor(new Interceptor() {
             @Override
@@ -119,10 +121,6 @@ public class Tab_Fourth extends Fragment {
         //데이터 넣는거
        // list.add(new listItem(iv,"이름","내용","시간"));
 
-        list.add(new listItem(R.drawable.kakao_default_profile_image,"이름","내용","시간"));
-        list.add(new listItem(R.drawable.kakao_default_profile_image,"이름","내용","시간"));
-        list.add(new listItem(R.drawable.kakao_default_profile_image,"이름","내용","시간"));
-        list.add(new listItem(R.drawable.kakao_default_profile_image,"이름","내용","시간"));
 
 
         final Call<get_matched_accountList>get_matched_account = apiService.get_matched_account(sex,account_id);
@@ -134,13 +132,21 @@ public class Tab_Fourth extends Fragment {
                     Log.e("get_matched_account","응답성공");
                     try {
 
-                        get_matched_accounts = response.body().getGet_matched_accounts();
+                        get_matched_accounts=response.body();
                         for (int i = 0; i < get_matched_accounts.size(); i++) {
                             get_matched_accounts.get(i).getAccount();
                             get_matched_accounts.get(i).getLast_message().getContents();
+
+                            list.add(new listItem(R.drawable.kakao_default_profile_image,"이름","내용","시간"));
+                            list.add(new listItem(R.drawable.kakao_default_profile_image,"이름","내용","시간"));
+                            list.add(new listItem(R.drawable.kakao_default_profile_image,"이름","내용","시간"));
+                            list.add(new listItem(R.drawable.kakao_default_profile_image,"이름","내용","시간"));
                         }
                         Log.e("get_matched_accountList", String.valueOf(response.body()));
                         Log.e("onresponse", String.valueOf(response.code()));
+
+
+
                     } catch (Exception e) {
                         e.printStackTrace();
                         Log.e("get_matehced_account","응답은 성공했지만 값이안들어옴");

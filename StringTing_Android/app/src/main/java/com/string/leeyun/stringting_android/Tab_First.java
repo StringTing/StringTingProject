@@ -19,17 +19,20 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
+import android.widget.TextView;
 
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
+import com.squareup.picasso.Picasso;
 import com.string.leeyun.stringting_android.API.Ger_last_5day_matched_account;
 import com.string.leeyun.stringting_android.API.Get_today_introduction;
 import com.string.leeyun.stringting_android.API.Im_get_today_introduction;
 import com.string.leeyun.stringting_android.API.Rest_ApiService;
 import com.string.leeyun.stringting_android.API.get_last_5days_matched_accountList;
 import com.string.leeyun.stringting_android.API.okhttp_intercepter_token;
+import com.string.leeyun.stringting_android.API.open_id;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -55,6 +58,7 @@ import static com.facebook.FacebookSdk.getApplicationContext;
 import static com.string.leeyun.stringting_android.API.Rest_ApiService.API_IMAGE_URL;
 import static com.string.leeyun.stringting_android.API.Rest_ApiService.API_URL;
 import static com.string.leeyun.stringting_android.R.mipmap.e;
+import static java.lang.System.load;
 
 
 public class Tab_First extends Fragment implements View.OnClickListener {
@@ -71,6 +75,8 @@ public class Tab_First extends Fragment implements View.OnClickListener {
      String sex;
     Rest_ApiService apiService;
     Retrofit retrofit;
+    ArrayList<Integer> matching_account=new ArrayList<Integer>();
+
     float cornerRadius = 25f;
     public String today_image_url_first;
     public String today_image_url_second;
@@ -216,7 +222,21 @@ public class Tab_First extends Fragment implements View.OnClickListener {
                     try {
                         if (im_get_today.get(0).getImages(0) != null) {
                             today_image_url_first = String.valueOf(im_get_today.get(0).getImages(0));
-                            Log.e("get_eval_list_image", String.valueOf(im_get_today.get(0).getImages(0)));
+                            Log.e("get_today_list_image", String.valueOf(im_get_today.get(0).getImages(0)));
+                            for (int i=0;i<im_get_today.size();i++){
+                                matching_account.add(im_get_today.get(i).getId());
+
+                                TextView today_info_text=(TextView)getView().findViewById(R.id.today_info_text);
+                                TextView today_info_text1=(TextView)getView().findViewById(R.id.today_info_text1);
+
+                                String shp=" #";
+
+                                String set_info_text= String.valueOf(shp+im_get_today.get(0).getHeight())+shp+im_get_today.get(0).getDrink()+shp+im_get_today.get(0).getDepartment();
+                                String set_info_text1= String.valueOf(shp+im_get_today.get(1).getHeight())+shp+im_get_today.get(1).getDrink()+shp+im_get_today.get(1).getDepartment();
+
+                                today_info_text.setText(set_info_text);
+                                today_info_text1.setText(set_info_text1);
+                            }
 
                         }
                         today_image_url_second = String.valueOf(im_get_today.get(1).getImages(0));
@@ -230,6 +250,8 @@ public class Tab_First extends Fragment implements View.OnClickListener {
                             today_image_url_second = today_image_url_second.replace(replace, small);
                             Log.e("image_url_first", today_image_url_first);
                             Log.e("image_url_second", today_image_url_second);
+                            image_url_today(v);
+
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -275,7 +297,7 @@ public class Tab_First extends Fragment implements View.OnClickListener {
 //                        last_image_url_third =last_image_url_third.replace(replace,small);
                             Log.e("image_url_first", last_image_url_first);
                             Log.e("image_url_second", last_image_url_second);
-                            image_url(v);
+
                         }
 
                     } catch (Exception e) {
@@ -312,11 +334,57 @@ public class Tab_First extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.t_pic1 :
+
                 Intent i = new Intent(getActivity(),Todaypic_pop.class);
+                Log.e("macthing_account", String.valueOf(matching_account.get(0)));
+                i.putExtra("matching_account",matching_account.get(0));
+
+                if (sex.equals("male")){
+                    i.putExtra("matching_sex","female");
+                }
+                else{
+                    i.putExtra("matching_sex","male");
+
+                }
+
+                open_id OpenId=new open_id();
+                OpenId.setOpen_id(matching_account.get(0));
+                //추가팝업개발
+                try {
+                    Call<open_id> post_open_id = apiService.post_open_id(OpenId);
+                    post_open_id.enqueue(new Callback<open_id>() {
+
+                        @Override
+                        public void onResponse(Call<open_id> call5day, retrofit2.Response<open_id> response) {
+                            open_id response_open=new open_id();
+                            response_open=response.body();
+                            Log.e("response_open_result",response_open.getResult());
+
+                        }
+
+                        @Override
+                        public void onFailure(Call<open_id> call, Throwable t) {
+                            Log.e("open_id 실패", t.toString());
+                        }
+                    });
+
+                }catch (Exception e){
+                    e.printStackTrace();
+                    Log.e("last_introduction","null");
+                }
+
                 startActivity(i);
                 break;
             case R.id.t_pic2 :
                 Intent e = new Intent(getActivity(),TodaypicScd_pop.class);
+                e.putExtra("matching_account",matching_account.get(1));
+                if (sex.equals("male")){
+                    e.putExtra("matching_sex","female");
+                }
+                else{
+                    e.putExtra("matching_sex","male");
+
+                }
                 startActivity(e);
                 break;
         }
@@ -327,7 +395,7 @@ public class Tab_First extends Fragment implements View.OnClickListener {
 
 
 
-    public void image_url(View v){
+    public void image_url_today(View v){
 
 
         // Get the application context
@@ -346,58 +414,65 @@ public class Tab_First extends Fragment implements View.OnClickListener {
 
 
 
-        Thread mTread =new Thread() {
+        final Thread mTread =new Thread() {
             public void run() {
                 try
                 {
 
                     URL url_frist = new URL(API_IMAGE_URL + today_image_url_first);
-                    URL url_second = new URL(API_IMAGE_URL+today_image_url_second);
+                    URL url_second = new URL(API_IMAGE_URL+ today_image_url_second);
                     URL url_last_day_first=new URL(API_IMAGE_URL+last_image_url_first);
                     URL url_last_day_second=new URL(API_IMAGE_URL+last_image_url_second);
-//                    URL url_last_day_third =new URL(API_IMAGE_URL+last_image_url_third);
+                    URLConnection conn;
+                    URLConnection conn1;
+                    URLConnection conn2;
+                    URLConnection conn3;
 
-
-                    Log.e("image_url", String.valueOf(url_frist));
-                    URLConnection conn = url_frist.openConnection();
-                    URLConnection conn1 = url_second.openConnection();
-                    URLConnection conn2 =url_last_day_first.openConnection();
-                    URLConnection conn3 =url_last_day_second.openConnection();
-//                    URLConnection conn4=url_last_day_third.openConnection();
-                    try{
+                    if(!url_frist.equals(null)){
+                        conn=url_frist.openConnection();
                         conn.connect();
-                        conn1.connect();
-                        conn2.connect();
-                        conn3.connect();
-//                    conn4.connect();
-
                         BufferedInputStream bis = new BufferedInputStream(conn.getInputStream());
-                        BufferedInputStream bis1= new BufferedInputStream(conn1.getInputStream());
-                        BufferedInputStream bis2= new BufferedInputStream(conn2.getInputStream());
-                        BufferedInputStream bis3= new BufferedInputStream(conn3.getInputStream());
-//                    BufferedInputStream bis4= new BufferedInputStream(conn4.getInputStream());
-
                         today_Bitmap1 = BitmapFactory.decodeStream(bis);
-                        today_Bitmap2= BitmapFactory.decodeStream(bis1);
-                        lb1 =  BitmapFactory.decodeStream(bis2);
-                        lb2 =  BitmapFactory.decodeStream(bis3);
-//                    lb3 =  BitmapFactory.decodeStream(bis4);
-
-
                         bis.close();
+
+                    }
+                    if(!url_second.equals(null)){
+                      conn1 = url_second.openConnection();
+                        conn1.connect();
+                        BufferedInputStream bis1= new BufferedInputStream(conn1.getInputStream());
+                        today_Bitmap2= BitmapFactory.decodeStream(bis1);
                         bis1.close();
+
+
+                    }
+                    if(!url_last_day_first.equals(null)){
+                       conn2 =url_last_day_first.openConnection();
+                        conn2.connect();
+                        BufferedInputStream bis2= new BufferedInputStream(conn2.getInputStream());
+                        lb1 =  BitmapFactory.decodeStream(bis2);
                         bis2.close();
+
+                    }
+                    if(!url_last_day_second.equals(null)){
+                      conn3 =url_last_day_second.openConnection();
+                        conn3.connect();
+                        BufferedInputStream bis3= new BufferedInputStream(conn3.getInputStream());
+                        lb2 =  BitmapFactory.decodeStream(bis3);
                         bis3.close();
-                    }catch (Exception e){
-                        e.printStackTrace();
+
                     }
 
+//                    URL url_last_day_third =new URL(API_IMAGE_URL+last_image_url_third);
 
-//                    bis4.close();
+                    Log.e("image_url", String.valueOf(url_frist));
+//                    URLConnection conn4=url_last_day_third.openConnection();
+
+
                 } catch (Exception e)
 
                 {
                         e.printStackTrace();
+                        Log.e("setting_today_bitmap","fail");
                 }
             }
         };
@@ -412,68 +487,51 @@ public class Tab_First extends Fragment implements View.OnClickListener {
 //            l1.setImageBitmap(lb3);
         } catch (InterruptedException e) {
             e.printStackTrace();
+            Log.e("setting_today_image","fail");
+
         }
         // Display the bitmap in ImageView
 
 
         // Define the ImageView corners radius
 
-        android.support.v4.graphics.drawable.RoundedBitmapDrawable roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(mResources, today_Bitmap1);
-        android.support.v4.graphics.drawable.RoundedBitmapDrawable roundedBitmapDrawable1 = RoundedBitmapDrawableFactory.create(mResources, today_Bitmap2);
-        android.support.v4.graphics.drawable.RoundedBitmapDrawable roundedBitmapDrawable2 = RoundedBitmapDrawableFactory.create(mResources, lb1);
-        android.support.v4.graphics.drawable.RoundedBitmapDrawable roundedBitmapDrawable3 = RoundedBitmapDrawableFactory.create(mResources, lb2);
+        if(!today_Bitmap1.equals(null)){
+            android.support.v4.graphics.drawable.RoundedBitmapDrawable roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(mResources, today_Bitmap1);
+            roundedBitmapDrawable.setCornerRadius(cornerRadius);
+            roundedBitmapDrawable.setAntiAlias(true);
+            mImageView.setImageDrawable(roundedBitmapDrawable);
+
+        }
+        if(!today_Bitmap2.equals(null)){
+            android.support.v4.graphics.drawable.RoundedBitmapDrawable roundedBitmapDrawable1 = RoundedBitmapDrawableFactory.create(mResources, today_Bitmap2);
+            roundedBitmapDrawable1.setCornerRadius(cornerRadius);
+            roundedBitmapDrawable1.setAntiAlias(true);
+            mImageView2.setImageDrawable(roundedBitmapDrawable1);
+
+        }
+        if(!lb1.equals(null)){
+            android.support.v4.graphics.drawable.RoundedBitmapDrawable roundedBitmapDrawable2 = RoundedBitmapDrawableFactory.create(mResources, lb1);
+            roundedBitmapDrawable2.setCornerRadius(cornerRadius);
+            roundedBitmapDrawable2.setAntiAlias(true);
+            l1.setImageDrawable(roundedBitmapDrawable2);
+
+        }
+        if(!lb2.equals(null)){
+            android.support.v4.graphics.drawable.RoundedBitmapDrawable roundedBitmapDrawable3 = RoundedBitmapDrawableFactory.create(mResources, lb2);
 //        android.support.v4.graphics.drawable.RoundedBitmapDrawable roundedBitmapDrawable4 = RoundedBitmapDrawableFactory.create(mResources, lb3);
-
-
-        roundedBitmapDrawable.setCornerRadius(cornerRadius);
-        roundedBitmapDrawable1.setCornerRadius(cornerRadius);
-        roundedBitmapDrawable2.setCornerRadius(cornerRadius);
-        roundedBitmapDrawable3.setCornerRadius(cornerRadius);
+            roundedBitmapDrawable3.setCornerRadius(cornerRadius);
 //        roundedBitmapDrawable4.setCornerRadius(cornerRadius);
-        roundedBitmapDrawable.setAntiAlias(true);
-        roundedBitmapDrawable1.setAntiAlias(true);
-        roundedBitmapDrawable2.setAntiAlias(true);
-        roundedBitmapDrawable3.setAntiAlias(true);
+            roundedBitmapDrawable3.setAntiAlias(true);
 //        roundedBitmapDrawable4.setAntiAlias(true);
-        // Set the ImageView image as drawable object
-        mImageView.setImageDrawable(roundedBitmapDrawable);
-        mImageView2.setImageDrawable(roundedBitmapDrawable1);
-        l1.setImageDrawable(roundedBitmapDrawable2);
-        l2.setImageDrawable(roundedBitmapDrawable3);
+            // Set the ImageView image as drawable object
+            l2.setImageDrawable(roundedBitmapDrawable3);
 //        l3.setImageDrawable(roundedBitmapDrawable4);
 
+        }
 
 
 
 
-//        // Get the bitmap from drawable resources
-//        mBitmap = BitmapFactory.decodeResource(mResources, R.drawable.gametitle_01);
-//
-
-
-
-        //last pic
-
-
-
-
-        android.support.v4.graphics.drawable.RoundedBitmapDrawable last_five_day1 = RoundedBitmapDrawableFactory.create(mResources, lb1);
-        android.support.v4.graphics.drawable.RoundedBitmapDrawable last_five_day2 = RoundedBitmapDrawableFactory.create(mResources, lb2);
-        android.support.v4.graphics.drawable.RoundedBitmapDrawable last_five_day3 = RoundedBitmapDrawableFactory.create(mResources,lb3);
-
-
-        last_five_day1.setCornerRadius(cornerRadius);
-        last_five_day2.setCornerRadius(cornerRadius);
-        last_five_day3.setCornerRadius(cornerRadius);
-
-        last_five_day1.setAntiAlias(true);
-        last_five_day2.setAntiAlias(true);
-        last_five_day3.setAntiAlias(true);
-
-
-        l1.setImageDrawable(last_five_day1);
-        l2.setImageDrawable(last_five_day2);
-        l3.setImageDrawable(last_five_day3);
 
     }
 

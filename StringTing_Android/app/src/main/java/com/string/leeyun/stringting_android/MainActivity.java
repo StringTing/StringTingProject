@@ -26,6 +26,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
+import com.facebook.AccessToken;
+import com.facebook.FacebookAuthorizationException;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -65,6 +67,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.string.leeyun.stringting_android.API.Rest_ApiService.API_URL;
+import static com.string.leeyun.stringting_android.R.mipmap.e;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -72,11 +75,12 @@ public class MainActivity extends AppCompatActivity {
 
     private Button CustomloginButton;
     private CallbackManager callbackManager;
-    Rest_ApiService apiService;
-    Retrofit retrofit;
+
     String refreshedToken;
     SessionCallback callback;
 
+    Rest_ApiService apiService;
+    Retrofit retrofit;
      String Email;
      String sex;
     public check_login CheckLogin=new check_login();
@@ -410,6 +414,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onError(FacebookException error) {
                 Log.e("test", "Error: " + error);
+                if (error instanceof FacebookAuthorizationException) {
+                    if (AccessToken.getCurrentAccessToken() != null) {
+                        LoginManager.getInstance().logOut();
+                    }
+                }
                 //finish();
             }
 
@@ -442,7 +451,7 @@ public class MainActivity extends AppCompatActivity {
     }
     public void onClick_login_firstpage(View v){
         Intent exintent = new Intent(getApplicationContext(),Preexistence_Login.class);
-
+        exintent.putExtra("fcm_token",refreshedToken);
         startActivity(exintent);
 
     }

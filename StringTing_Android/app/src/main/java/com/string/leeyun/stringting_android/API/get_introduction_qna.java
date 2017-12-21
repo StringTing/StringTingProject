@@ -10,37 +10,24 @@ import static android.os.Build.VERSION_CODES.N;
 
 public class get_introduction_qna {
 
-    @SerializedName("id")
-    private int id;
-    @SerializedName("contents")
-    private String contents;
-
-    private String question_id;
+    @SerializedName("question")
+    private String question;
+    @SerializedName("answer")
     private String answer;
 
-    public String getQuestion_id() {
-        return question_id;
+    public String getQuestion() {
+        return question;
     }
 
-    public void setQuestion_id(String question_id) {
-        this.question_id = question_id;
+    public String getAnswer() {
+        return answer;
     }
 
-    public int getId() {
-        return id;
+    public void setQuestion(String question) {
+        this.question = question;
     }
 
-    public String getContents() {
-        return contents;
+    public void setAnswer(String answer) {
+        this.answer = answer;
     }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setContents(String contents) {
-        this.contents = contents;
-    }
-
-
 }

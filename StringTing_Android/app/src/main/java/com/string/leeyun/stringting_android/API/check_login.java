@@ -9,7 +9,7 @@ public class check_login {
     private String result;
     private String status;
     private String id;
-    private String token;
+    private String access_token;
     private String sex;
     private String email;
     private String password;
@@ -38,7 +38,7 @@ public class check_login {
     }
 
     public void setToken(String token) {
-        this.token = token;
+        this.access_token = token;
     }
 
     public void setSex(String sex) {
@@ -51,7 +51,7 @@ public class check_login {
     }
 
     public String getToken() {
-        return token;
+        return access_token;
     }
 
     public String getSex() {
