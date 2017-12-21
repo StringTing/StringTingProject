@@ -5,8 +5,7 @@
     android:layout_width="300dp"
     android:layout_height="200dp"
     android:background="@drawable/rounded"
-    tools:context="com.string.leeyun.stringting_android.Basicinfo_pop">
-
+    tools:context="com.string.leeyun.stringting_android.TodaypicScd_pop">
 
     <RelativeLayout
         android:id="@+id/text_box"
@@ -20,16 +19,16 @@
             android:layout_centerHorizontal="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="입력하신 내용이 저장 되지 않습니다."/>
+            android:text="픽하지 않은 카드입니다."/>
 
-        <TextView
-            android:id="@+id/sub_text"
-            android:layout_centerHorizontal="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/main_text"
-            android:text="그래도 뒤로 가시겠습니까?"/>
-
+             <TextView
+                 android:id="@+id/sub_text"
+                 android:layout_centerHorizontal="true"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_below="@+id/main_text"
+                 android:gravity="center"
+                 android:text="다른픽을 열어보실 경우,\n 5코인이 필요해요!"/>
     </RelativeLayout>
 
     <LinearLayout

@@ -166,7 +166,7 @@
                             android:textSize="10sp" />
 
                         <ImageView
-                            android:id="@+id/imageView"
+                            android:id="@+id/rock"
                             android:layout_width="13.9dp"
                             android:layout_height="19.1dp"
                             android:layout_marginRight="10.1dp"
@@ -175,7 +175,6 @@
                             android:layout_alignParentBottom="true"
                             app:srcCompat="@mipmap/x" />
                     </RelativeLayout>
-
         </FrameLayout>
                 </LinearLayout>
 

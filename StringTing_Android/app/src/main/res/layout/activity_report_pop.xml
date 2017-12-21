@@ -5,8 +5,7 @@
     android:layout_width="300dp"
     android:layout_height="200dp"
     android:background="@drawable/rounded"
-    tools:context="com.string.leeyun.stringting_android.Basicinfo_pop">
-
+    tools:context="com.string.leeyun.stringting_android.Report_pop">
 
     <RelativeLayout
         android:id="@+id/text_box"
@@ -20,15 +19,10 @@
             android:layout_centerHorizontal="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="입력하신 내용이 저장 되지 않습니다."/>
+            android:gravity="center"
+            android:layout_marginBottom="10dp"
+            android:text="상대방을 신고할 경우,\n스트링이 자체 검토 후,\n계정 삭제 등의 불이익을 줄 수 있어요!\n이 사람을 신고할까요?"/>
 
-        <TextView
-            android:id="@+id/sub_text"
-            android:layout_centerHorizontal="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/main_text"
-            android:text="그래도 뒤로 가시겠습니까?"/>
 
     </RelativeLayout>
 

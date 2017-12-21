@@ -5,8 +5,7 @@
     android:layout_width="300dp"
     android:layout_height="200dp"
     android:background="@drawable/rounded"
-    tools:context="com.string.leeyun.stringting_android.Basicinfo_pop">
-
+    tools:context="com.string.leeyun.stringting_android.Chargecoin_pop">
 
     <RelativeLayout
         android:id="@+id/text_box"
@@ -20,7 +19,7 @@
             android:layout_centerHorizontal="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="입력하신 내용이 저장 되지 않습니다."/>
+            android:text="잔여코인이 부족하네요!"/>
 
         <TextView
             android:id="@+id/sub_text"
@@ -28,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/main_text"
-            android:text="그래도 뒤로 가시겠습니까?"/>
+            android:text="코인충전화면으로 이동할까요?"/>
 
     </RelativeLayout>
 
@@ -54,5 +53,6 @@
             android:onClick="confirm"
             android:text="확인"/>
     </LinearLayout>
+
 
 </RelativeLayout>

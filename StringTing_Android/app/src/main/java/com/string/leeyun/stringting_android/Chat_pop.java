@@ -10,22 +10,18 @@ import android.view.Window;
 
 import com.tsengvn.typekit.TypekitContextWrapper;
 
-public class MyIdeal_pop extends Activity {
+public class Chat_pop extends Activity {
 
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
     }
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-
-        setContentView(R.layout.activity_my_ideal_pop);
-
-
+        setContentView(R.layout.activity_chat_pop);
     }
 
     public void cancle(View v){
@@ -33,8 +29,10 @@ public class MyIdeal_pop extends Activity {
     }
 
     public void confirm(View v){
-        Intent intent = new Intent(this,Basicinfo_Edit.class);
+        //대화요청후 어떻게..?
 
-        startActivity(intent);
+        //코인부족하면
+        Intent chargecoin = new Intent(this,Chargecoin_pop.class);
+        startActivity(chargecoin);
     }
 }

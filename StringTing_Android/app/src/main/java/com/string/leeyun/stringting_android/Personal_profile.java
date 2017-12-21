@@ -1,6 +1,7 @@
 package com.string.leeyun.stringting_android;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
@@ -61,6 +62,17 @@ public class Personal_profile extends AppCompatActivity {
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
+    }
+
+
+    public void chat_request(View v){
+        Intent chat_r = new Intent(this,Chat_pop.class);
+        startActivity(chat_r);
+    }
+
+    public void report_request(View v){
+        Intent r= new Intent(this,Report_pop.class);
+        startActivity(r);
     }
 
 

@@ -312,11 +312,11 @@ public class Tab_First extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.t_pic1 :
-                Intent i = new Intent(getActivity(),Personal_profile.class);
+                Intent i = new Intent(getActivity(),Todaypic_pop.class);
                 startActivity(i);
                 break;
             case R.id.t_pic2 :
-                Intent e = new Intent(getActivity(),Personal_profile.class);
+                Intent e = new Intent(getActivity(),TodaypicScd_pop.class);
                 startActivity(e);
                 break;
         }

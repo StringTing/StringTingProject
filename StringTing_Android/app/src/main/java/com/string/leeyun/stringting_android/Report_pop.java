@@ -10,31 +10,24 @@ import android.view.Window;
 
 import com.tsengvn.typekit.TypekitContextWrapper;
 
-public class MyIdeal_pop extends Activity {
+public class Report_pop extends Activity {
 
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
     }
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-
-        setContentView(R.layout.activity_my_ideal_pop);
-
-
+        setContentView(R.layout.activity_report_pop);
     }
-
     public void cancle(View v){
         super.onBackPressed();
     }
 
     public void confirm(View v){
-        Intent intent = new Intent(this,Basicinfo_Edit.class);
-
-        startActivity(intent);
+        //신고후 어쩌지
     }
 }

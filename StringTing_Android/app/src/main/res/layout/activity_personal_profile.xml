@@ -31,6 +31,7 @@
             android:textColor="#de000000"
             android:lineSpacingExtra="15sp"
             android:text="신고"
+            android:onClick="report_request"
             android:textSize="13sp" />
 
     </RelativeLayout>
@@ -151,6 +152,7 @@
 
     <Button
         android:id="@+id/button7"
+        android:onClick="chat_request"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="#ff0066"
