@@ -757,10 +757,11 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
                 UserInfo.setBirthday(birthdayYear+"-"+birthdayMonth+"-"+birthdayDay);
                 Log.v("SETBIRTHDAY",UserInfo.getBirthday());
                 Button b1 = (Button) findViewById(R.id.r_btn5);
+                TextView t = (TextView)findViewById(R.id.spitem_set);
                 if (position == 0) {
-                    ((TextView) view).setTextColor(Color.rgb(221,220,220));
+                    t.setTextColor(Color.rgb(221,220,220));
                 } else {
-                    ((TextView) view).setTextColor(BLACK);
+                    t.setTextColor(BLACK);
                 }
                 if(UserInfo.getBirthday().contains("년도")&&UserInfo.getBirthday().contains("월")&&UserInfo.getBirthday().contains("일") == false) {
                     b1.setBackgroundResource(R.drawable.press_round_btn);
