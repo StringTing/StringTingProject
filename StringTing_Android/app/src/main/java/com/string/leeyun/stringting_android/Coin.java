@@ -45,4 +45,9 @@ public class Coin extends AppCompatActivity {
         setContentView(R.layout.activity_coin);
 
     }
+
+    @Override
+    public void onBackPressed() {
+        Coin.this.finish();
+    }
 }

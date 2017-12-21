@@ -5,8 +5,7 @@
     android:layout_width="300dp"
     android:layout_height="200dp"
     android:background="@drawable/rounded"
-    tools:context="com.string.leeyun.stringting_android.Basicinfo_pop">
-
+    tools:context="com.string.leeyun.stringting_android.Chat_pop">
 
     <RelativeLayout
         android:id="@+id/text_box"
@@ -20,15 +19,19 @@
             android:layout_centerHorizontal="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="입력하신 내용이 저장 되지 않습니다."/>
+            android:gravity="center"
+            android:layout_marginBottom="10dp"
+            android:text="상대방이 대화요청을 수락 할 경우,\n대화방이 열립니다!"/>
 
         <TextView
-            android:id="@+id/sub_text"
-            android:layout_centerHorizontal="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/main_text"
-            android:text="그래도 뒤로 가시겠습니까?"/>
+         android:id="@+id/sub_text"
+         android:layout_centerHorizontal="true"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_below="@+id/main_text"
+            android:layout_marginBottom="10dp"
+         android:gravity="center"
+         android:text="5코인이 소진됩니다.\n대화 요청하시겠어요?"/>
 
     </RelativeLayout>
 
@@ -54,5 +57,6 @@
             android:onClick="confirm"
             android:text="확인"/>
     </LinearLayout>
+
 
 </RelativeLayout>

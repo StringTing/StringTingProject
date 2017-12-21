@@ -28,7 +28,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".Preexistence_Login"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity android:name=".Login_local" />
         <activity
             android:name=".Basicinfo_Edit"
@@ -65,8 +65,23 @@
         <activity
             android:name=".MyIdeal_pop"
             android:theme="@android:style/Theme.Dialog" />
-        <activity android:name=".Basicinfo_pop"
-            android:theme="@android:style/Theme.Dialog"></activity>
+        <activity
+            android:name=".Basicinfo_pop"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name=".Chargecoin_pop"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name=".Todaypic_pop"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name=".TodaypicScd_pop"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name=".Chat_pop"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity android:name=".Report_pop"
+            android:theme="@android:style/Theme.Dialog" ></activity>
     </application>
 
 </manifest>

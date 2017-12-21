@@ -100,7 +100,7 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
 
 
 
-    @Override
+     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
     }

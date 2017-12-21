@@ -334,7 +334,8 @@ public class Tab_First extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.t_pic1 :
-                Intent i = new Intent(getActivity(),Personal_profile.class);
+
+                Intent i = new Intent(getActivity(),Todaypic_pop.class);
                 Log.e("macthing_account", String.valueOf(matching_account.get(0)));
                 i.putExtra("matching_account",matching_account.get(0));
 
@@ -375,7 +376,7 @@ public class Tab_First extends Fragment implements View.OnClickListener {
                 startActivity(i);
                 break;
             case R.id.t_pic2 :
-                Intent e = new Intent(getActivity(),Personal_profile.class);
+                Intent e = new Intent(getActivity(),TodaypicScd_pop.class);
                 e.putExtra("matching_account",matching_account.get(1));
                 if (sex.equals("male")){
                     e.putExtra("matching_sex","female");

@@ -78,6 +78,17 @@ public class Personal_profile extends AppCompatActivity {
     }
 
 
+    public void chat_request(View v){
+        Intent chat_r = new Intent(this,Chat_pop.class);
+        startActivity(chat_r);
+    }
+
+    public void report_request(View v){
+        Intent r= new Intent(this,Report_pop.class);
+        startActivity(r);
+    }
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
