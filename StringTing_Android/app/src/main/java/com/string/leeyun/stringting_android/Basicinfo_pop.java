@@ -7,25 +7,24 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 
-public class MyIdeal_pop extends Activity {
+public class Basicinfo_pop extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-
-        setContentView(R.layout.activity_my_ideal_pop);
-
-
+        setContentView(R.layout.activity_basicinfo_pop);
     }
 
-    public void cancle(View v){
+
+    public void cancle_b(View v){
         super.onBackPressed();
     }
 
-    public void confirm(View v){
-        Intent intent = new Intent(this,Basicinfo_Edit.class);
-
+    public void confirm_b(View v){
+        Intent intent = new Intent(this,MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
 }

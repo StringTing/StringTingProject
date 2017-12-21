@@ -235,8 +235,15 @@ public class ChatView extends Activity implements AdapterView.OnItemClickListene
 
 
     public void onClick_back(View v) {
-        super.onBackPressed(); // or super.finish();
+        Intent pop = new Intent(this,MyIdeal_pop.class);
+        startActivity(pop);
+    }
 
+    @Override
+    public void onBackPressed() {
+        Intent pop = new Intent(this,MyIdeal_pop.class);
+        startActivity(pop);
+        // super.onBackPressed();
     }
 
     public void onClick_TabbedBar(View v){

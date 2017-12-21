@@ -386,9 +386,17 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
     }
 
     public void onClick_back(View v) {
-        super.onBackPressed(); // or super.finish();
-
+        Intent pop = new Intent(this,Basicinfo_pop.class);
+        startActivity(pop);
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent pop = new Intent(this,Basicinfo_pop.class);
+        startActivity(pop);
+       // super.onBackPressed();
+    }
+
 
 
     private void doTakeAlbumAction() { //앨범에서 이미지 가져오기
@@ -444,12 +452,17 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
 
                 }
 
+
+
                 if (extras != null) {
                     Bitmap photo = extras.getParcelable("data");//CROP된 BITMAP
+                    Rounding roundingDrawable = new Rounding(photo);
+
 
                     switch (imageupload_count){
                         case 1:{
-                            iv_UserPhoto1.setImageBitmap(photo);
+                            iv_UserPhoto1.setBackground(roundingDrawable);
+                            iv_UserPhoto1.setImageBitmap(null);
                             storeCropImage(photo,filePath);
                             break;
                         }
@@ -595,6 +608,8 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
                     Button b1 = (Button)findViewById(R.id.r_btn1);
                     b1.setBackgroundResource(R.drawable.press_round_btn);
                     RelativeLayout army = (RelativeLayout)findViewById(R.id.army);
+                    RelativeLayout army_txt = (RelativeLayout) findViewById(R.id.army_txt);
+                    army_txt.setVisibility(View.VISIBLE);
                     army.setVisibility(View.VISIBLE);
                     Spinner body_male=(Spinner)findViewById(Spinner_body_form_male);
                     Spinner body_female=(Spinner)findViewById(Spinner_body_form_female);
@@ -618,6 +633,8 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
                     b1.setBackgroundResource(R.drawable.press_round_btn);
 
                     RelativeLayout army = (RelativeLayout) findViewById(R.id.army);
+                    RelativeLayout army_txt = (RelativeLayout) findViewById(R.id.army_txt);
+                    army_txt.setVisibility(View.GONE);
                     army.setVisibility(View.GONE);
                     Spinner body_male=(Spinner)findViewById(Spinner_body_form_male);
                     Spinner body_female=(Spinner)findViewById(Spinner_body_form_female);
