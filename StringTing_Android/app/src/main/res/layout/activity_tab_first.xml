@@ -177,14 +177,14 @@
 
                         <ImageView
 
-                            android:id="@+id/today_rock_img"
-
+                            android:id="@+id/today_rock_img2"
                             android:layout_width="13.9dp"
                             android:layout_height="19.1dp"
                             android:layout_marginRight="10.1dp"
                             android:layout_marginBottom="10.6dp"
                             android:layout_alignParentEnd="true"
                             android:layout_alignParentBottom="true"
+                            android:visibility="visible"
                             app:srcCompat="@mipmap/x" />
                     </RelativeLayout>
         </FrameLayout>

@@ -335,57 +335,66 @@ public class Tab_First extends Fragment implements View.OnClickListener {
         switch (v.getId()){
             case R.id.t_pic1 :
 
-                Intent i = new Intent(getActivity(),Todaypic_pop.class);
+
                 Log.e("macthing_account", String.valueOf(matching_account.get(0)));
-                i.putExtra("matching_account",matching_account.get(0));
 
-                if (sex.equals("male")){
-                    i.putExtra("matching_sex","female");
-                }
-                else{
-                    i.putExtra("matching_sex","male");
+                ImageView today_rock=(ImageView)v.findViewById(R.id.today_rock_img);
 
-                }
+                if(today_rock.getVisibility()==View.VISIBLE) {
+                    Intent i = new Intent(getActivity(),Todaypic_pop.class);
+                    i.putExtra("matching_account",matching_account.get(0));
+                    if (sex.equals("male")){
+                        i.putExtra("matching_sex","female");
+                    }
+                    else{
+                        i.putExtra("matching_sex","male");
 
-                open_id OpenId=new open_id();
-                OpenId.setOpen_id(matching_account.get(0));
-                //추가팝업개발
-                try {
-                    Call<open_id> post_open_id = apiService.post_open_id(OpenId);
-                    post_open_id.enqueue(new Callback<open_id>() {
+                    }
+                    startActivity(i);
 
-                        @Override
-                        public void onResponse(Call<open_id> call5day, retrofit2.Response<open_id> response) {
-                            open_id response_open=new open_id();
-                            response_open=response.body();
-                            Log.e("response_open_result",response_open.getResult());
+                }else {
+                    Intent e = new Intent(getActivity(),TodaypicScd_pop.class);
+                    e.putExtra("matching_account",matching_account.get(1));
+                    if (sex.equals("male")){
+                        e.putExtra("matching_sex","female");
+                    }
+                    else{
+                        e.putExtra("matching_sex","male");
 
-                        }
-
-                        @Override
-                        public void onFailure(Call<open_id> call, Throwable t) {
-                            Log.e("open_id 실패", t.toString());
-                        }
-                    });
-
-                }catch (Exception e){
-                    e.printStackTrace();
-                    Log.e("last_introduction","null");
+                    }
+                    startActivity(e);
                 }
 
-                startActivity(i);
+
                 break;
             case R.id.t_pic2 :
-                Intent e = new Intent(getActivity(),TodaypicScd_pop.class);
-                e.putExtra("matching_account",matching_account.get(1));
-                if (sex.equals("male")){
-                    e.putExtra("matching_sex","female");
-                }
-                else{
-                    e.putExtra("matching_sex","male");
+                ImageView today_rock1=(ImageView)v.findViewById(R.id.today_rock_img2);
 
+
+                if(today_rock1.getVisibility()==View.VISIBLE) {
+                    Intent i = new Intent(getActivity(),Todaypic_pop.class);
+                    i.putExtra("matching_account",matching_account.get(1));
+                    if (sex.equals("male")){
+                        i.putExtra("matching_sex","female");
+                    }
+                    else{
+                        i.putExtra("matching_sex","male");
+
+                    }
+                    startActivity(i);
+
+                }else {
+                    Intent e = new Intent(getActivity(),TodaypicScd_pop.class);
+                    e.putExtra("matching_account",matching_account.get(1));
+                    if (sex.equals("male")){
+                        e.putExtra("matching_sex","female");
+                    }
+                    else{
+                        e.putExtra("matching_sex","male");
+
+                    }
+                    startActivity(e);
                 }
-                startActivity(e);
                 break;
         }
 

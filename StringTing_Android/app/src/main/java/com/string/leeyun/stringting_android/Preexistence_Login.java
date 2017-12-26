@@ -107,14 +107,6 @@ public class Preexistence_Login extends Activity {
 
 
 
-        FrameLayout kakaologin = (FrameLayout) findViewById(R.id.loginBtn2);
-        kakaologin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Session.getCurrentSession().addCallback(callback);
-            }
-        });
-
 
         TextView Provision_Linkify = (TextView) findViewById(R.id.Provision_Linkify);
 

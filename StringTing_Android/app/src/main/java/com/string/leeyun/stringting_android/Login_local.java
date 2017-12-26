@@ -64,7 +64,7 @@ public class Login_local extends Activity {
         Log.e("local_account", String.valueOf(account_id));
         token=pref.getString("token","?");
         Log.e("loacal_token",String.valueOf(token));
-
+        String fcm_token=pref.getString("fcm_token","?");
 
 
         OkHttpClient.Builder client1 = new OkHttpClient.Builder();
@@ -105,6 +105,7 @@ public class Login_local extends Activity {
 
         CheckLogin.setEmail(Edit_id);
         CheckLogin.setPassword(Edit_pw);
+        CheckLogin.setFcm_token(fcm_token);
 
 
 

@@ -253,18 +253,20 @@ public class MainActivity extends AppCompatActivity {
                                 sex= response.getJSONObject().getString("gender".toString());
                                 Log.e("email:",Email);
                                 Log.e("sex",sex);
-                                save_sex(sex);
                             token= String.valueOf(result.getAccessToken().getToken());
                                 Log.e("facebook_token", String.valueOf(result.getAccessToken().getToken()));
 
                                 SharedPreferences pref = getSharedPreferences("Local_DB", MODE_PRIVATE);
                                 SharedPreferences.Editor editor = pref.edit();
                                 editor.putString("token",token);
+                                editor.putString("fcm_token",refreshedToken);
                                 Log.e("fcm_token",token);
                                 editor.commit();
 
                             CheckLogin.setEmail(Email);
-                            CheckLogin.getPassword(" ");
+
+                            CheckLogin.setPassword(" ");
+                            CheckLogin.setFcm_token(refreshedToken);
                                 responapi.setEmail(Email);
 
 
@@ -315,7 +317,6 @@ public class MainActivity extends AppCompatActivity {
                                     Log.e("onresponse_Email_check", gsonresponse.getResult());
                                     Log.e("onresponse_Email_check",gsonresponse.getMessage());
                                     Log.e("onresponse_Email_check", String.valueOf(response.code()));
-
                                     if("true".equals(gsonresponse.getResult())){
                                         Log.v("onresponse_Email_check", "success");
 
@@ -351,6 +352,10 @@ public class MainActivity extends AppCompatActivity {
                                     Intent intent_interview=new Intent(MainActivity.this, Mediate.class);
                                     check_login gsonresponse = response.body();
                                     Log.e("onresponse_check_login", gsonresponse.getResult());
+                                    Log.e("onresponse_check_login",gsonresponse.getMessage());
+                                    int account_id= Integer.parseInt(gsonresponse.getId());
+                                    String sex=gsonresponse.getSex();
+                                    save_local_data(sex,account_id,token);
                                     if (gsonresponse.getStatus()==null) {
 
                                         Log.e("get_status","등록되지않은 이메일입니다");
@@ -521,10 +526,13 @@ public class MainActivity extends AppCompatActivity {
 
             return false;
         }
-    public void save_sex(String data){
+    public void save_local_data(String sex,int account_id,String token){
         SharedPreferences pref = getSharedPreferences("Local_DB", MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
-        editor.putString("sex",data);
+        editor.putString("sex",sex);
+        editor.putInt("account_id",account_id);
+        editor.putString("token",token);
+
         editor.clear();
         editor.commit();
     }

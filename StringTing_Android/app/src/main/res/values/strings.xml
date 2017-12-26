@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">StringTing_Android</string>
     <color name="white">#FFFFFF</color>
-    <string name="facebook_app_id">306641599811296</string>
+    <string name="facebook_app_id">321303521665339</string>
     <string name="age_prompt">나이</string>
     <string name="city_prompt">지역</string>
     <string name="blood_prompt">혈액형</string>
