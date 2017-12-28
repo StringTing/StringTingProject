@@ -34,14 +34,7 @@
             android:layout_below="@+id/sb"
             android:layout_marginTop="24dp"
             android:layout_alignParentEnd="true">
-<!--
-            <com.string.leeyun.stringting_android.CircleImageView
-                android:id="@+id/imageView18"
-                android:layout_width="88dp"
-                android:layout_height="88dp"
-                android:layout_gravity="center"
-                android:layout_marginBottom="31dp"
-                app:srcCompat="@drawable/circle" />-->
+
             <FrameLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

@@ -121,7 +121,7 @@ public class Tab_Second extends Fragment implements View.OnClickListener {
 
         //CustomAdapter에게 LayoutInflater 객체 전달
 
-        ViewPagerAdapter adapter= new ViewPagerAdapter(getActivity().getLayoutInflater());
+        ViewPagerAdapter adapter= new ViewPagerAdapter(getActivity().getLayoutInflater(),getContext());
 
 
 
