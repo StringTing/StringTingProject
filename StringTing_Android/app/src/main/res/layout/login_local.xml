@@ -110,11 +110,10 @@
             android:id="@+id/button2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:onClick="onClick_login_check"
             android:background="@drawable/rounded_membershipbtn"
             android:text="로그인"
-            android:textColor="#ffffff"
+            android:textColor="#000000"
             android:textSize="14sp" />
 
     </LinearLayout>

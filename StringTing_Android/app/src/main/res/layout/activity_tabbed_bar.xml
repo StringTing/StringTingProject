@@ -226,14 +226,13 @@
             android:visibility="invisible">
 
 
-            <ImageView
+            <View
                 android:id="@+id/bar1"
                 android:layout_width="50dp"
                 android:layout_height="4dp"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:scaleType="fitXY"
-                app:srcCompat="@mipmap/tab" />
+                android:background="#FFCB3D"/>
 
 
 
@@ -244,14 +243,14 @@
                 android:layout_marginBottom="5dp"
                 android:layout_weight="1"
                 android:scaleType="centerInside"
-                app:srcCompat="@drawable/copy153x" />
+                app:srcCompat="@drawable/todaypic" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:letterSpacing="0.05"
-                android:textColor="#ff1b6d"
+                android:textColor="#FFCB3D"
                 android:textSize="8sp"
                 android:text="오늘의픽" />
 
@@ -265,14 +264,13 @@
             android:orientation="vertical"
             android:visibility="invisible">
 
-            <ImageView
+            <View
                 android:id="@+id/bar2"
                 android:layout_width="50dp"
                 android:layout_height="4dp"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:scaleType="fitXY"
-                app:srcCompat="@mipmap/tab" />
+                android:background="#FFCB3D" />
 
 
             <ImageView
@@ -282,14 +280,14 @@
                 android:layout_marginBottom="5dp"
                 android:layout_weight="1"
                 android:scaleType="centerInside"
-                app:srcCompat="@drawable/copy163x" />
+                app:srcCompat="@drawable/place" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:letterSpacing="0.05"
-                android:textColor="#ff1b6d"
+                android:textColor="#FFCB3D"
                 android:textSize="8sp"
                 android:text="플레이스" />
 
@@ -303,14 +301,13 @@
             android:orientation="vertical"
             android:visibility="invisible">
 
-            <ImageView
+            <View
                 android:id="@+id/bar3"
                 android:layout_width="50dp"
                 android:layout_height="4dp"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:scaleType="fitXY"
-                app:srcCompat="@mipmap/tab" />
+                android:background="#FFCB3D" />
 
 
             <ImageView
@@ -320,14 +317,14 @@
                 android:layout_marginBottom="5dp"
                 android:layout_weight="1"
                 android:scaleType="centerInside"
-                app:srcCompat="@drawable/copy173x" />
+                app:srcCompat="@drawable/mypic" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:letterSpacing="0.05"
-                android:textColor="#ff1b6d"
+                android:textColor="#FFCB3D"
                 android:textSize="8sp"
                 android:text="나의픽" />
 
@@ -341,14 +338,13 @@
             android:orientation="vertical"
             android:visibility="invisible">
 
-            <ImageView
+            <View
                 android:id="@+id/bar4"
                 android:layout_width="50dp"
                 android:layout_height="4dp"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:scaleType="fitXY"
-                app:srcCompat="@mipmap/tab" />
+                android:background="#FFCB3D" />
 
 
             <ImageView
@@ -358,14 +354,14 @@
                 android:layout_marginBottom="5dp"
                 android:layout_weight="1"
                 android:scaleType="centerInside"
-                app:srcCompat="@drawable/copy183x" />
+                app:srcCompat="@drawable/chatting" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:letterSpacing="0.05"
-                android:textColor="#ff1b6d"
+                android:textColor="#FFCB3D"
                 android:textSize="8sp"
                 android:text="채팅" />
         </LinearLayout>
@@ -378,13 +374,13 @@
             android:orientation="vertical"
             android:visibility="invisible">
 
-            <ImageView
+            <View
                 android:id="@+id/bar5"
                 android:layout_width="50dp"
                 android:layout_height="4dp"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                app:srcCompat="@mipmap/tab" />
+                android:background="#FFCB3D" />
 
             <ImageView
                 android:id="@+id/on_pic5"
@@ -394,14 +390,14 @@
                 android:layout_marginBottom="5dp"
                 android:layout_weight="1"
                 android:scaleType="centerInside"
-                app:srcCompat="@drawable/copy193x" />
+                app:srcCompat="@drawable/myinfo" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:letterSpacing="0.05"
-                android:textColor="#ff1b6d"
+                android:textColor="#FFCB3D"
                 android:textSize="8sp"
                 android:text="내정보" />
 

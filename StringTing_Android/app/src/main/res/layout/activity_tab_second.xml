@@ -66,7 +66,7 @@
         <LinearLayout
             android:layout_below="@+id/p_layout"
             android:layout_marginTop="25dp"
-            android:layout_width="wrap_content"
+            android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="40dp"
             android:layout_centerHorizontal="true"
@@ -79,7 +79,7 @@
                 android:layout_marginRight="8dp"
                 android:layout_weight="1"
                 android:scaleType="centerInside"
-                android:src="@mipmap/copy_2" />
+                android:src="@drawable/non_cheeze" />
 
             <ImageView
                 android:id="@+id/c2"
@@ -88,7 +88,7 @@
                 android:layout_marginRight="8dp"
                 android:layout_weight="1"
                 android:scaleType="centerInside"
-                android:src="@mipmap/copy_2" />
+                android:src="@drawable/non_cheeze" />
 
             <ImageView
                 android:id="@+id/c3"
@@ -97,7 +97,7 @@
                 android:layout_marginRight="8dp"
                 android:layout_weight="1"
                 android:scaleType="centerInside"
-                android:src="@mipmap/copy_2" />
+                android:src="@drawable/non_cheeze" />
 
             <ImageView
                 android:id="@+id/c4"
@@ -106,7 +106,7 @@
                 android:layout_marginRight="8dp"
                 android:layout_weight="1"
                 android:scaleType="centerInside"
-                android:src="@mipmap/copy_2" />
+                android:src="@drawable/non_cheeze" />
 
             <ImageView
                 android:id="@+id/c5"
@@ -114,11 +114,11 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:scaleType="centerInside"
-                android:src="@mipmap/copy_2" />
+                android:src="@drawable/non_cheeze" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/p_layout"
             android:layout_centerHorizontal="true"
@@ -135,7 +135,7 @@
                 android:layout_weight="1"
                 android:visibility="invisible"
                 android:scaleType="centerInside"
-                android:src="@mipmap/c" />
+                android:src="@drawable/select_cheeze" />
 
             <ImageView
                 android:id="@+id/cc2"
@@ -145,7 +145,7 @@
                 android:layout_weight="1"
                 android:visibility="invisible"
                 android:scaleType="centerInside"
-                android:src="@mipmap/c" />
+                android:src="@drawable/select_cheeze" />
 
             <ImageView
                 android:id="@+id/cc3"
@@ -155,7 +155,7 @@
                 android:layout_weight="1"
                 android:visibility="invisible"
                 android:scaleType="centerInside"
-                android:src="@mipmap/c" />
+                android:src="@drawable/select_cheeze" />
 
             <ImageView
                 android:id="@+id/cc4"
@@ -165,7 +165,7 @@
                 android:layout_weight="1"
                 android:visibility="invisible"
                 android:scaleType="centerInside"
-                android:src="@mipmap/c" />
+                android:src="@drawable/select_cheeze"/>
 
             <ImageView
                 android:id="@+id/cc5"
@@ -174,7 +174,7 @@
                 android:layout_weight="1"
                 android:visibility="invisible"
                 android:scaleType="centerInside"
-                android:src="@mipmap/c" />
+                android:src="@drawable/select_cheeze" />
         </LinearLayout>
 
 

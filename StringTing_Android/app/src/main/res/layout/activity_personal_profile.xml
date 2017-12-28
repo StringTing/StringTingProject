@@ -156,11 +156,11 @@
         android:onClick="chat_request"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="#ff0066"
+        android:background="#FFCB3D"
         android:layout_alignParentBottom="true"
         android:text="대화해보고 싶어요!"
         android:textSize="14sp"
         android:letterSpacing="-0.02"
-        android:textColor="#ffffff"/>
+        android:textColor="#000000"/>
 
 </RelativeLayout>
