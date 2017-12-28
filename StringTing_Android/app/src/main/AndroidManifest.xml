@@ -80,8 +80,10 @@
         <activity
             android:name=".Chat_pop"
             android:theme="@android:style/Theme.Dialog" />
-        <activity android:name=".Report_pop"
-            android:theme="@android:style/Theme.Dialog" ></activity>
+        <activity
+            android:name=".Report_pop"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity android:name=".Whitemember"></activity>
     </application>
 
 </manifest>

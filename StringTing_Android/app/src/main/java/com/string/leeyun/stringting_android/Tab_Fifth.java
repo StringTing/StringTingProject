@@ -44,6 +44,31 @@ public class Tab_Fifth extends Fragment  {
             }
         });
 
+        push.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(android.provider.Settings.ACTION_APPLICATION_SETTINGS);
+                startActivityForResult(intent, 0);
+            }
+        });
+
+
+        inquire.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                Intent email = new Intent(Intent.ACTION_SEND);
+                email.setType("plain/text");
+                // email setting 배열로 해놔서 복수 발송 가능
+                String[] address = {"wearecro@gmail.com"};
+                email.putExtra(Intent.EXTRA_EMAIL, address);
+                email.putExtra(Intent.EXTRA_SUBJECT,"스트링 고객센터에 문의합니다");
+                email.putExtra(Intent.EXTRA_TEXT,"문의 할 내용을 적어주세요\n\n내용:\n\n\n\n\nString계정 : \nOS version : Android");
+                startActivity(email);
+
+            }
+        });
+
 
 
 
