@@ -177,6 +177,7 @@
             android:background="@drawable/rounded_membershipbtn"
             android:text="가입하기"
             android:textColor="#ffffff"
+            android:layout_marginBottom="5dp"
             android:textSize="14sp" />
 
     </LinearLayout>

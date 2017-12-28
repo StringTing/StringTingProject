@@ -27,6 +27,7 @@
 
         </RelativeLayout>
 
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -37,7 +38,154 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <LinearLayout
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:padding="0dp"
+                    android:layout_gravity="center">
+                    <LinearLayout
+                        android:id="@+id/shadow_background"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="17dp"
+                        android:layout_marginLeft="22dp"
+                        android:orientation="horizontal">
+                        <View
+                            android:id="@+id/shadow"
+                            android:layout_width="145dp"
+                            android:layout_height="255dp"
+                            android:layout_marginRight="21dp"
+                            android:background="@drawable/p_shadow"/>
+                        <View
+                            android:id="@+id/shadow2"
+                            android:layout_width="145dp"
+                            android:layout_height="255dp"
+                            android:background="@drawable/p_shadow"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/pic_photo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+
+                        >
+
+                        <RelativeLayout
+                            android:id="@+id/t_pic1"
+                            android:layout_width="155dp"
+                            android:layout_height="255dp"
+                            android:layout_marginRight="18dp"
+                            android:background="@drawable/rounded_noline"
+                            android:onClick="onClick_today_pic_first"
+                            >
+
+
+                            <ImageView
+                                android:id="@+id/ph1"
+                                android:layout_width="155dp"
+                                android:layout_height="201dp"
+                                android:layout_alignParentEnd="true"
+                                android:layout_alignParentTop="true"
+                                android:padding="0dp"
+                                android:scaleType="fitXY" />
+
+                            <TextView
+                                android:id="@+id/white_text"
+                                android:layout_width="155dp"
+                                android:layout_height="16dp"
+                                android:background="@drawable/gradient_background"
+                                android:layout_marginTop="196dp"
+                                android:paddingLeft="10dp"
+                                android:paddingTop="2dp"
+                                android:text="White Member"
+                                android:textColor="#ffffff"
+                                android:textSize="10sp" />
+
+                            <TextView
+                                android:id="@+id/today_info_text"
+                                android:layout_width="100dp"
+                                android:layout_height="27dp"
+                                android:layout_gravity="start"
+                                android:layout_below="@+id/white_text"
+                                android:layout_marginLeft="12dp"
+                                android:layout_marginTop="7dp"
+                                android:textColor="#000000"
+                                android:text=""
+                                android:textSize="10sp" />
+
+
+                            <ImageView
+                                android:id="@+id/today_rock_img"
+                                android:layout_width="13.9dp"
+                                android:layout_height="19.1dp"
+                                android:layout_marginRight="10.1dp"
+                                android:layout_marginBottom="10.6dp"
+                                android:layout_alignParentEnd="true"
+                                android:layout_alignParentBottom="true"
+                                app:srcCompat="@mipmap/x" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/t_pic2"
+                            android:layout_width="155dp"
+                            android:layout_height="255dp"
+                            android:background="@drawable/rounded_noline"
+                            >
+
+
+
+                            <ImageView
+                                android:id="@+id/ph2"
+                                android:layout_width="155dp"
+                                android:layout_height="201dp"
+                                android:layout_alignParentStart="true"
+                                android:layout_alignParentTop="true"
+                                android:scaleType="fitXY" />
+
+                            <TextView
+                                android:id="@+id/space"
+                                android:layout_width="155dp"
+                                android:layout_height="16dp"
+                                android:background="@drawable/border_top"
+                                android:layout_marginTop="196dp"
+                                android:paddingLeft="10dp"
+                                android:paddingTop="2dp"
+                                android:text="White Member"
+                                android:textColor="#00000000"
+                                android:textSize="10sp" />
+
+                            <TextView
+                                android:id="@+id/today_info_text1"
+                                android:layout_width="100dp"
+                                android:layout_height="27dp"
+                                android:layout_gravity="start"
+                                android:layout_below="@+id/space"
+                                android:layout_marginLeft="12dp"
+                                android:layout_marginTop="7dp"
+                                android:textColor="#000000"
+                                android:text=""
+                                android:textSize="10sp" />
+
+                            <ImageView
+
+                                android:id="@+id/today_rock_img2"
+                                android:layout_width="13.9dp"
+                                android:layout_height="19.1dp"
+                                android:layout_marginRight="10.1dp"
+                                android:layout_marginBottom="10.6dp"
+                                android:layout_alignParentEnd="true"
+                                android:layout_alignParentBottom="true"
+                                android:visibility="visible"
+                                app:srcCompat="@mipmap/x" />
+                        </RelativeLayout>
+                    </LinearLayout>
+
+
+                </FrameLayout>
+
+              <!--  <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginTop="18dp"
@@ -46,6 +194,7 @@
                     android:layout_marginRight="16dp"
                     android:layout_gravity="center"
                     android:orientation="horizontal">
+
                     <FrameLayout
                         android:id="@+id/t_pic1"
                         android:layout_width="wrap_content"
@@ -54,7 +203,7 @@
 
                         <View
                             android:id="@+id/shadow"
-                            android:layout_width="155dp"
+                            android:layout_width="145dp"
                             android:layout_height="255dp"
                             android:layout_marginTop="17dp"
                             android:layout_marginLeft="22dp"
@@ -125,7 +274,7 @@
 
             <View
                 android:id="@+id/shadow2"
-                android:layout_width="155dp"
+                android:layout_width="145dp"
                 android:layout_height="255dp"
                 android:layout_marginTop="17dp"
                 android:layout_marginLeft="22dp"
@@ -136,8 +285,6 @@
                         android:id="@+id/t_pic"
                         android:layout_width="155dp"
                         android:layout_height="255dp"
-                        android:layout_toRightOf="@+id/t_pic1"
-                        android:layout_marginLeft="8dp"
                         android:background="@drawable/rounded_noline"
                         >
 
@@ -188,7 +335,7 @@
                             app:srcCompat="@mipmap/x" />
                     </RelativeLayout>
         </FrameLayout>
-                </LinearLayout>
+                </LinearLayout>-->
 
                 <ImageView
                     android:layout_width="326dp"

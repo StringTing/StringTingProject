@@ -29,14 +29,6 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <View
-                android:id="@+id/bar_t1"
-                android:layout_width="50dp"
-                android:layout_height="4dp"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-         />
-
 
             <ImageView
                 android:id="@+id/pic1"
@@ -45,7 +37,8 @@
                 android:layout_marginBottom="5dp"
                 android:layout_weight="1"
                 android:scaleType="centerInside"
-                app:srcCompat="@drawable/copy133x" />
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/n_today" />
 
             <TextView
                 android:id="@+id/txt1"
@@ -66,13 +59,6 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <View
-                android:id="@+id/bar_t2"
-                android:layout_width="50dp"
-                android:layout_height="4dp"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                />
 
 
             <ImageView
@@ -82,7 +68,8 @@
                 android:layout_marginBottom="5dp"
                 android:layout_weight="1"
                 android:scaleType="centerInside"
-                app:srcCompat="@drawable/copy83x" />
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/n_place" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -102,15 +89,6 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <View
-                android:id="@+id/bar_t3"
-                android:layout_width="50dp"
-                android:layout_height="4dp"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-              />
-
-
 
             <ImageView
                 android:id="@+id/pic3"
@@ -119,7 +97,8 @@
                 android:layout_marginBottom="5dp"
                 android:layout_weight="1"
                 android:scaleType="centerInside"
-                app:srcCompat="@drawable/copy93x" />
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/n_mypic" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -139,13 +118,6 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <View
-                android:id="@+id/bar_t4"
-                android:layout_width="50dp"
-                android:layout_height="4dp"
-                android:layout_gravity="center"
-                android:layout_weight="1" />
-
 
 
             <ImageView
@@ -155,7 +127,8 @@
                 android:layout_marginBottom="5dp"
                 android:layout_weight="1"
                 android:scaleType="centerInside"
-                app:srcCompat="@drawable/copy103x" />
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/n_chatting" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -174,13 +147,6 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <View
-                android:id="@+id/bar_t5"
-                android:layout_width="50dp"
-                android:layout_height="4dp"
-                android:layout_gravity="center"
-                android:layout_weight="1" />
-
 
 
             <ImageView
@@ -191,7 +157,7 @@
                 android:layout_marginBottom="5dp"
                 android:layout_weight="1"
                 android:scaleType="centerInside"
-                app:srcCompat="@drawable/copy113x" />
+                app:srcCompat="@drawable/n_myinfo" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -226,15 +192,6 @@
             android:visibility="invisible">
 
 
-            <View
-                android:id="@+id/bar1"
-                android:layout_width="50dp"
-                android:layout_height="4dp"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:background="#FFCB3D"/>
-
-
 
             <ImageView
                 android:id="@+id/on_pic1"
@@ -243,6 +200,7 @@
                 android:layout_marginBottom="5dp"
                 android:layout_weight="1"
                 android:scaleType="centerInside"
+                android:layout_gravity="center"
                 app:srcCompat="@drawable/todaypic" />
 
             <TextView
@@ -264,14 +222,6 @@
             android:orientation="vertical"
             android:visibility="invisible">
 
-            <View
-                android:id="@+id/bar2"
-                android:layout_width="50dp"
-                android:layout_height="4dp"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:background="#FFCB3D" />
-
 
             <ImageView
                 android:id="@+id/on_pic2"
@@ -280,6 +230,7 @@
                 android:layout_marginBottom="5dp"
                 android:layout_weight="1"
                 android:scaleType="centerInside"
+                android:layout_gravity="center"
                 app:srcCompat="@drawable/place" />
 
             <TextView
@@ -301,15 +252,6 @@
             android:orientation="vertical"
             android:visibility="invisible">
 
-            <View
-                android:id="@+id/bar3"
-                android:layout_width="50dp"
-                android:layout_height="4dp"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:background="#FFCB3D" />
-
-
             <ImageView
                 android:id="@+id/on_pic3"
                 android:layout_width="wrap_content"
@@ -317,6 +259,7 @@
                 android:layout_marginBottom="5dp"
                 android:layout_weight="1"
                 android:scaleType="centerInside"
+                android:layout_gravity="center"
                 app:srcCompat="@drawable/mypic" />
 
             <TextView
@@ -338,13 +281,6 @@
             android:orientation="vertical"
             android:visibility="invisible">
 
-            <View
-                android:id="@+id/bar4"
-                android:layout_width="50dp"
-                android:layout_height="4dp"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:background="#FFCB3D" />
 
 
             <ImageView
@@ -354,6 +290,7 @@
                 android:layout_marginBottom="5dp"
                 android:layout_weight="1"
                 android:scaleType="centerInside"
+                android:layout_gravity="center"
                 app:srcCompat="@drawable/chatting" />
 
             <TextView
@@ -374,13 +311,6 @@
             android:orientation="vertical"
             android:visibility="invisible">
 
-            <View
-                android:id="@+id/bar5"
-                android:layout_width="50dp"
-                android:layout_height="4dp"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:background="#FFCB3D" />
 
             <ImageView
                 android:id="@+id/on_pic5"

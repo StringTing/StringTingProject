@@ -6,12 +6,17 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
+
+import com.squareup.picasso.Picasso;
 
 
 public class Tab_Fifth extends Fragment  {
 
     RelativeLayout coin,notice,push,inquire;
+
+    ImageView profile;
 
     public Tab_Fifth() {
         // Required empty public constructor
@@ -22,6 +27,10 @@ public class Tab_Fifth extends Fragment  {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.activity_tab_fifth, container, false);
+
+        profile = (ImageView) v.findViewById(R.id.profile);
+
+        Picasso.with(getActivity()).load(R.drawable.gametitle_01).transform(new CircleTransForm()).into(profile);
 
         coin = (RelativeLayout) v.findViewById(R.id.coin_charge);
         notice = (RelativeLayout) v.findViewById(R.id.notice);
