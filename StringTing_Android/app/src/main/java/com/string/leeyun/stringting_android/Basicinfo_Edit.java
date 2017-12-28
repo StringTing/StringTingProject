@@ -31,6 +31,9 @@ import android.widget.Spinner;
 import android.support.v7.app.AlertDialog;
 import android.widget.TextView;
 
+import com.makeramen.roundedimageview.RoundedTransformationBuilder;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Transformation;
 import com.string.leeyun.stringting_android.API.ResponseApi;
 import com.string.leeyun.stringting_android.API.Rest_ApiService;
 import com.string.leeyun.stringting_android.API.join;
@@ -456,33 +459,56 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
 
                 if (extras != null) {
                     Bitmap photo = extras.getParcelable("data");//CROP된 BITMAP
-                    Rounding roundingDrawable = new Rounding(photo);
 
+                    Transformation transformation = new RoundedTransformationBuilder()
+                            .borderWidthDp(0)
+                            .cornerRadiusDp(8)
+                            .oval(false)
+                            .build();
 
                     switch (imageupload_count){
                         case 1:{
-                            iv_UserPhoto1.setBackground(roundingDrawable);
-                            iv_UserPhoto1.setImageBitmap(null);
+                            Picasso.with(Basicinfo_Edit.this)
+                                    .load(mImageCaptureUri)
+                                    .fit()
+                                    .transform(transformation)
+                                    .into(iv_UserPhoto1);
                             storeCropImage(photo,filePath);
                             break;
                         }
                         case 2:{
-                            iv_UserPhoto2.setImageBitmap(photo);
+                            Picasso.with(Basicinfo_Edit.this)
+                                    .load(mImageCaptureUri)
+                                    .fit()
+                                    .transform(transformation)
+                                    .into(iv_UserPhoto2);
                             storeCropImage(photo,filePath);
                             break;
                         }
                         case 3:{
-                            iv_UserPhoto3.setImageBitmap(photo);
+                            Picasso.with(Basicinfo_Edit.this)
+                                    .load(mImageCaptureUri)
+                                    .fit()
+                                    .transform(transformation)
+                                    .into(iv_UserPhoto3);
                             storeCropImage(photo,filePath);
                             break;
                         }
                         case 4:{
-                            iv_UserPhoto4.setImageBitmap(photo);
+                            Picasso.with(Basicinfo_Edit.this)
+                                    .load(mImageCaptureUri)
+                                    .fit()
+                                    .transform(transformation)
+                                    .into(iv_UserPhoto4);
                             storeCropImage(photo,filePath);
                             break;
                         }
                         case 5:{
-                            iv_UserPhoto5.setImageBitmap(photo);
+                            Picasso.with(Basicinfo_Edit.this)
+                                    .load(mImageCaptureUri)
+                                    .fit()
+                                    .transform(transformation)
+                                    .into(iv_UserPhoto5);
                             storeCropImage(photo,filePath);
                             break;
                         }

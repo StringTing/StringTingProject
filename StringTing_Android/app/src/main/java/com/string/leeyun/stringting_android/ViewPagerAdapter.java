@@ -1,10 +1,16 @@
 package com.string.leeyun.stringting_android;
 
+import android.content.Context;
+import android.graphics.Color;
 import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
+import com.makeramen.roundedimageview.RoundedTransformationBuilder;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Transformation;
 
 
 /**
@@ -13,15 +19,15 @@ import android.widget.ImageView;
 
 public class ViewPagerAdapter extends PagerAdapter {
 
-
+    Context context;
     LayoutInflater inflater;
 
 
 
-    public ViewPagerAdapter(LayoutInflater inflater) {
+    public ViewPagerAdapter(LayoutInflater inflater,Context context) {
 
         // TODO Auto-generated constructor stub
-
+        this.context = context;
 
 
         //전달 받은 LayoutInflater를 멤버변수로 전달
@@ -82,14 +88,28 @@ public class ViewPagerAdapter extends PagerAdapter {
 
         ImageView img= (ImageView)view.findViewById(R.id.imageView19);
 
+        Picasso.with(context)
+                .load(R.drawable.gametitle_01+position)
+                .transform(new CircleTransForm()).into(img);
+
 
 
         //ImageView에 현재 position 번째에 해당하는 이미지를 보여주기 위한 작업
 
         //현재 position에 해당하는 이미지를 setting
 
-        img.setImageResource(R.drawable.gametitle_01+position);
-        img.setScaleType(ImageView.ScaleType.FIT_XY);
+        Transformation transformation = new RoundedTransformationBuilder()
+                .borderColor(Color.BLACK)
+                .borderWidthDp(0)
+                .cornerRadiusDp(8)
+                .oval(false)
+                .build();
+
+        Picasso.with(context)
+                .load(R.drawable.gametitle_01+position)
+                .fit()
+                .transform(transformation)
+                .into(img);
 
 
         //ViewPager에 만들어 낸 View 추가

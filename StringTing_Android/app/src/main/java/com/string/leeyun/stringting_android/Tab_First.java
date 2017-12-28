@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -63,8 +64,8 @@ import static java.lang.System.load;
 
 public class Tab_First extends Fragment implements View.OnClickListener {
 
-    private FrameLayout today_pic_first;
-    private FrameLayout today_pic_second;
+    private RelativeLayout today_pic_first;
+    private RelativeLayout today_pic_second;
 
     private Context mContext;
     private Resources mResources;
@@ -120,20 +121,20 @@ public class Tab_First extends Fragment implements View.OnClickListener {
 
                 for(int i=0; i<p.length/3; ++i) {
                     tr = new TableRow(getApplicationContext());
-                    tr.setPadding(0,23,0,0);
+                    tr.setPadding(0,35,0,0);
                     for (int j = 0; j < 3; j++) {
                         // Inflated_Layout.xml로 구성한 레이아웃을 inflatedLayout 영역으로 확장
                         View img = inflater.inflate(R.layout.addimg, null);
                         //img_pic = (ImageView) addimg_table.findViewById(R.id.last1);
                         tr.addView(img);
-                        if(j<=1){
+                       /* if(j<=1){
                             img.setPadding(0,0,23,0);
-                        }
+                        }*/
                     }
                     tableLayout.addView(tr);
                     if(p.length%3 != 0) {
                         tr = new TableRow(getApplicationContext());
-                        tr.setPadding(0,23,0,0);
+                        tr.setPadding(0,35,0,0);
                         for (i=0; i<p.length%3; ++i){
                             // Inflated_Layout.xml로 구성한 레이아웃을 inflatedLayout 영역으로 확장
                             View img = inflater.inflate(R.layout.addimg, null);
@@ -229,10 +230,11 @@ public class Tab_First extends Fragment implements View.OnClickListener {
                                 TextView today_info_text=(TextView)getView().findViewById(R.id.today_info_text);
                                 TextView today_info_text1=(TextView)getView().findViewById(R.id.today_info_text1);
 
+                                String first_shp="#";
                                 String shp=" #";
 
-                                String set_info_text= String.valueOf(shp+im_get_today.get(0).getHeight())+shp+im_get_today.get(0).getDrink()+shp+im_get_today.get(0).getDepartment();
-                                String set_info_text1= String.valueOf(shp+im_get_today.get(1).getHeight())+shp+im_get_today.get(1).getDrink()+shp+im_get_today.get(1).getDepartment();
+                                String set_info_text= String.valueOf(first_shp+im_get_today.get(0).getHeight())+shp+im_get_today.get(0).getDrink()+shp+im_get_today.get(0).getDepartment();
+                                String set_info_text1= String.valueOf(first_shp+im_get_today.get(1).getHeight())+shp+im_get_today.get(1).getDrink()+shp+im_get_today.get(1).getDepartment();
 
                                 today_info_text.setText(set_info_text);
                                 today_info_text1.setText(set_info_text1);
@@ -317,8 +319,8 @@ public class Tab_First extends Fragment implements View.OnClickListener {
             e.printStackTrace();
             Log.e("last_introduction","null");
         }
-        today_pic_first = (FrameLayout) v.findViewById(R.id.t_pic1);
-        today_pic_second=(FrameLayout)v.findViewById(R.id.t_pic2);
+        today_pic_first = (RelativeLayout) v.findViewById(R.id.t_pic1);
+        today_pic_second=(RelativeLayout)v.findViewById(R.id.t_pic2);
         today_pic_first.setOnClickListener(this);
         today_pic_second.setOnClickListener(this);
 

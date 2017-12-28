@@ -10,6 +10,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -111,6 +112,7 @@ public class Preexistence_Login extends Activity {
         TextView Provision_Linkify = (TextView) findViewById(R.id.Provision_Linkify);
 
         String text = "가입하기 또는 로그인 버튼을 누르면\n이용약관 및 개인정보취급방침에 동의하신 것이 됩니다.";
+
         Provision_Linkify.setText(text);
 
 
@@ -126,6 +128,8 @@ public class Preexistence_Login extends Activity {
 
         Linkify.addLinks(Provision_Linkify, pattern1, "http://www.naver.com", null, mTransform);
         Linkify.addLinks(Provision_Linkify, pattern2, "http://gun0912.tistory.com/", null, mTransform);
+
+        Provision_Linkify.setTextColor(Color.rgb(102,102,102));
 
         //이용약관 및 개인정보 취급방식에대한 링크
 

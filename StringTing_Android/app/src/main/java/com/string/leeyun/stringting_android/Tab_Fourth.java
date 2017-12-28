@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
 import com.string.leeyun.stringting_android.API.Rest_ApiService;
 import com.string.leeyun.stringting_android.API.get_matched_account;
 import com.string.leeyun.stringting_android.API.get_matched_accountList;
@@ -229,8 +230,9 @@ public class Tab_Fourth extends Fragment {
                 TextView date = (TextView)v.findViewById(R.id.date);
 
 
-
-                profile.setImageResource(getItem(pos).profile);
+                //라운드처리 일단 해줘봄...
+                Picasso.with(getActivity()).load(getItem(pos).profile).transform(new CircleTransForm()).into(profile);
+                //profile.setImageResource(getItem(pos).profile);
                 name.setText(getItem(pos).name);
                 chat.setText(getItem(pos).chat);
                 date.setText(getItem(pos).date);

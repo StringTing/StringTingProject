@@ -3,6 +3,7 @@ package com.string.leeyun.stringting_android;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,7 +21,9 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 
+import com.makeramen.roundedimageview.RoundedTransformationBuilder;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Transformation;
 import com.string.leeyun.stringting_android.API.Getdetail;
 import com.string.leeyun.stringting_android.API.Im_get_today_introduction;
 import com.string.leeyun.stringting_android.API.Rest_ApiService;
@@ -193,18 +196,33 @@ public class Personal_profile extends AppCompatActivity {
 
                             image.setLayoutParams(paramlinear);
 
+                            Transformation transformation = new RoundedTransformationBuilder()
+                                    .borderWidthDp(0)
+                                    .cornerRadiusDp(8)
+                                    .oval(false)
+                                    .build();
+
                             Picasso.with(Personal_profile.this)
                                     .load(profile_image_full_url.get(x))
+                                    .fit()
+                                    .transform(transformation)
                                     .into(image);
 
                             inflatedLayout.addView(image, paramlinear);
 
                         }
 
-                            ImageView profile=(ImageView)findViewById(R.id.detail_profile);
-                            Picasso.with(Personal_profile.this)
-                                .load(profile_image_full_url.get(0))
-                                .into(profile);
+                        ImageView profile=(ImageView)findViewById(R.id.detail_profile);
+
+                        Picasso.with(Personal_profile.this).load(profile_image_full_url.get(0)).transform(new CircleTransForm()).into(profile);
+
+                       /*
+                        내 프로필 서클
+
+                       ImageView my_profile=(ImageView)findViewById(R.id.my_profile);
+
+                       Picasso.with(Personal_profile.this).load(?????????).transform(new CircleTransForm()).into(my_profile);*/
+
 
 
 
