@@ -3,6 +3,7 @@ package com.string.leeyun.stringting_android;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +15,11 @@ import com.string.leeyun.stringting_android.API.Rest_ApiService;
 import com.string.leeyun.stringting_android.API.open_id;
 import com.tsengvn.typekit.TypekitContextWrapper;
 
+import java.io.IOException;
+
+import okhttp3.Interceptor;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Retrofit;
@@ -27,6 +33,9 @@ public class Todaypic_pop extends Activity {
 
     int matching_account;
     String matching_sex;
+    String sex;
+    int account_id;
+    String token;
 
     Rest_ApiService apiService;
     Retrofit retrofit;
@@ -42,12 +51,14 @@ public class Todaypic_pop extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_todaypic_pop);
 
+        OkHttpClient.Builder client1=setting_local_data_and_client();
+
 
         retrofit = new Retrofit.Builder()
                 .baseUrl(API_URL)
                 .addConverterFactory(GsonConverterFactory.create())
+                .client(client1.build())
                 .build();
-
 
         apiService= retrofit.create(Rest_ApiService.class);
 
@@ -94,13 +105,65 @@ public class Todaypic_pop extends Activity {
         detail.putExtra("matching_account",matching_account);
         detail.putExtra("matching_sex",matching_sex);
 
-        View header = getLayoutInflater().inflate(R.layout.activity_tab_first, null, true);
+        Tab_First tab_first=new Tab_First();
 
-        ImageView today_rock= (ImageView)header.findViewById(R.id.today_rock_img);
-        today_rock.setVisibility(View.GONE);
+
+
 
 
         startActivity(detail);
 
+    }
+
+    public OkHttpClient.Builder setting_local_data_and_client(){
+        try {
+
+            SharedPreferences pref = getSharedPreferences("Local_DB", MODE_PRIVATE);
+            sex=pref.getString("sex","notfound");
+            Log.e("sex",sex);
+            account_id = pref.getInt("account_id",0);
+            Log.e("local_account", String.valueOf(account_id));
+            token=pref.getString("token","?");
+            Log.e("loacal_token",String.valueOf(token));
+            if (account_id==0){
+                Log.e("localid is null","fail");
+
+            }
+            else if(token.equals(null)){
+                Log.e("local_token is null","fail");
+
+            }
+            else if(sex.equals(null)){
+                Log.e("local_sex is null","fail");
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        OkHttpClient.Builder client1 = new OkHttpClient.Builder();
+        client1.addInterceptor(new Interceptor() {
+            @Override
+            public okhttp3.Response intercept(Chain chain) throws IOException {
+
+                Request builder = chain.request();
+                Request newRequest;
+
+
+                newRequest = builder.newBuilder()
+                        .addHeader("access-token",token)
+                        .addHeader("account-id", String.valueOf(account_id))
+                        .addHeader("account-sex",sex)
+                        .addHeader("Content-Type","application/json")
+                        .build();
+
+
+                return chain.proceed(newRequest);
+
+            }
+        });
+
+
+        return client1;
     }
 }

@@ -340,7 +340,7 @@ public class Tab_First extends Fragment implements View.OnClickListener {
 
                 ImageView today_rock=(ImageView)v.findViewById(R.id.today_rock_img);
 
-                if(today_rock.getVisibility()==View.VISIBLE) {
+                if(today_rock.getVisibility()==today_rock.VISIBLE) {
                     Intent i = new Intent(getActivity(),Todaypic_pop.class);
                     i.putExtra("matching_account",matching_account.get(0));
                     if (sex.equals("male")){
@@ -371,7 +371,7 @@ public class Tab_First extends Fragment implements View.OnClickListener {
                 ImageView today_rock1=(ImageView)v.findViewById(R.id.today_rock_img2);
 
 
-                if(today_rock1.getVisibility()==View.VISIBLE) {
+                if(today_rock1.getVisibility()==today_rock1.VISIBLE) {
                     Intent i = new Intent(getActivity(),Todaypic_pop.class);
                     i.putExtra("matching_account",matching_account.get(1));
                     if (sex.equals("male")){
@@ -538,16 +538,16 @@ public class Tab_First extends Fragment implements View.OnClickListener {
 
         }
 
-
-
-
-
     }
 
-    public void get_local_accoint_id(){
 
+    public void open_today_pic_setvisible(View v){
+        ImageView today_rock=(ImageView)v.findViewById(R.id.today_rock_img);
+
+        LayoutInflater inflater;
+
+        today_rock.setVisibility(View.INVISIBLE);
     }
-
 
 
 }
