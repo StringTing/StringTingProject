@@ -121,13 +121,37 @@ public class Tab_Second extends Fragment implements View.OnClickListener {
 
         //CustomAdapter에게 LayoutInflater 객체 전달
 
-        ViewPagerAdapter adapter= new ViewPagerAdapter(getActivity().getLayoutInflater());
+        ViewPagerAdapter adapter= new ViewPagerAdapter(getActivity().getLayoutInflater(),getContext());
 
 
 
         //ViewPager에 Adapter 설정
 
         pager.setAdapter(adapter);
+
+        pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+                o_candy1.setVisibility(View.INVISIBLE);
+
+                o_candy2.setVisibility(View.INVISIBLE);
+                o_candy3.setVisibility(View.INVISIBLE);
+                o_candy4.setVisibility(View.INVISIBLE);
+                o_candy5.setVisibility(View.INVISIBLE);
+
+            }
+        });
 
 
         return result;

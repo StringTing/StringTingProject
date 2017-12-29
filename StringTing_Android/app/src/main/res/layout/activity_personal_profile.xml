@@ -62,10 +62,10 @@
 
                 <ImageView
                     android:id="@+id/detail_profile"
-                    android:layout_width="42dp"
-                    android:layout_height="42dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:layout_centerVertical="true"
-                    android:background="@drawable/com_facebook_profile_picture_blank_square"
+
                     />
 
                 <TextView
@@ -85,7 +85,8 @@
                     android:layout_marginTop="18dp"
                     android:layout_marginBottom="35dp"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:scrollbars="none">
 
                     <LinearLayout
                         android:id="@+id/pic_view"
@@ -126,12 +127,12 @@
                  android:layout_centerVertical="true"/>
 
              <ImageView
+                 android:id="@+id/my_profile"
                  android:layout_width="42dp"
                  android:layout_height="42dp"
                  android:layout_toRightOf="@+id/lable1"
                  android:layout_centerVertical="true"
                  android:layout_marginLeft="11dp"
-                 android:background="@drawable/com_facebook_profile_picture_blank_square"
                  />
          </RelativeLayout>
 
@@ -140,7 +141,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:layout_margin="10dp"
+                android:padding="10dp"
                 android:background="#f7f7f7"
                 android:cacheColorHint="#00000000"
                 android:divider="@android:color/transparent"
@@ -155,11 +156,11 @@
         android:onClick="chat_request"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="#ff0066"
+        android:background="#FFCB3D"
         android:layout_alignParentBottom="true"
         android:text="대화해보고 싶어요!"
         android:textSize="14sp"
         android:letterSpacing="-0.02"
-        android:textColor="#ffffff"/>
+        android:textColor="#000000"/>
 
 </RelativeLayout>

@@ -6,8 +6,8 @@
 
     <ImageView
         android:id="@+id/imageView19"
-        android:layout_width="350dp"
-        android:layout_height="350dp"
+        android:layout_width="315dp"
+        android:layout_height="315dp"
         app:srcCompat="?android:attr/textSelectHandle" />
 
 </LinearLayout>

@@ -106,9 +106,8 @@
                                 android:layout_height="106dp"
                                 android:layout_marginLeft="39dp"
                                 android:layout_weight="1"
-                                android:background="@drawable/rectangle_border"
+                                android:background="@drawable/yellow_plus"
                                 android:scaleType="center"
-                                app:srcCompat="@mipmap/a_btn"
                                 android:onClick="onClick"/>
 
                             <ImageView
@@ -117,9 +116,8 @@
                                 android:layout_height="106dp"
                                 android:layout_marginLeft="24dp"
                                 android:layout_weight="1"
-                                android:background="@drawable/rectangle_border"
+                                android:background="@drawable/yellow_plus"
                                 android:scaleType="center"
-                                app:srcCompat="@mipmap/a_btn"
                                 android:onClick="onClick_imageUpload2"/>
 
                             <ImageView
@@ -128,9 +126,8 @@
                                 android:layout_height="106dp"
                                 android:layout_marginLeft="24dp"
                                 android:layout_weight="1"
-                                android:background="@drawable/un_rectangle_border"
+                                android:background="@drawable/gray_plus"
                                 android:scaleType="center"
-                                app:srcCompat="@mipmap/a_btn"
                                 android:onClick="onClick_imageUpload3"/>
 
                             <ImageView
@@ -139,9 +136,8 @@
                                 android:layout_height="106dp"
                                 android:layout_marginLeft="24dp"
                                 android:layout_weight="1"
-                                android:background="@drawable/un_rectangle_border"
+                                android:background="@drawable/gray_plus"
                                 android:scaleType="center"
-                                app:srcCompat="@mipmap/a_btn"
                                 android:onClick="onClick_imageUpload4"/>
 
                             <ImageView
@@ -150,9 +146,8 @@
                                 android:layout_height="106dp"
                                 android:layout_marginLeft="24dp"
                                 android:layout_weight="1"
-                                android:background="@drawable/un_rectangle_border"
+                                android:background="@drawable/gray_plus"
                                 android:scaleType="center"
-                                app:srcCompat="@mipmap/a_btn"
                                 android:onClick="onClick_imageUpload5"/>
 
                             <ImageView
@@ -162,9 +157,8 @@
                                 android:layout_marginLeft="24dp"
                                 android:layout_marginRight="39dp"
                                 android:layout_weight="1"
-                                android:background="@drawable/un_rectangle_border"
+                                android:background="@drawable/gray_plus"
                                 android:scaleType="center"
-                                app:srcCompat="@mipmap/a_btn"
                                 android:onClick="onClick_imageUpload6"/>
 
                         </LinearLayout>
@@ -915,7 +909,7 @@
                     android:onClick="onClick_Basicinfo_upload"
                     android:text="다  음"
                     android:background="@drawable/btn_rounded"
-                    android:textColor="#ffffff"
+                    android:textColor="#000000"
                     android:letterSpacing="-0.02"
                     android:textSize="13sp"
 

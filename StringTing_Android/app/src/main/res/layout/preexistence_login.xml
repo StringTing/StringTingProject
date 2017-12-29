@@ -30,33 +30,12 @@
                 android:layout_height="wrap_content"
                 android:visibility="gone"/>
 
-        <RelativeLayout
+        <ImageView
             android:id="@+id/loginBtn"
             android:layout_width="218dp"
             android:layout_height="45dp"
-            android:background="@drawable/rounded_loginbtn"
-            android:onClick="facebookLoginOnclick"
-            >
-
-            <ImageView
-                android:id="@+id/fb_l"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="22dp"
-                android:layout_centerVertical="true"
-                android:background="@mipmap/fb"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="페이스북으로 로그인"
-                android:layout_toRightOf="@+id/fb_l"
-                android:layout_marginLeft="8dp"
-                android:gravity="end"
-                android:layout_centerVertical="true"
-                android:textSize="13sp"
-                android:textColor="#ff0066"/>
-        </RelativeLayout>
+            android:background="@drawable/fb_login"
+            android:onClick="facebookLoginOnclick"/>
 
 
         <FrameLayout
@@ -72,66 +51,23 @@
             android:layout_gravity="center"
             />
 
-            <RelativeLayout
 
+            <ImageView
                 android:layout_width="218dp"
                 android:layout_height="45dp"
                 android:layout_marginTop="11dp"
-                android:background="@drawable/rounded_loginbtn"
-                >
-
-                <ImageView
-                    android:id="@+id/kk_l"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="22dp"
-                    android:layout_centerVertical="true"
-                    android:background="@mipmap/t"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="카카오톡으로 로그인"
-                    android:layout_toRightOf="@+id/kk_l"
-                    android:layout_marginLeft="8dp"
-                    android:gravity="end"
-                    android:layout_centerVertical="true"
-                    android:textSize="13sp"
-                    android:textColor="#ff0066"/>
-            </RelativeLayout>
+                android:background="@drawable/kakao_login" />
 
 
         </FrameLayout>
 
-
-        <RelativeLayout
+        <ImageView
             android:id="@+id/loginBtn3"
             android:layout_width="218dp"
             android:layout_height="45dp"
             android:layout_marginTop="11dp"
             android:onClick="onClick_login_local"
-            android:background="@drawable/rounded_loginbtn"
-            >
-
-            <ImageView
-                android:id="@+id/m_l"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="22dp"
-                android:layout_centerVertical="true"
-                android:background="@mipmap/m"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="이메일계정으로 로그인"
-                android:layout_toRightOf="@+id/m_l"
-                android:layout_marginLeft="8dp"
-                android:gravity="end"
-                android:layout_centerVertical="true"
-                android:textSize="13sp"
-                android:textColor="#ff0066"/>
-        </RelativeLayout>
+            android:background="@drawable/email_login" />
 
     </LinearLayout>
 
@@ -162,6 +98,7 @@
         android:gravity="center"
         android:textSize="9sp"
         android:textColor="#666666"
+        android:textColorLink="#666666"
         />
     </LinearLayout>
 

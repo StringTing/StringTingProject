@@ -133,7 +133,13 @@ public class TabbedBar extends AppCompatActivity implements View.OnClickListener
                 Tab_First fragment1 = new Tab_First();
                 transaction.replace(R.id.fragment_container, fragment1);
                 transaction.commit();
+                bt_tab1.setVisibility(View.INVISIBLE);
                 on_tab1.setVisibility(View.VISIBLE);
+
+                bt_tab4.setVisibility(View.VISIBLE);
+                bt_tab2.setVisibility(View.VISIBLE);
+                bt_tab3.setVisibility(View.VISIBLE);
+                bt_tab5.setVisibility(View.VISIBLE);
 
                 on_tab2.setVisibility(View.INVISIBLE);
                 on_tab3.setVisibility(View.INVISIBLE);
@@ -146,7 +152,13 @@ public class TabbedBar extends AppCompatActivity implements View.OnClickListener
                 Tab_Second fragment2 = new Tab_Second();
                 transaction.replace(R.id.fragment_container, fragment2);
                 transaction.commit();
+                bt_tab2.setVisibility(View.INVISIBLE);
                 on_tab2.setVisibility(View.VISIBLE);
+
+                bt_tab1.setVisibility(View.VISIBLE);
+                bt_tab3.setVisibility(View.VISIBLE);
+                bt_tab4.setVisibility(View.VISIBLE);
+                bt_tab5.setVisibility(View.VISIBLE);
 
 
                 on_tab1.setVisibility(View.INVISIBLE);
@@ -160,7 +172,13 @@ public class TabbedBar extends AppCompatActivity implements View.OnClickListener
                 Tab_Third fragment3 = new Tab_Third();
                 transaction.replace(R.id.fragment_container, fragment3);
                 transaction.commit();
+                bt_tab3.setVisibility(View.INVISIBLE);
                 on_tab3.setVisibility(View.VISIBLE);
+
+                bt_tab1.setVisibility(View.VISIBLE);
+                bt_tab2.setVisibility(View.VISIBLE);
+                bt_tab4.setVisibility(View.VISIBLE);
+                bt_tab5.setVisibility(View.VISIBLE);
 
                 on_tab1.setVisibility(View.INVISIBLE);
                 on_tab2.setVisibility(View.INVISIBLE);
@@ -173,7 +191,13 @@ public class TabbedBar extends AppCompatActivity implements View.OnClickListener
                 Tab_Fourth fragment4 = new Tab_Fourth();
                 transaction.replace(R.id.fragment_container, fragment4);
                 transaction.commit();
+                bt_tab4.setVisibility(View.INVISIBLE);
                 on_tab4.setVisibility(View.VISIBLE);
+
+                bt_tab1.setVisibility(View.VISIBLE);
+                bt_tab2.setVisibility(View.VISIBLE);
+                bt_tab3.setVisibility(View.VISIBLE);
+                bt_tab5.setVisibility(View.VISIBLE);
 
                 on_tab1.setVisibility(View.INVISIBLE);
                 on_tab2.setVisibility(View.INVISIBLE);
@@ -186,7 +210,13 @@ public class TabbedBar extends AppCompatActivity implements View.OnClickListener
                 Tab_Fifth fragment5 = new Tab_Fifth();
                 transaction.replace(R.id.fragment_container, fragment5);
                 transaction.commit();
+                bt_tab5.setVisibility(View.INVISIBLE);
                 on_tab5.setVisibility(View.VISIBLE);
+
+                bt_tab1.setVisibility(View.VISIBLE);
+                bt_tab2.setVisibility(View.VISIBLE);
+                bt_tab3.setVisibility(View.VISIBLE);
+                bt_tab4.setVisibility(View.VISIBLE);
 
                 on_tab1.setVisibility(View.INVISIBLE);
                 on_tab2.setVisibility(View.INVISIBLE);
