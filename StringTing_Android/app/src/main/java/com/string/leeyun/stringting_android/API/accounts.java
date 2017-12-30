@@ -41,28 +41,20 @@ public class accounts {
     @SerializedName("body_form")
     private String body_form;
     @SerializedName("images")
-    private List<String> images;
+    private images images;
 
-    public void setImages(List<String> images) {
-        this.images = images;
+
+
+    public int getHeight() {
+        return height;
     }
 
-    public void setOpened(boolean opened) {
-        this.opened = opened;
+    public void setHeight(int height) {
+        this.height = height;
     }
 
-    public List<String> getImages() {
 
-        return images;
-    }
 
-    public boolean isOpened() {
-        return opened;
-    }
-
-    @SerializedName("opened")
-
-    private boolean opened;
 
 
     public void setResult(String result) {
@@ -240,5 +232,14 @@ public class accounts {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public com.string.leeyun.stringting_android.API.images getImages() {
+
+        return images;
+    }
+
+    public void setImages(com.string.leeyun.stringting_android.API.images images) {
+        this.images = images;
     }
 }

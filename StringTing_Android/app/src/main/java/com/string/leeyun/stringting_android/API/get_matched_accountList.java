@@ -1,30 +1,26 @@
 package com.string.leeyun.stringting_android.API;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by leeyun on 2017. 12. 5..
  */
 
-public class get_matched_accountList extends ArrayList<get_matched_account> {
+public class get_matched_accountList  {
+
+        @SerializedName("accounts")
+        private ArrayList<get_matched_account>accounts;
 
 
-    private ArrayList<message>last_messages;
-    private ArrayList<accounts>account;
-
-    public ArrayList<message> getLast_messages() {
-        return last_messages;
+    public ArrayList<get_matched_account> getAccounts() {
+        return accounts;
     }
 
-    public ArrayList<accounts> getAccount() {
-        return account;
+    public void setAccounts(ArrayList<get_matched_account> accounts) {
+        this.accounts = accounts;
     }
 
-    public void setLast_messages(ArrayList<message> last_messages) {
-        this.last_messages = last_messages;
-    }
-
-    public void setAccount(ArrayList<accounts> account) {
-        this.account = account;
-    }
 }

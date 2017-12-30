@@ -357,9 +357,15 @@ public class MainActivity extends AppCompatActivity {
                                     check_login gsonresponse = response.body();
                                     Log.e("onresponse_check_login", gsonresponse.getResult());
                                     Log.e("onresponse_check_login",gsonresponse.getMessage());
-                                    int account_id= Integer.parseInt(gsonresponse.getId());
-                                    String sex=gsonresponse.getSex();
-                                    save_local_data(sex,account_id,token);
+                                    try{
+                                        int account_id= Integer.parseInt(gsonresponse.getId());
+                                        String sex=gsonresponse.getSex();
+                                        save_local_data(sex,account_id,token);
+
+                                    }catch (Exception e){
+                                        e.printStackTrace();
+                                    }
+
                                     if (gsonresponse.getStatus()==null) {
 
                                         Log.e("get_status","등록되지않은 이메일입니다");

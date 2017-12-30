@@ -27,6 +27,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.string.leeyun.stringting_android.API.Rest_ApiService.API_URL;
 import static com.string.leeyun.stringting_android.R.id.sex;
+import static com.string.leeyun.stringting_android.Tab_First.openselected;
+import static com.string.leeyun.stringting_android.Tab_First.openselected_count;
+import static com.string.leeyun.stringting_android.Tab_First.openselected_count_second;
+import static com.string.leeyun.stringting_android.Tab_First.openselected_second;
 
 public class Todaypic_pop extends Activity {
 
@@ -36,6 +40,8 @@ public class Todaypic_pop extends Activity {
     String sex;
     int account_id;
     String token;
+    String what_pic;
+    open_id OpenId;
 
     Rest_ApiService apiService;
     Retrofit retrofit;
@@ -51,8 +57,31 @@ public class Todaypic_pop extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_todaypic_pop);
 
+
+        Intent intent=getIntent();
+        matching_account= (int) intent.getSerializableExtra("matching_account");
+        matching_sex= (String) intent.getSerializableExtra("matching_sex");
+        what_pic =(String)intent.getSerializableExtra("what_pic");
+        Log.e("matching_account", String.valueOf(matching_account));
+
+    }
+
+    public void cancle(View v){
+        super.onBackPressed();
+    }
+
+    public void confirm(View v){
+        //코인 사용이 충분할때
+        Intent detail = new Intent(this,Personal_profile.class);
+
+        detail.putExtra("matching_account",matching_account);
+        detail.putExtra("matching_sex",matching_sex);
+
+        Tab_First tab_first=new Tab_First();
+
         OkHttpClient.Builder client1=setting_local_data_and_client();
 
+        OpenId=new open_id();
 
         retrofit = new Retrofit.Builder()
                 .baseUrl(API_URL)
@@ -62,12 +91,7 @@ public class Todaypic_pop extends Activity {
 
         apiService= retrofit.create(Rest_ApiService.class);
 
-        Intent intent=getIntent();
-        matching_account= (int) intent.getSerializableExtra("matching_account");
-        matching_sex= (String) intent.getSerializableExtra("matching_sex");
 
-        Log.e("matching_account", String.valueOf(matching_account));
-        open_id OpenId=new open_id();
         OpenId.setOpen_id(matching_account);
         //추가팝업개발
         try {
@@ -92,33 +116,17 @@ public class Todaypic_pop extends Activity {
             e.printStackTrace();
             Log.e("last_introduction","null");
         }
-    }
-
-    public void cancle(View v){
-        super.onBackPressed();
-    }
-
-    public void confirm(View v){
-        //코인 사용이 충분할때
-        Intent detail = new Intent(this,Personal_profile.class);
-
-        detail.putExtra("matching_account",matching_account);
-        detail.putExtra("matching_sex",matching_sex);
-
-        Tab_First tab_first=new Tab_First();
-
-
-
-
 
         startActivity(detail);
 
     }
 
     public OkHttpClient.Builder setting_local_data_and_client(){
+        SharedPreferences pref = getSharedPreferences("Local_DB", MODE_PRIVATE);
+
+
         try {
 
-            SharedPreferences pref = getSharedPreferences("Local_DB", MODE_PRIVATE);
             sex=pref.getString("sex","notfound");
             Log.e("sex",sex);
             account_id = pref.getInt("account_id",0);
@@ -163,7 +171,18 @@ public class Todaypic_pop extends Activity {
             }
         });
 
+       if(what_pic.equals("first")){
+           openselected="true";
+           openselected_count="true";
+       }
+       else if(what_pic.equals("second")){
+           openselected_count_second="true";
+           openselected_second="true";
+       }
+
 
         return client1;
     }
+
+
 }

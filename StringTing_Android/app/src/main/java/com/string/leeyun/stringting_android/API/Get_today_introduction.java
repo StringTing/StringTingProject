@@ -41,7 +41,7 @@ public class Get_today_introduction {
     @SerializedName("body_form")
     private String body_form;
     @SerializedName("images")
-    private List<String>images;
+    private images images;
     @SerializedName("opened")
     private boolean opened;
     @SerializedName("score")
@@ -69,9 +69,6 @@ public class Get_today_introduction {
         return authenticated;
     }
 
-    public List<String> getImages() {
-        return images;
-    }
 
     public int getScore() {
         return score;
@@ -81,18 +78,12 @@ public class Get_today_introduction {
         return id;
     }
 
-    public void setImages(List<String> images) {
-        this.images = images;
-    }
 
     public void setOpened(boolean opened) {
         this.opened = opened;
     }
 
-    public String getImages(int i) {
 
-        return images.get(i);
-    }
 
     public boolean isOpened() {
         return opened;
@@ -274,4 +265,11 @@ public class Get_today_introduction {
     }
 
 
+    public com.string.leeyun.stringting_android.API.images getImages() {
+        return images;
+    }
+
+    public void setImages(com.string.leeyun.stringting_android.API.images images) {
+        this.images = images;
+    }
 }

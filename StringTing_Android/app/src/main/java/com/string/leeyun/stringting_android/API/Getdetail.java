@@ -42,7 +42,7 @@ public class Getdetail {
     @SerializedName("body_form")
     private String body_form;
     @SerializedName("images")
-    private List<String> images;
+    private images images;
     @SerializedName("opened")
     private boolean opened;
     @SerializedName("score")
@@ -79,17 +79,12 @@ public class Getdetail {
         return id;
     }
 
-    public void setImages(List<String> images) {
-        this.images = images;
-    }
 
     public void setOpened(boolean opened) {
         this.opened = opened;
     }
 
-    public List<String> getImages() {
-        return images;
-    }
+
 
     public boolean isOpened() {
         return opened;
@@ -271,4 +266,11 @@ public class Getdetail {
     }
 
 
+    public com.string.leeyun.stringting_android.API.images getImages() {
+        return images;
+    }
+
+    public void setImages(com.string.leeyun.stringting_android.API.images images) {
+        this.images = images;
+    }
 }

@@ -66,7 +66,10 @@ public class Tab_First extends Fragment implements View.OnClickListener {
 
     private RelativeLayout today_pic_first;
     private RelativeLayout today_pic_second;
-
+    public static String openselected="null";
+    public static String openselected_count="null";
+    public static String openselected_second="null";
+    public static String openselected_count_second="null";
     private Context mContext;
     private Resources mResources;
     private ImageView mImageView , mImageView2 , l1,l2,l3;
@@ -101,6 +104,12 @@ public class Tab_First extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        SharedPreferences pref = this.getActivity().getSharedPreferences("Local_DB", MODE_PRIVATE);
+
+
+
+
         final View v = inflater.inflate(R.layout.activity_tab_first, container, false);
 
         //추가할 부모 뷰
@@ -154,7 +163,6 @@ public class Tab_First extends Fragment implements View.OnClickListener {
 
         try {
 
-            SharedPreferences pref = this.getActivity().getSharedPreferences("Local_DB", MODE_PRIVATE);
             sex=pref.getString("sex","notfound");
             Log.e("sex",sex);
             account_id = pref.getInt("account_id",0);
@@ -221,9 +229,9 @@ public class Tab_First extends Fragment implements View.OnClickListener {
                     Log.e("today_introduction", String.valueOf(response.code()));
 
                     try {
-                        if (im_get_today.get(0).getImages(0) != null) {
-                            today_image_url_first = String.valueOf(im_get_today.get(0).getImages(0));
-                            Log.e("get_today_list_image", String.valueOf(im_get_today.get(0).getImages(0)));
+                        if (im_get_today.get(0).getImages().getApproved().get(0).getName() != null) {
+                            today_image_url_first = String.valueOf(im_get_today.get(0).getImages().getApproved().get(0).getName());
+                            Log.e("get_today_list_image", String.valueOf(im_get_today.get(0).getImages().getApproved().get(0).getName()));
                             for (int i=0;i<im_get_today.size();i++){
                                 matching_account.add(im_get_today.get(i).getId());
 
@@ -241,7 +249,7 @@ public class Tab_First extends Fragment implements View.OnClickListener {
                             }
 
                         }
-                        today_image_url_second = String.valueOf(im_get_today.get(1).getImages(0));
+                        today_image_url_second = String.valueOf(im_get_today.get(1).getImages().getApproved().get(0).getName());
 
 
                         String replace = "{}";
@@ -282,14 +290,14 @@ public class Tab_First extends Fragment implements View.OnClickListener {
                     Log.e("last-5day", String.valueOf(response.raw()));
                     Log.e("last-5day", String.valueOf(response.body()));
                     Log.e("last-5day", String.valueOf(response.code()));
-
+                    im_get_last_5day=new ArrayList<Ger_last_5day_matched_account>();
                     im_get_last_5day = response.body().getGet_last_5day_matched_account();
                     try {
                         last_image_url_first = String.valueOf(im_get_last_5day.get(0).getImages().get(0));
                         last_image_url_second = String.valueOf(im_get_last_5day.get(1).getImages().get(0));
 //                    last_image_url_third = String.valueOf(im_get_last_5day.get(2).getImages().get(0));
 
-                        Log.e("get_eval_list_image", String.valueOf(im_get_today.get(0).getImages(0)));
+                        Log.e("get_eval_list_image", String.valueOf(im_get_today.get(0).getImages().getApproved().get(0).getName()));
                         String replace = "{}";
                         String medium = "medium";
                         String small = "small";
@@ -326,6 +334,29 @@ public class Tab_First extends Fragment implements View.OnClickListener {
 
 
 
+        Log.e("openselected_second",openselected_second);
+
+    try {
+        if (openselected.equals("true")) {
+
+            ImageView today_rock = (ImageView) v.findViewById(R.id.today_rock_img);
+            today_rock.setVisibility(View.GONE);
+
+        }
+
+
+    }catch (Exception e){
+        e.printStackTrace();
+    }
+    try{
+        if(openselected_second.equals("true")){
+            ImageView today_rock = (ImageView) v.findViewById(R.id.today_rock_img2);
+            today_rock.setVisibility(View.GONE);
+        }
+    }catch (Exception e){
+        e.printStackTrace();
+    }
+
 
         // Inflate the layout for this fragment
         return  v;
@@ -334,17 +365,27 @@ public class Tab_First extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+
+        LayoutInflater Inflater = (LayoutInflater) this.getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        final View today_pic_view = Inflater.inflate(R.layout.activity_tab_first, null, false);
+
         switch (v.getId()){
             case R.id.t_pic1 :
 
+                try {
+                    Log.e("macthing_account", String.valueOf(matching_account.get(0)));
 
-                Log.e("macthing_account", String.valueOf(matching_account.get(0)));
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
 
-                ImageView today_rock=(ImageView)v.findViewById(R.id.today_rock_img);
+                ImageView today_rock=(ImageView)today_pic_view.findViewById(R.id.today_rock_img);
+                ImageView today_rock_second=(ImageView)today_pic_view.findViewById(R.id.today_rock_img2);
 
-                if(today_rock.getVisibility()==today_rock.VISIBLE) {
+                if(openselected_count.equals("null")&&openselected_count_second.equals("null")) {
                     Intent i = new Intent(getActivity(),Todaypic_pop.class);
                     i.putExtra("matching_account",matching_account.get(0));
+                    i.putExtra("what_pic","first");
                     if (sex.equals("male")){
                         i.putExtra("matching_sex","female");
                     }
@@ -352,17 +393,48 @@ public class Tab_First extends Fragment implements View.OnClickListener {
                         i.putExtra("matching_sex","male");
 
                     }
+
+                    if (openselected_count.equals("true")){
+                        Intent direct_detail = new Intent(getActivity(),Personal_profile.class);
+                        direct_detail.putExtra("matching_account",matching_account.get(0));
+                        direct_detail.putExtra("what_pic","first");
+                        if (sex.equals("male")){
+                            direct_detail.putExtra("matching_sex","female");
+                        }
+                        else{
+                            direct_detail.putExtra("matching_sex","male");
+
+                        }
+                        startActivity(direct_detail);
+                        break;
+                    }
                     startActivity(i);
 
                 }else {
                     Intent e = new Intent(getActivity(),TodaypicScd_pop.class);
                     e.putExtra("matching_account",matching_account.get(1));
+                    e.putExtra("what_pic","second");
+
                     if (sex.equals("male")){
                         e.putExtra("matching_sex","female");
                     }
                     else{
                         e.putExtra("matching_sex","male");
 
+                    }
+                    if (openselected_count.equals("true")){
+                        Intent direct_detail = new Intent(getActivity(),Personal_profile.class);
+                        direct_detail.putExtra("matching_account",matching_account.get(0));
+                        direct_detail.putExtra("what_pic","first");
+                        if (sex.equals("male")){
+                            direct_detail.putExtra("matching_sex","female");
+                        }
+                        else{
+                            direct_detail.putExtra("matching_sex","male");
+
+                        }
+                        startActivity(direct_detail);
+                        break;
                     }
                     startActivity(e);
                 }
@@ -370,12 +442,14 @@ public class Tab_First extends Fragment implements View.OnClickListener {
 
                 break;
             case R.id.t_pic2 :
-                ImageView today_rock1=(ImageView)v.findViewById(R.id.today_rock_img2);
 
+                ImageView today_rock1=(ImageView)today_pic_view.findViewById(R.id.today_rock_img);
+                ImageView today_rock_second2=(ImageView)today_pic_view.findViewById(R.id.today_rock_img2);
 
-                if(today_rock1.getVisibility()==today_rock1.VISIBLE) {
+                if(openselected_count.equals("null")&&openselected_count_second.equals("null")) {
                     Intent i = new Intent(getActivity(),Todaypic_pop.class);
                     i.putExtra("matching_account",matching_account.get(1));
+                    i.putExtra("what_pic","second");
                     if (sex.equals("male")){
                         i.putExtra("matching_sex","female");
                     }
@@ -383,18 +457,50 @@ public class Tab_First extends Fragment implements View.OnClickListener {
                         i.putExtra("matching_sex","male");
 
                     }
+                    if (openselected_count_second.equals("true")){
+                        Intent direct_detail = new Intent(getActivity(),Personal_profile.class);
+                        direct_detail.putExtra("matching_account",matching_account.get(1));
+                        direct_detail.putExtra("what_pic","first");
+                        if (sex.equals("male")){
+                            direct_detail.putExtra("matching_sex","female");
+                        }
+                        else{
+                            direct_detail.putExtra("matching_sex","male");
+
+                        }
+                        startActivity(direct_detail);
+                        break;
+                    }
                     startActivity(i);
 
                 }else {
                     Intent e = new Intent(getActivity(),TodaypicScd_pop.class);
                     e.putExtra("matching_account",matching_account.get(1));
+                    e.putExtra("what_pic","second");
+
                     if (sex.equals("male")){
                         e.putExtra("matching_sex","female");
+
                     }
                     else{
                         e.putExtra("matching_sex","male");
 
                     }
+                    if (openselected_count_second.equals("true")){
+                        Intent direct_detail = new Intent(getActivity(),Personal_profile.class);
+                        direct_detail.putExtra("matching_account",matching_account.get(1));
+                        direct_detail.putExtra("what_pic","first");
+                        if (sex.equals("male")){
+                            direct_detail.putExtra("matching_sex","female");
+                        }
+                        else{
+                            direct_detail.putExtra("matching_sex","male");
+
+                        }
+                        startActivity(direct_detail);
+                        break;
+                    }
+
                     startActivity(e);
                 }
                 break;
@@ -543,13 +649,11 @@ public class Tab_First extends Fragment implements View.OnClickListener {
     }
 
 
-    public void open_today_pic_setvisible(View v){
-        ImageView today_rock=(ImageView)v.findViewById(R.id.today_rock_img);
+    public void openselected_check(){
 
-        LayoutInflater inflater;
-
-        today_rock.setVisibility(View.INVISIBLE);
     }
+
+
 
 
 }

@@ -19,13 +19,9 @@ import com.squareup.picasso.Picasso;
 import com.string.leeyun.stringting_android.API.Rest_ApiService;
 import com.string.leeyun.stringting_android.API.get_matched_account;
 import com.string.leeyun.stringting_android.API.get_matched_accountList;
-import com.string.leeyun.stringting_android.API.message;
-import com.string.leeyun.stringting_android.API.register_message;
-import com.string.leeyun.stringting_android.API.userinfo;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import okhttp3.Interceptor;
@@ -37,11 +33,11 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static android.R.attr.data;
 import static android.content.Context.MODE_PRIVATE;
 import static android.media.CamcorderProfile.get;
+import static com.string.leeyun.stringting_android.API.Rest_ApiService.API_IMAGE_URL;
 import static com.string.leeyun.stringting_android.API.Rest_ApiService.API_URL;
-import static com.string.leeyun.stringting_android.R.mipmap.t;
+import static com.string.leeyun.stringting_android.R.mipmap.e;
 
 
 public class Tab_Fourth extends Fragment {
@@ -51,10 +47,11 @@ public class Tab_Fourth extends Fragment {
     private ArrayList<listItem> list;
     Rest_ApiService apiService;
     Retrofit retrofit;
-    ArrayList<get_matched_account>get_matched_accounts;
+    ArrayList<get_matched_account> get_matched_accounts;
     String token;
     int account_id;
     String sex;
+    String contents;
 
 
     public Tab_Fourth() {
@@ -82,7 +79,7 @@ public class Tab_Fourth extends Fragment {
         list = new ArrayList<listItem>();
         lv = (ListView)getView().findViewById(R.id.list);
         mAdapter = new Tab_Fourth_Custom(list);
-        lv.setAdapter(mAdapter);
+
 
 
 
@@ -133,20 +130,28 @@ public class Tab_Fourth extends Fragment {
                     Log.e("get_matched_account","응답성공");
                     try {
 
-                        get_matched_accounts=response.body();
+                        get_matched_accounts=response.body().getAccounts();
                         for (int i = 0; i < get_matched_accounts.size(); i++) {
-                            get_matched_accounts.get(i).getAccount();
-                            get_matched_accounts.get(i).getLast_message().getContents();
+                            get_matched_accounts.get(1).getAccount();
+                            Log.e("zzz",get_matched_accounts.get(0).getAccount().getBlood_type());
 
-                            list.add(new listItem(R.drawable.kakao_default_profile_image,"이름","내용","시간"));
-                            list.add(new listItem(R.drawable.kakao_default_profile_image,"이름","내용","시간"));
-                            list.add(new listItem(R.drawable.kakao_default_profile_image,"이름","내용","시간"));
-                            list.add(new listItem(R.drawable.kakao_default_profile_image,"이름","내용","시간"));
                         }
                         Log.e("get_matched_accountList", String.valueOf(response.body()));
                         Log.e("onresponse", String.valueOf(response.code()));
-
-
+                        contents=get_matched_accounts.get(1).getLast_messages().getContents();
+                         String chat_profile_url= get_matched_accounts.get(1).getAccount().getImages().getApproved().get(0).getName();
+                        String replace = "{}";
+                        String medium = "medium";
+                        String small = "small";
+                        if (!chat_profile_url.equals(null)) {
+                            chat_profile_url = chat_profile_url.replace(replace, small);
+                        }
+                       chat_profile_url= API_IMAGE_URL+chat_profile_url;
+                        list.add(new listItem(chat_profile_url,"이름",contents,"시간"));
+                        list.add(new listItem(chat_profile_url,"이름","내용","시간"));
+                        list.add(new listItem(chat_profile_url,"이름","내용","시간"));
+                        list.add(new listItem(chat_profile_url,"이름","내용","시간"));
+                        lv.setAdapter(mAdapter);
 
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -168,13 +173,13 @@ public class Tab_Fourth extends Fragment {
 
     //리스트 아이템 클래스
     public class listItem{
-        private int profile; //이미지리소스 아이디값 받아오는 변수
+        private String profile; //이미지리소스 아이디값 받아오는 변수
         private String name;
         private String chat;
         private String date;
 
 
-        public listItem(int p,String n, String c,String d){
+        public listItem(String p,String n, String c,String d){
             this.profile=p;
             this.name = n;
             this.chat = c;

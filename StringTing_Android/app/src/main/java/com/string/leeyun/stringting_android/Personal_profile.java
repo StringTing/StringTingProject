@@ -155,12 +155,12 @@ public class Personal_profile extends AppCompatActivity {
                     try {
                         detail_photo=new ArrayList<Integer>();
 
-                        if (getdetail.getImages().get(0) != null) {
-                            for (int i=0;i<getdetail.getImages().size();i++){
-                                profile_image_list.add(String.valueOf(getdetail.getImages().get(i)));
+                        if (getdetail.getImages().getApproved().get(0).getName() != null) {
+                            for (int i=0;i<getdetail.getImages().getApproved().size();i++){
+                                profile_image_list.add(String.valueOf(getdetail.getImages().getApproved().get(i).getName()));
                             }
 
-                            Log.e("get_eval_list_image", String.valueOf(getdetail.getImages().get(0)));
+                            Log.e("get_eval_list_image", String.valueOf(getdetail.getImages().getApproved().get(0).getName()));
 
                         }
 
@@ -168,8 +168,8 @@ public class Personal_profile extends AppCompatActivity {
                         String medium = "medium";
                         String large="large";
                         String small = "small";
-                        if (getdetail.getImages().get(0) != null) {
-                            for (int i=0;i<getdetail.getImages().size();i++){
+                        if (getdetail.getImages().getApproved().get(0) != null) {
+                            for (int i=0;i<getdetail.getImages().getApproved().size();i++){
                                profile_image_replace.add(profile_image_list.get(i).replace(replace,large));
                             }
 
