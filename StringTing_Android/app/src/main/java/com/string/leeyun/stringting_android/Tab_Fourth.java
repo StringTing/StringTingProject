@@ -51,8 +51,14 @@ public class Tab_Fourth extends Fragment {
     String token;
     int account_id;
     String sex;
-    String contents;
 
+
+    ArrayList<String>contents;
+    ArrayList<String>date;
+    ArrayList<String>chat_url_list;
+    ArrayList<Integer>group_id;
+    ArrayList<String>chat_url_list_replace;
+    ArrayList<String>chat_url_list_full;
 
     public Tab_Fourth() {
         // Required empty public constructor
@@ -120,6 +126,12 @@ public class Tab_Fourth extends Fragment {
        // list.add(new listItem(iv,"이름","내용","시간"));
 
 
+        contents=new ArrayList<>();
+        date=new ArrayList<>();
+        chat_url_list=new ArrayList<>();
+        chat_url_list_replace=new ArrayList<>();
+        group_id=new ArrayList<>();
+        chat_url_list_full=new ArrayList<>();
 
         final Call<get_matched_accountList>get_matched_account = apiService.get_matched_account(sex,account_id);
         get_matched_account.enqueue(new Callback<get_matched_accountList>() {
@@ -134,23 +146,24 @@ public class Tab_Fourth extends Fragment {
                         for (int i = 0; i < get_matched_accounts.size(); i++) {
                             get_matched_accounts.get(1).getAccount();
                             Log.e("zzz",get_matched_accounts.get(0).getAccount().getBlood_type());
-
+                            contents.add(get_matched_accounts.get(i).getLast_messages().getContents());
+                            chat_url_list.add(get_matched_accounts.get(i).getAccount().getImages().getApproved().get(0).getName());
+                            group_id.add(get_matched_accounts.get(i).getGroup_id());
                         }
+
                         Log.e("get_matched_accountList", String.valueOf(response.body()));
                         Log.e("onresponse", String.valueOf(response.code()));
-                        contents=get_matched_accounts.get(1).getLast_messages().getContents();
-                         String chat_profile_url= get_matched_accounts.get(1).getAccount().getImages().getApproved().get(0).getName();
                         String replace = "{}";
                         String medium = "medium";
                         String small = "small";
-                        if (!chat_profile_url.equals(null)) {
-                            chat_profile_url = chat_profile_url.replace(replace, small);
+                        for (int i=0;i<get_matched_accounts.size();i++){
+                            chat_url_list_replace.add(chat_url_list.get(i).replace(replace,small));
+                            chat_url_list_full.add(API_IMAGE_URL+chat_url_list_replace.get(i));
+                            list.add(new listItem(chat_url_list_full.get(i),"이름",contents.get(i),"시간", group_id.get(i)));
+
                         }
-                       chat_profile_url= API_IMAGE_URL+chat_profile_url;
-                        list.add(new listItem(chat_profile_url,"이름",contents,"시간"));
-                        list.add(new listItem(chat_profile_url,"이름","내용","시간"));
-                        list.add(new listItem(chat_profile_url,"이름","내용","시간"));
-                        list.add(new listItem(chat_profile_url,"이름","내용","시간"));
+
+
                         lv.setAdapter(mAdapter);
 
                     } catch (Exception e) {
@@ -177,13 +190,15 @@ public class Tab_Fourth extends Fragment {
         private String name;
         private String chat;
         private String date;
+        private int group_id;
 
 
-        public listItem(String p,String n, String c,String d){
+        public listItem(String p,String n, String c,String d,int e){
             this.profile=p;
             this.name = n;
             this.chat = c;
             this.date = d;
+            this.group_id=e;
         }
     }
 
@@ -223,11 +238,14 @@ public class Tab_Fourth extends Fragment {
             final Context context = parent.getContext();
             final int pos = position;
             View v= convertView;
+            final int group_id = 0;
+            LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            v = inflater.inflate(R.layout.tab_fourth_message,parent,false);
+            final int group_id_set = getItem(pos).group_id;
 
 
             if(v==null){
-                LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                v = inflater.inflate(R.layout.tab_fourth_message,parent,false);
+
 
                 ImageView profile = (ImageView)v.findViewById(R.id.profile_image);
                 TextView name = (TextView)v.findViewById(R.id.keyword);
@@ -250,7 +268,7 @@ public class Tab_Fourth extends Fragment {
                     // 터치 시 해당 아이템 채팅방 불러오기
                     Intent i = new Intent(getContext(),Chatting.class);
                     //여기다 그룹아이디 넣어주기 그럼 채팅방이랑연결
-                    i.putExtra("group_id",1);
+                    i.putExtra("group_id",group_id_set);
                     startActivity(i);
                 }
             });

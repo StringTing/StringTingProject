@@ -66,6 +66,7 @@ public class Chatting extends AppCompatActivity  {
         setContentView(R.layout.activity_chatting);
         //그룹아이디를 받아와 메시지 리스트생성
         group_id = (int)getIntent().getSerializableExtra("group_id");
+        Log.e("group_id", String.valueOf(group_id));
         get_local_data();
         // 커스텀 어댑터 생성
         m_Adapter = new ChattingCustom();
@@ -92,9 +93,9 @@ public class Chatting extends AppCompatActivity  {
 
 
                 newRequest = builder.newBuilder()
-                        .addHeader("access-token","KS1FVQENJADAOCXA74KUDQMP4KI69BXE")
-                        .addHeader("account-id", String.valueOf(115))
-                        .addHeader("account-sex","female")
+                        .addHeader("access-token",token)
+                        .addHeader("account-id", String.valueOf(account_id))
+                        .addHeader("account-sex",sex)
                         .addHeader("Content-Type","application/json")
                         .build();
 
@@ -116,7 +117,7 @@ public class Chatting extends AppCompatActivity  {
         Log.e("sex",sex);
 
 
-        Call<get_message_list> get_message = apiService.get_message_list_api(2);
+        Call<get_message_list> get_message = apiService.get_message_list_api(group_id);
         get_message.enqueue(new Callback<get_message_list>() {
             @Override
             public void onResponse(Call<get_message_list> call, Response<get_message_list> response) {
@@ -170,7 +171,7 @@ public class Chatting extends AppCompatActivity  {
 
         EditText editText = (EditText) findViewById(R.id.input_text);
         inputValue = editText.getText().toString();
-        RegisterMessage.setGrounp_id(2);
+        RegisterMessage.setGrounp_id(group_id);
         RegisterMessage.setContents(inputValue);
         editText.setText("");
 
