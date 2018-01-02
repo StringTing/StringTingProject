@@ -13,217 +13,265 @@ import java.util.List;
 public class Get_evalaccount {
 
 
-         @SerializedName("login_format")
-        private String login_format;
-        @SerializedName("birthday")
-        private String birthday;
-        @SerializedName("military_service_status")
-        private String military_service_status;
-        @SerializedName("education")
-        private String education;
-        @SerializedName("department")
-        private String department;
-        @SerializedName("location")
-        private String location;
-        @SerializedName("height")
-        private int height;
-        @SerializedName("smoke")
-        private boolean smoke;
-        @SerializedName("drink")
-        private String drink;
-        @SerializedName("religion")
-        private String religion;
-        @SerializedName("blood_type")
-        private String blood_type;
-        @SerializedName("authenticated")
-        private boolean authenticated;
-        @SerializedName("id_image")
-        private String id_image;
-        @SerializedName("password")
-        private String password;
-        @SerializedName("body_form")
-        private String body_form;
+    @SerializedName("military_service_status")
+    private String military_service_status;
+    @SerializedName("education")
+    private String education;
+    @SerializedName("department")
+    private String department;
+    @SerializedName("location")
+    private String location;
+    @SerializedName("height")
+    private int height;
+    @SerializedName("age")
+    private int age;
 
+    @SerializedName("smoke")
+    private boolean smoke;
+    @SerializedName("drink")
+    private String drink;
+    @SerializedName("religion")
+    private String religion;
+    @SerializedName("blood_type")
+    private String blood_type;
+    @SerializedName("authenticated")
+    private boolean authenticated;
+    @SerializedName("id_image")
+    private String id_image;
+    @SerializedName("password")
+    private String password;
+    @SerializedName("body_form")
+    private String body_form;
+    @SerializedName("images")
+    private images images;
+    @SerializedName("opened")
+    private boolean opened;
+    @SerializedName("score")
+    private int score;
+    private int id;
 
+    public void setHeight(int height) {
+        this.height = height;
+    }
 
-        public void setResult(String result) {
-            this.result = result;
-        }
+    public void setScore(int score) {
+        this.score = score;
+    }
 
-        public String getResult() {
+    public void setId(int id) {
+        this.id = id;
+    }
 
-            return result;
-        }
+    public int getHeight() {
 
-        private String result;
+        return height;
+    }
 
+    public boolean isAuthenticated() {
+        return authenticated;
+    }
 
-        private String email;
 
+    public int getScore() {
+        return score;
+    }
 
+    public int getId() {
+        return id;
+    }
 
 
-        public String getPassword() {
-            return password;
-        }
+    public void setOpened(boolean opened) {
+        this.opened = opened;
+    }
 
-        public String getLogin_format() {
-            return login_format;
-        }
 
 
-        public String getBirthday() {
-            return birthday;
-        }
+    public boolean isOpened() {
+        return opened;
+    }
 
-        public String getMilitary_service_status() {
-            return military_service_status;
-        }
 
-        public String getEducation() {
-            return education;
-        }
 
-        public String getEmail() {
-            return email;
-        }
 
+    public void setResult(String result) {
+        this.result = result;
+    }
 
+    public String getResult() {
 
-        public void setId_image(String id_image) {
-            this.id_image = id_image;
-        }
+        return result;
+    }
 
-        public void setAuthenticated(boolean authenticated) {
+    private String result;
 
-            this.authenticated = authenticated;
-        }
 
-        public void setBlood_type(String blood_type) {
+    private String email;
 
-            this.blood_type = blood_type;
-        }
 
-        public void setReligion(String religion) {
 
-            this.religion = religion;
-        }
 
-        public void setDrink(String drink) {
+    public String getPassword() {
+        return password;
+    }
 
-            this.drink = drink;
-        }
 
-        public void setSmoke(boolean smoke) {
 
-            this.smoke = smoke;
-        }
+    public String getMilitary_service_status() {
+        return military_service_status;
+    }
 
-        public void setBody_form(String body_form) {
+    public String getEducation() {
+        return education;
+    }
 
-            this.body_form = body_form;
-        }
+    public String getEmail() {
+        return email;
+    }
 
-        public void setheight(int height) {
 
-            this.height = height;
-        }
 
-        public void setLocation(String location) {
+    public void setId_image(String id_image) {
+        this.id_image = id_image;
+    }
 
-            this.location = location;
-        }
+    public void setAuthenticated(boolean authenticated) {
 
-        public void setDepartment(String department) {
+        this.authenticated = authenticated;
+    }
 
-            this.department = department;
-        }
+    public void setBlood_type(String blood_type) {
 
-        public void setEducation(String education) {
+        this.blood_type = blood_type;
+    }
 
-            this.education = education;
-        }
+    public void setReligion(String religion) {
 
-        public void setMilitary_service_status(String military_service_status) {
+        this.religion = religion;
+    }
 
-            this.military_service_status = military_service_status;
-        }
+    public void setDrink(String drink) {
 
-        public void setBirthday(String birthday) {
+        this.drink = drink;
+    }
 
-            this.birthday = birthday;
-        }
+    public void setSmoke(boolean smoke) {
 
-        public void setLogin_format(String login_format) {
+        this.smoke = smoke;
+    }
 
-            this.login_format = login_format;
-        }
+    public void setBody_form(String body_form) {
 
-        public void setPassword(String password) {
+        this.body_form = body_form;
+    }
 
-            this.password = password;
-        }
+    public void setheight(int height) {
 
+        this.height = height;
+    }
 
+    public void setLocation(String location) {
 
+        this.location = location;
+    }
 
-        public String getId_image() {
+    public void setDepartment(String department) {
 
-            return id_image;
-        }
+        this.department = department;
+    }
 
-        public boolean getAuthenticated() {
+    public void setEducation(String education) {
 
-            return authenticated;
-        }
+        this.education = education;
+    }
 
-        public String getBlood_type() {
+    public void setMilitary_service_status(String military_service_status) {
 
-            return blood_type;
-        }
+        this.military_service_status = military_service_status;
+    }
 
-        public String getReligion() {
 
-            return religion;
-        }
 
-        public String getDrink() {
+    public void setPassword(String password) {
 
-            return drink;
-        }
+        this.password = password;
+    }
 
-        public boolean isSmoke() {
 
-            return smoke;
-        }
 
-        public String getBody_form() {
 
-            return body_form;
-        }
+    public int getAge() {
+        return age;
+    }
 
-        public int getheight() {
+    public void setAge(int age) {
 
-            return height;
-        }
+        this.age = age;
+    }
 
-        public String getLocation() {
 
-            return location;
-        }
+    public String getId_image() {
 
-        public String getDepartment() {
+        return id_image;
+    }
 
-            return department;
-        }
+    public boolean getAuthenticated() {
 
+        return authenticated;
+    }
 
+    public String getBlood_type() {
 
-        public void setEmail(String email) {
-            this.email = email;
-        }
+        return blood_type;
+    }
 
+    public String getReligion() {
 
+        return religion;
+    }
 
+    public String getDrink() {
 
+        return drink;
+    }
+
+    public boolean isSmoke() {
+
+        return smoke;
+    }
+
+    public String getBody_form() {
+
+        return body_form;
+    }
+
+    public int getheight() {
+
+        return height;
+    }
+
+    public String getLocation() {
+
+        return location;
+    }
+
+    public String getDepartment() {
+
+        return department;
+    }
+
+
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+
+    public com.string.leeyun.stringting_android.API.images getImages() {
+        return images;
+    }
+
+    public void setImages(com.string.leeyun.stringting_android.API.images images) {
+        this.images = images;
+    }
 }

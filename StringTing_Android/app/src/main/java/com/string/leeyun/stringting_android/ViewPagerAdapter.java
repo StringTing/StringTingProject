@@ -3,6 +3,7 @@ package com.string.leeyun.stringting_android;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.v4.view.PagerAdapter;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,8 @@ import android.widget.ImageView;
 import com.makeramen.roundedimageview.RoundedTransformationBuilder;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
+
+import java.util.ArrayList;
 
 
 /**
@@ -21,10 +24,11 @@ public class ViewPagerAdapter extends PagerAdapter {
 
     Context context;
     LayoutInflater inflater;
+    ArrayList<String>eval_img=new ArrayList<>();
 
 
 
-    public ViewPagerAdapter(LayoutInflater inflater,Context context) {
+    public ViewPagerAdapter(LayoutInflater inflater,Context context,ArrayList<String>eval_img) {
 
         // TODO Auto-generated constructor stub
         this.context = context;
@@ -33,7 +37,10 @@ public class ViewPagerAdapter extends PagerAdapter {
         //전달 받은 LayoutInflater를 멤버변수로 전달
 
         this.inflater=inflater;
-
+        for (int i=0;i<eval_img.size();i++) {
+            this.eval_img.add(eval_img.get(i));
+            Log.e("ss",eval_img.get(i));
+        }
     }
 
     //PagerAdapter가 가지고 잇는 View의 개수를 리턴
@@ -46,7 +53,7 @@ public class ViewPagerAdapter extends PagerAdapter {
 
         // TODO Auto-generated method stub
 
-        return 10; //이미지 개수 리턴(그림이 10개라서 10을 리턴)
+        return eval_img.size(); //tab_second에서 넘어온 이미지 수 만큼 리턴
 
     }
 
@@ -88,11 +95,6 @@ public class ViewPagerAdapter extends PagerAdapter {
 
         ImageView img= (ImageView)view.findViewById(R.id.imageView19);
 
-        Picasso.with(context)
-                .load(R.drawable.gametitle_01+position)
-                .transform(new CircleTransForm()).into(img);
-
-
 
         //ImageView에 현재 position 번째에 해당하는 이미지를 보여주기 위한 작업
 
@@ -105,11 +107,14 @@ public class ViewPagerAdapter extends PagerAdapter {
                 .oval(false)
                 .build();
 
-        Picasso.with(context)
-                .load(R.drawable.gametitle_01+position)
-                .fit()
-                .transform(transformation)
-                .into(img);
+
+            Picasso.with(context)
+                    .load(eval_img.get(position))
+                    .fit()
+                    .transform(transformation)
+                    .into(img);
+
+
 
 
         //ViewPager에 만들어 낸 View 추가

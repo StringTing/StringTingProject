@@ -8,14 +8,13 @@ import java.util.ArrayList;
 
 public class get_eval_accountList {
 
-    private ArrayList<Get_evalaccount>evalaccount_list;
+    private ArrayList<Get_evalaccount>accounts;
 
-    public void setEvalaccount_list(ArrayList<Get_evalaccount> evalaccount_list) {
-        this.evalaccount_list = evalaccount_list;
+    public ArrayList<Get_evalaccount> getAccounts() {
+        return accounts;
     }
 
-    public ArrayList<Get_evalaccount> getEvalaccount_list() {
-
-        return evalaccount_list;
+    public void setAccounts(ArrayList<Get_evalaccount> accounts) {
+        this.accounts = accounts;
     }
 }

@@ -80,11 +80,14 @@ public interface Rest_ApiService {
         @GET("get/message-list/{group_id}/")
         Call<get_message_list>get_message_list_api(@Path("group_id")int group_id);
 
-        @GET("{sex}/{account-id}/get/introduction-qna")
+        @GET("{sex}/{account-id}/get/introduction-qna/")
         Call<get_introduction_qnalist>get_introduction_qnalist(@Path("sex")String introduction_sex, @Path("account-id") int introduction_account);
 
         @GET("{get}/introduction-questions/")
         Call<get_introduction_questionlist>get_introduction_questionlist(@Path("get")String get);
+
+        @POST("register/score/")
+        Call<post_register_score>post_register_score(@Body post_register_score post_register_score );
     }
 
 
