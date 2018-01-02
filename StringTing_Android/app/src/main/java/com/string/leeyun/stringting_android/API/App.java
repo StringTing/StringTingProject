@@ -8,6 +8,7 @@ import android.app.Application;
 import android.content.Context;
 import android.util.Log;
 
+import com.crashlytics.android.Crashlytics;
 import com.kakao.auth.ApprovalType;
 import com.kakao.auth.AuthType;
 import com.kakao.auth.IApplicationConfig;
@@ -16,6 +17,8 @@ import com.kakao.auth.KakaoAdapter;
 import com.kakao.auth.KakaoSDK;
 import com.tsengvn.typekit.Typekit;
 
+
+import io.fabric.sdk.android.Fabric;
 
 import static com.kakao.util.helper.Utility.getPackageInfo;
 
@@ -70,6 +73,7 @@ public class App extends Application {
         @Override
         public void onCreate() {
             super.onCreate();
+            Fabric.with(this, new Crashlytics());
             KakaoSDK.init(new KakaoSDKAdapter());
             Log.e("Key Hash : ", getKeyHash(this));
             Typekit.getInstance()
