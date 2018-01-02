@@ -293,8 +293,8 @@ public class Tab_First extends Fragment implements View.OnClickListener {
                     im_get_last_5day=new ArrayList<Ger_last_5day_matched_account>();
                     im_get_last_5day = response.body().getGet_last_5day_matched_account();
                     try {
-                        last_image_url_first = String.valueOf(im_get_last_5day.get(0).getImages().get(0));
-                        last_image_url_second = String.valueOf(im_get_last_5day.get(1).getImages().get(0));
+                        last_image_url_first = String.valueOf(im_get_last_5day.get(0).getImages().getApproved().get(0));
+                        last_image_url_second = String.valueOf(im_get_last_5day.get(1).getImages().getApproved().get(0));
 //                    last_image_url_third = String.valueOf(im_get_last_5day.get(2).getImages().get(0));
 
                         Log.e("get_eval_list_image", String.valueOf(im_get_today.get(0).getImages().getApproved().get(0).getName()));
@@ -307,6 +307,7 @@ public class Tab_First extends Fragment implements View.OnClickListener {
 //                        last_image_url_third =last_image_url_third.replace(replace,small);
                             Log.e("image_url_first", last_image_url_first);
                             Log.e("image_url_second", last_image_url_second);
+                            image_url_today(v);
 
                         }
 

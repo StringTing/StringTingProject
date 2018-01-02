@@ -22,7 +22,6 @@ import com.string.leeyun.stringting_android.API.get_matched_accountList;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -37,7 +36,6 @@ import static android.content.Context.MODE_PRIVATE;
 import static android.media.CamcorderProfile.get;
 import static com.string.leeyun.stringting_android.API.Rest_ApiService.API_IMAGE_URL;
 import static com.string.leeyun.stringting_android.API.Rest_ApiService.API_URL;
-import static com.string.leeyun.stringting_android.R.mipmap.e;
 
 
 public class Tab_Fourth extends Fragment {
@@ -59,7 +57,8 @@ public class Tab_Fourth extends Fragment {
     ArrayList<Integer>group_id;
     ArrayList<String>chat_url_list_replace;
     ArrayList<String>chat_url_list_full;
-
+    ArrayList<String>info;
+    ArrayList<Integer> unread_message;
     public Tab_Fourth() {
         // Required empty public constructor
     }
@@ -132,8 +131,9 @@ public class Tab_Fourth extends Fragment {
         chat_url_list_replace=new ArrayList<>();
         group_id=new ArrayList<>();
         chat_url_list_full=new ArrayList<>();
-
-        final Call<get_matched_accountList>get_matched_account = apiService.get_matched_account(sex,account_id);
+        info =new ArrayList<>();
+        unread_message=new ArrayList<>();
+        Call<get_matched_accountList>get_matched_account = apiService.get_matched_account(sex,account_id);
         get_matched_account.enqueue(new Callback<get_matched_accountList>() {
 
             @Override
@@ -141,14 +141,20 @@ public class Tab_Fourth extends Fragment {
                 if (response.body()!=null) {
                     Log.e("get_matched_account","응답성공");
                     try {
-
+                        String shap=" #";
                         get_matched_accounts=response.body().getAccounts();
-                        for (int i = 0; i < get_matched_accounts.size(); i++) {
+                        for (int i = 0; i  < get_matched_accounts.size(); i++) {
                             get_matched_accounts.get(1).getAccount();
-                            Log.e("zzz",get_matched_accounts.get(0).getAccount().getBlood_type());
-                            contents.add(get_matched_accounts.get(i).getLast_messages().getContents());
-                            chat_url_list.add(get_matched_accounts.get(i).getAccount().getImages().getApproved().get(0).getName());
-                            group_id.add(get_matched_accounts.get(i).getGroup_id());
+                            if(get_matched_accounts.get(i).getLast_messages().getContents()!=null){
+                                contents.add(get_matched_accounts.get(i).getLast_messages().getContents());
+                                chat_url_list.add(get_matched_accounts.get(i).getAccount().getImages().getApproved().get(0).getName());
+                                Log.e("image_log",get_matched_accounts.get(i).getAccount().getImages().getApproved().get(0).getName());
+                                group_id.add(get_matched_accounts.get(i).getGroup_id());
+                                info.add(shap+get_matched_accounts.get(i).getAccount().getBirthday()+shap+get_matched_accounts.get(i).getAccount().getBody_form()+shap+get_matched_accounts.get(i).getAccount().getEducation()+shap+get_matched_accounts.get(i).getAccount().getHeight());
+                                unread_message.add(get_matched_accounts.get(i).getUnread_messages());
+                            }
+                            Log.e("contentsArray",get_matched_accounts.get(1).getLast_messages().getContents());
+
                         }
 
                         Log.e("get_matched_accountList", String.valueOf(response.body()));
@@ -156,10 +162,16 @@ public class Tab_Fourth extends Fragment {
                         String replace = "{}";
                         String medium = "medium";
                         String small = "small";
-                        for (int i=0;i<get_matched_accounts.size();i++){
-                            chat_url_list_replace.add(chat_url_list.get(i).replace(replace,small));
-                            chat_url_list_full.add(API_IMAGE_URL+chat_url_list_replace.get(i));
-                            list.add(new listItem(chat_url_list_full.get(i),"이름",contents.get(i),"시간", group_id.get(i)));
+                        for (int i=0;i<contents.size();i++){
+                            if(chat_url_list.get(i)!=null){
+                                chat_url_list_replace.add(chat_url_list.get(i).replace(replace,small));
+                                chat_url_list_full.add(API_IMAGE_URL+chat_url_list_replace.get(i));
+                                list.add(new listItem(chat_url_list_full.get(i),info.get(i),contents.get(i),"111", group_id.get(i),unread_message.get(i))) ;
+                                Log.e("i",String.valueOf(i));
+
+                            }
+                            Log.e("contents",contents.get(i));
+
 
                         }
 
@@ -187,18 +199,20 @@ public class Tab_Fourth extends Fragment {
     //리스트 아이템 클래스
     public class listItem{
         private String profile; //이미지리소스 아이디값 받아오는 변수
-        private String name;
+        private String info;
         private String chat;
         private String date;
         private int group_id;
+        private int unread_message;
 
 
-        public listItem(String p,String n, String c,String d,int e){
+        public listItem(String p,String info, String c,String d,int e,int unread){
             this.profile=p;
-            this.name = n;
+            this.info=info;
             this.chat = c;
             this.date = d;
             this.group_id=e;
+            this.unread_message=unread;
         }
     }
 
@@ -244,22 +258,22 @@ public class Tab_Fourth extends Fragment {
             final int group_id_set = getItem(pos).group_id;
 
 
-            if(v==null){
 
 
                 ImageView profile = (ImageView)v.findViewById(R.id.profile_image);
-                TextView name = (TextView)v.findViewById(R.id.keyword);
                 TextView chat = (TextView)v.findViewById(R.id.text);
                 TextView date = (TextView)v.findViewById(R.id.date);
-
+                TextView info = (TextView)v.findViewById(R.id.keyword);
+                TextView unread= (TextView)v.findViewById(R.id.pop);
 
                 //라운드처리 일단 해줘봄...
                 Picasso.with(getActivity()).load(getItem(pos).profile).transform(new CircleTransForm()).into(profile);
                 //profile.setImageResource(getItem(pos).profile);
-                name.setText(getItem(pos).name);
                 chat.setText(getItem(pos).chat);
                 date.setText(getItem(pos).date);
-            }
+                info.setText(getItem(pos).info);
+                unread.setText(Integer.toString(getItem(pos).unread_message));
+
 
             v.setOnClickListener(new View.OnClickListener() {
 

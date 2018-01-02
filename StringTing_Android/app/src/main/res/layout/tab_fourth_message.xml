@@ -52,7 +52,7 @@
                 android:textSize="12sp"
                 android:textColor="#000000"
                 android:letterSpacing="-0.01"
-                android:text="#서울 #23세 #176 #대학생" />
+                android:text="" />
 
             <TextView
                 android:id="@+id/text"
@@ -63,7 +63,7 @@
                 android:textSize="10sp"
                 android:letterSpacing="-0.01"
                 android:textColor="#606060"
-                android:text="안녕하세요!" />
+                android:text="" />
 
             <TextView
                 android:id="@+id/date"
@@ -72,7 +72,7 @@
                 android:layout_alignParentRight="true"
                 android:textColor="#7a7a7a"
                 android:textSize="8sp"
-                android:text="오전 2:00" />
+                android:text="" />
 
 
             <TextView
@@ -84,7 +84,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="9dp"
                 android:gravity="center"
-                android:text="1"
+                android:text=""
                 android:textSize="12sp"
                 android:textColor="#000000"
                 android:letterSpacing="-0.01"
