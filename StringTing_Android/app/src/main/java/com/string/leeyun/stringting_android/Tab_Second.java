@@ -46,6 +46,7 @@ public class Tab_Second extends Fragment implements View.OnClickListener {
     String generalInfoJson = "{'name': 'Future Studio Dev Team', 'website': 'https://futurestud.io', 'account': [{'name': 'Christian', 'flowerCount': 1 }, {'name': 'Marcus','flowerCount': 3 }, {'name': 'Norman','flowerCount': 2 }]}";
 
     Gson gson= new Gson();
+    private ViewPager pager;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -66,7 +67,7 @@ public class Tab_Second extends Fragment implements View.OnClickListener {
 
         View result=inflater.inflate(R.layout.activity_tab_second, container, false);
 
-        ViewPager pager= (ViewPager)result.findViewById(R.id.viewPager);
+        pager= (ViewPager)result.findViewById(R.id.viewPager);
 
 
 //
@@ -144,7 +145,6 @@ public class Tab_Second extends Fragment implements View.OnClickListener {
             public void onPageScrollStateChanged(int state) {
 
                 o_candy1.setVisibility(View.INVISIBLE);
-
                 o_candy2.setVisibility(View.INVISIBLE);
                 o_candy3.setVisibility(View.INVISIBLE);
                 o_candy4.setVisibility(View.INVISIBLE);
@@ -162,49 +162,73 @@ public class Tab_Second extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
 
+        int position;
+
         switch (view.getId()){
             case R.id.c1:
+
+                position=pager.getCurrentItem();//현재 보여지는 아이템의 위치를 리턴
                 o_candy1.setVisibility(View.VISIBLE);
 
                 o_candy2.setVisibility(View.INVISIBLE);
                 o_candy3.setVisibility(View.INVISIBLE);
                 o_candy4.setVisibility(View.INVISIBLE);
                 o_candy5.setVisibility(View.INVISIBLE);
+
+                //현재 위치(position)에서 +1 을 해서 다음 position으로 변경
+
+                //다음 Item으로 현재의 아이템 변경 설정(가장 마지막이면 더이상 이동하지 않음)
+
+                //첫번째 파라미터: 설정할 현재 위치
+
+                //두번째 파라미터: 변경할 때 부드럽게 이동하는가? false면 팍팍 바뀜
+
+                pager.setCurrentItem(position+1,true);
+
+
                 break;
 
             case R.id.c2:
+                position=pager.getCurrentItem();//현재 보여지는 아이템의 위치를 리턴
                 o_candy1.setVisibility(View.VISIBLE);
                 o_candy2.setVisibility(View.VISIBLE);
 
                 o_candy3.setVisibility(View.INVISIBLE);
                 o_candy4.setVisibility(View.INVISIBLE);
                 o_candy5.setVisibility(View.INVISIBLE);
+                pager.setCurrentItem(position+1,true);
                 break;
 
             case R.id.c3:
+                position=pager.getCurrentItem();
                 o_candy1.setVisibility(View.VISIBLE);
                 o_candy2.setVisibility(View.VISIBLE);
                 o_candy3.setVisibility(View.VISIBLE);
 
                 o_candy4.setVisibility(View.INVISIBLE);
                 o_candy5.setVisibility(View.INVISIBLE);
+                pager.setCurrentItem(position+1,true);
                 break;
 
             case R.id.c4:
+                position=pager.getCurrentItem();
                 o_candy1.setVisibility(View.VISIBLE);
                 o_candy2.setVisibility(View.VISIBLE);
                 o_candy3.setVisibility(View.VISIBLE);
                 o_candy4.setVisibility(View.VISIBLE);
 
                 o_candy5.setVisibility(View.INVISIBLE);
+                pager.setCurrentItem(position+1,true);
                 break;
 
             case R.id.c5:
+                position=pager.getCurrentItem();
                 o_candy1.setVisibility(View.VISIBLE);
                 o_candy2.setVisibility(View.VISIBLE);
                 o_candy3.setVisibility(View.VISIBLE);
                 o_candy4.setVisibility(View.VISIBLE);
                 o_candy5.setVisibility(View.VISIBLE);
+                pager.setCurrentItem(position+1,true);
                 break;
         }
 
