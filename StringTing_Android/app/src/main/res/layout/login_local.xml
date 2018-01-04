@@ -41,70 +41,72 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="89dp"
+        android:layout_marginTop="19dp"
         android:layout_below="@+id/sb"
         >
 
         <RelativeLayout
-            android:layout_width="291dp"
-            android:layout_height="42dp"
-            android:layout_marginBottom="35dp"
-            android:background="@drawable/rounded_20_edittext">
+            android:layout_width="290dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:textColor="#666666"
+                android:text="이메일 아이디"/>
 
             <ImageView
-                android:id="@+id/text_id"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:layout_marginLeft="14dp"
-                android:layout_centerVertical="true"
-                android:src="@mipmap/e"/>
-
-            <EditText
-                android:id="@+id/id_Edit"
-                android:layout_width="179dp"
-                android:layout_height="28dp"
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/text_id"
-                android:layout_marginLeft="50dp"
-                android:inputType="textEmailAddress"
-                android:text=""
-                android:background="#00000000"
-                android:textSize="11sp"/>
-
+                android:layout_width="20dp"
+                android:layout_height="15dp"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/check"/>
 
         </RelativeLayout>
+
+
+        <EditText
+            android:id="@+id/id_Edit"
+            android:layout_width="290dp"
+            android:layout_height="28dp"
+            android:layout_marginTop="15dp"
+            android:inputType="textEmailAddress"
+            android:text=""
+            android:textSize="11sp"/>
 
 
         <RelativeLayout
-            android:layout_width="291dp"
-            android:layout_height="42dp"
-            android:layout_marginBottom="35dp"
-            android:background="@drawable/rounded_20_edittext">
+            android:layout_width="290dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:textColor="#666666"
+                android:text="비밀번호"/>
 
             <ImageView
-                android:id="@+id/Pw_text"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:layout_marginLeft="14dp"
-                android:layout_centerVertical="true"
-                android:background="@mipmap/l_d"
-                />
-
-            <EditText
-                android:id="@+id/pw_edit"
-                android:layout_width="179dp"
-                android:layout_height="28dp"
-                android:layout_centerVertical="true"
-                android:inputType="textPassword"
-                android:layout_toRightOf="@+id/Pw_text"
-                android:layout_marginLeft="50dp"
-                android:text=""
-                android:background="#00000000"
-                android:textSize="11sp"
-                />
+                android:layout_width="20dp"
+                android:layout_height="15dp"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/check"/>
 
         </RelativeLayout>
+
+        <EditText
+            android:id="@+id/pw_edit"
+            android:layout_width="290dp"
+            android:layout_height="28dp"
+            android:inputType="textPassword"
+            android:layout_marginTop="15dp"
+            android:text=""
+            android:textSize="11sp"
+            />
+
+
 
         <Button
             android:id="@+id/button2"
@@ -112,10 +114,28 @@
             android:layout_height="42dp"
             android:onClick="onClick_login_check"
             android:background="@drawable/rounded_membershipbtn"
-            android:text="로그인"
+            android:text="로그인 하기"
             android:textColor="#000000"
-            android:layout_marginBottom="5dp"
+            android:layout_marginTop="30dp"
             android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="스트링 계정 만들러 가실래요?"
+            android:layout_gravity="center"
+            android:layout_marginTop="29dp"
+            android:textSize="10sp"
+            android:textColor="#666666"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="비밀번호를 까먹으셨다구요?"
+            android:layout_gravity="center"
+            android:layout_marginTop="7dp"
+            android:textSize="10sp"
+            android:textColor="#666666"/>
 
     </LinearLayout>
 

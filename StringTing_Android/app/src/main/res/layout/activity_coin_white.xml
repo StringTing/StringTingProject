@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.string.leeyun.stringting_android.Coin">
+    tools:context="com.string.leeyun.stringting_android.Coin_White">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -113,12 +113,24 @@
             android:textSize="16sp" />
 
 
+        <TextView
+            android:id="@+id/basic_coin1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="$4.39"
+            android:textSize="12sp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="65dp"
+            android:layout_gravity="right"
+            android:letterSpacing="0.05"
+            android:textColor="#d8d8d8"/>
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="45dp"
             android:paddingRight="45dp"
-            android:layout_marginTop="10dp"
             android:orientation="horizontal">
 
             <ImageView
@@ -148,6 +160,17 @@
                 android:text="30"/>
 
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginRight="4dp"
+                android:textColor="#ffcb3d"
+                android:textSize="18sp"
+                android:text="50%"/>
+
+
+
+                <TextView
                 android:layout_width="82dp"
                 android:layout_height="38dp"
                 android:layout_gravity="center"
@@ -160,14 +183,28 @@
                 android:textSize="16sp"
                 android:background="@drawable/rounded_sendbtn"
                 android:text="$4.39"/>
+
+
+
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/basic_coin2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="$8.79"
+            android:textSize="12sp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="65dp"
+            android:layout_gravity="right"
+            android:letterSpacing="0.05"
+            android:textColor="#d8d8d8"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="45dp"
             android:paddingRight="45dp"
-            android:layout_marginTop="25dp"
             android:orientation="horizontal">
 
             <ImageView
@@ -196,6 +233,15 @@
                 android:text="65"
                />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginRight="4dp"
+                android:textColor="#ffcb3d"
+                android:textSize="18sp"
+                android:text="50%"/>
+
 
             <TextView
                 android:layout_width="82dp"
@@ -213,12 +259,25 @@
              />
         </LinearLayout>
 
+
+        <TextView
+            android:id="@+id/basic_coin3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="$13.19"
+            android:textSize="12sp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="65dp"
+            android:layout_gravity="right"
+            android:letterSpacing="0.05"
+            android:textColor="#d8d8d8"/>
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="45dp"
             android:paddingRight="45dp"
-            android:layout_marginTop="25dp"
             android:orientation="horizontal">
 
             <ImageView
@@ -246,6 +305,15 @@
                 android:textSize="18sp"
                 android:text="100" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginRight="4dp"
+                android:textColor="#ffcb3d"
+                android:textSize="18sp"
+                android:text="50%"/>
+
 
             <TextView
                 android:layout_width="82dp"
@@ -262,12 +330,23 @@
                 android:text="$13.19" />
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/basic_coin4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="$17.59"
+            android:textSize="12sp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="65dp"
+            android:layout_gravity="right"
+            android:letterSpacing="0.05"
+            android:textColor="#d8d8d8"/>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="45dp"
             android:paddingRight="45dp"
-            android:layout_marginTop="25dp"
             android:orientation="horizontal">
 
             <ImageView
@@ -296,6 +375,15 @@
                 android:text="150" />
 
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginRight="4dp"
+                android:textColor="#ffcb3d"
+                android:textSize="18sp"
+                android:text="50%"/>
+
+            <TextView
                 android:layout_width="82dp"
                 android:layout_height="38dp"
                 android:layout_gravity="center"
@@ -310,12 +398,23 @@
                 android:text="$17.59" />
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/basic_coin5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="$31.19"
+            android:textSize="12sp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="65dp"
+            android:layout_gravity="right"
+            android:letterSpacing="0.05"
+            android:textColor="#d8d8d8"/>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="45dp"
             android:paddingRight="45dp"
-            android:layout_marginTop="25dp"
             android:orientation="horizontal">
 
             <ImageView
@@ -343,6 +442,15 @@
                 android:textSize="18sp"
                 android:text="300"/>
 
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginRight="4dp"
+                android:textColor="#ffcb3d"
+                android:textSize="18sp"
+                android:text="50%"/>
             <TextView
                 android:layout_width="82dp"
                 android:layout_height="38dp"
@@ -357,13 +465,23 @@
                 android:background="@drawable/rounded_sendbtn"
                 android:text="$31.19" />
         </LinearLayout>
+        <TextView
+            android:id="@+id/basic_coin6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="$48.79"
+            android:textSize="12sp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="65dp"
+            android:layout_gravity="right"
+            android:letterSpacing="0.05"
 
+            android:textColor="#d8d8d8"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="45dp"
             android:paddingRight="45dp"
-            android:layout_marginTop="25dp"
             android:orientation="horizontal">
 
             <ImageView
@@ -391,6 +509,15 @@
                 android:textSize="18sp"
                 android:text="500"/>
 
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginRight="4dp"
+                android:textColor="#ffcb3d"
+                android:textSize="18sp"
+                android:text="50%"/>
             <TextView
                 android:layout_width="82dp"
                 android:layout_height="38dp"
