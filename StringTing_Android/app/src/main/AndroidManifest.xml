@@ -84,6 +84,8 @@
             android:name=".Report_pop"
             android:theme="@android:style/Theme.Dialog" />
         <activity android:name=".Whitemember"></activity>
+        <activity android:name=".White_webview"/>
+        <activity android:name=".PersonalProfile_Edit"/>
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="c21894fb4370f3d85f8eb5315f054d65e7f826bb" />

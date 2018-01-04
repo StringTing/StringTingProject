@@ -337,6 +337,7 @@
                 </LinearLayout>-->
 
                 <ImageView
+                    android:id="@+id/whitemember_banner"
                     android:layout_width="326dp"
                     android:layout_height="51dp"
                     android:layout_gravity="center"

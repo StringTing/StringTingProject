@@ -2,61 +2,58 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="300dp"
-    android:layout_height="200dp"
-    android:background="@drawable/rounded"
+    android:layout_width="280dp"
+    android:layout_height="174dp"
+    android:background="#ffffff"
     tools:context="com.string.leeyun.stringting_android.Chat_pop">
 
     <RelativeLayout
         android:id="@+id/text_box"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
+        android:layout_height="122dp"
         >
 
         <TextView
             android:id="@+id/main_text"
+            android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="#8a000000"
             android:gravity="center"
-            android:layout_marginBottom="10dp"
-            android:text="상대방이 대화요청을 수락 할 경우,\n대화방이 열립니다!"/>
+            android:text="좋아요를 보내시겠어요?\n2코인이 소진됩니다."/>
 
-        <TextView
-         android:id="@+id/sub_text"
-         android:layout_centerHorizontal="true"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_below="@+id/main_text"
-            android:layout_marginBottom="10dp"
-         android:gravity="center"
-         android:text="5코인이 소진됩니다.\n대화 요청하시겠어요?"/>
 
     </RelativeLayout>
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="52dp"
         android:layout_below="@+id/text_box"
         android:orientation="horizontal">
+        <View
+            android:layout_width="115dp"
+            android:layout_height="wrap_content"/>
         <TextView
             android:id="@+id/cancle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             android:onClick="cancle"
+            android:textColor="#009688"
+            android:textSize="14sp"
             android:text="취소"/>
         <TextView
             android:id="@+id/confirm"
             android:layout_weight="1"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:gravity="center"
             android:onClick="confirm"
+            android:textColor="#009688"
+            android:textSize="14sp"
             android:text="확인"/>
     </LinearLayout>
-
 
 </RelativeLayout>
