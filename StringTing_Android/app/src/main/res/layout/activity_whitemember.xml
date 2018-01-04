@@ -6,12 +6,14 @@
     android:layout_height="match_parent"
     tools:context="com.string.leeyun.stringting_android.Whitemember">
 
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:id="@+id/sb">
 
         <Button
+            android:onClick="back"
             android:layout_width="14dp"
             android:layout_height="wrap_content"
             android:text="X"
@@ -21,172 +23,73 @@
             android:textColor="#000000"
             android:background="#00000000"/>
 
-        <TextView
-            android:id="@+id/textView21"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginRight="20dp"
-            android:layout_centerVertical="true"
-            android:textColor="#de000000"
-            android:lineSpacingExtra="15sp"
-            android:text="White Member"
-            android:textSize="16sp" />
-
     </RelativeLayout>
 
-    <View
-        android:id="@+id/gray_box"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_centerHorizontal="true"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/sb"
-        android:background="#e2e2e2"
-        android:layout_marginTop="30dp"/>
+        android:layout_above="@+id/button7">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_below="@id/gray_box"
-        android:layout_marginTop="50dp"
-        android:paddingLeft="40dp">
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:orientation="vertical">
 
-        >
+    <ImageView
+        android:layout_width="350dp"
+        android:layout_height="300dp"
+        android:background="@drawable/white_main"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="화이트 멤버 인증하기"
+            android:textSize="15dp"
+            android:textColor="#000000"/>
 
         <TextView
-            android:id="@+id/id_num"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:letterSpacing="-0.02"
-            android:text="주민번호 \n앞7자리"
-            android:textSize="11sp" />
-
-        <EditText
-            android:id="@+id/input_idnum"
-            android:layout_width="130dp"
-            android:layout_height="30dp"
-            android:ems="6"
-            android:layout_toRightOf="@+id/id_num"
-            android:layout_marginLeft="30dp"
-            android:layout_centerVertical="true"
-            android:textSize="11sp"
-            android:background="@drawable/spinner_rectangle_border"
-            android:inputType="number" />
-        <View
-            android:id="@+id/bar"
-            android:layout_width="10dp"
-            android:layout_height="2dp"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="6dp"
-            android:layout_toRightOf="@+id/input_idnum"
-            android:background="#e2e2e2"/>
-
-        <EditText
-            android:id="@+id/editText"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:ems="1"
-            android:layout_toRightOf="@+id/bar"
-            android:layout_marginLeft="6dp"
-            android:layout_centerVertical="true"
-            android:textSize="11sp"
-            android:background="@drawable/spinner_rectangle_border"
-            android:inputType="number" />
-
-
-    </RelativeLayout>
-
-        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="20dp"
+            android:textSize="12dp"
+            android:text="1 단계 휴대폰 인증"/>
 
-            <TextView
-                android:id="@+id/name"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:letterSpacing="-0.02"
-                android:textSize="11sp"
-                android:text="이름" />
+        <ImageView
+            android:id="@+id/certify_btn"
+            android:layout_width="300dp"
+            android:layout_height="100dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/certify"/>
 
-            <EditText
-                android:layout_width="200dp"
-                android:layout_height="30dp"
-                android:ems="10"
-                android:layout_toRightOf="@+id/name"
-                android:layout_marginLeft="30dp"
-                android:background="@drawable/spinner_rectangle_border"
-                android:inputType="text"
-                android:textSize="11sp"/>
-        </RelativeLayout>
-
-        <RelativeLayout
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="20dp"
+            android:textSize="12dp"
+            android:text="2 단계 소속 인증"/>
 
-            <TextView
-                android:id="@+id/agency"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:letterSpacing="-0.02"
-                android:textSize="11sp"
-                android:text="통신사" />
-
-
-            <Spinner
-                android:id="@+id/Spinner_agency"
-                android:layout_width="200dp"
-                android:layout_height="30dp"
-                android:layout_toRightOf="@+id/agency"
-                android:layout_marginLeft="30dp"
-                android:background="@drawable/spinner_rectangle_border"
-                />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
-
-            <TextView
-                android:id="@+id/certification"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:letterSpacing="-0.02"
-                android:textSize="11sp"
-                android:text="인증번호" />
-
-            <EditText
-                android:layout_width="200dp"
-                android:layout_height="30dp"
-                android:ems="10"
-                android:layout_toRightOf="@+id/certification"
-                android:layout_marginLeft="30dp"
-                android:background="@drawable/spinner_rectangle_border"
-                android:inputType="number"
-                android:textSize="11sp"/>
-        </RelativeLayout>
+        <ImageView
+            android:layout_width="300dp"
+            android:layout_height="100dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/certify"/>
 
     </LinearLayout>
+    </ScrollView>
 
 
     <Button
         android:id="@+id/button7"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="#ff0066"
+        android:background="#FFCB3D"
         android:layout_alignParentBottom="true"
-        android:text="인증하기"
+        android:text="완료"
         android:textSize="14sp"
         android:letterSpacing="-0.02"
         android:textColor="#ffffff"/>

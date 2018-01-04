@@ -2,57 +2,55 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="300dp"
-    android:layout_height="200dp"
-    android:background="@drawable/rounded"
+    android:layout_width="280dp"
+    android:layout_height="174dp"
+    android:background="#ffffff"
     tools:context="com.string.leeyun.stringting_android.Basicinfo_pop">
-
 
     <RelativeLayout
         android:id="@+id/text_box"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
+        android:layout_height="122dp"
         >
-
         <TextView
             android:id="@+id/main_text"
+            android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="입력하신 내용이 저장 되지 않습니다."/>
-
-        <TextView
-            android:id="@+id/sub_text"
-            android:layout_centerHorizontal="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/main_text"
-            android:text="그래도 뒤로 가시겠습니까?"/>
+            android:textSize="16sp"
+            android:textColor="#8a000000"
+            android:gravity="center"
+            android:text="입력하신 내용이 저장 되지 않습니다.\n그래도 뒤로 가시겠습니까?"/>
 
     </RelativeLayout>
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="52dp"
         android:layout_below="@+id/text_box"
         android:orientation="horizontal">
+        <View
+            android:layout_width="115dp"
+            android:layout_height="wrap_content"/>
         <TextView
             android:id="@+id/cancle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             android:onClick="cancle"
+            android:textColor="#009688"
+            android:textSize="14sp"
             android:text="취소"/>
         <TextView
             android:id="@+id/confirm"
             android:layout_weight="1"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:gravity="center"
             android:onClick="confirm"
+            android:textColor="#009688"
+            android:textSize="14sp"
             android:text="확인"/>
     </LinearLayout>
-
 </RelativeLayout>
