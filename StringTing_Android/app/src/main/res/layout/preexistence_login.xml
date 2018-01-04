@@ -7,20 +7,22 @@
 
 
 
+
             <ImageView
                 android:id="@+id/logo_image"
                 android:layout_width="wrap_content"
                 android:layout_height="150dp"
-                android:layout_marginTop="100dp"
+                android:layout_marginTop="50dp"
                 android:layout_gravity="center"
                 android:src="@drawable/stringlogo" />
 
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:gravity="center"
         android:layout_marginTop="60dp"
+        android:background="#ffce33"
         android:orientation="vertical">
 
 
@@ -69,37 +71,39 @@
             android:onClick="onClick_login_local"
             android:background="@drawable/email_login" />
 
+        <TextView
+            android:onClick="onClick_main_firstpage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textColor="#ffffff"
+            android:layout_marginTop="14dp"
+            android:layout_gravity="center"
+            android:text="회원가입"
+            />
+
+        <View
+            android:layout_width="337dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="8dp"
+            android:background="#6cffffff"/>
+
+        <TextView
+            android:id="@+id/Provision_Linkify"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textSize="9sp"
+            android:textColor="#ffffff"
+            android:textColorLink="#ffffff"
+            />
+
     </LinearLayout>
 
-    <TextView
-        android:onClick="onClick_main_firstpage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="12sp"
-        android:textColor="#666666"
-        android:layout_marginTop="14dp"
-        android:layout_gravity="center"
-        android:text="회원가입"
-        />
 
-    <ImageView
-        android:layout_width="337dp"
-        android:layout_height="3dp"
-        android:layout_marginTop="10dp"
-        android:layout_gravity="center"
-        android:layout_marginBottom="8dp"
-        android:background="#e5e5e5"/>
-
-    <TextView
-        android:id="@+id/Provision_Linkify"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:textSize="9sp"
-        android:textColor="#666666"
-        android:textColorLink="#666666"
-        />
     </LinearLayout>
 
 

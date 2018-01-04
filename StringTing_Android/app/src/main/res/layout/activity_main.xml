@@ -13,19 +13,18 @@
         android:id="@+id/logo_image"
         android:layout_width="wrap_content"
         android:layout_height="150dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="50dp"
         android:layout_gravity="center"
         android:src="@drawable/stringlogo" />
 
 
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:gravity="center"
         android:layout_marginTop="60dp"
+        android:background="#ffce33"
         android:orientation="vertical">
-
 
 
 
@@ -40,7 +39,7 @@
             android:id="@+id/loginBtn"
             android:layout_width="218dp"
             android:layout_height="45dp"
-            android:background="@drawable/fb_membership"
+            android:background="@drawable/facebook_join"
             android:onClick="facebookLoginOnclick"/>
 
 
@@ -62,7 +61,7 @@
                 android:layout_width="218dp"
                 android:layout_height="45dp"
                 android:layout_marginTop="11dp"
-                android:background="@drawable/kakao_membership"/>
+                android:background="@drawable/kakao_join"/>
 
         </FrameLayout>
 
@@ -72,41 +71,43 @@
             android:layout_height="45dp"
             android:layout_marginTop="11dp"
             android:onClick="onClick_membership"
-            android:background="@drawable/email_membership"/>
+            android:background="@drawable/email_join"/>
 
-</LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="12sp"
-            android:textColor="#666666"
+            android:textColor="#ffffff"
             android:onClick="onClick_login_firstpage"
             android:layout_marginTop="14dp"
             android:layout_gravity="center"
-            android:text="로그인"
+            android:text="기존회원 로그인"
             />
 
-        <ImageView
+        <View
             android:layout_width="337dp"
-            android:layout_height="3dp"
+            android:layout_height="1dp"
             android:layout_marginTop="10dp"
             android:layout_gravity="center"
             android:layout_marginBottom="8dp"
-            android:background="#e5e5e5"/>
+            android:background="#6cffffff"/>
 
 
-    <TextView
+        <TextView
 
-        android:id="@+id/Provision_Linkify"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:textSize="9sp"
-        android:textColor="#666666"
-        android:textColorLink="#666666"
-        />
+            android:id="@+id/Provision_Linkify"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textSize="9sp"
+            android:textColor="#000000"
+            android:textColorLink="#000000"
+            />
+
+
+    </LinearLayout>
 
 
 
