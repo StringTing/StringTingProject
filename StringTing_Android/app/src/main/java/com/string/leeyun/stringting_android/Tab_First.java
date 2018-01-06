@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.graphics.drawable.*;
@@ -59,6 +60,7 @@ import static com.facebook.FacebookSdk.getApplicationContext;
 import static com.string.leeyun.stringting_android.API.Rest_ApiService.API_IMAGE_URL;
 import static com.string.leeyun.stringting_android.API.Rest_ApiService.API_URL;
 import static com.string.leeyun.stringting_android.R.mipmap.e;
+import static java.lang.System.in;
 import static java.lang.System.load;
 
 
@@ -110,7 +112,18 @@ public class Tab_First extends Fragment implements View.OnClickListener {
 
 
 
+
         final View v = inflater.inflate(R.layout.activity_tab_first, container, false);
+
+        //whitemember view
+        ImageView white_member=(ImageView)v.findViewById(R.id.whitemember_banner);
+        white_member.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(),Whitemember.class);
+                startActivity(intent);
+            }
+        });
 
         //추가할 부모 뷰
         //final TableLayout inflatedLayout = (TableLayout) v.findViewById(R.id.addpic);
@@ -290,11 +303,10 @@ public class Tab_First extends Fragment implements View.OnClickListener {
                     Log.e("last-5day", String.valueOf(response.raw()));
                     Log.e("last-5day", String.valueOf(response.body()));
                     Log.e("last-5day", String.valueOf(response.code()));
-                    im_get_last_5day=new ArrayList<Ger_last_5day_matched_account>();
                     im_get_last_5day = response.body().getGet_last_5day_matched_account();
                     try {
-                        last_image_url_first = String.valueOf(im_get_last_5day.get(0).getImages().getApproved().get(0));
-                        last_image_url_second = String.valueOf(im_get_last_5day.get(1).getImages().getApproved().get(0));
+                        last_image_url_first = String.valueOf(im_get_last_5day.get(0).getImages().getApproved().get(0).getName());
+                        last_image_url_second = String.valueOf(im_get_last_5day.get(1).getImages().getApproved().get(0).getName());
 //                    last_image_url_third = String.valueOf(im_get_last_5day.get(2).getImages().get(0));
 
                         Log.e("get_eval_list_image", String.valueOf(im_get_today.get(0).getImages().getApproved().get(0).getName()));
@@ -506,6 +518,8 @@ public class Tab_First extends Fragment implements View.OnClickListener {
                 }
                 break;
         }
+
+
 
 
 

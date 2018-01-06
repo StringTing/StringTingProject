@@ -504,14 +504,166 @@ public class MainActivity extends AppCompatActivity {
                 public void onSuccess(UserProfile userProfile) {
                     //로그인에 성공하면 로그인한 사용자의 일련번호, 닉네임, 이미지url등을 리턴합니다.
                     //사용자 ID는 보안상의 문제로 제공하지 않고 일련번호는 제공합니다.
+                    //토큰도 받아와야함.
+
                     Log.e("UserProfile", userProfile.toString());
                     String kakaoID = String.valueOf(userProfile.getId()); // userProfile에서 ID값을 가져옴
                     String kakaoNickname = userProfile.getNickname();     // Nickname 값을 가져옴
                     Log.e("KakaoId", kakaoID);
+                    final String token=Session.getCurrentSession().getAccessToken();
+                    SharedPreferences pref = getSharedPreferences("Local_DB", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = pref.edit();
+                    editor.putString("token",token);
+                    editor.putString("fcm_token",refreshedToken);
+                    Log.e("fcm_token",token);
+                    editor.commit();
 
+                    CheckLogin.setEmail(Email);
+                    CheckLogin.setPassword(" ");
+                    CheckLogin.setFcm_token(refreshedToken);
+
+                    OkHttpClient.Builder client1 = new OkHttpClient.Builder();
+                    client1.addInterceptor(new Interceptor() {
+                        @Override
+                        public okhttp3.Response intercept(Chain chain) throws IOException {
+
+                            Request builder = chain.request();
+                            Request newRequest;
+
+
+                            newRequest = builder.newBuilder()
+                                    .addHeader("access-token",token)
+                                    .build();
+
+
+                            return chain.proceed(newRequest);
+
+                        }
+                    });
+
+                    retrofit = new Retrofit.Builder()
+                            .baseUrl(API_URL)
+                            .addConverterFactory(GsonConverterFactory.create())
+                            .client(client1.build())
+                            .build();
+                    apiService= retrofit.create(Rest_ApiService.class);
+
+                    callback = new SessionCallback();
+                    Session.getCurrentSession().addCallback(callback);
+
+
+                    try {
+
+                        Call<ResponseApi> comment = apiService.getPostEmailStr1(responapi);
+                        comment.enqueue(new Callback<ResponseApi>() {
+                            @Override
+                            public void onResponse(Call<ResponseApi> call, Response<ResponseApi> response) {
+
+
+                                ResponseApi gsonresponse=response.body();
+                                Log.e("onresponse_Email_check", gsonresponse.getResult());
+                                Log.e("onresponse_Email_check",gsonresponse.getMessage());
+                                Log.e("onresponse_Email_check", String.valueOf(response.code()));
+                                if("true".equals(gsonresponse.getResult())){
+                                    Log.v("onresponse_Email_check", "success");
+
+                                }
+                                else{
+                                    Log.v("onresponse","fail");
+                                }
+
+
+
+                            }
+
+                            @Override
+                            public void onFailure(Call<ResponseApi> call, Throwable t) {
+                                Log.d("sam", "fail");
+                            }
+                        });
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+
+
+
+
+                    try {
+                        Call<check_login> post_check_login = apiService.post_check_login(CheckLogin);
+                        post_check_login.enqueue(new Callback<check_login>() {
+                            @Override
+                            public void onResponse(Call<check_login> call, Response<check_login> response) {
+
+                                Intent intent_activate = new Intent(MainActivity.this,  TabbedBar.class);
+                                Intent intent_ghost= new Intent(MainActivity.this, Basicinfo_Edit.class);
+                                Intent intent_interview=new Intent(MainActivity.this, Mediate.class);
+                                check_login gsonresponse = response.body();
+                                Log.e("onresponse_check_login", gsonresponse.getResult());
+                                Log.e("onresponse_check_login",gsonresponse.getMessage());
+                                try{
+                                    int account_id= Integer.parseInt(gsonresponse.getId());
+                                    String sex=gsonresponse.getSex();
+                                    save_local_data(sex,account_id,token);
+
+                                }catch (Exception e){
+                                    e.printStackTrace();
+                                }
+
+                                if (gsonresponse.getStatus()==null) {
+
+                                    Log.e("get_status","등록되지않은 이메일입니다");
+                                    startActivity(intent_ghost);
+                                }
+                                else
+                                {
+                                    Log.e("onresponse", gsonresponse.getStatus());
+                                    Log.e("onresponse", String.valueOf(response.code()));
+                                    Log.e("onresponse", "success");
+
+                                    if (gsonresponse.getStatus().equals("ACTIVATE"))
+                                    {
+
+                                        startActivity(intent_activate);
+                                    }
+                                    else if(gsonresponse.getStatus().equals("GHOST")){
+                                        intent_ghost.putExtra("ID",Email);
+                                        intent_ghost.putExtra("PW","-");
+                                        intent_ghost.putExtra("setformat","FACEBOOK");
+                                        startActivity(intent_ghost);
+                                    }
+                                    else if(gsonresponse.getStatus().equals("INREVIEW")){
+                                        startActivity(intent_interview);
+                                    }
+                                    else if(gsonresponse.getStatus().equals("REJECTED")){
+
+                                    }
+                                    else{
+                                        intent_ghost.putExtra("ID",Email);
+                                        intent_ghost.putExtra("PW"," ");
+                                        intent_ghost.putExtra("setformat","FACEBOOK");
+                                        intent_ghost.putExtra("fcm_token",refreshedToken);
+                                        startActivity(intent_ghost);
+                                    }
+                                }
+
+
+
+
+                            }
+
+
+                            @Override
+                            public void onFailure(Call<check_login> call, Throwable t) {
+                                Log.d("sam", t.toString());
+                            }
+
+                        });
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
                     Intent intent = new Intent(MainActivity.this,  Basicinfo_Edit.class);
                     intent.putExtra("ID",kakaoID);
-                    intent.putExtra("PW","-");
+                    intent.putExtra("PW"," ");
                     intent.putExtra("setformat","KAKAO");
                     startActivity(intent);
                 }

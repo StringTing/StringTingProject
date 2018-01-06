@@ -5,6 +5,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="com.android.vending.BILLING"/>
+
 
     <application
         android:name=".API.App"
@@ -86,6 +88,7 @@
         <activity android:name=".Whitemember"></activity>
         <activity android:name=".White_webview"/>
         <activity android:name=".PersonalProfile_Edit"/>
+
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="c21894fb4370f3d85f8eb5315f054d65e7f826bb" />
