@@ -42,7 +42,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textView13"
+            android:id="@+id/mycoin_white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -102,7 +102,7 @@
         android:layout_below="@+id/coin_img">
 
         <TextView
-            android:id="@+id/textView13"
+            android:id="@+id/charge_coin_white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

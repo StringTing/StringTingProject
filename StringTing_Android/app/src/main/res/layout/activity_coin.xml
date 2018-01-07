@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.string.leeyun.stringting_android.Coin">
+   >
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -42,7 +42,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textView13"
+            android:id="@+id/mycoin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -102,7 +102,7 @@
         android:layout_below="@+id/coin_img">
 
         <TextView
-            android:id="@+id/textView13"
+            android:id="@+id/charge_coin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -141,13 +141,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_weight="5"
                 android:layout_marginLeft="15dp"
+                android:layout_weight="5"
+                android:text="100"
                 android:textColor="#000000"
-                android:textSize="18sp"
-                android:text="30"/>
+                android:textSize="18sp" />
 
             <TextView
+                android:id="@+id/coin_item_100"
                 android:layout_width="82dp"
                 android:layout_height="38dp"
                 android:layout_gravity="center"
@@ -159,7 +160,7 @@
                 android:textAlignment="center"
                 android:textSize="16sp"
                 android:background="@drawable/rounded_sendbtn"
-                android:text="$4.39"/>
+                android:text="₩4400"/>
         </LinearLayout>
 
         <LinearLayout
@@ -193,11 +194,12 @@
                 android:layout_marginLeft="15dp"
                 android:textColor="#000000"
                 android:textSize="18sp"
-                android:text="65"
+                android:text="220"
                />
 
 
             <TextView
+                android:id="@+id/coin_item_220"
                 android:layout_width="82dp"
                 android:layout_height="38dp"
                 android:layout_gravity="center"
@@ -209,7 +211,7 @@
                 android:textAlignment="center"
                 android:textSize="16sp"
                 android:background="@drawable/rounded_sendbtn"
-                android:text="$8.79"
+                android:text="₩8800"
              />
         </LinearLayout>
 
@@ -244,10 +246,11 @@
                 android:layout_marginLeft="15dp"
                 android:textColor="#000000"
                 android:textSize="18sp"
-                android:text="100" />
+                android:text="360" />
 
 
             <TextView
+                android:id="@+id/coin_item_360"
                 android:layout_width="82dp"
                 android:layout_height="38dp"
                 android:layout_gravity="center"
@@ -259,7 +262,7 @@
                 android:textAlignment="center"
                 android:textSize="16sp"
                 android:background="@drawable/rounded_sendbtn"
-                android:text="$13.19" />
+                android:text="₩13200" />
         </LinearLayout>
 
         <LinearLayout
@@ -293,9 +296,11 @@
                 android:layout_marginLeft="15dp"
                 android:textColor="#000000"
                 android:textSize="18sp"
-                android:text="150" />
+                android:text="500" />
 
             <TextView
+
+                android:id="@+id/coin_item_500"
                 android:layout_width="82dp"
                 android:layout_height="38dp"
                 android:layout_gravity="center"
@@ -307,7 +312,7 @@
                 android:textAlignment="center"
                 android:textSize="16sp"
                 android:background="@drawable/rounded_sendbtn"
-                android:text="$17.59" />
+                android:text="₩17600" />
         </LinearLayout>
 
         <LinearLayout
@@ -341,9 +346,10 @@
                 android:layout_marginLeft="15dp"
                 android:textColor="#000000"
                 android:textSize="18sp"
-                android:text="300"/>
+                android:text="1000"/>
 
             <TextView
+                android:id="@+id/coin_item_1000"
                 android:layout_width="82dp"
                 android:layout_height="38dp"
                 android:layout_gravity="center"
@@ -355,7 +361,7 @@
                 android:textAlignment="center"
                 android:textSize="16sp"
                 android:background="@drawable/rounded_sendbtn"
-                android:text="$31.19" />
+                android:text="₩30800" />
         </LinearLayout>
 
         <LinearLayout
@@ -389,9 +395,10 @@
                 android:layout_marginLeft="15dp"
                 android:textColor="#000000"
                 android:textSize="18sp"
-                android:text="500"/>
+                android:text="3000"/>
 
             <TextView
+                android:id="@+id/coin_item_3000"
                 android:layout_width="82dp"
                 android:layout_height="38dp"
                 android:layout_gravity="center"
@@ -403,7 +410,7 @@
                 android:textAlignment="center"
                 android:textSize="16sp"
                 android:background="@drawable/rounded_sendbtn"
-                android:text="$48.79" />
+                android:text="₩82500" />
         </LinearLayout>
     </LinearLayout>
 

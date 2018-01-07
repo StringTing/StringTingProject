@@ -45,7 +45,6 @@
         <activity android:name=".TabbedBar" />
         <activity android:name=".Chatting" />
         <activity android:name=".Personal_profile" />
-        <activity android:name=".Coin" />
         <activity android:name=".Mediate" />
 
         <meta-data
@@ -89,6 +88,7 @@
         <activity android:name=".White_webview"/>
         <activity android:name=".PersonalProfile_Edit"/>
         <activity android:name=".Coin_White"/>
+        <activity android:name=".google_play_item_payment"/>
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="c21894fb4370f3d85f8eb5315f054d65e7f826bb" />

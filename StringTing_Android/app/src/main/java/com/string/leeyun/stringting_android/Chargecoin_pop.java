@@ -30,7 +30,7 @@ public class Chargecoin_pop extends Activity {
     }
 
     public void confirm(View v){
-        Intent intent = new Intent(this,Coin.class);
+        Intent intent = new Intent(this,google_play_item_payment.class);
         startActivity(intent);
     }
 }

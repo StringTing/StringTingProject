@@ -74,7 +74,7 @@ public class Tab_Fifth extends Fragment  {
         coin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getContext(), Coin.class);
+                Intent i = new Intent(getContext(), google_play_item_payment.class);
                 startActivity(i);
             }
         });
@@ -216,8 +216,6 @@ public class Tab_Fifth extends Fragment  {
             e.printStackTrace();
             Log.e("get_detail_profile","null");
         }
-
-
 
 
 

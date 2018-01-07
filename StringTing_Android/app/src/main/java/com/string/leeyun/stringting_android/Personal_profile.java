@@ -49,7 +49,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import static android.view.ViewGroup.LayoutParams.FILL_PARENT;
 import static com.string.leeyun.stringting_android.API.Rest_ApiService.API_IMAGE_URL;
 import static com.string.leeyun.stringting_android.API.Rest_ApiService.API_URL;
-import static com.string.leeyun.stringting_android.R.id.imageView4;
 import static com.string.leeyun.stringting_android.R.mipmap.t;
 import static java.lang.System.load;
 
