@@ -6,9 +6,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.string.leeyun.stringting_android.API.ResponseApi;
@@ -29,12 +33,14 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static android.graphics.Color.BLACK;
 import static com.string.leeyun.stringting_android.R.id.Email;
 import static com.string.leeyun.stringting_android.R.id.Email_checkText;
 import static com.string.leeyun.stringting_android.R.id.Pw_checkText;
 import static com.string.leeyun.stringting_android.R.id.Pw_edit;
 import static com.string.leeyun.stringting_android.R.id.Pw_equalText;
 import static com.string.leeyun.stringting_android.R.id.check_pw;
+import static com.string.leeyun.stringting_android.R.id.question;
 
 
 /**
@@ -96,7 +102,68 @@ public class Membership_form extends Activity {
         });
 */
 
+
+
+        ImageView check_pw = (ImageView)findViewById(R.id.check_pw_img) ;
+        final EditText email_edit = (EditText) findViewById(R.id.Email);
+        final EditText pw_edit = (EditText)findViewById(R.id.Pw_edit);
+        final EditText c_pw_edit =(EditText)findViewById(R.id.check_pw);
+
+
+
+        email_edit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            // 입력이 끝났을 때
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String ch = email_edit.getText().toString();
+                ImageView check_email = (ImageView)findViewById(R.id.check_email_img) ;
+                check_email.setVisibility(View.VISIBLE);
+                /*if (ch.contains("@")&&ch.length()>=3){
+                    check_email.setVisibility(View.VISIBLE);
+                }else {
+                    check_email.setVisibility(View.GONE);
+                }*/
+            }
+
+            // 입력하기 전에
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+        });
+
+
+        pw_edit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            // 입력이 끝났을 때
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String ch = pw_edit.getText().toString();
+                ImageView check_pw_edit = (ImageView)findViewById(R.id.check_pw_edit_img) ;
+                if (ch.length()>=1){
+                    check_pw_edit.setVisibility(View.VISIBLE);
+                }else{
+                    check_pw_edit.setVisibility(View.GONE);
+                }
+            }
+
+            // 입력하기 전에
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+        });
     }
+
+
+
 
     public void onClick_Basicinfo_Edit(View v) throws MalformedURLException {
 
@@ -119,6 +186,8 @@ public class Membership_form extends Activity {
         String Email=Check_email.getText().toString();
         String PW=Check_pw.getText().toString();
         String EqualPw=EqualCheck_pw.getText().toString();
+
+
 
 
         responapi.setEmail(Email);

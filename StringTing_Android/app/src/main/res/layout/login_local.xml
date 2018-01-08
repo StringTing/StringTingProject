@@ -69,16 +69,23 @@
         <EditText
             android:id="@+id/id_Edit"
             android:layout_width="290dp"
-            android:layout_height="28dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:inputType="textEmailAddress"
             android:text=""
-            android:textSize="11sp"/>
+            android:textSize="11sp"
+            android:background="#00000000"/>
+
+        <View
+            android:layout_width="290dp"
+            android:layout_height="1dp"
+            android:background="#666666"/>
 
 
         <RelativeLayout
             android:layout_width="290dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
             android:orientation="horizontal">
 
             <TextView
@@ -99,12 +106,17 @@
         <EditText
             android:id="@+id/pw_edit"
             android:layout_width="290dp"
-            android:layout_height="28dp"
+            android:layout_height="wrap_content"
             android:inputType="textPassword"
             android:layout_marginTop="15dp"
             android:text=""
             android:textSize="11sp"
-            />
+            android:background="#00000000"/>
+
+        <View
+            android:layout_width="290dp"
+            android:layout_height="1dp"
+            android:background="#666666"/>
 
 
 

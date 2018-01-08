@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.makeramen.roundedimageview.RoundedTransformationBuilder;
 import com.squareup.picasso.Picasso;
@@ -39,6 +40,7 @@ import static com.string.leeyun.stringting_android.API.Rest_ApiService.API_URL;
 public class Tab_Fifth extends Fragment  {
 
     RelativeLayout coin,notice,push,inquire;
+    TextView edit;
     int account_id;
     String sex;
     String token;
@@ -70,6 +72,8 @@ public class Tab_Fifth extends Fragment  {
         notice = (RelativeLayout) v.findViewById(R.id.notice);
         push = (RelativeLayout) v.findViewById(R.id.push_setting);
         inquire = (RelativeLayout) v.findViewById(R.id.inquire);
+
+        edit = (TextView)v.findViewById(R.id.profile_edit);
 
         coin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,6 +116,24 @@ public class Tab_Fifth extends Fragment  {
             }
         });
 
+/*        edit.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(),PersonalProfile_Edit.class);
+                startActivity(intent);
+            }
+        });*/
+
+
+        ImageView white_member=(ImageView)v.findViewById(R.id.whitemember_banner);
+        white_member.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(),Whitemember.class);
+                startActivity(intent);
+            }
+        });
 
 
         get_local_data();
