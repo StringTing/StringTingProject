@@ -58,29 +58,39 @@
                 android:text="이메일 아이디"/>
 
             <ImageView
+                android:id="@+id/check_email_img"
                 android:layout_width="20dp"
                 android:layout_height="15dp"
                 android:layout_alignParentEnd="true"
-                android:background="@drawable/check"/>
+                android:background="@drawable/check"
+                android:visibility="gone"/>
 
         </RelativeLayout>
         <EditText
             android:id="@+id/Email"
             android:layout_width="290dp"
-            android:layout_height="28dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:inputType="textEmailAddress"
             android:text=""
-            android:textSize="11sp" />
+            android:textSize="11sp"
+            android:background="#00000000"/>
+
+        <View
+            android:layout_width="290dp"
+            android:layout_height="1dp"
+            android:background="#666666"/>
 
 
 
         <TextView
             android:id="@+id/Email_checkText"
-            android:layout_width="wrap_content"
+            android:layout_width="290dp"
             android:layout_height="20dp"
-            android:textColor="#000000"
-            android:textSize="15sp" />
+            android:text=""
+            android:textAlignment="textEnd"
+            android:textColor="#666666"
+            android:textSize="11sp" /> />
 
 
         <RelativeLayout
@@ -96,28 +106,36 @@
                 android:text="비밀번호"/>
 
             <ImageView
+                android:id="@+id/check_pw_edit_img"
                 android:layout_width="20dp"
                 android:layout_height="15dp"
                 android:layout_alignParentEnd="true"
-                android:background="@drawable/check"/>
+                android:background="@drawable/check"
+                android:visibility="gone"/>
 
         </RelativeLayout>
         <EditText
             android:id="@+id/Pw_edit"
             android:layout_width="290dp"
-            android:layout_height="28dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:inputType="textPassword"
             android:text=""
-            android:textSize="11sp" />
+            android:textSize="11sp"
+            android:background="#00000000"/>
 
+        <View
+            android:layout_width="290dp"
+            android:layout_height="1dp"
+            android:background="#666666"/>
         <TextView
             android:id="@+id/Pw_checkText"
-            android:layout_width="wrap_content"
+            android:layout_width="290dp"
             android:layout_height="20dp"
             android:text=""
-            android:textColor="#000000"
-            android:textSize="15sp" />
+            android:textAlignment="textEnd"
+            android:textColor="#666666"
+            android:textSize="11sp" /> />
 
 
         <RelativeLayout
@@ -133,30 +151,39 @@
                 android:text="비밀번호 확인"/>
 
             <ImageView
+                android:id="@+id/check_pw_img"
                 android:layout_width="20dp"
                 android:layout_height="15dp"
                 android:layout_alignParentEnd="true"
-                android:background="@drawable/check"/>
+                android:background="@drawable/check"
+                android:visibility="gone"/>
 
         </RelativeLayout>
 
         <EditText
             android:id="@+id/check_pw"
             android:layout_width="290dp"
-            android:layout_height="28dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:inputType="textPassword"
             android:text=""
-            android:textSize="11sp" />
+            android:textSize="11sp"
+            android:background="#00000000"/>
+
+        <View
+            android:layout_width="290dp"
+            android:layout_height="1dp"
+            android:background="#666666"/>
 
 
         <TextView
             android:id="@+id/Pw_equalText"
-            android:layout_width="wrap_content"
+            android:layout_width="290dp"
             android:layout_height="20dp"
             android:text=""
-            android:textColor="#000000"
-            android:textSize="15sp" />
+            android:textAlignment="textEnd"
+            android:textColor="#666666"
+            android:textSize="11sp" />
 
 
         <Button

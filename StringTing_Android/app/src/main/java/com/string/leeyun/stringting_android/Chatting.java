@@ -8,11 +8,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.SerializedName;
+import com.squareup.picasso.Picasso;
 import com.string.leeyun.stringting_android.API.Rest_ApiService;
 import com.string.leeyun.stringting_android.API.get_message_list;
 import com.string.leeyun.stringting_android.API.message;
@@ -53,6 +55,7 @@ public class Chatting extends AppCompatActivity  {
     String sex;
     String token;
 
+    ImageView profile_img;
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -78,6 +81,12 @@ public class Chatting extends AppCompatActivity  {
 
         // ListView에 어댑터 연결
         m_ListView.setAdapter(m_Adapter);
+
+
+        //프로필 이미지 서클 (프로필 url주세요)
+        profile_img = (ImageView) findViewById(R.id.profile_image);
+
+   //     Picasso.with(getBaseContext()).load(profile_image_full_url.get(0)).transform(new CircleTransForm()).into(profile_img);
 
 
         Gson gson = new GsonBuilder()
