@@ -38,9 +38,6 @@ public class google_play_item_payment extends Activity{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coin);
-        bindService(new Intent(
-                        "com.android.vending.billing.InAppBillingService.BIND"),
-                mServiceConn, Context.BIND_AUTO_CREATE);
 
         Intent intent=new Intent("com.android.vending.billing.InAppBillingService.BIND");
         intent.setPackage("com.android.vending");
