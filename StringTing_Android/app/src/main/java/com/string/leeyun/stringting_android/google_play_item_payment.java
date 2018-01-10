@@ -61,7 +61,7 @@ public class google_play_item_payment extends Activity{
 
             public void onClick(View v) {
 
-                InAppBuyItem_U("coin_item_30"); // 제품id를 써줍니다. 앱배포시에 인앱상품등록시  등록할 id입니다.
+                InAppBuyItem_U("coin_item_100"); // 제품id를 써줍니다. 앱배포시에 인앱상품등록시  등록할 id입니다.
 
             }
 
@@ -75,7 +75,7 @@ public class google_play_item_payment extends Activity{
 
             public void onClick(View v) {
 
-                InAppBuyItem_U("coin_item_65"); // 제품id를 써줍니다. 앱배포시에 인앱상품등록시  등록할 id입니다.
+                InAppBuyItem_U("coin_item_220"); // 제품id를 써줍니다. 앱배포시에 인앱상품등록시  등록할 id입니다.
 
             }
 
@@ -89,7 +89,7 @@ public class google_play_item_payment extends Activity{
 
             public void onClick(View v) {
 
-                InAppBuyItem_U("coin_item_100"); // 제품id를 써줍니다. 앱배포시에 인앱상품등록시  등록할 id입니다.
+                InAppBuyItem_U("coin_item_360"); // 제품id를 써줍니다. 앱배포시에 인앱상품등록시  등록할 id입니다.
 
             }
 
@@ -102,7 +102,7 @@ public class google_play_item_payment extends Activity{
 
             public void onClick(View v) {
 
-                InAppBuyItem_U("coin_item_150"); // 제품id를 써줍니다. 앱배포시에 인앱상품등록시  등록할 id입니다.
+                InAppBuyItem_U("coin_item_500"); // 제품id를 써줍니다. 앱배포시에 인앱상품등록시  등록할 id입니다.
 
             }
 
@@ -116,7 +116,7 @@ public class google_play_item_payment extends Activity{
 
             public void onClick(View v) {
 
-                InAppBuyItem_U("coin_item_300"); // 제품id를 써줍니다. 앱배포시에 인앱상품등록시  등록할 id입니다.
+                InAppBuyItem_U("coin_item_1000"); // 제품id를 써줍니다. 앱배포시에 인앱상품등록시  등록할 id입니다.
 
             }
 
@@ -129,7 +129,7 @@ public class google_play_item_payment extends Activity{
 
             public void onClick(View v) {
 
-                InAppBuyItem_U("coin_item_500"); // 제품id를 써줍니다. 앱배포시에 인앱상품등록시  등록할 id입니다.
+                InAppBuyItem_U("coin_item_3000"); // 제품id를 써줍니다. 앱배포시에 인앱상품등록시  등록할 id입니다.
 
             }
 
