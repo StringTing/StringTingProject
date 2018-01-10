@@ -84,6 +84,9 @@ public class Tab_First extends Fragment implements View.OnClickListener {
     ArrayList<Integer> matching_account=new ArrayList<Integer>();
 
     float cornerRadius = 25f;
+    ArrayList<String>last5_image_list=new ArrayList<>();
+    ArrayList<String>last5_image_replace=new ArrayList<>();
+    ArrayList<String>last5_image_full_url=new ArrayList<String>();
     public String today_image_url_first;
     public String today_image_url_second;
     public String last_image_url_first;
@@ -305,23 +308,21 @@ public class Tab_First extends Fragment implements View.OnClickListener {
                     Log.e("last-5day", String.valueOf(response.code()));
                     im_get_last_5day = response.body().getGet_last_5day_matched_account();
                     try {
-                        last_image_url_first = String.valueOf(im_get_last_5day.get(0).getImages().getApproved().get(0).getName());
-                        last_image_url_second = String.valueOf(im_get_last_5day.get(1).getImages().getApproved().get(0).getName());
-//                    last_image_url_third = String.valueOf(im_get_last_5day.get(2).getImages().get(0));
-
-                        Log.e("get_eval_list_image", String.valueOf(im_get_today.get(0).getImages().getApproved().get(0).getName()));
                         String replace = "{}";
                         String medium = "medium";
                         String small = "small";
-                        if (last_image_url_first != null && last_image_url_second != null) {
-                            last_image_url_first = last_image_url_first.replace(replace, small);
-                            last_image_url_second = last_image_url_second.replace(replace, small);
-//                        last_image_url_third =last_image_url_third.replace(replace,small);
-                            Log.e("image_url_first", last_image_url_first);
-                            Log.e("image_url_second", last_image_url_second);
+                        if(im_get_last_5day.get(0).getImages().getApproved().get(0).getName()!=null) {
+                            for (int i = 0; i < im_get_last_5day.size(); i++) {
+                                last5_image_list.add(String.valueOf(im_get_last_5day.get(i).getImages().getApproved().get(0).getName()));
+                                last5_image_replace.add(last5_image_list.get(i).replace(replace,small));
+                                last5_image_full_url.add(API_IMAGE_URL+last5_image_replace.get(i));
+                            }
                             image_url_today(v);
 
                         }
+
+                        Log.e("get_eval_list_image", String.valueOf(im_get_today.get(0).getImages().getApproved().get(0).getName()));
+
 
                     } catch (Exception e) {
                         e.printStackTrace();

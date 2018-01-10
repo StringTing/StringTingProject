@@ -66,12 +66,13 @@ public class Personal_profile extends AppCompatActivity {
     ImageView personfile_image;
     ArrayList<String>profile_image_list;
     ArrayList<String>profile_image_replace;
+    ArrayList<String>profile_image_full_url=new ArrayList<String>();
+
     int macthing_account;
     String macthing_sex;
 
     ArrayList<String>question_array;
     ArrayList<String>answer_array;
-    ArrayList<String>profile_image_full_url=new ArrayList<String>();
     ArrayList<get_introduction_qna> GetIntroDuction;
 
     @Override

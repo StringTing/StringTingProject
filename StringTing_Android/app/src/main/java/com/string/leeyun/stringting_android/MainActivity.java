@@ -505,12 +505,14 @@ public class MainActivity extends AppCompatActivity {
                     //로그인에 성공하면 로그인한 사용자의 일련번호, 닉네임, 이미지url등을 리턴합니다.
                     //사용자 ID는 보안상의 문제로 제공하지 않고 일련번호는 제공합니다.
                     //토큰도 받아와야함.
+                    Intent intent_interview=new Intent(MainActivity.this, Mediate.class);
+
 
                     Log.e("UserProfile", userProfile.toString());
                     String kakaoID = String.valueOf(userProfile.getId()); // userProfile에서 ID값을 가져옴
-                    String kakaoNickname = userProfile.getNickname();     // Nickname 값을 가져옴
                     Log.e("KakaoId", kakaoID);
                     final String token=Session.getCurrentSession().getAccessToken();
+                    String kakaoNickname = userProfile.getNickname();     // Nickname 값을 가져옴
                     SharedPreferences pref = getSharedPreferences("Local_DB", MODE_PRIVATE);
                     SharedPreferences.Editor editor = pref.edit();
                     editor.putString("token",token);
