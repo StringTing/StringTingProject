@@ -152,7 +152,7 @@
     </ScrollView>
 
     <Button
-        android:id="@+id/button7"
+        android:id="@+id/chat_request_button"
         android:onClick="chat_request"
         android:layout_width="match_parent"
         android:layout_height="50dp"

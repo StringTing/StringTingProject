@@ -88,6 +88,9 @@ public interface Rest_ApiService {
 
         @POST("register/score/")
         Call<post_register_score>post_register_score(@Body post_register_score post_register_score );
+
+        @POST("pay/item/")
+        Call<post_item>post_item(@Body post_item postItem);
     }
 
 

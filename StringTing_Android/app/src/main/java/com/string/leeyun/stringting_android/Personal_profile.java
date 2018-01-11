@@ -83,11 +83,17 @@ public class Personal_profile extends AppCompatActivity {
 
     public void chat_request(View v){
         Intent chat_r = new Intent(this,Chat_pop.class);
+        chat_r.putExtra("account_id",account_id);
+        chat_r.putExtra("sex",sex);
+        chat_r.putExtra("token",token);
         startActivity(chat_r);
     }
 
     public void report_request(View v){
         Intent r= new Intent(this,Report_pop.class);
+        r.putExtra("account_id",account_id);
+        r.putExtra("sex",sex);
+        r.putExtra("token",token);
         startActivity(r);
     }
 
