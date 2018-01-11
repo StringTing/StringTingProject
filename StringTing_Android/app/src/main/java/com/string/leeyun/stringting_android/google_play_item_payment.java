@@ -96,10 +96,7 @@ public class google_play_item_payment extends Activity{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coin);
-<<<<<<< HEAD
 
-=======
->>>>>>> 60efe52babe880c06bc310208bedcce853f6d9b7
 
         Intent intent=new Intent("com.android.vending.billing.InAppBillingService.BIND");
         intent.setPackage("com.android.vending");
@@ -111,7 +108,6 @@ public class google_play_item_payment extends Activity{
         // developer console  -> 서비스및 API -> 어플리케이션용 라이센스 키를 복사해서 넣으시면 됩니다.
 
         InAppInit_U(base64EncodiedPushedkey, true);
-
 
 
 
