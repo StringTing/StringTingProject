@@ -529,7 +529,7 @@ public class Tab_First extends Fragment implements View.OnClickListener {
 
 
     public void image_url_today(View v){
-
+        //Arraylist에서 url 받아와서 뷰에 로드해줘야함
 
         // Get the application context
         mContext = getApplicationContext();
@@ -543,7 +543,6 @@ public class Tab_First extends Fragment implements View.OnClickListener {
         l2 = (ImageView) v.findViewById(R.id.last2);
         l3 = (ImageView) v.findViewById(R.id.last3);
 
-        //mBTN = (Button) v.findViewById(R.id.btn);
 
 
 

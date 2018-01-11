@@ -172,6 +172,8 @@ public class Todaypic_pop extends Activity {
         });
 
        if(what_pic.equals("first")){
+           //만약에 이게 처음 픽한거면 openselected를 true로 바꿔주고
+           //이 로직은 자물쇠를 없앨 때 그리고 한번 픽을 하면 팝업을 안띄워줄 때 사용함.
            openselected="true";
            openselected_count="true";
        }
