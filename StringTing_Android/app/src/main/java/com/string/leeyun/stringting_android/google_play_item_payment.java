@@ -34,13 +34,69 @@ public class google_play_item_payment extends Activity{
     IabHelper iaphelper;
 
 
+
+
+    IabHelper.QueryInventoryFinishedListener mGotInventoryListener = new IabHelper.QueryInventoryFinishedListener() {
+        public void onQueryInventoryFinished(IabResult result,
+                                             Inventory inventory) {
+            if (result.isFailure()) {
+                Log.d("myLog", "Failed to query inventory: " + result);
+                SendConsumeResult(null, result);
+                return;
+            }
+
+            /*
+             * Check for items we own. Notice that for each purchase, we check
+             * the developer payload to see if it's correct! See
+             * verifyDeveloperPayload().
+             */
+
+
+            List<String> inappList = inventory.getAllOwnedSkus(IabHelper.ITEM_TYPE_INAPP);
+            // inappList.add("item01");
+
+            for (String inappSku : inappList) {
+                Purchase purchase = inventory.getPurchase(inappSku);
+                Log.d("myLog", "Consumeing ... " + inappSku);
+                iaphelper.consumeAsync(purchase, mConsumeFinishedListener);
+            }
+
+            Log.d("myLog", "Query inventory was successful.");
+
+        }
+    };
+
+
+
+    IabHelper.OnIabPurchaseFinishedListener mPurchaseFinishedListener = new IabHelper.OnIabPurchaseFinishedListener() {
+        public void onIabPurchaseFinished(IabResult result, Purchase purchase) {
+            Log.d("myLog", "Purchase finished: " + result + ", purchase: "
+                    + purchase);  //결제 완료 되었을때 각종 결제 정보들을 볼 수 있습니다. 이정보들을 서버에 저장해 놓아야 결제 취소시 변경된 정보를 관리 할 수 있을것 같습니다~
+
+            if (purchase != null) {
+                if (!verifyDeveloperPayload(purchase)) {
+                    Log.d("myLog",
+                            "Error purchasing. Authenticity verification failed.");
+                }
+
+                iaphelper.consumeAsync(purchase, mConsumeFinishedListener);
+            } else {
+                Toast.makeText(google_play_item_payment.this,
+                        String.valueOf(result.getResponse()),
+                        Toast.LENGTH_SHORT).show();
+            }
+
+
+        }
+    };
+
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coin);
-        bindService(new Intent(
-                        "com.android.vending.billing.InAppBillingService.BIND"),
-                mServiceConn, Context.BIND_AUTO_CREATE);
+
 
         Intent intent=new Intent("com.android.vending.billing.InAppBillingService.BIND");
         intent.setPackage("com.android.vending");
@@ -201,33 +257,6 @@ public class google_play_item_payment extends Activity{
     }
 
 
-    IabHelper.QueryInventoryFinishedListener mGotInventoryListener = new IabHelper.QueryInventoryFinishedListener() {
-        public void onQueryInventoryFinished(IabResult result,
-                                             Inventory inventory) {
-            if (result.isFailure()) {
-                Log.d("myLog", "Failed to query inventory: " + result);
-                SendConsumeResult(null, result);
-                return;
-            }
-
-            /*
-             * Check for items we own. Notice that for each purchase, we check
-             * the developer payload to see if it's correct! See
-             * verifyDeveloperPayload().
-             */
-
-            List<String> inappList = inventory.getAllOwnedSkus(IabHelper.ITEM_TYPE_INAPP);
-            // inappList.add("item01");
-
-            for (String inappSku : inappList) {
-                Purchase purchase = inventory.getPurchase(inappSku);
-                Log.d("myLog", "Consumeing ... " + inappSku);
-                iaphelper.consumeAsync(purchase, mConsumeFinishedListener);
-            }
-
-            Log.d("myLog", "Query inventory was successful.");
-        }
-    };
 
 
 
@@ -287,25 +316,6 @@ public class google_play_item_payment extends Activity{
 
     }
 
-    IabHelper.OnIabPurchaseFinishedListener mPurchaseFinishedListener = new IabHelper.OnIabPurchaseFinishedListener() {
-        public void onIabPurchaseFinished(IabResult result, Purchase purchase) {
-            Log.d("myLog", "Purchase finished: " + result + ", purchase: "
-                    + purchase);  //결제 완료 되었을때 각종 결제 정보들을 볼 수 있습니다. 이정보들을 서버에 저장해 놓아야 결제 취소시 변경된 정보를 관리 할 수 있을것 같습니다~
-
-            if (purchase != null) {
-                if (!verifyDeveloperPayload(purchase)) {
-                    Log.d("myLog",
-                            "Error purchasing. Authenticity verification failed.");
-                }
-
-                iaphelper.consumeAsync(purchase, mConsumeFinishedListener);
-            } else {
-                Toast.makeText(google_play_item_payment.this,
-                        String.valueOf(result.getResponse()),
-                        Toast.LENGTH_SHORT).show();
-            }
-        }
-    };
 
     boolean verifyDeveloperPayload(Purchase p) {
         String payload = p.getDeveloperPayload();
@@ -339,14 +349,7 @@ public class google_play_item_payment extends Activity{
         return true;
     }
 
-    // Called when consumption is complete
-    IabHelper.OnConsumeFinishedListener mConsumeFinishedListener = new IabHelper.OnConsumeFinishedListener() {
-        public void onConsumeFinished(Purchase purchase, IabResult result) {
-            Log.d("myLog", "Consumption finished. Purchase: " + purchase
-                    + ", result: " + result);
-            SendConsumeResult(purchase, result);
-        }
-    };
+
 
 
 
@@ -372,22 +375,7 @@ public class google_play_item_payment extends Activity{
         }
     }
 
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.d("myLog", "onActivityResult(" + requestCode + "," + resultCode
-                + "," + data);
-        if (requestCode == 1001) {
-            // Pass on the activity result to the helper for handling
-            if (!iaphelper.handleActivityResult(requestCode, resultCode, data)) {
-                // not handled, so handle it ourselves (here's where you'd
-                // perform any handling of activity results not related to
-                // in-app
-                // billing...
-                super.onActivityResult(requestCode, resultCode, data);
-            } else {
-                Log.d("myLog", "onActivityResult handled by IABUtil.");
-            }
-        }
-    }
+
 
     @Override
     protected void onDestroy() {
@@ -420,5 +408,48 @@ public class google_play_item_payment extends Activity{
 
 
 
+    private void queryPurchasedItems() {
+        //check if user has bought "remove adds"
+        if(iaphelper.isSetupDone() && !iaphelper.isAsyncInProgress()) {
+            iaphelper.queryInventoryAsync(mGotInventoryListener);
+        }
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        queryPurchasedItems();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        queryPurchasedItems();
+    }
+    // Called when consumption is complete
+    IabHelper.OnConsumeFinishedListener mConsumeFinishedListener = new IabHelper.OnConsumeFinishedListener() {
+        public void onConsumeFinished(Purchase purchase, IabResult result) {
+            Log.d("myLog", "Consumption finished. Purchase: " + purchase
+                    + ", result: " + result);
+            SendConsumeResult(purchase, result);
+        }
+    };
+
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.d("myLog", "onActivityResult(" + requestCode + "," + resultCode
+                + "," + data);
+        if (requestCode == 1001) {
+            // Pass on the activity result to the helper for handling
+            if (!iaphelper.handleActivityResult(requestCode, resultCode, data)) {
+                // not handled, so handle it ourselves (here's where you'd
+                // perform any handling of activity results not related to
+                // in-app
+                // billing...
+                super.onActivityResult(requestCode, resultCode, data);
+            } else {
+                Log.d("myLog", "onActivityResult handled by IABUtil.");
+            }
+        }
+    }
 }
