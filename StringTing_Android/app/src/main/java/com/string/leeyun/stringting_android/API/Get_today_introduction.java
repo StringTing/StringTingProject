@@ -45,7 +45,7 @@ public class Get_today_introduction {
     @SerializedName("opened")
     private boolean opened;
     @SerializedName("score")
-    private int score;
+    private double score;
     private int id;
 
     public void setHeight(int height) {
@@ -70,7 +70,7 @@ public class Get_today_introduction {
     }
 
 
-    public int getScore() {
+    public double getScore() {
         return score;
     }
 

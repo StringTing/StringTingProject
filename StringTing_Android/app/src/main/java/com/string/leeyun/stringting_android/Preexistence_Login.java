@@ -129,7 +129,7 @@ public class Preexistence_Login extends Activity {
         Linkify.addLinks(Provision_Linkify, pattern1, "http://www.naver.com", null, mTransform);
         Linkify.addLinks(Provision_Linkify, pattern2, "http://gun0912.tistory.com/", null, mTransform);
 
-        Provision_Linkify.setTextColor(Color.rgb(102,102,102));
+        Provision_Linkify.setTextColor(Color.rgb(255,255,255));
 
         //이용약관 및 개인정보 취급방식에대한 링크
 
