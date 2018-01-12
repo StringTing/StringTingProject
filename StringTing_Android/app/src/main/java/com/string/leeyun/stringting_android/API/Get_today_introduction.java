@@ -65,6 +65,8 @@ public class Get_today_introduction {
         return height;
     }
 
+
+
     public boolean isAuthenticated() {
         return authenticated;
     }

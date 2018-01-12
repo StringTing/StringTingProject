@@ -94,7 +94,8 @@ public class Tab_First extends Fragment implements View.OnClickListener {
     public String last_image_url_third;
     ArrayList<Get_today_introduction> im_get_today;
     ArrayList<Ger_last_5day_matched_account>im_get_last_5day;
-
+    Boolean opened_form_api1;
+    Boolean opened_form_api2;
     TableRow tr;
     ImageView img_pic ;
 
@@ -266,8 +267,8 @@ public class Tab_First extends Fragment implements View.OnClickListener {
 
                         }
                         today_image_url_second = String.valueOf(im_get_today.get(1).getImages().getApproved().get(0).getName());
-
-
+                        opened_form_api1=im_get_today.get(0).isOpened();
+                        opened_form_api2=im_get_today.get(1).isOpened();
                         String replace = "{}";
                         String medium = "medium";
                         String small = "small";
@@ -351,7 +352,8 @@ public class Tab_First extends Fragment implements View.OnClickListener {
         Log.e("openselected_second",openselected_second);
 
     try {
-        if (openselected.equals("true")) {
+        if (openselected.equals("true")&&opened_form_api1==true) {
+
 
             ImageView today_rock = (ImageView) v.findViewById(R.id.today_rock_img);
             today_rock.setVisibility(View.GONE);
@@ -363,7 +365,7 @@ public class Tab_First extends Fragment implements View.OnClickListener {
         e.printStackTrace();
     }
     try{
-        if(openselected_second.equals("true")){
+        if(openselected_second.equals("true")&&opened_form_api2==true){
             ImageView today_rock = (ImageView) v.findViewById(R.id.today_rock_img2);
             today_rock.setVisibility(View.GONE);
         }
