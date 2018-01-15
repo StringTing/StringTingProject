@@ -72,6 +72,10 @@ public class Tab_Fifth extends Fragment  {
         notice = (RelativeLayout) v.findViewById(R.id.notice);
         push = (RelativeLayout) v.findViewById(R.id.push_setting);
         inquire = (RelativeLayout) v.findViewById(R.id.inquire);
+        TextView profile_edit=(TextView)v.findViewById(R.id.profile_edit);
+
+
+
 
         edit = (TextView)v.findViewById(R.id.profile_edit);
 
@@ -82,6 +86,17 @@ public class Tab_Fifth extends Fragment  {
                 startActivity(i);
             }
         });
+
+        profile_edit.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public  void onClick(View view){
+                Intent profile_edit_intent=new Intent(getContext(), PersonalProfile_Edit.class);
+                startActivity(profile_edit_intent);
+            }
+
+        });
+        Intent profile_edit_intent=new Intent(getContext(), PersonalProfile_Edit.class);
+        startActivity(profile_edit_intent);
 
         notice.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -259,6 +274,7 @@ public class Tab_Fifth extends Fragment  {
             Log.e("profile_image_full_url",profile_image_full_url.get(0));
         }
     }
+
 
 
 }
