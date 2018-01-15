@@ -80,6 +80,7 @@
                 android:textSize="10sp"
                 android:text="내 프로필 수정"
                 android:textColor="#666666"
+                android:clickable="true"
                 android:layout_marginBottom="18dp"
                 />
 

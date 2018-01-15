@@ -116,14 +116,14 @@ public class Tab_Fifth extends Fragment  {
             }
         });
 
-/*        edit.setOnClickListener(new View.OnClickListener(){
+        edit.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(),PersonalProfile_Edit.class);
                 startActivity(intent);
             }
-        });*/
+        });
 
 
         ImageView white_member=(ImageView)v.findViewById(R.id.whitemember_banner);

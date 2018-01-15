@@ -49,6 +49,7 @@ public class Getdetail {
     private double score;
     private int id;
 
+
     public void setHeight(int height) {
         this.height = height;
     }

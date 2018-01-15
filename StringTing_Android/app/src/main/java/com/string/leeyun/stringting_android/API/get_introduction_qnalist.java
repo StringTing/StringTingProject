@@ -10,16 +10,13 @@ import java.util.ArrayList;
 
 public class get_introduction_qnalist {
 
-    @SerializedName("qna_list")
-    ArrayList<get_introduction_qna>qna_list;
+  qna_list qna_list;
 
-
-
-    public ArrayList<get_introduction_qna> getQna_list() {
+    public com.string.leeyun.stringting_android.API.qna_list getQna_list() {
         return qna_list;
     }
 
-    public void setQna_list(ArrayList<get_introduction_qna> qna_list) {
+    public void setQna_list(com.string.leeyun.stringting_android.API.qna_list qna_list) {
         this.qna_list = qna_list;
     }
 }

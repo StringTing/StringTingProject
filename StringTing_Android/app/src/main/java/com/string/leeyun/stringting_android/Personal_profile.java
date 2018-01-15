@@ -28,6 +28,7 @@ import com.string.leeyun.stringting_android.API.Getdetail;
 import com.string.leeyun.stringting_android.API.Im_get_today_introduction;
 import com.string.leeyun.stringting_android.API.Rest_ApiService;
 
+import com.string.leeyun.stringting_android.API.qna_list;
 import com.tsengvn.typekit.TypekitContextWrapper;
 
 import com.string.leeyun.stringting_android.API.get_introduction_qna;
@@ -71,6 +72,7 @@ public class Personal_profile extends AppCompatActivity {
     int macthing_account;
     String macthing_sex;
 
+    get_introduction_qnalist QnaList;
     ArrayList<String>question_array;
     ArrayList<String>answer_array;
     ArrayList<get_introduction_qna> GetIntroDuction;
@@ -250,26 +252,26 @@ public class Personal_profile extends AppCompatActivity {
         }
 
 
+        QnaList=new get_introduction_qnalist();
 
         Call<get_introduction_qnalist> PostQnaList = apiService.get_introduction_qnalist(macthing_sex,macthing_account);
         PostQnaList.enqueue(new Callback<get_introduction_qnalist>() {
             @Override
             public void onResponse(Call<get_introduction_qnalist> call, Response<get_introduction_qnalist> response) {
 
-                GetIntroDuction=response.body().getQna_list();
+                QnaList=response.body();
 
                 question_array=new ArrayList<String>();
                 answer_array=new ArrayList<String>();
 
 
-                Log.e("onresponse_get_question", GetIntroDuction.get(0).getQuestion());
+                Log.e("onresponse_get_question", String.valueOf(QnaList.getQna_list().getApproved().get(0).getAnswer()));
 
-                Log.e("onresponse_get_answer", String.valueOf(GetIntroDuction.get(0).getAnswer()));
 
 
                 for (int i=0;i<3;i++){
-                    question_array.add(GetIntroDuction.get(i).getQuestion());
-                    answer_array.add(GetIntroDuction.get(i).getAnswer());
+                    question_array.add(QnaList.getQna_list().getApproved().get(i).getQuestion());
+                    answer_array.add(QnaList.getQna_list().getApproved().get(i).getAnswer());
                 }
 
 
@@ -287,17 +289,17 @@ public class Personal_profile extends AppCompatActivity {
                 m_ListView.setAdapter(m_Adapter);
 
 
-                m_Adapter.add(question_array.get(0), 0);
+                m_Adapter.add(question_array.get(0), 1);
 
-                m_Adapter.add(answer_array.get(0), 1);
+                m_Adapter.add(answer_array.get(0), 0);
 
-                m_Adapter.add(question_array.get(1), 0);
+                m_Adapter.add(question_array.get(1), 1);
 
-                m_Adapter.add(answer_array.get(1), 1);
+                m_Adapter.add(answer_array.get(1), 0);
 
-                m_Adapter.add(question_array.get(2), 0);
+                m_Adapter.add(question_array.get(2), 1);
 
-                m_Adapter.add(answer_array.get(2), 1);
+                m_Adapter.add(answer_array.get(2), 0);
                 setListViewHeightBasedOnItems(m_ListView);
 
             }
