@@ -152,6 +152,7 @@ public class PersonalProfile_Edit extends AppCompatActivity {
 
                         if (getdetail.getImages().getApproved().get(0).getName() != null) {
                             for (int i=0;i<getdetail.getImages().getApproved().size();i++){
+                                //이미지 url 받아오는 로직
                                 profile_image_list.add(String.valueOf(getdetail.getImages().getApproved().get(i).getName()));
                             }
 
@@ -163,20 +164,21 @@ public class PersonalProfile_Edit extends AppCompatActivity {
                         String medium = "medium";
                         String large="large";
                         String small = "small";
+
                         if (getdetail.getImages().getApproved().get(0) != null) {
                             for (int i=0;i<getdetail.getImages().getApproved().size();i++){
+                                //이미지 url 받아온 것 size 변경
                                 profile_image_replace.add(profile_image_list.get(i).replace(replace,large));
+                                //이미지 full url 이거 picasso에 바로 넣으면 됨
+                                profile_image_full_url.add(API_URL+profile_image_replace.get(i));
                             }
 
                             Log.e("image_url_first", profile_image_replace.get(0));
                         }
 
-
-
-
-
-
-
+                        //이런식으로 음주,나이,키 등등 받아오면 됩니다.
+                        getdetail.getDrink();
+                        getdetail.getAge();
 
 
 
@@ -216,6 +218,7 @@ public class PersonalProfile_Edit extends AppCompatActivity {
 
 
                 for (int i=0;i<3;i++){
+                    //질문,답변 차례로 arraylist에 add합니다.
                     question_array.add(QnaList.getQna_list().getApproved().get(i).getQuestion());
                     answer_array.add(QnaList.getQna_list().getApproved().get(i).getAnswer());
                 }
