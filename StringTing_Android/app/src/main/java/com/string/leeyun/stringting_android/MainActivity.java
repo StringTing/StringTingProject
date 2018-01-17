@@ -369,6 +369,10 @@ public class MainActivity extends AppCompatActivity {
                                     if (gsonresponse.getStatus()==null) {
 
                                         Log.e("get_status","등록되지않은 이메일입니다");
+                                        intent_ghost.putExtra("ID",Email);
+                                        intent_ghost.putExtra("PW","-");
+                                        intent_ghost.putExtra("setformat","FACEBOOK");
+                                        intent_ghost.putExtra("token",token);
                                         startActivity(intent_ghost);
                                     }
                                     else
@@ -386,6 +390,8 @@ public class MainActivity extends AppCompatActivity {
                                             intent_ghost.putExtra("ID",Email);
                                             intent_ghost.putExtra("PW","-");
                                             intent_ghost.putExtra("setformat","FACEBOOK");
+                                            intent_ghost.putExtra("token",token);
+
                                             startActivity(intent_ghost);
                                         }
                                         else if(gsonresponse.getStatus().equals("INREVIEW")){
@@ -397,8 +403,11 @@ public class MainActivity extends AppCompatActivity {
                                         else{
                                             intent_ghost.putExtra("ID",Email);
                                             intent_ghost.putExtra("PW"," ");
+                                            Log.e("id",Email);
                                             intent_ghost.putExtra("setformat","FACEBOOK");
                                             intent_ghost.putExtra("fcm_token",refreshedToken);
+                                            intent_ghost.putExtra("token",token);
+
                                             startActivity(intent_ghost);
                                         }
                                     }

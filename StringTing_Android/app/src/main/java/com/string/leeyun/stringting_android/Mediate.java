@@ -78,15 +78,18 @@ get_matched_account account1;
                 Imageprofile1.add(Imageresized_small.get(0));
                 Imageprofile1.add(Imageresized_middle.get(0));
                 Imageprofile1.add(Imageresized_large.get(0));
+                Imageprofile1.add("0");
             } else if (Imageresized_small.get(1) != null) {
 
                 Imageprofile2.add(Imageresized_small.get(1));
                 Imageprofile2.add(Imageresized_middle.get(1));
                 Imageprofile2.add(Imageresized_large.get(1));
+                Imageprofile2.add("1");
             } else if (Imageresized_small.get(2) != null) {
                 Imageprofile3.add(Imageresized_large.get(2));
                 Imageprofile3.add(Imageresized_middle.get(2));
                 Imageprofile3.add(Imageresized_large.get(2));
+                Imageprofile3.add("2");
             }
 
 
@@ -94,6 +97,7 @@ get_matched_account account1;
             keyvalue.add("-small");
             keyvalue.add("-medium");
             keyvalue.add("-large");
+            keyvalue.add("-index");
 
            images1 = new MultipartBody.Part[Imageprofile1.size()];
 

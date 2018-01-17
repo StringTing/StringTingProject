@@ -44,11 +44,15 @@ import com.tsengvn.typekit.TypekitContextWrapper;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 
+import okhttp3.Interceptor;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -58,6 +62,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import static android.graphics.Color.BLACK;
 import static android.graphics.Color.GRAY;
 import static android.graphics.Color.WHITE;
+import static com.string.leeyun.stringting_android.API.Rest_ApiService.API_URL;
 import static com.string.leeyun.stringting_android.R.id.Spinner_Tall;
 import static com.string.leeyun.stringting_android.R.id.Spinner_birthday1;
 import static com.string.leeyun.stringting_android.R.id.Spinner_birthday2;
@@ -90,6 +95,7 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
     Rest_ApiService apiService;
     Retrofit retrofit;
     String birthdayYear;
+    String token;
     String birthdayMonth;
     String birthdayDay;
     String real_album_path;
@@ -171,7 +177,28 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.basicinfo_edit);
 
-        retrofit = new Retrofit.Builder().baseUrl(Rest_ApiService.API_URL).addConverterFactory(GsonConverterFactory.create()).build();
+        OkHttpClient.Builder client1 = new OkHttpClient.Builder();
+        client1.addInterceptor(new Interceptor() {
+            @Override
+            public okhttp3.Response intercept(Chain chain) throws IOException {
+
+                Request builder = chain.request();
+                Request newRequest;
+                newRequest = builder.newBuilder()
+                        .addHeader("access-token",token)
+                        .build();
+
+
+                return chain.proceed(newRequest);
+
+            }
+        });
+
+        retrofit = new Retrofit.Builder()
+                .baseUrl(API_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(client1.build())
+                .build();
         apiService= retrofit.create(Rest_ApiService.class);
 
 
@@ -567,10 +594,11 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
 
 
         try {
-            final Intent i = getIntent();                      // facebook 또는 kakao의 아이디, 메신저타입을 받아와 변수에 저장
+            Intent i = getIntent();                      // facebook 또는 kakao의 아이디, 메신저타입을 받아와 변수에 저장
             String id = i.getExtras().getString("ID");
             String PW = i.getExtras().getString("PW");
             String Setting_id = i.getExtras().getString("setformat");
+            token=i.getExtras().getString("token");
             String fcm_token = i.getExtras().getString("fcm_token");
             Log.e("Test", id);
             Log.e("Test1", String.valueOf(Setting_id));
