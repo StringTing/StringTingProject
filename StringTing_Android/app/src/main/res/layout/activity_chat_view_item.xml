@@ -13,7 +13,6 @@
         android:maxWidth="200dp"
         android:breakStrategy="simple"
         android:textSize="12sp"
-        android:gravity="center_vertical"
         android:textColor="#000000"
         android:text="TextView" />
 
@@ -21,6 +20,7 @@
         android:id="@+id/modify_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:orientation="vertical">
 
         <TextView
@@ -28,16 +28,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textAlignment="viewStart"
             android:textColor="#000000"
+            android:padding="5dp"
             android:textSize="12sp"
             android:text="text" />
 
-        <Button
+        <TextView
             android:id="@+id/modify_btn"
             android:onClick="modify"
-            android:layout_marginTop="5dp"
-            android:layout_width="40dp"
-            android:layout_height="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
             android:background="#00ff0000"
