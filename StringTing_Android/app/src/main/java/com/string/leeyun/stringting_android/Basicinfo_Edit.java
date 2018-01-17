@@ -127,7 +127,6 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
         UserInfo.setSex(sex);
 
         try {
-
             Call<join> getPostUserinfo = apiService.getPostUserinfo(UserInfo);
             getPostUserinfo.enqueue(new Callback<join>() {
                 @Override
