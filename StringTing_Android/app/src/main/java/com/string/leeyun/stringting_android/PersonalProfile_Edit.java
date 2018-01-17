@@ -10,10 +10,14 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.makeramen.roundedimageview.RoundedTransformationBuilder;
 import com.squareup.picasso.Picasso;
@@ -40,6 +44,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.string.leeyun.stringting_android.API.Rest_ApiService.API_URL;
+import static com.string.leeyun.stringting_android.ChatView.position;
 
 public class PersonalProfile_Edit extends AppCompatActivity {
 
@@ -86,7 +91,7 @@ public class PersonalProfile_Edit extends AppCompatActivity {
 
     //대화창
     ListView m_ListView;
-    PersonalChatCustom m_Adapter;
+    ChatCustom m_Adapter;
 
 
 
@@ -226,7 +231,7 @@ public class PersonalProfile_Edit extends AppCompatActivity {
 
 
                 // 커스텀 어댑터 생성
-                m_Adapter = new PersonalChatCustom();
+                m_Adapter = new ChatCustom();
 
 
                 // Xml에서 추가한 ListView 연결
@@ -260,7 +265,66 @@ public class PersonalProfile_Edit extends AppCompatActivity {
 
         });
 
+
+        //수정 버튼을 클릭하면 edittext를 받아서 listview에 세팅해줌
+        findViewById(R.id.modify_sendbtn).setOnClickListener(new TextView.OnClickListener() {
+                                                                 int i=1;
+                                                                 @Override
+                                                                 public void onClick(View v) {
+
+                                                                     EditText editText =(EditText)findViewById(R.id.modify_Edit);
+                                                                     editText.requestFocus();
+                                                                     InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                                                                     imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,InputMethodManager.HIDE_IMPLICIT_ONLY);
+                                                                     Toast.makeText(getApplicationContext(), "modify_send", Toast.LENGTH_LONG).show();
+                                                                     String modifyString = editText.getText().toString();
+                                                                     Log.v("modifyString",modifyString);
+
+                                                                     m_Adapter.getM_List().set(position, new ChatCustom.ListContents(modifyString,position));
+                                                                     m_Adapter.notifyDataSetChanged();
+
+                                                                     LinearLayout l2 = (LinearLayout)findViewById(R.id.enter_chatting_visible);
+                                                                     l2.setVisibility(View.GONE);
+                                                                     LinearLayout ll = (LinearLayout)findViewById(R.id.enter_chatting);
+                                                                     ll.setVisibility(View.VISIBLE);
+
+
+                                                                 }
+                                                             }
+        );
+
     }
+
+    //수정하기 버튼을 눌렀을때 position을 받아옴, 전송버튼을 수정버튼으로 바꿔줌
+    public void modify(View view) {
+
+        LinearLayout ll = (LinearLayout)findViewById(R.id.enter_chatting);
+        ll.setVisibility(View.GONE);
+        LinearLayout l2 = (LinearLayout)findViewById(R.id.enter_chatting_visible);
+        l2.setVisibility(View.VISIBLE);
+
+        Toast.makeText(getApplicationContext(), "OK", Toast.LENGTH_LONG).show();
+        EditText editText =(EditText)findViewById(R.id.input_text);
+        editText.requestFocus();
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,InputMethodManager.HIDE_IMPLICIT_ONLY);
+
+
+        String modifyString = editText.getText().toString();
+        Log.v("modifyString",modifyString);
+
+        int count,checked;
+        count=m_Adapter.getCount();
+        Log.v("count", String.valueOf(count));
+        if(count>0){
+
+            position=m_ListView.getPositionForView(view);
+
+            Log.v("checked", String.valueOf(position));
+        }
+
+    }
+
 
     public void setListViewHeightBasedOnItems(ListView listView) {
 

@@ -70,7 +70,7 @@ public class ChatCustom extends BaseAdapter{
     public View getView(final int position, View convertView, ViewGroup parent) {
         final int pos = position;
         final Context context = parent.getContext();
-        Button btn = null;
+        TextView btn = null;
         LinearLayout modify_layout = null;
         TextView        text    = null;
         TextView        text_l    = null;
@@ -89,7 +89,7 @@ public class ChatCustom extends BaseAdapter{
             layout    = (RelativeLayout) convertView.findViewById(R.id.layout);
             text    = (TextView) convertView.findViewById(R.id.text);
             text_l    = (TextView) convertView.findViewById(R.id.text_l);
-            btn = (Button)convertView.findViewById(R.id.modify_btn);
+            btn = (TextView) convertView.findViewById(R.id.modify_btn);
             // 메인리스트 - 수정버튼
             //Button OptionButton = (Button) convertView.findViewById(R.id.modify_btn);
             //OptionButton.setOnClickListener((View.OnClickListener)context);
@@ -120,11 +120,11 @@ public class ChatCustom extends BaseAdapter{
 
 
         if( m_List.get(position).type == 0 ) {
-            text_l.setBackgroundResource(R.drawable.left_b);
+            text_l.setBackgroundResource(R.drawable.word_l_2);
             layout.setGravity(Gravity.LEFT);
             modify_layout.setVisibility(GONE);
         }else if(m_List.get(position).type == 1) {
-            modify_layout.setBackgroundResource(R.drawable.right_b);
+            modify_layout.setBackgroundResource(R.drawable.word_r_2);
             btn.setGravity(CENTER);
             text_l.setVisibility(GONE);
             layout.setGravity(Gravity.RIGHT);
@@ -140,7 +140,7 @@ public class ChatCustom extends BaseAdapter{
     private class CustomHolder {
         TextView    m_TextView;
         TextView m_TextView_l;
-        Button m_Btn;
+        TextView m_Btn;
         LinearLayout m_layout;
         RelativeLayout layout;
     }

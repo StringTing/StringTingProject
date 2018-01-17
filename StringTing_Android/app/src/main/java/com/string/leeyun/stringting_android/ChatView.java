@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.string.leeyun.stringting_android.API.Rest_ApiService;
@@ -197,7 +198,7 @@ public class ChatView extends Activity implements AdapterView.OnItemClickListene
 
 
         //수정 버튼을 클릭하면 edittext를 받아서 listview에 세팅해줌
-        findViewById(R.id.modify_sendbtn).setOnClickListener(new Button.OnClickListener() {
+        findViewById(R.id.modify_sendbtn).setOnClickListener(new TextView.OnClickListener() {
             int i=1;
             @Override
             public void onClick(View v) {

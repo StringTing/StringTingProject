@@ -80,11 +80,8 @@
                 android:textSize="10sp"
                 android:text="내 프로필 수정"
                 android:textColor="#666666"
-<<<<<<< HEAD
                 android:clickable="true"
-=======
                 android:onClick="profile_edit"
->>>>>>> 1ff2d827e422747550625ebe0a2b1bfe55b9a0a5
                 android:layout_marginBottom="18dp"
                 />
 
