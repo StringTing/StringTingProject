@@ -103,11 +103,11 @@ public class ChattingCustom extends BaseAdapter{
 
 
         if( m_List.get(position).type == 0 ) {
-            text.setBackgroundResource(R.drawable.left_b);
+            text.setBackgroundResource(R.drawable.word_l_2);
             layout.setGravity(Gravity.LEFT);
 
         }else if(m_List.get(position).type == 1) {
-            text.setBackgroundResource(R.drawable.right_b);
+            text.setBackgroundResource(R.drawable.word_r_2);
             layout.setGravity(Gravity.RIGHT);
         }
 
