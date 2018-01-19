@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.media.Image;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -27,7 +28,9 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
+import com.makeramen.roundedimageview.RoundedTransformationBuilder;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Transformation;
 import com.string.leeyun.stringting_android.API.Ger_last_5day_matched_account;
 import com.string.leeyun.stringting_android.API.Get_today_introduction;
 import com.string.leeyun.stringting_android.API.Im_get_today_introduction;
@@ -98,6 +101,8 @@ public class Tab_First extends Fragment implements View.OnClickListener {
     Boolean opened_form_api2;
     TableRow tr;
     ImageView img_pic ;
+    //이미지 들어오는거
+    final int[] last_pic = {1,2,3,4,5};
 
 
 
@@ -137,42 +142,135 @@ public class Tab_First extends Fragment implements View.OnClickListener {
         final LinearLayout addbtn = (LinearLayout) v.findViewById(R.id.add_btn);
 
         //이미지 들어오는거
-        final int[] p = {1,2,3,4,5};
+        final int[] p = {1,2,3,4,5,6,7,8};
 
-        addbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        //픽이 3개 이하일 때
+        if (p.length < 3) {
+            TextView nothing = (TextView) v.findViewById(R.id.nothing);
+            nothing.setVisibility(View.GONE);
+
+            if (p.length % 3 != 0) {
                 addbtn.setVisibility(View.GONE);
-                // activity_main.xml에서 정의한 LinearLayout 객체 할당
+                tr = new TableRow(getApplicationContext());
+                tr.setPadding(0, 35, 0, 0);
+                for (int i = 0; i < p.length % 3; ++i) {
+                    View img = inflater.inflate(R.layout.addimg, null);
+                    ImageView img_pic = (ImageView) img.findViewById(R.id.last1);
 
-                for(int i=0; i<p.length/3; ++i) {
-                    tr = new TableRow(getApplicationContext());
-                    tr.setPadding(0,35,0,0);
-                    for (int j = 0; j < 3; j++) {
-                        // Inflated_Layout.xml로 구성한 레이아웃을 inflatedLayout 영역으로 확장
-                        View img = inflater.inflate(R.layout.addimg, null);
-                        //img_pic = (ImageView) addimg_table.findViewById(R.id.last1);
-                        tr.addView(img);
-                       /* if(j<=1){
-                            img.setPadding(0,0,23,0);
-                        }*/
-                    }
-                    tableLayout.addView(tr);
-                    if(p.length%3 != 0) {
+                    Transformation transformation = new RoundedTransformationBuilder()
+                            .borderColor(Color.BLACK)
+                            .borderWidthDp(0)
+                            .cornerRadiusDp(8)
+                            .oval(false)
+                            .build();
+
+
+                    Picasso.with(getContext())
+                            .load(R.drawable.gametitle_01)
+                            .fit()
+                            .transform(transformation)
+                            .into(img_pic);
+
+                    tr.addView(img);
+                }
+                tableLayout.addView(tr);
+            }
+
+        }
+
+        //3개 이상 픽
+        else if (p.length >= 3) {
+            TextView nothing = (TextView) v.findViewById(R.id.nothing);
+            nothing.setVisibility(View.GONE);
+
+
+            tr = new TableRow(getApplicationContext());
+            tr.setPadding(0, 35, 0, 0);
+            for (int i = 0; i < 3 ; ++i) {
+                View img = inflater.inflate(R.layout.addimg, null);
+                ImageView img_pic = (ImageView) img.findViewById(R.id.last1);
+
+                Transformation transformation = new RoundedTransformationBuilder()
+                        .borderColor(Color.BLACK)
+                        .borderWidthDp(0)
+                        .cornerRadiusDp(8)
+                        .oval(false)
+                        .build();
+
+
+                Picasso.with(getContext())
+                        .load(R.drawable.gametitle_01)
+                        .fit()
+                        .transform(transformation)
+                        .into(img_pic);
+
+                tr.addView(img);
+            }
+            tableLayout.addView(tr);
+
+            final int remainder = p.length -3;
+
+            addbtn.setVisibility(View.VISIBLE);
+            addbtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    addbtn.setVisibility(View.GONE);
+
+                    for (int i = 0; i < remainder / 3; ++i) {
                         tr = new TableRow(getApplicationContext());
-                        tr.setPadding(0,35,0,0);
-                        for (i=0; i<p.length%3; ++i){
-                            // Inflated_Layout.xml로 구성한 레이아웃을 inflatedLayout 영역으로 확장
+                        tr.setPadding(0, 35, 0, 0);
+                        for (int j = 0; j < 3; ++j) {
                             View img = inflater.inflate(R.layout.addimg, null);
-                            //img_pic = (ImageView) addimg_table.findViewById(R.id.last1);
+                            ImageView img_pic = (ImageView) img.findViewById(R.id.last1);
+
+                            Transformation transformation = new RoundedTransformationBuilder()
+                                    .borderColor(Color.BLACK)
+                                    .borderWidthDp(0)
+                                    .cornerRadiusDp(8)
+                                    .oval(false)
+                                    .build();
+
+
+                            Picasso.with(getContext())
+                                    .load(R.drawable.gametitle_01)
+                                    .fit()
+                                    .transform(transformation)
+                                    .into(img_pic);
+
+                            tr.addView(img);
+                        }
+                        tableLayout.addView(tr);
+                    }
+                    if (remainder % 3 != 0) {
+
+                        tr = new TableRow(getApplicationContext());
+                        tr.setPadding(0, 35, 0, 0);
+                        for (int i = 0; i < remainder % 3; ++i) {
+                            View img = inflater.inflate(R.layout.addimg, null);
+                            ImageView img_pic = (ImageView) img.findViewById(R.id.last1);
+
+                            Transformation transformation = new RoundedTransformationBuilder()
+                                    .borderColor(Color.BLACK)
+                                    .borderWidthDp(0)
+                                    .cornerRadiusDp(8)
+                                    .oval(false)
+                                    .build();
+
+
+                            Picasso.with(getContext())
+                                    .load(R.drawable.gametitle_01)
+                                    .fit()
+                                    .transform(transformation)
+                                    .into(img_pic);
+
                             tr.addView(img);
                         }
                         tableLayout.addView(tr);
                     }
                 }
-                //inflater.inflate(R.layout.addimg_2, inflatedLayout);
-            }
-        });
+            });
+
+        }
 
 
 
@@ -542,8 +640,9 @@ public class Tab_First extends Fragment implements View.OnClickListener {
         mImageView = (ImageView) v.findViewById(R.id.ph1);
         mImageView2 = (ImageView) v.findViewById(R.id.ph2);
         l1 = (ImageView) v.findViewById(R.id.last1);
-        l2 = (ImageView) v.findViewById(R.id.last2);
+     /*   l2 = (ImageView) v.findViewById(R.id.last2);
         l3 = (ImageView) v.findViewById(R.id.last3);
+*/
 
 
 
