@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.TextView;
 
 import com.tsengvn.typekit.TypekitContextWrapper;
@@ -44,5 +45,10 @@ public class Coin_White extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         Coin_White.this.finish();
+    }
+
+
+    public void onClick_Back(View v){
+        super.onBackPressed();
     }
 }

@@ -99,7 +99,14 @@ public class Personal_profile extends AppCompatActivity {
         startActivity(r);
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 
+    public void Back(View v){
+        onBackPressed();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

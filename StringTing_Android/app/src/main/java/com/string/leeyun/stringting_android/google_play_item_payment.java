@@ -92,6 +92,7 @@ public class google_play_item_payment extends Activity{
 
 
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -403,6 +404,10 @@ public class google_play_item_payment extends Activity{
 
     public void onBackPressed() {
         google_play_item_payment.this.finish();
+    }
+
+    public void onclick_Back(View v){
+        super.onBackPressed();
     }
 
 

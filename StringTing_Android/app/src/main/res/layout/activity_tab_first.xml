@@ -194,167 +194,44 @@
                     />
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="15dp"
+                    android:id="@+id/pic1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
                     android:orientation="vertical">
 
+
                     <TextView
-                        android:id="@+id/textView3"
-                        android:layout_width="50dp"
-                        android:layout_height="14dp"
-                        android:layout_marginLeft="16dp"
+                        android:layout_width="326dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:letterSpacing="0.04"
                         android:text="지난 픽들"
                         android:textColor="#000000"
                         android:textSize="12sp" />
 
 
-                <TextView
-                    android:id="@+id/nothing"
-                    android:layout_width="match_parent"
-                    android:layout_height="127dp"
-                    android:gravity="center"
-                    android:textSize="11sp"
-                    android:textColor="#e2e2e2"
-                    android:text="아직 지난 픽들이 없습니다."
-                    android:textAlignment="center"
-                    android:visibility="gone"
-                    />
+                    <TextView
+                        android:id="@+id/nothing"
+                        android:layout_width="match_parent"
+                        android:layout_height="127dp"
+                        android:gravity="center"
+                        android:textSize="11sp"
+                        android:textColor="#e2e2e2"
+                        android:text="아직 좋아하는 카드가 없습니다."
+                        android:textAlignment="center"
 
-                    <LinearLayout
+                        />
+
+                    <TableLayout
+                        android:id="@+id/addpic"
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
                         android:layout_marginLeft="16dp"
                         android:layout_marginRight="16dp"
-                        android:layout_marginTop="16dp"
-                        android:orientation="horizontal">
+                        />
 
-
-                        <RelativeLayout
-                            android:id="@+id/l_pic1"
-                            android:layout_width="94dp"
-                            android:layout_height="127dp"
-                            android:layout_marginRight="23dp"
-                            android:background="@drawable/rounded">
-
-
-                            <ImageView
-                                android:id="@+id/last1"
-                                android:layout_width="94dp"
-                                android:layout_height="98dp"
-                                android:padding="0dp"
-                                android:scaleType="fitXY" />
-
-
-                            <TextView
-                                android:id="@+id/l_white_text"
-                                android:layout_width="94dp"
-                                android:layout_height="12dp"
-                                android:layout_marginTop="92dp"
-                                android:background="@drawable/gradient_background"
-                                android:paddingLeft="9dp"
-                                android:text="White Member"
-                                android:textColor="#ffffff"
-                                android:textSize="9sp" />
-
-                            <TextView
-                                android:id="@+id/l_textView"
-                                android:layout_width="49dp"
-                                android:layout_height="wrap_content"
-                                android:layout_below="@+id/l_white_text"
-                                android:layout_gravity="start"
-                                android:layout_marginLeft="9dp"
-                                android:layout_marginTop="7dp"
-                                android:text="#서울 #23세"
-                                android:textColor="#000000"
-                                android:textSize="9sp" />
-
-
-                        </RelativeLayout>
-
-                        <RelativeLayout
-                            android:id="@+id/l_pic2"
-                            android:layout_width="94dp"
-                            android:layout_height="127dp"
-                            android:layout_marginRight="23dp"
-                            android:background="@drawable/rounded">
-
-
-                            <ImageView
-                                android:id="@+id/last2"
-                                android:layout_width="94dp"
-                                android:layout_height="98dp"
-                                android:padding="0dp"
-                                android:scaleType="fitXY" />
-
-
-                            <TextView
-                                android:id="@+id/l_white_text2"
-                                android:layout_width="94dp"
-                                android:layout_height="12dp"
-                                android:layout_marginTop="92dp"
-                                android:background="@drawable/gradient_background"
-                                android:paddingLeft="9dp"
-                                android:text="White Member"
-                                android:textColor="#ffffff"
-                                android:textSize="9sp" />
-
-
-                            <TextView
-                                android:id="@+id/l_textView2"
-                                android:layout_width="49dp"
-                                android:layout_height="wrap_content"
-                                android:layout_below="@+id/l_white_text2"
-                                android:layout_gravity="start"
-                                android:layout_marginLeft="9dp"
-                                android:layout_marginTop="7dp"
-                                android:text="#서울 #23세"
-                                android:textColor="#000000"
-                                android:textSize="9sp" />
-                        </RelativeLayout>
-
-
-                        <RelativeLayout
-                            android:id="@+id/l_pic3"
-                            android:layout_width="94dp"
-                            android:layout_height="127dp"
-                            android:background="@drawable/rounded">
-
-
-                            <ImageView
-                                android:id="@+id/last3"
-                                android:layout_width="94dp"
-                                android:layout_height="98dp"
-                                android:padding="0dp"
-                                android:scaleType="fitXY" />
-
-
-                            <TextView
-                                android:id="@+id/l_white_text3"
-                                android:layout_width="94dp"
-                                android:layout_height="12dp"
-                                android:layout_marginTop="92dp"
-                                android:background="@drawable/border_top_side"
-                                android:textSize="9sp" />
-
-                            <TextView
-                                android:id="@+id/l_textView3"
-                                android:layout_width="49dp"
-                                android:layout_height="wrap_content"
-                                android:layout_below="@+id/l_white_text3"
-                                android:layout_gravity="start"
-                                android:layout_marginLeft="9dp"
-                                android:layout_marginTop="7dp"
-                                android:text="#서울 #23세"
-                                android:textColor="#000000"
-                                android:textSize="9sp" />
-
-                        </RelativeLayout>
-
-                    </LinearLayout>
 
                     <LinearLayout
                         android:id="@+id/add_btn"
@@ -362,8 +239,8 @@
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
                         android:layout_marginBottom="21dp"
-                        android:layout_marginTop="16dp"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:visibility="gone">
 
                         <View
                             android:layout_width="131dp"
@@ -389,46 +266,9 @@
 
                     </LinearLayout>
 
-                    <!--   <LinearLayout
-                          android:id="@+id/addpic"
-                          android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          android:layout_marginTop="22dp"
-                          android:layout_marginLeft="16dp"
-                          android:layout_marginRight="16dp"
-                          android:layout_marginBottom="16dp"
-                          android:layout_gravity="center"
-                          android:orientation="horizontal">
-
-                      </LinearLayout>
-
-
-                     <GridLayout
-                          android:id="@+id/addpic2"
-                          android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          android:layout_marginTop="22dp"
-                          android:layout_marginLeft="16dp"
-                          android:layout_marginRight="16dp"
-                          android:layout_marginBottom="16dp"
-                          android:layout_gravity="center"
-                          android:orientation="horizontal">
-                      </GridLayout>-->
-
-                    <TableLayout
-                        android:id="@+id/addpic"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginBottom="16dp"
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginRight="16dp"
-                       >
-
-                    </TableLayout>
-
 
                 </LinearLayout>
+
 
             </LinearLayout>
         </ScrollView>
