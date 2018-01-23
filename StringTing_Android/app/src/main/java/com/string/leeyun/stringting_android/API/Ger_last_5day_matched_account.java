@@ -46,16 +46,13 @@ public class Ger_last_5day_matched_account {
     @SerializedName("opened")
     private boolean opened;
     @SerializedName("score")
-    private int score;
+    private double score;
     private int id;
 
     public void setHeight(int height) {
         this.height = height;
     }
 
-    public void setScore(int score) {
-        this.score = score;
-    }
 
     public void setId(int id) {
         this.id = id;
@@ -70,9 +67,12 @@ public class Ger_last_5day_matched_account {
         return authenticated;
     }
 
-
-    public int getScore() {
+    public double getScore() {
         return score;
+    }
+
+    public void setScore(double score) {
+        this.score = score;
     }
 
     public int getId() {

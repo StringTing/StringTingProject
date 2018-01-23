@@ -121,7 +121,6 @@ public class Tab_First extends Fragment implements View.OnClickListener {
 
 
 
-
         final View v = inflater.inflate(R.layout.activity_tab_first, container, false);
 
         //whitemember view
@@ -133,147 +132,6 @@ public class Tab_First extends Fragment implements View.OnClickListener {
                 startActivity(intent);
             }
         });
-
-        //추가할 부모 뷰
-        //final TableLayout inflatedLayout = (TableLayout) v.findViewById(R.id.addpic);
-        final TableLayout tableLayout = (TableLayout) v.findViewById(R.id.addpic);
-
-        //더보기 버튼
-        final LinearLayout addbtn = (LinearLayout) v.findViewById(R.id.add_btn);
-
-        //이미지 들어오는거
-        ArrayList<String>last_5_pic_url_beforerounding=new ArrayList<>();
-
-
-        //픽이 3개 이하일 때
-        if (last_5_pic_url_beforerounding.size() < 3) {
-            TextView nothing = (TextView) v.findViewById(R.id.nothing);
-            nothing.setVisibility(View.GONE);
-
-            if (last_5_pic_url_beforerounding.size() % 3 != 0) {
-                addbtn.setVisibility(View.GONE);
-                tr = new TableRow(getApplicationContext());
-                tr.setPadding(0, 35, 0, 0);
-                for (int i = 0; i < last_5_pic_url_beforerounding.size() % 3; ++i) {
-                    View img = inflater.inflate(R.layout.addimg, null);
-                    ImageView img_pic = (ImageView) img.findViewById(R.id.last1);
-
-                    Transformation transformation = new RoundedTransformationBuilder()
-                            .borderColor(Color.BLACK)
-                            .borderWidthDp(0)
-                            .cornerRadiusDp(8)
-                            .oval(false)
-                            .build();
-
-
-                    Picasso.with(getContext())
-                            .load(R.drawable.gametitle_01)
-                            .fit()
-                            .transform(transformation)
-                            .into(img_pic);
-
-                    tr.addView(img);
-                }
-                tableLayout.addView(tr);
-            }
-
-        }
-
-        //3개 이상 픽
-        else if (last_5_pic_url_beforerounding.size() >= 3) {
-            TextView nothing = (TextView) v.findViewById(R.id.nothing);
-            nothing.setVisibility(View.GONE);
-
-
-            tr = new TableRow(getApplicationContext());
-            tr.setPadding(0, 35, 0, 0);
-            for (int i = 0; i < 3 ; ++i) {
-                View img = inflater.inflate(R.layout.addimg, null);
-                ImageView img_pic = (ImageView) img.findViewById(R.id.last1);
-
-                Transformation transformation = new RoundedTransformationBuilder()
-                        .borderColor(Color.BLACK)
-                        .borderWidthDp(0)
-                        .cornerRadiusDp(8)
-                        .oval(false)
-                        .build();
-
-
-                Picasso.with(getContext())
-                        .load(R.drawable.gametitle_01)
-                        .fit()
-                        .transform(transformation)
-                        .into(img_pic);
-
-                tr.addView(img);
-            }
-            tableLayout.addView(tr);
-
-            final int remainder = last_5_pic_url_beforerounding.size() -3;
-
-            addbtn.setVisibility(View.VISIBLE);
-            addbtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    addbtn.setVisibility(View.GONE);
-
-                    for (int i = 0; i < remainder / 3; ++i) {
-                        tr = new TableRow(getApplicationContext());
-                        tr.setPadding(0, 35, 0, 0);
-                        for (int j = 0; j < 3; ++j) {
-                            View img = inflater.inflate(R.layout.addimg, null);
-                            ImageView img_pic = (ImageView) img.findViewById(R.id.last1);
-
-                            Transformation transformation = new RoundedTransformationBuilder()
-                                    .borderColor(Color.BLACK)
-                                    .borderWidthDp(0)
-                                    .cornerRadiusDp(8)
-                                    .oval(false)
-                                    .build();
-
-
-                            Picasso.with(getContext())
-                                    .load(R.drawable.gametitle_01)
-                                    .fit()
-                                    .transform(transformation)
-                                    .into(img_pic);
-
-                            tr.addView(img);
-                        }
-                        tableLayout.addView(tr);
-                    }
-                    if (remainder % 3 != 0) {
-
-                        tr = new TableRow(getApplicationContext());
-                        tr.setPadding(0, 35, 0, 0);
-                        for (int i = 0; i < remainder % 3; ++i) {
-                            View img = inflater.inflate(R.layout.addimg, null);
-                            ImageView img_pic = (ImageView) img.findViewById(R.id.last1);
-
-                            Transformation transformation = new RoundedTransformationBuilder()
-                                    .borderColor(Color.BLACK)
-                                    .borderWidthDp(0)
-                                    .cornerRadiusDp(8)
-                                    .oval(false)
-                                    .build();
-
-
-                            Picasso.with(getContext())
-                                    .load(R.drawable.gametitle_01)
-                                    .fit()
-                                    .transform(transformation)
-                                    .into(img_pic);
-
-                            tr.addView(img);
-                        }
-                        tableLayout.addView(tr);
-                    }
-                }
-            });
-
-        }
-
-
 
 
 
@@ -416,8 +274,9 @@ public class Tab_First extends Fragment implements View.OnClickListener {
                                 last5_image_list.add(String.valueOf(im_get_last_5day.get(i).getImages().getApproved().get(0).getName()));
                                 last5_image_replace.add(last5_image_list.get(i).replace(replace,small));
                                 last5_image_full_url.add(API_IMAGE_URL+last5_image_replace.get(i));
+                                Log.e("지난픽들 log", String.valueOf(last5_image_full_url));
                             }
-                            image_url_today(v);
+                            last_5_pic_view(inflater);
 
                         }
 
@@ -772,5 +631,148 @@ public class Tab_First extends Fragment implements View.OnClickListener {
 
 
 
+    public void last_5_pic_view(final LayoutInflater inflater){
+        //추가할 부모 뷰
+        //final TableLayout inflatedLayout = (TableLayout) v.findViewById(R.id.addpic);
+//        final View v = inflater.inflate(R.layout.activity_tab_first,null);
+
+        final TableLayout tableLayout = (TableLayout) getView().findViewById(R.id.addpic);
+
+        //더보기 버튼
+        final LinearLayout addbtn = (LinearLayout) getView().findViewById(R.id.add_btn);
+
+        //이미지 들어오는거
+        int last_img_count;
+
+        //픽이 3개 이하일 때
+        if (last5_image_full_url.size() < 3) {
+            TextView nothing = (TextView) getView().findViewById(R.id.nothing);
+            nothing.setVisibility(View.GONE);
+
+            if (last5_image_full_url.size() % 3 != 0) {
+                addbtn.setVisibility(View.GONE);
+                tr = new TableRow(getApplicationContext());
+                tr.setPadding(0, 35, 0, 0);
+                for (last_img_count = 0; last_img_count < last5_image_full_url.size() % 3; ++last_img_count) {
+                    View img = inflater.inflate(R.layout.addimg, null);
+                    ImageView img_pic = (ImageView) img.findViewById(R.id.last1);
+
+                    Transformation transformation = new RoundedTransformationBuilder()
+                            .borderColor(Color.BLACK)
+                            .borderWidthDp(0)
+                            .cornerRadiusDp(8)
+                            .oval(false)
+                            .build();
+
+
+                    Picasso.with(getContext())
+                            .load(last5_image_full_url.get(last_img_count))
+                            .fit()
+                            .transform(transformation)
+                            .into(img_pic);
+
+                    tr.addView(img);
+                }
+                tableLayout.addView(tr);
+            }
+
+        }
+
+        //3개 이상 픽
+        else if (last5_image_full_url.size() >= 3) {
+            TextView nothing = (TextView) getView().findViewById(R.id.nothing);
+            nothing.setVisibility(View.GONE);
+
+
+            tr = new TableRow(getApplicationContext());
+            tr.setPadding(0, 35, 0, 0);
+            for (int i=0; i < 3 ; ++i) {
+                View img = inflater.inflate(R.layout.addimg, null);
+                ImageView img_pic = (ImageView) img.findViewById(R.id.last1);
+
+                Transformation transformation = new RoundedTransformationBuilder()
+                        .borderColor(Color.BLACK)
+                        .borderWidthDp(0)
+                        .cornerRadiusDp(8)
+                        .oval(false)
+                        .build();
+
+
+                Picasso.with(getContext())
+                        .load(last5_image_full_url.get(i))
+                        .fit()
+                        .transform(transformation)
+                        .into(img_pic);
+
+                tr.addView(img);
+            }
+            tableLayout.addView(tr);
+
+            final int remainder = last5_image_full_url.size() -3;
+
+            addbtn.setVisibility(View.VISIBLE);
+            addbtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    addbtn.setVisibility(View.GONE);
+
+                    for (int i = 0; i < remainder / 3; ++i) {
+                        tr = new TableRow(getApplicationContext());
+                        tr.setPadding(0, 35, 0, 0);
+                        for (int j = 0; j < 3; ++j) {
+                            View img = inflater.inflate(R.layout.addimg, null);
+                            ImageView img_pic = (ImageView) img.findViewById(R.id.last1);
+
+                            Transformation transformation = new RoundedTransformationBuilder()
+                                    .borderColor(Color.BLACK)
+                                    .borderWidthDp(0)
+                                    .cornerRadiusDp(8)
+                                    .oval(false)
+                                    .build();
+
+
+                            Picasso.with(getContext())
+                                    .load(last5_image_full_url.get(i+ last5_image_full_url.size() % 3))
+                                    .fit()
+                                    .transform(transformation)
+                                    .into(img_pic);
+
+                            tr.addView(img);
+                        }
+                        tableLayout.addView(tr);
+                    }
+                    if (remainder % 3 != 0) {
+
+                        tr = new TableRow(getApplicationContext());
+                        tr.setPadding(0, 35, 0, 0);
+                        for (int i = 0; i < remainder % 3; ++i) {
+                            View img = inflater.inflate(R.layout.addimg, null);
+                            ImageView img_pic = (ImageView) img.findViewById(R.id.last1);
+
+                            Transformation transformation = new RoundedTransformationBuilder()
+                                    .borderColor(Color.BLACK)
+                                    .borderWidthDp(0)
+                                    .cornerRadiusDp(8)
+                                    .oval(false)
+                                    .build();
+
+
+                            Picasso.with(getContext())
+                                    .load(last5_image_full_url.get(i))
+                                    .fit()
+                                    .transform(transformation)
+                                    .into(img_pic);
+
+                            tr.addView(img);
+                        }
+                        tableLayout.addView(tr);
+                    }
+                }
+            });
+
+        }
+
+
+    }
 
 }
