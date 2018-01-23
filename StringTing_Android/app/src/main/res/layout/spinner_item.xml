@@ -3,6 +3,8 @@
     android:id="@+id/spitem_set"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
+    android:paddingTop="3dp"
+    android:paddingBottom="3dp"
     android:textSize="11sp"
     android:textColor="#000"
     >

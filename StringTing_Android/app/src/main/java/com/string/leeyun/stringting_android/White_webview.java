@@ -3,6 +3,7 @@ package com.string.leeyun.stringting_android;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -15,6 +16,16 @@ public class White_webview extends AppCompatActivity {
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
+
+    public void onBack(View v){
+        onBackPressed();
     }
 
     private WebView webView;

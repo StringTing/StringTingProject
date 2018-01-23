@@ -43,16 +43,18 @@ public class Tab_Third extends Fragment {
         final LinearLayout addbtn = (LinearLayout) v.findViewById(R.id.add_btn);
 
         //이미지 들어오는거
-        final int[] p = {1};
+        final int[] p = {1,2};
 
-        if (p.length >= 1) {
+        //픽이 3개 이하일 때
+        if (p.length < 3) {
             TextView nothing = (TextView) v.findViewById(R.id.nothing);
             nothing.setVisibility(View.GONE);
 
+            if (p.length % 3 != 0) {
+                addbtn.setVisibility(View.GONE);
                 tr = new TableRow(getApplicationContext());
                 tr.setPadding(0, 35, 0, 0);
-                for (int k = 0; k < p.length; k++) {
-                    // Inflated_Layout.xml로 구성한 레이아웃을 inflatedLayout 영역으로 확장
+                for (int i = 0; i < p.length % 3; ++i) {
                     View img = inflater.inflate(R.layout.addimg, null);
                     ImageView img_pic = (ImageView) img.findViewById(R.id.last1);
 
@@ -72,26 +74,53 @@ public class Tab_Third extends Fragment {
 
                     tr.addView(img);
                 }
-            tableLayout.addView(tr);
-
-            if (p.length>3){
-                addbtn.setVisibility(View.VISIBLE);
+                tableLayout.addView(tr);
             }
 
         }
 
+        //3개 이상 픽
+        else if (p.length >= 3) {
+            TextView nothing = (TextView) v.findViewById(R.id.nothing);
+            nothing.setVisibility(View.GONE);
+
+
+                tr = new TableRow(getApplicationContext());
+                tr.setPadding(0, 35, 0, 0);
+                for (int i = 0; i < 3 ; ++i) {
+                    View img = inflater.inflate(R.layout.addimg, null);
+                    ImageView img_pic = (ImageView) img.findViewById(R.id.last1);
+
+                    Transformation transformation = new RoundedTransformationBuilder()
+                            .borderColor(Color.BLACK)
+                            .borderWidthDp(0)
+                            .cornerRadiusDp(8)
+                            .oval(false)
+                            .build();
+
+
+                    Picasso.with(getContext())
+                            .load(R.drawable.gametitle_01)
+                            .fit()
+                            .transform(transformation)
+                            .into(img_pic);
+
+                    tr.addView(img);
+                }
+                tableLayout.addView(tr);
+
             final int remainder = p.length -3;
+
+            addbtn.setVisibility(View.VISIBLE);
             addbtn.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v) {
+                public void onClick(View view) {
                     addbtn.setVisibility(View.GONE);
-                    // activity_main.xml에서 정의한 LinearLayout 객체 할당
 
-                    for (int i = 0; i <remainder / 3; ++i) {
+                    for (int i = 0; i < remainder / 3; ++i) {
                         tr = new TableRow(getApplicationContext());
                         tr.setPadding(0, 35, 0, 0);
-                        for (int j = 0; j < 3; j++) {
-                            // Inflated_Layout.xml로 구성한 레이아웃을 inflatedLayout 영역으로 확장
+                        for (int j = 0; j < 3; ++j) {
                             View img = inflater.inflate(R.layout.addimg, null);
                             ImageView img_pic = (ImageView) img.findViewById(R.id.last1);
 
@@ -112,36 +141,39 @@ public class Tab_Third extends Fragment {
                             tr.addView(img);
                         }
                         tableLayout.addView(tr);
-                        if (p.length % 3 != 0) {
-                            tr = new TableRow(getApplicationContext());
-                            tr.setPadding(0, 35, 0, 0);
-                            for (i = 0; i <remainder % 3; ++i) {
-                                // Inflated_Layout.xml로 구성한 레이아웃을 inflatedLayout 영역으로 확장
-                                View img = inflater.inflate(R.layout.addimg, null);
-                                ImageView img_pic = (ImageView) img.findViewById(R.id.last1);
+                    }
+                    if (remainder % 3 != 0) {
 
-                                Transformation transformation = new RoundedTransformationBuilder()
-                                        .borderColor(Color.BLACK)
-                                        .borderWidthDp(0)
-                                        .cornerRadiusDp(8)
-                                        .oval(false)
-                                        .build();
+                        tr = new TableRow(getApplicationContext());
+                        tr.setPadding(0, 35, 0, 0);
+                        for (int i = 0; i < remainder % 3; ++i) {
+                            View img = inflater.inflate(R.layout.addimg, null);
+                            ImageView img_pic = (ImageView) img.findViewById(R.id.last1);
+
+                            Transformation transformation = new RoundedTransformationBuilder()
+                                    .borderColor(Color.BLACK)
+                                    .borderWidthDp(0)
+                                    .cornerRadiusDp(8)
+                                    .oval(false)
+                                    .build();
 
 
-                                Picasso.with(getContext())
-                                        .load(R.drawable.gametitle_01)
-                                        .fit()
-                                        .transform(transformation)
-                                        .into(img_pic);
+                            Picasso.with(getContext())
+                                    .load(R.drawable.gametitle_01)
+                                    .fit()
+                                    .transform(transformation)
+                                    .into(img_pic);
 
-                                tr.addView(img);
-                            }
-                            tableLayout.addView(tr);
+                            tr.addView(img);
                         }
+                        tableLayout.addView(tr);
                     }
                 }
             });
 
-            return v;
         }
+
+
+        return v;
+    }
 }
