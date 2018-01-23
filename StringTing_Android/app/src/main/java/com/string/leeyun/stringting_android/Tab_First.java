@@ -142,18 +142,19 @@ public class Tab_First extends Fragment implements View.OnClickListener {
         final LinearLayout addbtn = (LinearLayout) v.findViewById(R.id.add_btn);
 
         //이미지 들어오는거
-        final int[] p = {1,2,3,4,5,6,7,8};
+        ArrayList<String>last_5_pic_url_beforerounding=new ArrayList<>();
+
 
         //픽이 3개 이하일 때
-        if (p.length < 3) {
+        if (last_5_pic_url_beforerounding.size() < 3) {
             TextView nothing = (TextView) v.findViewById(R.id.nothing);
             nothing.setVisibility(View.GONE);
 
-            if (p.length % 3 != 0) {
+            if (last_5_pic_url_beforerounding.size() % 3 != 0) {
                 addbtn.setVisibility(View.GONE);
                 tr = new TableRow(getApplicationContext());
                 tr.setPadding(0, 35, 0, 0);
-                for (int i = 0; i < p.length % 3; ++i) {
+                for (int i = 0; i < last_5_pic_url_beforerounding.size() % 3; ++i) {
                     View img = inflater.inflate(R.layout.addimg, null);
                     ImageView img_pic = (ImageView) img.findViewById(R.id.last1);
 
@@ -179,7 +180,7 @@ public class Tab_First extends Fragment implements View.OnClickListener {
         }
 
         //3개 이상 픽
-        else if (p.length >= 3) {
+        else if (last_5_pic_url_beforerounding.size() >= 3) {
             TextView nothing = (TextView) v.findViewById(R.id.nothing);
             nothing.setVisibility(View.GONE);
 
@@ -208,7 +209,7 @@ public class Tab_First extends Fragment implements View.OnClickListener {
             }
             tableLayout.addView(tr);
 
-            final int remainder = p.length -3;
+            final int remainder = last_5_pic_url_beforerounding.size() -3;
 
             addbtn.setVisibility(View.VISIBLE);
             addbtn.setOnClickListener(new View.OnClickListener() {

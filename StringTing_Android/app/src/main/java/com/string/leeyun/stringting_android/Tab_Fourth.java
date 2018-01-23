@@ -144,7 +144,7 @@ public class Tab_Fourth extends Fragment {
                         String shap=" #";
                         get_matched_accounts=response.body().getAccounts();
                         for (int i = 0; i  < get_matched_accounts.size(); i++) {
-                            get_matched_accounts.get(1).getAccount();
+//                            get_matched_accounts.get(1).getAccount();
                             if(get_matched_accounts.get(i).getLast_messages().getContents()!=null){
                                 contents.add(get_matched_accounts.get(i).getLast_messages().getContents());
                                 chat_url_list.add(get_matched_accounts.get(i).getAccount().getImages().getApproved().get(0).getName());
@@ -153,7 +153,7 @@ public class Tab_Fourth extends Fragment {
                                 info.add(shap+get_matched_accounts.get(i).getAccount().getBirthday()+shap+get_matched_accounts.get(i).getAccount().getBody_form()+shap+get_matched_accounts.get(i).getAccount().getEducation()+shap+get_matched_accounts.get(i).getAccount().getHeight());
                                 unread_message.add(get_matched_accounts.get(i).getUnread_messages());
                             }
-                            Log.e("contentsArray",get_matched_accounts.get(1).getLast_messages().getContents());
+//                            Log.e("contentsArray",get_matched_accounts.get(1).getLast_messages().getContents());
 
                         }
 

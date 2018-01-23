@@ -286,8 +286,8 @@ public class PersonalProfile_Edit extends AppCompatActivity {
 
                 LinearLayout l2 = (LinearLayout)findViewById(R.id.enter_chatting_visible);
                 l2.setVisibility(View.GONE);
-                LinearLayout ll = (LinearLayout)findViewById(R.id.enter_chatting);
-                ll.setVisibility(View.VISIBLE);
+                Button confirm = (Button)findViewById(R.id.confirm_btn);
+                confirm.setVisibility(Button.VISIBLE);
 
 
             }
