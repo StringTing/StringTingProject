@@ -120,11 +120,16 @@ public class Tab_Second extends Fragment implements View.OnClickListener {
 
                 get_eval_accountLists=response.body().getAccounts();
                 for (int i = 0; i  < get_eval_accountLists.size(); i++) {
-                    if(get_eval_accountLists.get(i)!=null){
-                        image_url.add(get_eval_accountLists.get(i).getImages().getApproved().get(0).getName());
-                        Log.e("image_log",get_eval_accountLists.get(i).getImages().getApproved().get(0).getName());
-                        to_id.add(String.valueOf(get_eval_accountLists.get(i).getId()));
+                    try{
+                        if(get_eval_accountLists.get(i)!=null){
+                            image_url.add(get_eval_accountLists.get(i).getImages().getApproved().get(0).getName());
+                            Log.e("image_log",get_eval_accountLists.get(i).getImages().getApproved().get(0).getName());
+                            to_id.add(String.valueOf(get_eval_accountLists.get(i).getId()));
+                        }
+                    }catch (Exception e){
+                        e.printStackTrace();
                     }
+
 
                 }
 

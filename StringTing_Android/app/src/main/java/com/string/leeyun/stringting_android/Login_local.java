@@ -44,6 +44,7 @@ public class Login_local extends Activity {
     String sex;
     String Edit_id;
     String Edit_pw;
+    String refreshedToken;
 
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -65,6 +66,7 @@ public class Login_local extends Activity {
         token=pref.getString("token","?");
         Log.e("loacal_token",String.valueOf(token));
         String fcm_token=pref.getString("fcm_token","?");
+
 
 
         OkHttpClient.Builder client1 = new OkHttpClient.Builder();
@@ -107,7 +109,8 @@ public class Login_local extends Activity {
         CheckLogin.setPassword(Edit_pw);
         CheckLogin.setFcm_token(fcm_token);
 
-
+        Log.e("checkloginsex",sex);
+        Log.e("checkloginfcm",fcm_token);
 
         try {
             Call<check_login> post_check_login = apiService.post_check_login(CheckLogin);
@@ -116,42 +119,69 @@ public class Login_local extends Activity {
                 public void onResponse(Call<check_login> call, Response<check_login> response) {
 
 
-                    try {
-                        Intent intent_activate = new Intent(Login_local.this, TabbedBar.class);
-                        Intent intent_ghost = new Intent(Login_local.this, Basicinfo_Edit.class);
-                        Intent intent_interview = new Intent(Login_local.this, Mediate.class);
-                        check_login gsonresponse = response.body();
-                        Log.e("onresponse_check_login", gsonresponse.getResult());
-                        if (gsonresponse.getStatus()!=null) {
-                            Log.e("onresponse", gsonresponse.getStatus());
-                            Log.e("onresponse", String.valueOf(response.code()));
-                            Log.e("onresponse", "success");
-                            get_total_data_save(gsonresponse.getToken(), Integer.parseInt(gsonresponse.getId()),gsonresponse.getSex());
-                        }
-                        else
-                        {
-                            Log.e("get_status","등록되지않은 이메일입니다");
-                            startActivity(intent_ghost);
-                        }
+                    Intent intent_activate = new Intent(Login_local.this,  TabbedBar.class);
+                    Intent intent_ghost= new Intent(Login_local.this, Basicinfo_Edit.class);
+                    Intent intent_interview=new Intent(Login_local.this, Mediate.class);
+                    check_login gsonresponse = response.body();
+                    Log.e("onresponse_check_login", gsonresponse.getResult());
+                    Log.e("onresponse_check_login",gsonresponse.getMessage());
+                    try{
+                        int account_id= Integer.parseInt(gsonresponse.getId());
+                        String sex=gsonresponse.getSex();
+                        get_total_data_save(gsonresponse.getToken(), Integer.parseInt(gsonresponse.getId()),gsonresponse.getSex());
 
-                        if (gsonresponse.getStatus().equals("ACTIVATE")) {
-
-                            startActivity(intent_activate);
-
-                        } else if (gsonresponse.getStatus().equals("GHOST")) {
-                            intent_ghost.putExtra("ID", Edit_id);
-                            intent_ghost.putExtra("PW", Edit_pw);
-                            intent_ghost.putExtra("setformat", "EMAIL");
-                            startActivity(intent_ghost);
-                        } else if (gsonresponse.getStatus().equals("INREVIEW")) {
-                            //test때문에 active로 바꿔둠
-                            startActivity(intent_interview);
-                        } else if (gsonresponse.getStatus().equals("REJECTED")) {
-
-                        }
                     }catch (Exception e){
                         e.printStackTrace();
                     }
+
+                    if (gsonresponse.getStatus()==null) {
+
+                        Log.e("get_status","등록되지않은 이메일입니다");
+                        intent_ghost.putExtra("ID",Edit_id);
+                        intent_ghost.putExtra("PW",Edit_pw);
+                        intent_ghost.putExtra("setformat","EMAIL");
+                        intent_ghost.putExtra("token",token);
+                        startActivity(intent_ghost);
+                    }
+                    else
+                    {
+                        Log.e("onresponse", gsonresponse.getStatus());
+                        Log.e("onresponse", String.valueOf(response.code()));
+                        Log.e("onresponse", "success");
+
+                        if (gsonresponse.getStatus().equals("ACTIVATE"))
+                        {
+
+                            startActivity(intent_activate);
+                        }
+                        else if(gsonresponse.getStatus().equals("GHOST")){
+                            intent_ghost.putExtra("ID",Edit_id);
+                            intent_ghost.putExtra("PW",Edit_pw);
+                            intent_ghost.putExtra("setformat","EMAIL");
+                            intent_ghost.putExtra("token",token);
+
+                            startActivity(intent_ghost);
+                        }
+                        else if(gsonresponse.getStatus().equals("INREVIEW")){
+                            startActivity(intent_interview);
+                        }
+                        else if(gsonresponse.getStatus().equals("REJECTED")){
+
+                        }
+                        else{
+                            intent_ghost.putExtra("ID",Edit_id);
+                            intent_ghost.putExtra("PW",Edit_pw);
+                            Log.e("id",Edit_id);
+                            intent_ghost.putExtra("setformat","EMAIL");
+                            intent_ghost.putExtra("token",token);
+
+                            startActivity(intent_ghost);
+                        }
+                    }
+
+
+
+
                 }
 
 

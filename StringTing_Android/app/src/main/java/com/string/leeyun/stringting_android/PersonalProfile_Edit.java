@@ -243,17 +243,17 @@ public class PersonalProfile_Edit extends AppCompatActivity {
                 m_ListView.setAdapter(m_Adapter);
 
 
-                m_Adapter.add(question_array.get(0), 1);
+                m_Adapter.add(question_array.get(0), 0);
 
-                m_Adapter.add(answer_array.get(0), 0);
+                m_Adapter.add(answer_array.get(0), 1);
 
-                m_Adapter.add(question_array.get(1), 1);
+                m_Adapter.add(question_array.get(1), 0);
 
-                m_Adapter.add(answer_array.get(1), 0);
+                m_Adapter.add(answer_array.get(1), 1);
 
-                m_Adapter.add(question_array.get(2), 1);
+                m_Adapter.add(question_array.get(2), 0);
 
-                m_Adapter.add(answer_array.get(2), 0);
+                m_Adapter.add(answer_array.get(2), 1);
                 setListViewHeightBasedOnItems(m_ListView);
 
             }
@@ -359,5 +359,9 @@ public class PersonalProfile_Edit extends AppCompatActivity {
         token=pref.getString("token","?");
         sex=pref.getString("sex","0");
         Log.e("local_token",String.valueOf(token));
+    }
+
+    public void send_question(View view) {
+
     }
 }
