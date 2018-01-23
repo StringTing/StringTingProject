@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -268,29 +269,29 @@ public class PersonalProfile_Edit extends AppCompatActivity {
 
         //수정 버튼을 클릭하면 edittext를 받아서 listview에 세팅해줌
         findViewById(R.id.modify_sendbtn).setOnClickListener(new TextView.OnClickListener() {
-                                                                 int i=1;
-                                                                 @Override
-                                                                 public void onClick(View v) {
+            int i=1;
+            @Override
+            public void onClick(View v) {
 
-                                                                     EditText editText =(EditText)findViewById(R.id.modify_Edit);
-                                                                     editText.requestFocus();
-                                                                     InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                                                                     imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,InputMethodManager.HIDE_IMPLICIT_ONLY);
-                                                                     Toast.makeText(getApplicationContext(), "modify_send", Toast.LENGTH_LONG).show();
-                                                                     String modifyString = editText.getText().toString();
-                                                                     Log.v("modifyString",modifyString);
+                EditText editText =(EditText)findViewById(R.id.modify_Edit);
+                editText.requestFocus();
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,InputMethodManager.HIDE_IMPLICIT_ONLY);
+                Toast.makeText(getApplicationContext(), "modify_send", Toast.LENGTH_LONG).show();
+                String modifyString = editText.getText().toString();
+                Log.v("modifyString",modifyString);
 
-                                                                     m_Adapter.getM_List().set(position, new ChatCustom.ListContents(modifyString,position));
-                                                                     m_Adapter.notifyDataSetChanged();
+                m_Adapter.getM_List().set(position, new ChatCustom.ListContents(modifyString,position));
+                m_Adapter.notifyDataSetChanged();
 
-                                                                     LinearLayout l2 = (LinearLayout)findViewById(R.id.enter_chatting_visible);
-                                                                     l2.setVisibility(View.GONE);
-                                                                     LinearLayout ll = (LinearLayout)findViewById(R.id.enter_chatting);
-                                                                     ll.setVisibility(View.VISIBLE);
+                LinearLayout l2 = (LinearLayout)findViewById(R.id.enter_chatting_visible);
+                l2.setVisibility(View.GONE);
+                LinearLayout ll = (LinearLayout)findViewById(R.id.enter_chatting);
+                ll.setVisibility(View.VISIBLE);
 
 
-                                                                 }
-                                                             }
+            }
+        }
         );
 
     }
@@ -298,6 +299,8 @@ public class PersonalProfile_Edit extends AppCompatActivity {
     //수정하기 버튼을 눌렀을때 position을 받아옴, 전송버튼을 수정버튼으로 바꿔줌
     public void modify(View view) {
 
+        Button confirm = (Button)findViewById(R.id.confirm_btn);
+        confirm.setVisibility(Button.GONE);
         LinearLayout ll = (LinearLayout)findViewById(R.id.enter_chatting);
         ll.setVisibility(View.GONE);
         LinearLayout l2 = (LinearLayout)findViewById(R.id.enter_chatting_visible);
