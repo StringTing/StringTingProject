@@ -10,7 +10,7 @@
 <FrameLayout
     android:layout_width="94dp"
     android:layout_height="127dp"
-    android:background="@drawable/rounded">
+    >
 
     <ImageView
         android:id="@+id/last1"
@@ -18,7 +18,7 @@
         android:layout_height="98dp"
         android:padding="0dp"
         android:scaleType="fitXY"
-        android:src="@drawable/rounded" />
+        />
 
 
     <TextView
