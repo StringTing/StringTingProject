@@ -79,9 +79,9 @@ public class Tab_First extends Fragment implements View.OnClickListener {
     private Resources mResources;
     private ImageView mImageView , mImageView2 , l1,l2,l3;
     private Bitmap today_Bitmap1,today_Bitmap2 , lb1,lb2,lb3;
-      int account_id;
-     String token;
-     String sex;
+    int account_id;
+    String token;
+    String sex;
     Rest_ApiService apiService;
     Retrofit retrofit;
     ArrayList<Integer> matching_account=new ArrayList<Integer>();
@@ -309,27 +309,27 @@ public class Tab_First extends Fragment implements View.OnClickListener {
 
         Log.e("openselected_second",openselected_second);
 
-    try {
-        if (openselected.equals("true")&&opened_form_api1==true) {
+        try {
+            if (openselected.equals("true")&&opened_form_api1==true) {
 
 
-            ImageView today_rock = (ImageView) v.findViewById(R.id.today_rock_img);
-            today_rock.setVisibility(View.GONE);
+                ImageView today_rock = (ImageView) v.findViewById(R.id.today_rock_img);
+                today_rock.setVisibility(View.GONE);
 
+            }
+
+
+        }catch (Exception e){
+            e.printStackTrace();
         }
-
-
-    }catch (Exception e){
-        e.printStackTrace();
-    }
-    try{
-        if(openselected_second.equals("true")&&opened_form_api2==true){
-            ImageView today_rock = (ImageView) v.findViewById(R.id.today_rock_img2);
-            today_rock.setVisibility(View.GONE);
+        try{
+            if(openselected_second.equals("true")&&opened_form_api2==true){
+                ImageView today_rock = (ImageView) v.findViewById(R.id.today_rock_img2);
+                today_rock.setVisibility(View.GONE);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
-    }catch (Exception e){
-        e.printStackTrace();
-    }
 
 
         // Inflate the layout for this fragment
@@ -358,6 +358,8 @@ public class Tab_First extends Fragment implements View.OnClickListener {
 
                 if(openselected_count.equals("null")&&openselected_count_second.equals("null")) {
                     Intent i = new Intent(getActivity(),Todaypic_pop.class);
+                    i.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+
                     i.putExtra("matching_account",matching_account.get(0));
                     i.putExtra("what_pic","first");
                     if (sex.equals("male")){
@@ -422,6 +424,7 @@ public class Tab_First extends Fragment implements View.OnClickListener {
 
                 if(openselected_count.equals("null")&&openselected_count_second.equals("null")) {
                     Intent i = new Intent(getActivity(),Todaypic_pop.class);
+                    i.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                     i.putExtra("matching_account",matching_account.get(1));
                     i.putExtra("what_pic","second");
                     if (sex.equals("male")){
@@ -530,7 +533,7 @@ public class Tab_First extends Fragment implements View.OnClickListener {
 
                     }
                     if(!url_second.equals(null)){
-                      conn1 = url_second.openConnection();
+                        conn1 = url_second.openConnection();
                         conn1.connect();
                         BufferedInputStream bis1= new BufferedInputStream(conn1.getInputStream());
                         today_Bitmap2= BitmapFactory.decodeStream(bis1);
@@ -539,7 +542,7 @@ public class Tab_First extends Fragment implements View.OnClickListener {
 
                     }
                     if(!url_last_day_first.equals(null)){
-                       conn2 =url_last_day_first.openConnection();
+                        conn2 =url_last_day_first.openConnection();
                         conn2.connect();
                         BufferedInputStream bis2= new BufferedInputStream(conn2.getInputStream());
                         lb1 =  BitmapFactory.decodeStream(bis2);
@@ -547,7 +550,7 @@ public class Tab_First extends Fragment implements View.OnClickListener {
 
                     }
                     if(!url_last_day_second.equals(null)){
-                      conn3 =url_last_day_second.openConnection();
+                        conn3 =url_last_day_second.openConnection();
                         conn3.connect();
                         BufferedInputStream bis3= new BufferedInputStream(conn3.getInputStream());
                         lb2 =  BitmapFactory.decodeStream(bis3);
@@ -564,8 +567,8 @@ public class Tab_First extends Fragment implements View.OnClickListener {
                 } catch (Exception e)
 
                 {
-                        e.printStackTrace();
-                        Log.e("setting_today_bitmap","fail");
+                    e.printStackTrace();
+                    Log.e("setting_today_bitmap","fail");
                 }
             }
         };

@@ -58,10 +58,12 @@
                 android:text="이메일 아이디"/>
 
             <ImageView
+                android:id="@+id/check_email_img"
                 android:layout_width="20dp"
                 android:layout_height="15dp"
                 android:layout_alignParentEnd="true"
-                android:background="@drawable/check"/>
+                android:background="@drawable/check"
+                android:visibility="gone"/>
 
         </RelativeLayout>
 
@@ -96,10 +98,12 @@
                 android:text="비밀번호"/>
 
             <ImageView
+                android:id="@+id/check_pw_edit_img"
                 android:layout_width="20dp"
                 android:layout_height="15dp"
                 android:layout_alignParentEnd="true"
-                android:background="@drawable/check"/>
+                android:background="@drawable/check"
+                android:visibility="gone"/>
 
         </RelativeLayout>
 

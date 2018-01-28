@@ -14,14 +14,12 @@
 
         <Button
             android:onClick="back"
-            android:layout_width="14dp"
-            android:layout_height="wrap_content"
-            android:text="X"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="22dp"
             android:gravity="center"
-            android:textColor="#000000"
-            android:background="#00000000"/>
+            android:background="@drawable/cancelbutton"/>
 
     </RelativeLayout>
 
@@ -29,6 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/sb"
+        android:overScrollMode="never"
         android:layout_above="@+id/button7">
 
     <LinearLayout
