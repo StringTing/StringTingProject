@@ -107,7 +107,7 @@
                             <TextView
                                 android:id="@+id/today_info_text"
                                 android:layout_width="100dp"
-                                android:layout_height="27dp"
+                                android:layout_height="wrap_content"
                                 android:layout_gravity="start"
                                 android:layout_below="@+id/white_text"
                                 android:layout_marginLeft="12dp"
@@ -161,7 +161,7 @@
                             <TextView
                                 android:id="@+id/today_info_text1"
                                 android:layout_width="100dp"
-                                android:layout_height="27dp"
+                                android:layout_height="wrap_content"
                                 android:layout_gravity="start"
                                 android:layout_below="@+id/space"
                                 android:layout_marginLeft="12dp"

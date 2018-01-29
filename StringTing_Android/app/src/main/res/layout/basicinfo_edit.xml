@@ -898,7 +898,6 @@
                 </RelativeLayout>
 
                 <Button
-
                     android:id="@+id/next_btn"
                     android:layout_width="350dp"
                     android:layout_height="40dp"
@@ -912,7 +911,7 @@
                     android:textColor="#000000"
                     android:letterSpacing="-0.02"
                     android:textSize="13sp"
-
+                    style="?android:attr/borderlessButtonStyle"
                     />
             </LinearLayout>
         </ScrollView>
