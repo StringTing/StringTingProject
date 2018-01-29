@@ -1,8 +1,15 @@
 package com.string.leeyun.stringting_android;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -31,7 +38,9 @@ import com.string.leeyun.stringting_android.API.message;
 import com.string.leeyun.stringting_android.API.userinfo;
 import com.tsengvn.typekit.TypekitContextWrapper;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -75,6 +84,7 @@ public class PersonalProfile_Edit extends AppCompatActivity {
     get_introduction_qnalist QnaList;
     ArrayList<String> question_array;
     ArrayList<String>answer_array;
+    String real_album_path;
     message Message = new message();
 
     File Postfile;
@@ -295,6 +305,307 @@ public class PersonalProfile_Edit extends AppCompatActivity {
         );
 
     }
+
+    public void onClick(View v) {
+
+        //앨범가져오기
+        DialogInterface.OnClickListener albumListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                doTakeAlbumAction();
+            }
+        };
+        //취소
+        DialogInterface.OnClickListener canceListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        };
+
+        new AlertDialog.Builder(this)
+                .setTitle("업로드이미지 선택")
+                //.setPositiveButton("사진촬영",cameraListener)
+                .setNeutralButton("앨범선택", albumListener)
+                .setNegativeButton("취소", canceListener)
+                .show();
+    }
+
+    public void onClick_imageUpload2(View v) {
+        DialogInterface.OnClickListener albumListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                doTakeAlbumAction();
+            }
+        };
+        //취소
+        DialogInterface.OnClickListener canceListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        };
+
+        new AlertDialog.Builder(this)
+                .setTitle("업로드이미지 선택")
+                //.setPositiveButton("사진촬영",cameraListener)
+                .setNeutralButton("앨범선택", albumListener)
+                .setNegativeButton("취소", canceListener)
+                .show();
+    }
+
+    public void onClick_imageUpload3(View v) {
+        DialogInterface.OnClickListener albumListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                doTakeAlbumAction();
+            }
+        };
+        //취소
+        DialogInterface.OnClickListener canceListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        };
+
+        new AlertDialog.Builder(this)
+                .setTitle("업로드이미지 선택")
+                //.setPositiveButton("사진촬영",cameraListener)
+                .setNeutralButton("앨범선택", albumListener)
+                .setNegativeButton("취소", canceListener)
+                .show();
+    }
+
+    public void onClick_imageUpload4(View v) {
+        DialogInterface.OnClickListener albumListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                doTakeAlbumAction();
+            }
+        };
+        //취소
+        DialogInterface.OnClickListener canceListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        };
+
+        new AlertDialog.Builder(this)
+                .setTitle("업로드이미지 선택")
+                //.setPositiveButton("사진촬영",cameraListener)
+                .setNeutralButton("앨범선택", albumListener)
+                .setNegativeButton("취소", canceListener)
+                .show();
+    }
+
+    public void onClick_imageUpload5(View v) {
+        DialogInterface.OnClickListener albumListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                doTakeAlbumAction();
+            }
+        };
+        //취소
+        DialogInterface.OnClickListener canceListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        };
+
+        new AlertDialog.Builder(this)
+                .setTitle("업로드이미지 선택")
+                //.setPositiveButton("사진촬영",cameraListener)
+                .setNeutralButton("앨범선택", albumListener)
+                .setNegativeButton("취소", canceListener)
+                .show();
+    }
+
+    public void onClick_imageUpload6(View v) {
+        DialogInterface.OnClickListener albumListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                doTakeAlbumAction();
+            }
+        };
+        //취소
+        DialogInterface.OnClickListener canceListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        };
+
+        new AlertDialog.Builder(this)
+                .setTitle("업로드이미지 선택")
+                //.setPositiveButton("사진촬영",cameraListener)
+                .setNeutralButton("앨범선택", albumListener)
+                .setNegativeButton("취소", canceListener)
+                .show();
+    }
+
+    private void doTakeAlbumAction() { //앨범에서 이미지 가져오기
+        //앨범 호출
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
+        startActivityForResult(intent, PICK_FROM_ALBUM);
+    }
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode != RESULT_OK)
+            return;
+
+        switch (requestCode) {
+            case PICK_FROM_ALBUM: {
+                mImageCaptureUri = data.getData();
+                Log.d("SmartWheel", mImageCaptureUri.getPath().toString());
+                real_album_path= getPath(mImageCaptureUri);
+                Log.e("real_album_path",real_album_path);
+            }
+            case PICK_FROM_CAMERA: {
+                //이미지를 가져온 이후 리자이즈할 이미지 크기
+                //이후에 이미지 크롭 어플리케이션 호출
+                Intent intent = new Intent("com.android.camera.action.CROP");
+                intent.setDataAndType(mImageCaptureUri, "image/*");
+
+                //CROP할 이미지 75*75(키울예정)
+
+                intent.putExtra("scale", true);
+                intent.putExtra("return-data", true);
+                startActivityForResult(intent, CROP_FROM_IMAGE);
+                break;
+            }
+            case CROP_FROM_IMAGE: {
+                //크롭 이후 이미지 받아서 이미지 뷰에 이미지 보여줌
+                //임시파일 삭제
+                if (resultCode != RESULT_OK) {
+                    return;
+                }
+                final Bundle extras = data.getExtras();
+
+                imageupload_count++;
+                Log.e("imageipload_count", String.valueOf(imageupload_count));
+
+
+                String filePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/SmartWheel" + System.currentTimeMillis() + ".jpg";
+                Imageupload_countList.add(real_album_path);
+
+                for (int i=0;i<Imageupload_countList.size();i++){
+                    Log.e("imageupload_countList", String.valueOf(Imageupload_countList.get(i)));
+
+                }
+
+
+
+                if (extras != null) {
+                    Bitmap photo = extras.getParcelable("data");//CROP된 BITMAP
+
+                    Transformation transformation = new RoundedTransformationBuilder()
+                            .borderWidthDp(0)
+                            .cornerRadiusDp(8)
+                            .oval(false)
+                            .build();
+
+                    switch (imageupload_count){
+                        case 1:{
+                            Picasso.with(PersonalProfile_Edit.this)
+                                    .load(mImageCaptureUri)
+                                    .fit()
+                                    .transform(transformation)
+                                    .into(iv_UserPhoto1);
+                            storeCropImage(photo,filePath);
+                            break;
+                        }
+                        case 2:{
+                            Picasso.with(PersonalProfile_Edit.this)
+                                    .load(mImageCaptureUri)
+                                    .fit()
+                                    .transform(transformation)
+                                    .into(iv_UserPhoto2);
+                            storeCropImage(photo,filePath);
+                            break;
+                        }
+                        case 3:{
+                            Picasso.with(PersonalProfile_Edit.this)
+                                    .load(mImageCaptureUri)
+                                    .fit()
+                                    .transform(transformation)
+                                    .into(iv_UserPhoto3);
+                            storeCropImage(photo,filePath);
+                            break;
+                        }
+                        case 4:{
+                            Picasso.with(PersonalProfile_Edit.this)
+                                    .load(mImageCaptureUri)
+                                    .fit()
+                                    .transform(transformation)
+                                    .into(iv_UserPhoto4);
+                            storeCropImage(photo,filePath);
+                            break;
+                        }
+                        case 5:{
+                            Picasso.with(PersonalProfile_Edit.this)
+                                    .load(mImageCaptureUri)
+                                    .fit()
+                                    .transform(transformation)
+                                    .into(iv_UserPhoto5);
+                            storeCropImage(photo,filePath);
+                            break;
+                        }
+                    }
+
+
+                }
+
+                //임시파일삭제
+                File f = new File(mImageCaptureUri.getPath());
+                if (f.exists()) {
+                    f.delete();
+                }
+
+            }
+
+        }
+    }
+    private void storeCropImage(Bitmap bitmap,String filePath){
+        //SmartWheel 폴더를 생성하여 이미지를 저장하는 방식
+        String dirPath=Environment.getExternalStorageDirectory().getAbsolutePath()+"/SmartWheel";
+        File directory_SmartWheel =new File(dirPath);
+
+        if(!directory_SmartWheel.exists()){
+            directory_SmartWheel.mkdir();
+        }
+        File copyFile= new File(filePath);
+        BufferedOutputStream out=null;
+
+        try{
+
+            copyFile.createNewFile();
+            out= new BufferedOutputStream(new FileOutputStream(copyFile));
+            bitmap.compress(Bitmap.CompressFormat.JPEG,100,out);
+
+            //sendBroadcst를 통해 Crop된 사진을 앨범에 보이도록 갱신한다
+            sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,Uri.fromFile(copyFile)));
+            out.flush();
+            out.close();
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
+    public String getPath(Uri uri) {
+        String[] projection = {MediaStore.Images.Media.DATA};
+        Cursor cursor = managedQuery(uri, projection, null, null, null);
+        startManagingCursor(cursor);
+        int columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        return cursor.getString(columnIndex);
+    }
+
 
     //수정하기 버튼을 눌렀을때 position을 받아옴, 전송버튼을 수정버튼으로 바꿔줌
     public void modify(View view) {
