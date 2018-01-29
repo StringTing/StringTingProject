@@ -22,6 +22,7 @@ import com.tsengvn.typekit.TypekitContextWrapper;
 
 import java.io.File;
 import java.net.MalformedURLException;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import okhttp3.MediaType;
@@ -76,35 +77,6 @@ public class Membership_form extends Activity {
         apiService= retrofit.create(Rest_ApiService.class);
 
 
-   /*
-        //입력확인
-        Check_email.addTextChangedListener(new TextWatcher() {
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (ce.length()>=1){
-                    c1.setBackgroundResource(R.drawable.rounded_check_20_edittext);
-                } else {
-                    c1.setBackgroundResource(R.drawable.rounded_20_edittext);
-                }
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-*/
-
-
-
-        ImageView check_pw = (ImageView)findViewById(R.id.check_pw_img) ;
         final EditText email_edit = (EditText) findViewById(R.id.Email);
         final EditText pw_edit = (EditText)findViewById(R.id.Pw_edit);
         final EditText c_pw_edit =(EditText)findViewById(R.id.check_pw);
@@ -121,12 +93,11 @@ public class Membership_form extends Activity {
             public void afterTextChanged(Editable editable) {
                 String ch = email_edit.getText().toString();
                 ImageView check_email = (ImageView)findViewById(R.id.check_email_img) ;
-                check_email.setVisibility(View.VISIBLE);
-                /*if (ch.contains("@")&&ch.length()>=3){
+                if(checkEmail(ch)){
                     check_email.setVisibility(View.VISIBLE);
                 }else {
                     check_email.setVisibility(View.GONE);
-                }*/
+                }
             }
 
             // 입력하기 전에
@@ -147,7 +118,7 @@ public class Membership_form extends Activity {
             public void afterTextChanged(Editable editable) {
                 String ch = pw_edit.getText().toString();
                 ImageView check_pw_edit = (ImageView)findViewById(R.id.check_pw_edit_img) ;
-                if (ch.length()>=1){
+                if (checkPW(ch)){
                     check_pw_edit.setVisibility(View.VISIBLE);
                 }else{
                     check_pw_edit.setVisibility(View.GONE);
@@ -160,8 +131,58 @@ public class Membership_form extends Activity {
 
             }
         });
+
+        c_pw_edit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            // 입력이 끝났을 때
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String ch = pw_edit.getText().toString();
+                String ch_2 =c_pw_edit.getText().toString();
+                ImageView check_pw = (ImageView)findViewById(R.id.check_pw_img) ;
+                if (ch.equals(ch_2)){
+                    check_pw.setVisibility(View.VISIBLE);
+                }else{
+                    check_pw.setVisibility(View.GONE);
+                }
+            }
+
+            // 입력하기 전에
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+        });
     }
 
+    /**
+     * 이메일 포맷 체크
+     * @param email
+     * @return
+     */
+    public static boolean checkEmail(String email){
+
+        String regex = "^[_a-zA-Z0-9-\\.]+@[\\.a-zA-Z0-9-]+\\.[a-zA-Z]+$";
+        Pattern p = Pattern.compile(regex);
+        Matcher m = p.matcher(email);
+        boolean isNormal = m.matches();
+        return isNormal;
+
+    }
+
+
+    public static boolean checkPW(String pw){
+
+        String regex = "^[A-Za-z0-9_@./#&+-]*.{8,20}$";
+        Pattern p = Pattern.compile(regex);
+        Matcher m = p.matcher(pw);
+        boolean isNormal = m.matches();
+        return isNormal;
+
+    }
 
 
 

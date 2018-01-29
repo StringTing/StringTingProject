@@ -4,15 +4,20 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.string.leeyun.stringting_android.API.Rest_ApiService;
 import com.string.leeyun.stringting_android.API.check_login;
 
 import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -46,12 +51,91 @@ public class Login_local extends Activity {
     String Edit_pw;
     String refreshedToken;
 
-        protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.login_local);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.login_local);
 
 
-        }
+
+
+        final EditText email_edit = (EditText) findViewById(R.id.id_Edit);
+        final EditText pw_edit = (EditText)findViewById(R.id.pw_edit);
+
+
+
+        email_edit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            // 입력이 끝났을 때
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String ch = email_edit.getText().toString();
+                ImageView check_email = (ImageView)findViewById(R.id.check_email_img) ;
+                if(checkEmail(ch)){
+                    check_email.setVisibility(View.VISIBLE);
+                }else {
+                    check_email.setVisibility(View.GONE);
+                }
+            }
+
+            // 입력하기 전에
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+        });
+
+
+        pw_edit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            // 입력이 끝났을 때
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String ch = pw_edit.getText().toString();
+                ImageView check_pw_edit = (ImageView)findViewById(R.id.check_pw_edit_img) ;
+                if (checkPW(ch)){
+                    check_pw_edit.setVisibility(View.VISIBLE);
+                }else{
+                    check_pw_edit.setVisibility(View.GONE);
+                }
+            }
+
+            // 입력하기 전에
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+        });
+
+
+    }
+
+
+    public static boolean checkEmail(String email){
+
+        String regex = "^[_a-zA-Z0-9-\\.]+@[\\.a-zA-Z0-9-]+\\.[a-zA-Z]+$";
+        Pattern p = Pattern.compile(regex);
+        Matcher m = p.matcher(email);
+        boolean isNormal = m.matches();
+        return isNormal;
+
+    }
+
+
+    public static boolean checkPW(String pw){
+
+        String regex = "^[A-Za-z0-9_@./#&+-]*.{8,20}$";
+        Pattern p = Pattern.compile(regex);
+        Matcher m = p.matcher(pw);
+        boolean isNormal = m.matches();
+        return isNormal;
+
+    }
 
 
     public void onClick_login_check(View v){

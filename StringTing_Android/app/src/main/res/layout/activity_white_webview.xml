@@ -12,15 +12,13 @@
         android:id="@+id/sb">
 
         <Button
-            android:layout_width="14dp"
-            android:layout_height="wrap_content"
-            android:text="X"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="22dp"
             android:gravity="center"
             android:onClick="onBack"
-            android:textColor="#000000"
-            android:background="#00000000"/>
+            android:background="@drawable/cancelbutton"/>
 
         <TextView
             android:id="@+id/textView21"
