@@ -63,7 +63,7 @@ public class PersonalProfile_Edit extends AppCompatActivity {
     private static final int PICK_FROM_ALBUM = 1;
     private static final int CROP_FROM_IMAGE = 2;
     private Uri mImageCaptureUri;
-    private ImageView iv_UserPhoto1, iv_UserPhoto2, iv_UserPhoto3, iv_UserPhoto4, iv_UserPhoto5, iv_UserPhoto6;
+    ImageView iv_UserPhoto1, iv_UserPhoto2, iv_UserPhoto3, iv_UserPhoto4, iv_UserPhoto5, iv_UserPhoto6;
     public int imageupload_count=0;
     public ArrayList<String> Imageupload_countList=new ArrayList<>();
     userinfo UserInfo = new userinfo();
@@ -111,6 +111,12 @@ public class PersonalProfile_Edit extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_profile__edit);
 
+        iv_UserPhoto1 = (ImageView) this.findViewById(R.id.photo1);
+        iv_UserPhoto2 = (ImageView) this.findViewById(R.id.photo2);
+        iv_UserPhoto3 = (ImageView) this.findViewById(R.id.photo3);
+        iv_UserPhoto4 = (ImageView) this.findViewById(R.id.photo4);
+        iv_UserPhoto5 = (ImageView) this.findViewById(R.id.photo5);
+        iv_UserPhoto6 = (ImageView) this.findViewById(R.id.photo6);
 
         get_local_data();
 
@@ -187,8 +193,9 @@ public class PersonalProfile_Edit extends AppCompatActivity {
                                 profile_image_replace.add(profile_image_list.get(i).replace(replace,large));
                                 //이미지 full url 이거 picasso에 바로 넣으면 됨
                                 profile_image_full_url.add(API_URL+profile_image_replace.get(i));
-                            }
 
+                            }
+                            get_image_setting(profile_image_full_url);
                             Log.e("image_url_first", profile_image_replace.get(0));
                         }
 
@@ -312,6 +319,7 @@ public class PersonalProfile_Edit extends AppCompatActivity {
         DialogInterface.OnClickListener albumListener = new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                imageupload_count=1;
                 doTakeAlbumAction();
             }
         };
@@ -335,6 +343,7 @@ public class PersonalProfile_Edit extends AppCompatActivity {
         DialogInterface.OnClickListener albumListener = new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                imageupload_count=2;
                 doTakeAlbumAction();
             }
         };
@@ -358,6 +367,7 @@ public class PersonalProfile_Edit extends AppCompatActivity {
         DialogInterface.OnClickListener albumListener = new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                imageupload_count=3;
                 doTakeAlbumAction();
             }
         };
@@ -381,6 +391,7 @@ public class PersonalProfile_Edit extends AppCompatActivity {
         DialogInterface.OnClickListener albumListener = new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                imageupload_count=4;
                 doTakeAlbumAction();
             }
         };
@@ -404,6 +415,7 @@ public class PersonalProfile_Edit extends AppCompatActivity {
         DialogInterface.OnClickListener albumListener = new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                imageupload_count=5;
                 doTakeAlbumAction();
             }
         };
@@ -411,6 +423,7 @@ public class PersonalProfile_Edit extends AppCompatActivity {
         DialogInterface.OnClickListener canceListener = new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                imageupload_count=6;
                 dialog.dismiss();
             }
         };
@@ -486,7 +499,7 @@ public class PersonalProfile_Edit extends AppCompatActivity {
                 }
                 final Bundle extras = data.getExtras();
 
-                imageupload_count++;
+//                imageupload_count++;
                 Log.e("imageipload_count", String.valueOf(imageupload_count));
 
 
@@ -681,5 +694,29 @@ public class PersonalProfile_Edit extends AppCompatActivity {
     public void edit_profile_confirm(View view){
 
        
+    }
+
+    public void get_image_setting(ArrayList<String> image_url){
+        Transformation transformation = new RoundedTransformationBuilder()
+                .borderWidthDp(0)
+                .cornerRadiusDp(8)
+                .oval(false)
+                .build();
+        Log.e("get_image_setting에서 imageurl파라미터 테스트",image_url.get(0));
+        ArrayList<ImageView>get_image_setting_preview= new ArrayList<>();
+            get_image_setting_preview.add(iv_UserPhoto1);
+            get_image_setting_preview.add(iv_UserPhoto2);
+            get_image_setting_preview.add(iv_UserPhoto3);
+            get_image_setting_preview.add(iv_UserPhoto4);
+            get_image_setting_preview.add(iv_UserPhoto5);
+            get_image_setting_preview.add(iv_UserPhoto6);
+
+        for (int i=0;i<image_url.size();i++){
+            Picasso.with(PersonalProfile_Edit.this)
+                    .load(image_url.get(i))
+                    .fit()
+                    .transform(transformation)
+                    .into(get_image_setting_preview.get(i));
+        }
     }
 }
