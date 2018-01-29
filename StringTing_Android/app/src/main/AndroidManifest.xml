@@ -32,6 +32,7 @@
             android:name=".Preexistence_Login"
             android:screenOrientation="portrait" />
         <activity android:name=".Login_local" />
+        <activity android:name=".KaKaoSign"/>
         <activity
             android:name=".Basicinfo_Edit"
             android:windowSoftInputMode="stateAlwaysHidden" />

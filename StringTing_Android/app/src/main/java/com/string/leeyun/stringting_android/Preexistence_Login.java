@@ -102,6 +102,7 @@ public class Preexistence_Login extends Activity {
         kakaologin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                callback = new SessionCallback();
                 Session.getCurrentSession().addCallback(callback);
             }
         });
@@ -352,8 +353,8 @@ public class Preexistence_Login extends Activity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        callbackManager.onActivityResult(requestCode, resultCode, data);
+       // super.onActivityResult(requestCode, resultCode, data);
+      //  callbackManager.onActivityResult(requestCode, resultCode, data);
         if (Session.getCurrentSession().handleActivityResult(requestCode, resultCode, data)) {
             return;
         }
@@ -375,58 +376,31 @@ public class Preexistence_Login extends Activity {
         startActivity(exintent);
 
     }
-        public class SessionCallback implements ISessionCallback {
+
+    public class SessionCallback implements ISessionCallback {
 
         @Override
         public void onSessionOpened() {
-
-            UserManagement.requestMe(new MeResponseCallback() {
-
-                @Override
-                public void onFailure(ErrorResult errorResult) {
-                    String message = "failed to get user info. msg=" + errorResult;
-                    Logger.d(message);
-
-                    ErrorCode result = ErrorCode.valueOf(errorResult.getErrorCode());
-                    if (result == ErrorCode.CLIENT_ERROR_CODE) {
-                        finish();
-                    } else {
-                        //redirectMainActivity();
-                    }
-
-                }
-
-                @Override
-                public void onSessionClosed(ErrorResult errorResult) {
-                }
-
-                @Override
-                public void onNotSignedUp() {
-                }
-
-                @Override
-                public void onSuccess(UserProfile userProfile) {
-                    //로그인에 성공하면 로그인한 사용자의 일련번호, 닉네임, 이미지url등을 리턴합니다.
-                    //사용자 ID는 보안상의 문제로 제공하지 않고 일련번호는 제공합니다.
-                    Log.e("UserProfile", userProfile.toString());
-                    String kakaoID = String.valueOf(userProfile.getId()); // userProfile에서 ID값을 가져옴
-                    String kakaoNickname = userProfile.getNickname();     // Nickname 값을 가져옴
-                    Log.e("KakaoId", kakaoID);
-
-                    Intent intent = new Intent(Preexistence_Login.this, Basicinfo_Edit.class);
-                    intent.putExtra("ID", kakaoID);
-                    intent.putExtra("setid", 'K');
-                    startActivity(intent);
-                }
-            });
-
+            Log.e("세션","성공");
+            redirectSignupActivity();  // 세션 연결성공 시 redirectSignupActivity() 호출
         }
 
         @Override
         public void onSessionOpenFailed(KakaoException exception) {
             Log.e("sessionopenfail","fail");
-
+            if(exception != null) {
+                Logger.e(exception);
+            }
+            setContentView(R.layout.preexistence_login); // 세션 연결이 실패했을때
         }
+
+    }
+
+    protected void redirectSignupActivity() {       //세션 연결 성공 시 SignupActivity로 넘김
+        final Intent intent = new Intent(this, KaKaoSign.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        startActivity(intent);
+        finish();
     }
 
 
