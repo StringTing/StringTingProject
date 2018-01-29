@@ -5,8 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="com.android.vending.BILLING"/>
-
+    <uses-permission android:name="com.android.vending.BILLING" />
 
     <application
         android:name=".API.App"
@@ -32,7 +31,7 @@
             android:name=".Preexistence_Login"
             android:screenOrientation="portrait" />
         <activity android:name=".Login_local" />
-        <activity android:name=".KaKaoSign"/>
+        <activity android:name=".KaKaoSign" />
         <activity
             android:name=".Basicinfo_Edit"
             android:windowSoftInputMode="stateAlwaysHidden" />
@@ -85,14 +84,17 @@
         <activity
             android:name=".Report_pop"
             android:theme="@android:style/Theme.Dialog" />
-        <activity android:name=".Whitemember"></activity>
-        <activity android:name=".White_webview"/>
-        <activity android:name=".PersonalProfile_Edit"/>
-        <activity android:name=".Coin_White"/>
-        <activity android:name=".google_play_item_payment"/>
+        <activity android:name=".Whitemember" />
+        <activity android:name=".White_webview" />
+        <activity android:name=".PersonalProfile_Edit" />
+        <activity android:name=".Coin_White" />
+        <activity android:name=".google_play_item_payment" />
+
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="c21894fb4370f3d85f8eb5315f054d65e7f826bb" />
+
+        <activity android:name=".Rejected_mediate"></activity>
     </application>
 
 </manifest>

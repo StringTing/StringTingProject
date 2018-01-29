@@ -32,12 +32,29 @@
 
         </RelativeLayout>
 
+        <TextView
+            android:id="@+id/endding"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/sb"
+            android:gravity="center"
+            android:background="@color/white"
+            android:textColor="#a9a9a9"
+            android:text="오늘 심사를 모두 진행하셨어요!"
+            android:textSize="11sp"
+            android:visibility="gone"/>
+
+        <RelativeLayout
+            android:id="@+id/ing"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/sb">
+
         <RelativeLayout
             android:id="@+id/p_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:layout_below="@+id/sb"
             android:orientation="vertical">
 
             <android.support.v4.view.ViewPager
@@ -177,6 +194,7 @@
                 android:scaleType="centerInside"
                 android:src="@drawable/select_cheeze" />
         </LinearLayout>
+        </RelativeLayout>
 
 
     </RelativeLayout>
