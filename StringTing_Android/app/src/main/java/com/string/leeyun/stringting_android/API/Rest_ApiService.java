@@ -91,6 +91,9 @@ public interface Rest_ApiService {
 
         @POST("pay/item/")
         Call<post_item>post_item(@Body post_item postItem);
+
+        @POST("register/edit-introduction-qna/")
+        Call<post_qna_list>post_edit_qna(@Body post_qna_list postEditQna);
     }
 
 

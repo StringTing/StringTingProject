@@ -367,4 +367,8 @@ public class PersonalProfile_Edit extends AppCompatActivity {
     public void send_question(View view) {
 
     }
+    public void edit_profile_confirm(View view){
+
+       
+    }
 }

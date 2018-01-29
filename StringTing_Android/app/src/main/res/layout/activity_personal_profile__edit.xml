@@ -946,6 +946,7 @@
             android:textSize="14sp"
             android:letterSpacing="-0.02"
             android:visibility="visible"
+            android:onClick="edit_profile_confirm"
             android:textColor="#000000"/>
 
 

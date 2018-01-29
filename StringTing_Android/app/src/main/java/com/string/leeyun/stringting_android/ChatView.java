@@ -82,7 +82,7 @@ public class ChatView extends Activity implements AdapterView.OnItemClickListene
     post_qna PostQna=new post_qna();
     ArrayList<String> Imageupload_countList;
     ArrayList<get_introduction_question>GetIntroductionQuestion;
-
+    int question_id_count=0;
 
     public ArrayList<post_qna>postQnaList=new ArrayList<post_qna>();
 
@@ -430,7 +430,8 @@ public class ChatView extends Activity implements AdapterView.OnItemClickListene
         String inputValue = editText.getText().toString();
 
 
-        PostQna.setQuestion_id(question_id_array.get(0));
+        PostQna.setQuestion_id(question_id_array.get(question_id_count));
+        question_id_count+=1;
         Log.e("dd", String.valueOf(question_id_array.get(0)));
         Log.e("dd1",inputValue);
         PostQna.setAnswer(inputValue);
