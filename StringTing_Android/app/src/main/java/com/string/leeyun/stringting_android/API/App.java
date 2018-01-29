@@ -4,84 +4,61 @@ package com.string.leeyun.stringting_android.API;
  * Created by leeyun on 2017. 9. 16..
  */
 
+import android.app.Activity;
 import android.app.Application;
-import android.content.Context;
-import android.util.Log;
 
-import com.crashlytics.android.Crashlytics;
-import com.kakao.auth.ApprovalType;
-import com.kakao.auth.AuthType;
-import com.kakao.auth.IApplicationConfig;
-import com.kakao.auth.ISessionConfig;
-import com.kakao.auth.KakaoAdapter;
 import com.kakao.auth.KakaoSDK;
-import com.tsengvn.typekit.Typekit;
+import com.string.leeyun.stringting_android.KaKaoSDKAdapter;
 
-
-import io.fabric.sdk.android.Fabric;
 
 import static com.kakao.util.helper.Utility.getPackageInfo;
 
-import static com.kakao.util.helper.Utility.getKeyHash;
-
+/**
+ * 이미지를 캐시를 앱 수준에서 관리하기 위한 애플리케이션 객체이다.
+ * 로그인 기반 샘플앱에서 사용한다.
+ *
+ * @author MJ
+ */
 public class App extends Application {
+    private static volatile App instance = null;
+    private static volatile Activity currentActivity = null;
 
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        instance = this;
 
-    private class KakaoSDKAdapter extends KakaoAdapter {
-
-        @Override
-        public ISessionConfig getSessionConfig() {
-            return new ISessionConfig() {
-                @Override
-                public AuthType[] getAuthTypes() {
-                    return new AuthType[] {AuthType.KAKAO_LOGIN_ALL};
-                }
-
-                @Override
-                public boolean isUsingWebviewTimer() {
-                    return false;
-                }
-
-                @Override
-                public boolean isSecureMode() {
-                    return false;
-                }
-
-                @Override
-                public ApprovalType getApprovalType() {
-                    return ApprovalType.INDIVIDUAL;
-                }
-
-                @Override
-                public boolean isSaveFormData() {
-                    return true;
-                }
-            };
-        }
-
-        @Override
-        public IApplicationConfig getApplicationConfig() {
-            return new IApplicationConfig() {
-                @Override
-                public Context getApplicationContext() {
-                    return App.this.getApplicationContext();
-                }
-            };
-        }
+        KakaoSDK.init(new KaKaoSDKAdapter());
     }
 
-        @Override
-        public void onCreate() {
-            super.onCreate();
-            Fabric.with(this, new Crashlytics());
-            KakaoSDK.init(new KakaoSDKAdapter());
-            Log.e("Key Hash : ", getKeyHash(this));
-            Typekit.getInstance()
-                    .addNormal(Typekit.createFromAsset(this, "font/nanum.ttf"))
-                    .addBold(Typekit.createFromAsset(this, "font/nanum.ttf"));
-        }
-    //Application이 가지고있는 정보를 얻기위한 interface.
+    public static Activity getCurrentActivity() {
+        return currentActivity;
+    }
 
+    public static void setCurrentActivity(Activity currentActivity) {
+        App.currentActivity = currentActivity;
+    }
+
+    /**
+     * singleton 애플리케이션 객체를 얻는다.
+     * @return singleton 애플리케이션 객체
+     */
+    public static App getGlobalApplicationContext() {
+        if(instance == null)
+            throw new IllegalStateException("this application does not inherit com.kakao.GlobalApplication");
+        return instance;
+    }
+
+    /**
+     * 애플리케이션 종료시 singleton 어플리케이션 객체 초기화한다.
+     */
+    @Override
+    public void onTerminate() {
+        super.onTerminate();
+        instance = null;
+    }
 }
+
+
 
 
