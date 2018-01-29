@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.string.leeyun.stringting_android.API.Get_evalaccount;
 import com.string.leeyun.stringting_android.API.ResponseApi;
@@ -42,6 +44,9 @@ public class Tab_Second extends Fragment implements View.OnClickListener {
     private ImageView candy1,candy2,candy3,candy4,candy5;
 
     private ImageView o_candy1,o_candy2,o_candy3,o_candy4,o_candy5;
+
+    TextView endding;
+    RelativeLayout ing;
 
     int account_id;
     String token;
@@ -101,7 +106,7 @@ public class Tab_Second extends Fragment implements View.OnClickListener {
 
         apiService= retrofit.create(Rest_ApiService.class);
 
-        View result=inflater.inflate(R.layout.activity_tab_second, container, false);
+        final View result=inflater.inflate(R.layout.activity_tab_second, container, false);
 
         pager= (ViewPager)result.findViewById(R.id.viewPager);
 
@@ -151,6 +156,14 @@ public class Tab_Second extends Fragment implements View.OnClickListener {
                         ViewPagerAdapter adapter = new ViewPagerAdapter(getActivity().getLayoutInflater(), getContext(), image_url_full);
                         pager.setAdapter(adapter);
 
+                    }
+
+                    else {
+                        ing = (RelativeLayout) result.findViewById(R.id.ing);
+                        endding = (TextView) result.findViewById(R.id.endding);
+
+                        ing.setVisibility(View.GONE);
+                        endding.setVisibility(View.VISIBLE);
                     }
                 }catch (Exception e){
                     e.printStackTrace();

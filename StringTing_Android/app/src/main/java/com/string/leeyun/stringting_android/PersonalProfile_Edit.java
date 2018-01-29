@@ -223,7 +223,7 @@ public class PersonalProfile_Edit extends AppCompatActivity {
         }
 
 
-        QnaList=new get_introduction_qnalist();
+        /*QnaList=new get_introduction_qnalist();
 
         Call<get_introduction_qnalist> PostQnaList = apiService.get_introduction_qnalist(sex,account_id);
         PostQnaList.enqueue(new Callback<get_introduction_qnalist>() {
@@ -309,7 +309,7 @@ public class PersonalProfile_Edit extends AppCompatActivity {
 
             }
         }
-        );
+        );*/
 
     }
 

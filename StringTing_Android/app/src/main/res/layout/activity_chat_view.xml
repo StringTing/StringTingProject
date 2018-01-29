@@ -4,12 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="#f7f7f7"
     tools:context="com.string.leeyun.stringting_android.ChatView">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:background="@color/white"
         android:id="@+id/sb">
 
         <ImageButton
@@ -65,7 +66,8 @@
     <FrameLayout
         android:id="@+id/enter_change"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
+        android:background="@color/white"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true">
 
@@ -83,7 +85,8 @@
             android:lineSpacingExtra="12sp"
             android:textSize="18sp"
             android:onClick="onClick_TabbedBar"
-            android:visibility="invisible" />
+            android:visibility="invisible"
+            style="?android:attr/borderlessButtonStyle"/>
 
         <LinearLayout
             android:id="@+id/enter_chatting"
@@ -92,7 +95,6 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true"
             android:layout_gravity="center"
-            android:layout_marginTop="10dp"
             android:orientation="horizontal"
             android:visibility="visible">
 
@@ -102,7 +104,6 @@
                 android:layout_height="36dp"
                 android:layout_marginLeft="7dp"
                 android:layout_marginRight="7dp"
-                android:layout_marginBottom="7dp"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
                 android:layout_gravity="center"
@@ -117,13 +118,13 @@
                 android:layout_width="56dp"
                 android:layout_height="36dp"
                 android:layout_gravity="center"
-                android:layout_marginBottom="7dp"
                 android:layout_marginRight="7dp"
                 android:textColor="@color/white"
                 android:onClick="send_question"
                 android:textSize="14sp"
                 android:background="@drawable/rounded_sendbtn"
-                android:text="전송" />
+                android:text="전송"
+                style="?android:attr/borderlessButtonStyle"/>
 
         </LinearLayout>
 
@@ -166,7 +167,8 @@
                 android:layout_marginRight="7dp"
                 android:layout_gravity="center"
                 android:background="@drawable/rounded_sendbtn"
-                android:visibility="visible"/>
+                android:visibility="visible"
+                style="?android:attr/borderlessButtonStyle"/>
         </LinearLayout>
 
     </FrameLayout>
