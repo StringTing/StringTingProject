@@ -53,6 +53,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static com.string.leeyun.stringting_android.API.Rest_ApiService.API_IMAGE_URL;
 import static com.string.leeyun.stringting_android.API.Rest_ApiService.API_URL;
 import static com.string.leeyun.stringting_android.ChatView.position;
 
@@ -192,7 +193,7 @@ public class PersonalProfile_Edit extends AppCompatActivity {
                                 //이미지 url 받아온 것 size 변경
                                 profile_image_replace.add(profile_image_list.get(i).replace(replace,large));
                                 //이미지 full url 이거 picasso에 바로 넣으면 됨
-                                profile_image_full_url.add(API_URL+profile_image_replace.get(i));
+                                profile_image_full_url.add(API_IMAGE_URL+profile_image_replace.get(i));
 
                             }
                             get_image_setting(profile_image_full_url);
