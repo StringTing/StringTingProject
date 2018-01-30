@@ -86,10 +86,20 @@ get_matched_account account1;
                 Imageprofile2.add(Imageresized_large.get(1));
                 Imageprofile2.add("1");
             } else if (Imageresized_small.get(2) != null) {
-                Imageprofile3.add(Imageresized_large.get(2));
+                Imageprofile3.add(Imageresized_small.get(2));
                 Imageprofile3.add(Imageresized_middle.get(2));
                 Imageprofile3.add(Imageresized_large.get(2));
                 Imageprofile3.add("2");
+            } else if (Imageresized_small.get(3) !=null){
+                Imageprofile3.add(Imageresized_small.get(3));
+                Imageprofile3.add(Imageresized_middle.get(3));
+                Imageprofile3.add(Imageresized_large.get(3));
+                Imageprofile3.add("3");
+            }else if (Imageresized_small.get(4) !=null){
+                Imageprofile3.add(Imageresized_small.get(4));
+                Imageprofile3.add(Imageresized_middle.get(4));
+                Imageprofile3.add(Imageresized_large.get(4));
+                Imageprofile3.add("4");
             }
 
 
