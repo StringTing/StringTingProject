@@ -8,6 +8,8 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -147,7 +149,7 @@ public class ChatView extends Activity implements AdapterView.OnItemClickListene
         sex=local_sex();
         Log.e("sex",sex);
 
-
+        setonclick();
 
         // 커스텀 어댑터 생성
         m_Adapter = new ChatCustom();
@@ -182,6 +184,7 @@ public class ChatView extends Activity implements AdapterView.OnItemClickListene
 
 
                 m_Adapter.add(GetIntroductionQuestion.get(0).getContents(),0);
+
 
 
 
@@ -224,9 +227,45 @@ public class ChatView extends Activity implements AdapterView.OnItemClickListene
             }
         );
 
+
+
+
+
     }
 
 
+    public void setonclick(){
+        final Button send = (Button) findViewById(R.id.send_btn);
+
+        final EditText editText = (EditText) findViewById(R.id.input_text);
+
+
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(charSequence.toString().replace(" ", "").equals("")||charSequence.length()<5){
+                    send.setBackgroundResource(R.drawable.rounded_non_sendbtn);
+                    send.setClickable(false);
+
+                } else {
+                    send.setBackgroundResource(R.drawable.rounded_sendbtn);
+                    send.setClickable(true);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+
+    }
 
 /*
     private void replacee (String inputValue ,int _str){
@@ -422,6 +461,7 @@ public class ChatView extends Activity implements AdapterView.OnItemClickListene
         editor.clear();
         editor.commit();
     }
+
 
     public void send_question(View v){
 
