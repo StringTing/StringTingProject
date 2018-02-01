@@ -58,6 +58,7 @@ public class Chatting extends AppCompatActivity  {
     String sex;
     String token;
     ArrayList<String>image_full_url=new ArrayList<>();
+    int profile_position=0;
     ImageView profile_img;
 
     @Override
@@ -73,6 +74,7 @@ public class Chatting extends AppCompatActivity  {
         //그룹아이디를 받아와 메시지 리스트생성
         group_id = (int)getIntent().getSerializableExtra("group_id");
         image_full_url=(getIntent().getStringArrayListExtra("image_full_url"));
+        profile_position=getIntent().getIntExtra("profile_position",profile_position);
         Log.e("image_full_url잘넘어왔냐",image_full_url.get(0));
         Log.e("group_id", String.valueOf(group_id));
         get_local_data();
@@ -91,7 +93,7 @@ public class Chatting extends AppCompatActivity  {
         //프로필 이미지 서클 (프로필 url주세요)
         profile_img = (ImageView) findViewById(R.id.profile_image);
 
-   //     Picasso.with(getBaseContext()).load(profile_image_full_url.get(0)).transform(new CircleTransForm()).into(profile_img);
+        Picasso.with(getBaseContext()).load(image_full_url.get(profile_position)).transform(new CircleTransForm()).into(profile_img);
 
 
         Gson gson = new GsonBuilder()
