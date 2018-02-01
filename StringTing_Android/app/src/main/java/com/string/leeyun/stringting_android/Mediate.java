@@ -93,16 +93,6 @@ public class Mediate extends AppCompatActivity {
                 Imageprofile3.add(Imageresized_middle.get(2));
                 Imageprofile3.add(Imageresized_large.get(2));
                 Imageprofile3.add("2");
-            } else if (Imageresized_small.get(3) !=null){
-                Imageprofile3.add(Imageresized_small.get(3));
-                Imageprofile3.add(Imageresized_middle.get(3));
-                Imageprofile3.add(Imageresized_large.get(3));
-                Imageprofile3.add("3");
-            }else if (Imageresized_small.get(4) !=null){
-                Imageprofile3.add(Imageresized_small.get(4));
-                Imageprofile3.add(Imageresized_middle.get(4));
-                Imageprofile3.add(Imageresized_large.get(4));
-                Imageprofile3.add("4");
             }
 
 
@@ -116,9 +106,18 @@ public class Mediate extends AppCompatActivity {
 
             for (int index = 0; index < Imageprofile1.size(); index++) {
                 Log.e("Imageprofile1", Imageprofile1.get(index));
-                File file = new File(Imageprofile1.get(index));
-                RequestBody surveyBody = RequestBody.create(MediaType.parse("image/*"), file);
-                images1[index] = MultipartBody.Part.createFormData("image" + keyvalue.get(index), file.getName(), surveyBody);
+                    File file = new File(Imageprofile1.get(index));
+                    if (index<3) {
+                        RequestBody surveyBody = RequestBody.create(MediaType.parse("image/*"), file);
+
+                        images1[index] = MultipartBody.Part.createFormData("image" + keyvalue.get(index), file.getName(), surveyBody);
+                    }
+                    if (index==3){
+                        RequestBody surveyBody = RequestBody.create(MediaType.parse("text/plain"),Imageprofile1.get(index));
+
+                        images1[index] = MultipartBody.Part.createFormData("image" + keyvalue.get(index), Imageprofile1.get(index), surveyBody);
+                    }
+
             }
 
         }catch (Exception e){
