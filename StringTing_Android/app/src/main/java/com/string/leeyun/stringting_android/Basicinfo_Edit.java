@@ -103,6 +103,7 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
     String sex;
     String token_localdb;
     int account_id_localdb;
+    String Setting_id;
     message Message = new message();
 
     File Postfile;
@@ -177,6 +178,7 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.basicinfo_edit);
 
+        userinfo_save();
         OkHttpClient.Builder client1 = new OkHttpClient.Builder();
         client1.addInterceptor(new Interceptor() {
             @Override
@@ -184,10 +186,16 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
 
                 Request builder = chain.request();
                 Request newRequest;
-                newRequest = builder.newBuilder()
-                        .addHeader("access-token",token)
-                        .build();
-
+                if (Setting_id.equals("EMAIL")){
+                    newRequest = builder.newBuilder()
+                            .addHeader("access-token"," ")
+                            .build();
+                }
+                else {
+                    newRequest = builder.newBuilder()
+                            .addHeader("access-token", token_localdb)
+                            .build();
+                }
 
                 return chain.proceed(newRequest);
 
@@ -444,22 +452,22 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
         switch (requestCode) {
             case PICK_FROM_ALBUM: {
                 mImageCaptureUri = data.getData();
-                Log.d("SmartWheel", mImageCaptureUri.getPath().toString());
+                Log.e("SmartWheel", mImageCaptureUri.getPath().toString());
                 real_album_path= getPath(mImageCaptureUri);
                 Log.e("real_album_path",real_album_path);
             }
             case PICK_FROM_CAMERA: {
                 //이미지를 가져온 이후 리자이즈할 이미지 크기
                 //이후에 이미지 크롭 어플리케이션 호출
-                Intent intent = new Intent("com.android.camera.action.CROP");
-                intent.setDataAndType(mImageCaptureUri, "image/*");
-
-                //CROP할 이미지 75*75(키울예정)
-
-                intent.putExtra("scale", true);
-                intent.putExtra("return-data", true);
-                startActivityForResult(intent, CROP_FROM_IMAGE);
-                break;
+//                Intent editIntent = new Intent(Intent.ACTION_EDIT);
+//                editIntent.setDataAndType(mImageCaptureUri, "image/*");
+//                editIntent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+//                //CROP할 이미지 75*75(키울예정)
+//
+//                editIntent.putExtra("scale", true);
+//                editIntent.putExtra("return-data", true);
+//                startActivityForResult(editIntent, CROP_FROM_IMAGE);
+//                break;
             }
             case CROP_FROM_IMAGE: {
                 //크롭 이후 이미지 받아서 이미지 뷰에 이미지 보여줌
@@ -474,6 +482,7 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
 
 
                 String filePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/SmartWheel" + System.currentTimeMillis() + ".jpg";
+                Log.e("filepath",filePath);
                 Imageupload_countList.add(real_album_path);
 
                 for (int i=0;i<Imageupload_countList.size();i++){
@@ -483,8 +492,8 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
 
 
 
-                if (extras != null) {
-                    Bitmap photo = extras.getParcelable("data");//CROP된 BITMAP
+//                if (extras != null) {
+//                    Bitmap photo = extras.getParcelable("data");//CROP된 BITMAP
 
                     Transformation transformation = new RoundedTransformationBuilder()
                             .borderWidthDp(0)
@@ -499,7 +508,7 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
                                     .fit()
                                     .transform(transformation)
                                     .into(iv_UserPhoto1);
-                            storeCropImage(photo,filePath);
+                            storeCropImage(filePath);
                             break;
                         }
                         case 2:{
@@ -508,7 +517,7 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
                                     .fit()
                                     .transform(transformation)
                                     .into(iv_UserPhoto2);
-                            storeCropImage(photo,filePath);
+//                            storeCropImage(photo,filePath);
                             break;
                         }
                         case 3:{
@@ -517,7 +526,7 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
                                     .fit()
                                     .transform(transformation)
                                     .into(iv_UserPhoto3);
-                            storeCropImage(photo,filePath);
+//                            storeCropImage(photo,filePath);
                             break;
                         }
                         case 4:{
@@ -526,7 +535,7 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
                                     .fit()
                                     .transform(transformation)
                                     .into(iv_UserPhoto4);
-                            storeCropImage(photo,filePath);
+//                            storeCropImage(photo,filePath);
                             break;
                         }
                         case 5:{
@@ -535,13 +544,13 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
                                     .fit()
                                     .transform(transformation)
                                     .into(iv_UserPhoto5);
-                            storeCropImage(photo,filePath);
+//                            storeCropImage(photo,filePath);
                             break;
                         }
                     }
 
 
-                }
+//                }
 
                 //임시파일삭제
                 File f = new File(mImageCaptureUri.getPath());
@@ -553,7 +562,7 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
 
         }
     }
-    private void storeCropImage(Bitmap bitmap,String filePath){
+    private void storeCropImage(String filePath){
         //SmartWheel 폴더를 생성하여 이미지를 저장하는 방식
         String dirPath=Environment.getExternalStorageDirectory().getAbsolutePath()+"/SmartWheel";
         File directory_SmartWheel =new File(dirPath);
@@ -568,7 +577,7 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
 
             copyFile.createNewFile();
             out= new BufferedOutputStream(new FileOutputStream(copyFile));
-            bitmap.compress(Bitmap.CompressFormat.JPEG,100,out);
+//            bitmap.compress(Bitmap.CompressFormat.JPEG,100,out);
 
             //sendBroadcst를 통해 Crop된 사진을 앨범에 보이도록 갱신한다
             sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,Uri.fromFile(copyFile)));
@@ -597,7 +606,7 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
             Intent i = getIntent();                      // facebook 또는 kakao의 아이디, 메신저타입을 받아와 변수에 저장
             String id = i.getExtras().getString("ID");
             String PW = i.getExtras().getString("PW");
-            String Setting_id = i.getExtras().getString("setformat");
+             Setting_id = i.getExtras().getString("setformat");
             token=i.getExtras().getString("token");
             String fcm_token = i.getExtras().getString("fcm_token");
             Log.e("Test", id);
@@ -811,11 +820,16 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
                 Log.v("SETBIRTHDAY",UserInfo.getBirthday());
                 Button b1 = (Button) findViewById(R.id.r_btn5);
                 TextView t = (TextView)findViewById(R.id.spitem_set);
-                if (position == 0) {
-                    t.setTextColor(Color.rgb(221,220,220));
-                } else {
-                    t.setTextColor(BLACK);
+                try{
+                    if (position == 0) {
+                        t.setTextColor(Color.rgb(221,220,220));
+                    } else {
+                        t.setTextColor(BLACK);
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
                 }
+
                 if(UserInfo.getBirthday().contains("년도")&&UserInfo.getBirthday().contains("월")&&UserInfo.getBirthday().contains("일") == false) {
                     b1.setBackgroundResource(R.drawable.press_round_btn);
                 } else {
