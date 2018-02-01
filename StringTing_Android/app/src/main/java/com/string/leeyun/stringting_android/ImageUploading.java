@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 
@@ -32,39 +31,33 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.string.leeyun.stringting_android.API.Rest_ApiService.API_URL;
 
-public class Mediate extends AppCompatActivity {
+/**
+ * Created by ahdguialee on 2018. 1. 31..
+ */
+
+public class ImageUploading {
+
     get_matched_account account1;
     userinfo Userinfo;
-    ArrayList<String>Imageupload_countList;
+
     int account_id_localdb;
     String token_localdb;
     Rest_ApiService apiService;
     Retrofit retrofit;
     String sex;
 
+    public void image_uplodaing_method(ArrayList<String> Imageupload_countList, final String token, final int account_id, final String sex){
 
-    @Override
-    protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
-    }
+        Log.e("image_uploading_method 파라미타체크",Imageupload_countList.get(0));
+        Log.e("image_uploading_method 파라미타체크",token+account_id+sex);
 
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mediate);
-        Intent intent=getIntent();
-        Imageupload_countList=intent.getExtras().getStringArrayList("ProfileFilepath");
-        get_local_db();
-        ImageUploading imageUploading =new ImageUploading();
-//        imageUploading.image_uplodaing_method(Imageupload_countList,token_localdb,account_id_localdb,sex);
         MultipartBody.Part[] images1 = new MultipartBody.Part[0];
-        ArrayList<String> Imageresized_small=new ArrayList<>();
-        ArrayList<String>Imageresized_middle=new ArrayList<>();
-        ArrayList<String>Imageresized_large=new ArrayList<>();
-        ArrayList<String>Imageprofile1=new ArrayList<>();
-        ArrayList<String>Imageprofile2=new ArrayList<>();
-        ArrayList<String>Imageprofile3=new ArrayList<>();
+        ArrayList<String> Imageresized_small = new ArrayList<>();
+        ArrayList<String> Imageresized_middle = new ArrayList<>();
+        ArrayList<String> Imageresized_large = new ArrayList<>();
+        ArrayList<String> Imageprofile1 = new ArrayList<>();
+        ArrayList<String> Imageprofile2 = new ArrayList<>();
+        ArrayList<String> Imageprofile3 = new ArrayList<>();
 
         try {
             for (int i = 0; i < Imageupload_countList.size(); i++) {
@@ -93,12 +86,12 @@ public class Mediate extends AppCompatActivity {
                 Imageprofile3.add(Imageresized_middle.get(2));
                 Imageprofile3.add(Imageresized_large.get(2));
                 Imageprofile3.add("2");
-            } else if (Imageresized_small.get(3) !=null){
+            } else if (Imageresized_small.get(3) != null) {
                 Imageprofile3.add(Imageresized_small.get(3));
                 Imageprofile3.add(Imageresized_middle.get(3));
                 Imageprofile3.add(Imageresized_large.get(3));
                 Imageprofile3.add("3");
-            }else if (Imageresized_small.get(4) !=null){
+            } else if (Imageresized_small.get(4) != null) {
                 Imageprofile3.add(Imageresized_small.get(4));
                 Imageprofile3.add(Imageresized_middle.get(4));
                 Imageprofile3.add(Imageresized_large.get(4));
@@ -112,7 +105,7 @@ public class Mediate extends AppCompatActivity {
             keyvalue.add("-large");
             keyvalue.add("-index");
 
-           images1 = new MultipartBody.Part[Imageprofile1.size()];
+            images1 = new MultipartBody.Part[Imageprofile1.size()];
 
             for (int index = 0; index < Imageprofile1.size(); index++) {
                 Log.e("Imageprofile1", Imageprofile1.get(index));
@@ -121,11 +114,9 @@ public class Mediate extends AppCompatActivity {
                 images1[index] = MultipartBody.Part.createFormData("image" + keyvalue.get(index), file.getName(), surveyBody);
             }
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
-
-
 
 
 
@@ -139,9 +130,9 @@ public class Mediate extends AppCompatActivity {
 
 
                 newRequest = builder.newBuilder()
-                        .addHeader("access-token",token_localdb)
-                        .addHeader("account-id", String.valueOf(account_id_localdb))
-                        .addHeader("account-sex",sex)
+                        .addHeader("access-token", token)
+                        .addHeader("account-id", String.valueOf(account_id))
+                        .addHeader("account-sex", sex)
                         .build();
 
 
@@ -158,39 +149,24 @@ public class Mediate extends AppCompatActivity {
                 .build();
 
 
-        apiService= retrofit.create(Rest_ApiService.class);
+        apiService = retrofit.create(Rest_ApiService.class);
         Call<register_image> call = apiService.post_register_image(images1);
         call.enqueue(new Callback<register_image>() {
             @Override
             public void onResponse(Call<register_image> call, Response<register_image> response) {
-                register_image imageresponse=response.body();
-                Log.e("onregistImage",imageresponse.getResult());
+                register_image imageresponse = response.body();
+                Log.e("onregistImage", imageresponse.getResult());
 
 
             }
 
             @Override
             public void onFailure(Call<register_image> call, Throwable t) {
-                Log.e("onregistImage_fail",t.toString());
+                Log.e("onregistImage_fail", t.toString());
             }
         });
 
     }
-    public void onClick_TabbedBar(View v){
-        Intent intent = new Intent(getApplicationContext(), TabbedBar.class);
-        startActivity(intent);
-    }
-
-    public void get_local_db(){
-
-        SharedPreferences pref = getSharedPreferences("Local_DB",MODE_PRIVATE);
-        sex=pref.getString("sex","notfound");
-        Log.e("sex",sex);
-        account_id_localdb = pref.getInt("account_id",0);
-        Log.e("local_account", String.valueOf(account_id_localdb));
-        token_localdb=pref.getString("token","?");
-        Log.e("loacal_token",String.valueOf(token_localdb));
 
 
-    }
 }
