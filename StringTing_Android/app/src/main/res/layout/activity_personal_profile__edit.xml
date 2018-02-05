@@ -179,7 +179,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_alignParentLeft="true"
-                        android:layout_marginLeft="53dp"
+                        android:layout_marginLeft="33dp"
                         android:letterSpacing="-0.02"
                         android:paddingLeft="11dp"
                         android:text="생년월일"
@@ -253,7 +253,7 @@
                         android:layout_width="20dp"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        android:layout_marginRight="17dp"
+                        android:layout_marginRight="37dp"
                         android:textAlignment="textEnd"
                         android:layout_centerVertical="true"
                         android:letterSpacing="-0.02"
@@ -279,7 +279,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_alignParentLeft="true"
-                        android:layout_marginLeft="53dp"
+                        android:layout_marginLeft="33dp"
                         android:letterSpacing="-0.02"
                         android:paddingLeft="11dp"
                         android:text="학력"
@@ -293,7 +293,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_alignTop="@+id/text_id00"
                         android:layout_gravity="center"
-                        android:layout_marginRight="17dp"
+                        android:layout_marginRight="37dp"
                         android:background="@drawable/spinner_rectangle_border"
                         android:textSize="11sp"
                         >
@@ -321,7 +321,7 @@
                         android:letterSpacing="-0.02"
                         android:textSize="11sp"
                         android:layout_alignParentLeft="true"
-                        android:layout_marginLeft="53dp"
+                        android:layout_marginLeft="33dp"
                         android:text="학과/커리어"
                         />
 
@@ -333,7 +333,7 @@
                         android:layout_height="30dp"
                         android:paddingLeft="10dp"
                         android:layout_alignParentRight="true"
-                        android:layout_marginRight="17dp"
+                        android:layout_marginRight="37dp"
                         android:layout_gravity="center"
                         android:background="@drawable/spinner_rectangle_border"
                         android:hint="ex)00전자 마케팅 or 00대 컴퓨터학과"
@@ -361,7 +361,7 @@
                         android:letterSpacing="-0.02"
                         android:textSize="11sp"
                         android:layout_alignParentLeft="true"
-                        android:layout_marginLeft="53dp"
+                        android:layout_marginLeft="33dp"
                         android:text="지역"
                         />
 
@@ -371,7 +371,7 @@
                         android:layout_width="200dp"
                         android:layout_height="30dp"
                         android:layout_alignParentRight="true"
-                        android:layout_marginRight="17dp"
+                        android:layout_marginRight="37dp"
                         android:layout_gravity="center"
                         android:textSize="11sp"
                         android:paddingLeft="10dp"
@@ -401,7 +401,7 @@
                         android:letterSpacing="-0.02"
                         android:textSize="11sp"
                         android:layout_alignParentLeft="true"
-                        android:layout_marginLeft="53dp"
+                        android:layout_marginLeft="33dp"
                         android:text="키"
                         />
 
@@ -411,7 +411,7 @@
                         android:layout_width="200dp"
                         android:layout_height="30dp"
                         android:layout_alignParentRight="true"
-                        android:layout_marginRight="17dp"
+                        android:layout_marginRight="37dp"
                         android:textSize="11sp"
                         android:layout_gravity="center"
                         android:paddingLeft="10dp"
@@ -444,7 +444,7 @@
                         android:letterSpacing="-0.02"
                         android:textSize="11sp"
                         android:layout_alignParentLeft="true"
-                        android:layout_marginLeft="53dp"
+                        android:layout_marginLeft="33dp"
                         android:text="혈액형" />
 
 
@@ -455,7 +455,7 @@
                         android:layout_gravity="center"
                         android:paddingLeft="10dp"
                         android:layout_alignParentRight="true"
-                        android:layout_marginRight="17dp"
+                        android:layout_marginRight="37dp"
                         android:textSize="11sp"
                         android:background="@drawable/spinner_rectangle_border"
                         android:prompt="@string/blood_prompt">
@@ -482,7 +482,7 @@
                         android:letterSpacing="-0.02"
                         android:textSize="11sp"
                         android:layout_alignParentLeft="true"
-                        android:layout_marginLeft="53dp"
+                        android:layout_marginLeft="33dp"
                         android:text="체형"
                         />
 
@@ -493,7 +493,7 @@
                         android:layout_width="200dp"
                         android:layout_height="30dp"
                         android:layout_alignParentRight="true"
-                        android:layout_marginRight="17dp"
+                        android:layout_marginRight="37dp"
                         android:layout_gravity="center"
                         android:background="@drawable/spinner_rectangle_border"
                         android:paddingLeft="10dp"
@@ -540,14 +540,14 @@
                         android:letterSpacing="-0.02"
                         android:textSize="11sp"
                         android:layout_alignParentLeft="true"
-                        android:layout_marginLeft="53dp"
+                        android:layout_marginLeft="33dp"
                         android:text="흡연" />
 
                     <info.hoang8f.android.segmented.SegmentedGroup xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
                         android:id="@+id/Radio_smoking"
                         android:layout_width="200dp"
                         android:layout_height="30dp"
-                        android:layout_marginRight="17dp"
+                        android:layout_marginRight="37dp"
                         android:orientation="horizontal"
                         android:layout_alignParentRight="true"
                         segmentedgroup:sc_border_width="1dp"
@@ -596,7 +596,7 @@
                         android:letterSpacing="-0.02"
                         android:textSize="11sp"
                         android:layout_alignParentLeft="true"
-                        android:layout_marginLeft="53dp"
+                        android:layout_marginLeft="33dp"
                         android:text="음주"
                         />
 
@@ -608,7 +608,7 @@
                         android:layout_alignParentRight="true"
                         android:paddingLeft="10dp"
                         android:textSize="11sp"
-                        android:layout_marginRight="17dp"
+                        android:layout_marginRight="37dp"
                         android:background="@drawable/spinner_rectangle_border"
                         >
 
@@ -635,7 +635,7 @@
                         android:letterSpacing="-0.02"
                         android:textSize="11sp"
                         android:layout_alignParentLeft="true"
-                        android:layout_marginLeft="53dp"
+                        android:layout_marginLeft="33dp"
                         android:text="종교"
                         />
 
@@ -646,7 +646,7 @@
                         android:layout_width="200dp"
                         android:layout_height="30dp"
                         android:layout_alignParentRight="true"
-                        android:layout_marginRight="17dp"
+                        android:layout_marginRight="37dp"
                         android:layout_gravity="center"
                         android:paddingLeft="10dp"
                         android:textSize="11sp"
@@ -676,7 +676,7 @@
                         android:letterSpacing="-0.02"
                         android:textSize="11sp"
                         android:layout_alignParentLeft="true"
-                        android:layout_marginLeft="53dp"
+                        android:layout_marginLeft="33dp"
                         android:text="병역"
                         />
 
@@ -685,7 +685,7 @@
                         android:id="@+id/RadioArmy"
                         android:layout_width="200dp"
                         android:layout_height="29dp"
-                        android:layout_marginRight="17dp"
+                        android:layout_marginRight="37dp"
                         android:layout_alignParentRight="true"
                         android:orientation="horizontal"
                         android:layout_centerVertical="true"

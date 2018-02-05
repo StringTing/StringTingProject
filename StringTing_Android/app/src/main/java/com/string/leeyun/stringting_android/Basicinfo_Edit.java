@@ -1032,7 +1032,7 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Log.e("Tall", (String) spinnerTall.getItemAtPosition(position));
-//                UserInfo.setheight(Integer.parseInt(spinnerTall.getItemAtPosition(position).toString()));
+                UserInfo.setheight(Integer.parseInt(spinnerTall.getItemAtPosition(position).toString()));
 
 
                 Button b1 = (Button) findViewById(R.id.r_btn7);
