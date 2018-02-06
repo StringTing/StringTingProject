@@ -32,6 +32,7 @@ import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RadioButton;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,6 +43,7 @@ import com.squareup.picasso.Transformation;
 import com.string.leeyun.stringting_android.API.Getdetail;
 import com.string.leeyun.stringting_android.API.ResponseApi;
 import com.string.leeyun.stringting_android.API.Rest_ApiService;
+import com.string.leeyun.stringting_android.API.accounts;
 import com.string.leeyun.stringting_android.API.get_introduction_qnalist;
 import com.string.leeyun.stringting_android.API.message;
 import com.string.leeyun.stringting_android.API.userinfo;
@@ -53,6 +55,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.StringTokenizer;
 
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -98,6 +102,7 @@ public class PersonalProfile_Edit extends AppCompatActivity {
     int account_id;
     String sex;
     Getdetail getdetail;
+    accounts account;
     ImageView personfile_image;
     ArrayList<String>profile_image_list;
     ArrayList<String>profile_image_replace;
@@ -274,6 +279,26 @@ public class PersonalProfile_Edit extends AppCompatActivity {
                         getdetail.getDrink();
                         getdetail.getAge();
 
+                        if(sex.equals("female")){
+                            RelativeLayout army = (RelativeLayout) findViewById(R.id.army);
+                            RelativeLayout army_txt = (RelativeLayout) findViewById(R.id.army_txt);
+                            army_txt.setVisibility(View.GONE);
+                            army.setVisibility(View.GONE);
+                            Spinner body_male=(Spinner)findViewById(Spinner_body_form_male);
+                            Spinner body_female=(Spinner)findViewById(Spinner_body_form_female);
+                            body_male.setVisibility(View.GONE);
+                            body_female.setVisibility(View.VISIBLE);
+                        }else {
+                            RelativeLayout army = (RelativeLayout)findViewById(R.id.army);
+                            RelativeLayout army_txt = (RelativeLayout) findViewById(R.id.army_txt);
+                            army_txt.setVisibility(View.VISIBLE);
+                            army.setVisibility(View.VISIBLE);
+                            Spinner body_male=(Spinner)findViewById(Spinner_body_form_male);
+                            Spinner body_female=(Spinner)findViewById(Spinner_body_form_female);
+                            body_male.setVisibility(View.VISIBLE);
+                            body_female.setVisibility(View.GONE);
+                        }
+
                         radioCheck();
                         //Log.e("담배", String.valueOf(getdetail.isSmoke()));
 
@@ -406,6 +431,26 @@ public class PersonalProfile_Edit extends AppCompatActivity {
         final Spinner spinnerTall = (Spinner) findViewById(Spinner_Tall);
 
 
+        //생일스피너
+   /*     Log.e("생일",account.getBirthday());
+
+        String[] bir = getdetail.getBirthday().split("-");
+
+        List<String> birth = new ArrayList<>();
+        for (int i = 0; i < bir.length; i++) {
+            birth.add(bir[i]);
+        }
+
+
+        int birthYear_length = getResources().getStringArray(R.array.birthday1).length;
+        int birthYear_spinnerIndex =0;
+
+        for(int p=0;p<birthYear_length;p++){
+            if(spinnerbir1.getItemAtPosition(p).toString().equals(birth.get(0))){
+                birthYear_spinnerIndex = p;
+            }
+        }
+        spinnerbir1.setSelection(birthYear_spinnerIndex);*/
 
         //학력스피너
         //기존값 불러오기
@@ -513,7 +558,7 @@ public class PersonalProfile_Edit extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Log.e("Tall", (String) spinnerTall.getItemAtPosition(position));
-                UserInfo.setheight(Integer.parseInt(spinnerTall.getItemAtPosition(position).toString()));
+                UserInfo.setheight(spinnerTall.getItemAtPosition(position).toString());
             }
 
             @Override
