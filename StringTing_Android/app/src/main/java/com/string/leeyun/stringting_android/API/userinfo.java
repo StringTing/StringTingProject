@@ -1,13 +1,6 @@
 package com.string.leeyun.stringting_android.API;
 
-import com.google.gson.annotations.SerializedName;
-
 import java.io.Serializable;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-
-import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;
 
 /**
  * Created by leeyun on 2017. 11. 1..
@@ -23,7 +16,7 @@ public class userinfo implements Serializable{
     private String education;
     private String department;
     private String location;
-    private int height;
+    private String height;
     private boolean smoke;
     private String drink;            //논의 필요
     private String religion;
@@ -128,7 +121,7 @@ public class userinfo implements Serializable{
         this.body_form = body_form;
     }
 
-    public void setheight(int height) {
+    public void setheight(String height) {
 
         this.height = height;
     }
@@ -206,7 +199,7 @@ public class userinfo implements Serializable{
         return body_form;
     }
 
-    public int getheight() {
+    public String getheight() {
 
         return height;
     }
@@ -237,7 +230,7 @@ public class userinfo implements Serializable{
         return token;
     }
 
-    public int getHeight() {
+    public String getHeight() {
 
         return height;
     }
@@ -246,7 +239,7 @@ public class userinfo implements Serializable{
         return authenticated;
     }
 
-    public void setHeight(int height) {
+    public void setHeight(String height) {
         this.height = height;
     }
 

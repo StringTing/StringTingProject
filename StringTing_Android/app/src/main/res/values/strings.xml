@@ -106,7 +106,7 @@
         <item>슬림</item>
         <item>보통</item>
         <item>근육질</item>
-        <item>통통함</item>
+        <item>통통한</item>
     </string-array>
 
     <string-array name="body_form_female">
@@ -115,7 +115,7 @@
         <item>슬림</item>
         <item>보통</item>
         <item>글래머</item>
-        <item>통통함</item>
+        <item>통통한</item>
     </string-array>
 
     <string-array name="blood">
@@ -128,11 +128,10 @@
 
     <string-array name="religion">
         <item>종교를 선택해주세요.</item>
-        <item>없음</item>
+        <item>무교</item>
         <item>기독교</item>
+        <item>불교</item>
         <item>천주교</item>
-        <item>원불교</item>
-        <item>이슬람</item>
         <item>기타</item>
 
     </string-array>

@@ -2,8 +2,6 @@ package com.string.leeyun.stringting_android.API;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
-
 /**
  * Created by leeyun on 2017. 12. 5..
  */
@@ -23,7 +21,7 @@ public class accounts {
     @SerializedName("location")
     private String location;
     @SerializedName("height")
-    private int height;
+    private String height;
     @SerializedName("smoke")
     private boolean smoke;
     @SerializedName("drink")
@@ -45,11 +43,11 @@ public class accounts {
 
 
 
-    public int getHeight() {
+    public String getHeight() {
         return height;
     }
 
-    public void setHeight(int height) {
+    public void setHeight(String height) {
         this.height = height;
     }
 
@@ -135,7 +133,7 @@ public class accounts {
         this.body_form = body_form;
     }
 
-    public void setheight(int height) {
+    public void setheight(String height) {
 
         this.height = height;
     }
@@ -213,7 +211,7 @@ public class accounts {
         return body_form;
     }
 
-    public int getheight() {
+    public String getheight() {
 
         return height;
     }
