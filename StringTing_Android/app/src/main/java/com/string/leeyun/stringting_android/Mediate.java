@@ -112,15 +112,15 @@ public class Mediate extends AppCompatActivity {
                     File file = new File(Imageprofile1.get(index));
                     if (index<3) {
                         RequestBody surveyBody = RequestBody.create(MediaType.parse("image/*"), file);
-                        images.put("image" + keyvalue.get(index) + "\"; filename=\"" + file.getName(), surveyBody);
+//                        images.put("image" + keyvalue.get(index) + "\"; filename=\"" + file.getName(), surveyBody);
 
                         images1[index] = MultipartBody.Part.createFormData("image" + keyvalue.get(index), file.getName(), surveyBody);
                         Log.e("멀티파트폼 index<3", String.valueOf(images1[index]));
                     }
                     if (index==3){
-                        RequestBody surveyBody = RequestBody.create(MediaType.parse("image/*"),"");
-                        images1[index] = MultipartBody.Part.createFormData("image" + keyvalue.get(index), file.getName(), surveyBody);
-                        images.put("image" + keyvalue.get(index), surveyBody);
+                        RequestBody surveyBody = RequestBody.create(MediaType.parse("text/plain"),"");
+                        images1[index] = MultipartBody.Part.createFormData("image" + keyvalue.get(index), Imageprofile1.get(index));
+//                        images.put("image" + keyvalue.get(index), surveyBody);
 
                         Log.e("멀티파트폼 index==3", String.valueOf(images1[index]));
 

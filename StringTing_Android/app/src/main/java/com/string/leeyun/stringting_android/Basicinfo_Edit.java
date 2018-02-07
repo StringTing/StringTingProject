@@ -608,11 +608,9 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
             Intent i = getIntent();                      // facebook 또는 kakao의 아이디, 메신저타입을 받아와 변수에 저장
             String id = i.getExtras().getString("ID");
             String PW = i.getExtras().getString("PW");
-<<<<<<< HEAD
+
             Setting_id = i.getExtras().getString("setformat");
-=======
-             Setting_id = i.getExtras().getString("setformat");
->>>>>>> d7acdc39510327b15ef34a2930fe5c6675b944ac
+
             token=i.getExtras().getString("token");
             String fcm_token = i.getExtras().getString("fcm_token");
             Log.e("Test", id);
