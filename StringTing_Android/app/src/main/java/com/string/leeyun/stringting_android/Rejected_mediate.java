@@ -159,21 +159,21 @@ public class Rejected_mediate extends AppCompatActivity {
 
 
         apiService= retrofit.create(Rest_ApiService.class);
-        Call<register_image> call = apiService.post_register_image(images1);
-        call.enqueue(new Callback<register_image>() {
-            @Override
-            public void onResponse(Call<register_image> call, Response<register_image> response) {
-                register_image imageresponse=response.body();
-                Log.e("onregistImage",imageresponse.getResult());
-
-
-            }
-
-            @Override
-            public void onFailure(Call<register_image> call, Throwable t) {
-                Log.e("onregistImage_fail",t.toString());
-            }
-        });
+//        Call<register_image> call = apiService.post_register_image(images1);
+//        call.enqueue(new Callback<register_image>() {
+//            @Override
+//            public void onResponse(Call<register_image> call, Response<register_image> response) {
+//                register_image imageresponse=response.body();
+//                Log.e("onregistImage",imageresponse.getResult());
+//
+//
+//            }
+//
+//            @Override
+//            public void onFailure(Call<register_image> call, Throwable t) {
+//                Log.e("onregistImage_fail",t.toString());
+//            }
+//        });
 
     }
     public void onClick_TabbedBar(View v){
