@@ -116,8 +116,7 @@
                 android:layout_gravity="center"
                 android:layout_marginRight="7dp"
                 android:textColor="@color/white"
-                android:background="@drawable/rounded_sendbtn"
-                android:onClick="send_message"
+                android:background="@drawable/rounded_non_sendbtn"
                 android:text="전송"
                 style="?android:attr/borderlessButtonStyle"/>
 

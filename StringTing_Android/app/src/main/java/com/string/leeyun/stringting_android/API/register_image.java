@@ -9,6 +9,15 @@ import com.google.gson.annotations.SerializedName;
 public class register_image {
     @SerializedName("result")
     private String result;
+    private String message;
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
 
     public void setResult(String result) {
         this.result = result;

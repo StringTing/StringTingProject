@@ -145,6 +145,7 @@ public class MainActivity extends AppCompatActivity {
         kakaologin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                callback = new SessionCallback();
                 Session.getCurrentSession().addCallback(callback);
             }
         });
@@ -504,6 +505,35 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onSessionOpened() {
+            Log.e("세션","성공");
+            redirectSignupActivity();  // 세션 연결성공 시 redirectSignupActivity() 호출
+        }
+
+        @Override
+        public void onSessionOpenFailed(KakaoException exception) {
+            Log.e("sessionopenfail","fail");
+            if(exception != null) {
+                Logger.e(exception);
+            }
+            setContentView(R.layout.activity_main); // 세션 연결이 실패했을때
+        }
+
+    }
+
+    protected void redirectSignupActivity() {       //세션 연결 성공 시 SignupActivity로 넘김
+        final Intent intent = new Intent(this, KaKaoSign.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        startActivity(intent);
+        finish();
+    }
+
+
+
+
+    /*public class SessionCallback implements ISessionCallback {
+
+        @Override
+        public void onSessionOpened() {
 
             UserManagement.requestMe(new MeResponseCallback() {
 
@@ -705,7 +735,7 @@ public class MainActivity extends AppCompatActivity {
 
             Log.e("sessionopenfail","fail");
         }
-    }
+    }*/
 
         public boolean isConnected() {          //인터넷 연결상태확인인
             ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);

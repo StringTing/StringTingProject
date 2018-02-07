@@ -87,8 +87,6 @@ public class Tab_Fourth extends Fragment {
 
 
 
-
-
         OkHttpClient.Builder client1 = new OkHttpClient.Builder();
         client1.addInterceptor(new Interceptor() {
             @Override
@@ -275,6 +273,7 @@ public class Tab_Fourth extends Fragment {
                 unread.setText(Integer.toString(getItem(pos).unread_message));
 
 
+
             v.setOnClickListener(new View.OnClickListener() {
 
                 @Override
@@ -282,6 +281,8 @@ public class Tab_Fourth extends Fragment {
                     // 터치 시 해당 아이템 채팅방 불러오기
                     Intent i = new Intent(getContext(),Chatting.class);
                     //여기다 그룹아이디 넣어주기 그럼 채팅방이랑연결
+                    i.putStringArrayListExtra("image_full_url",chat_url_list_full);
+                    i.putExtra("profile_position",pos);
                     i.putExtra("group_id",group_id_set);
                     startActivity(i);
                 }

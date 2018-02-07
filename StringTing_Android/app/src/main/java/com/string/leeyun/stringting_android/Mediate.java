@@ -17,6 +17,7 @@ import com.tsengvn.typekit.TypekitContextWrapper;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import okhttp3.Interceptor;
 import okhttp3.MediaType;
@@ -33,7 +34,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import static com.string.leeyun.stringting_android.API.Rest_ApiService.API_URL;
 
 public class Mediate extends AppCompatActivity {
-get_matched_account account1;
+    get_matched_account account1;
     userinfo Userinfo;
     ArrayList<String>Imageupload_countList;
     int account_id_localdb;
@@ -55,6 +56,9 @@ get_matched_account account1;
         setContentView(R.layout.activity_mediate);
         Intent intent=getIntent();
         Imageupload_countList=intent.getExtras().getStringArrayList("ProfileFilepath");
+        get_local_db();
+        ImageUploading imageUploading =new ImageUploading();
+//        imageUploading.image_uplodaing_method(Imageupload_countList,token_localdb,account_id_localdb,sex);
         MultipartBody.Part[] images1 = new MultipartBody.Part[0];
         ArrayList<String> Imageresized_small=new ArrayList<>();
         ArrayList<String>Imageresized_middle=new ArrayList<>();
@@ -62,6 +66,8 @@ get_matched_account account1;
         ArrayList<String>Imageprofile1=new ArrayList<>();
         ArrayList<String>Imageprofile2=new ArrayList<>();
         ArrayList<String>Imageprofile3=new ArrayList<>();
+        HashMap<String, RequestBody> images = null;
+
 
         try {
             for (int i = 0; i < Imageupload_countList.size(); i++) {
@@ -106,13 +112,19 @@ get_matched_account account1;
                     File file = new File(Imageprofile1.get(index));
                     if (index<3) {
                         RequestBody surveyBody = RequestBody.create(MediaType.parse("image/*"), file);
+                        images.put("image" + keyvalue.get(index) + "\"; filename=\"" + file.getName(), surveyBody);
 
                         images1[index] = MultipartBody.Part.createFormData("image" + keyvalue.get(index), file.getName(), surveyBody);
+                        Log.e("멀티파트폼 index<3", String.valueOf(images1[index]));
                     }
                     if (index==3){
-                        RequestBody surveyBody = RequestBody.create(MediaType.parse("text/plain"),Imageprofile1.get(index));
+                        RequestBody surveyBody = RequestBody.create(MediaType.parse("image/*"),"");
+                        images1[index] = MultipartBody.Part.createFormData("image" + keyvalue.get(index), file.getName(), surveyBody);
+                        images.put("image" + keyvalue.get(index), surveyBody);
 
-                        images1[index] = MultipartBody.Part.createFormData("image" + keyvalue.get(index), Imageprofile1.get(index), surveyBody);
+                        Log.e("멀티파트폼 index==3", String.valueOf(images1[index]));
+
+//                        images1[index] = MultipartBody.Part.createFormData("image" + keyvalue.get(index), Imageprofile1.get(index), surveyBody);
                     }
 
             }
@@ -120,19 +132,6 @@ get_matched_account account1;
         }catch (Exception e){
             e.printStackTrace();
         }
-
-
-
-
-        SharedPreferences pref = getSharedPreferences("Local_DB",MODE_PRIVATE);
-        sex=pref.getString("sex","notfound");
-        Log.e("sex",sex);
-        account_id_localdb = pref.getInt("account_id",0);
-        Log.e("local_account", String.valueOf(account_id_localdb));
-        token_localdb=pref.getString("token","?");
-        Log.e("loacal_token",String.valueOf(token_localdb));
-
-
 
 
 
@@ -159,14 +158,14 @@ get_matched_account account1;
             }
         });
 
-        
+
         retrofit = new Retrofit.Builder()
                 .baseUrl(API_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client1.build())
                 .build();
-        
-        
+
+
         apiService= retrofit.create(Rest_ApiService.class);
         Call<register_image> call = apiService.post_register_image(images1);
         call.enqueue(new Callback<register_image>() {
@@ -174,12 +173,29 @@ get_matched_account account1;
             public void onResponse(Call<register_image> call, Response<register_image> response) {
                 register_image imageresponse=response.body();
                 Log.e("onregistImage",imageresponse.getResult());
+//                Log.e("onregistImage", imageresponse.getMessage());
 
 
             }
 
             @Override
             public void onFailure(Call<register_image> call, Throwable t) {
+                Log.e("onregistImage_fail",t.toString());
+            }
+        });
+        Call<register_image> call2 = apiService.post_register_image_map(images);
+        call2.enqueue(new Callback<register_image>() {
+            @Override
+            public void onResponse(Call<register_image> call2, Response<register_image> response) {
+                register_image imageresponse=response.body();
+                Log.e("onregistImage",imageresponse.getResult());
+                Log.e("onregistImage", imageresponse.getMessage());
+
+
+            }
+
+            @Override
+            public void onFailure(Call<register_image> call2, Throwable t) {
                 Log.e("onregistImage_fail",t.toString());
             }
         });
@@ -190,4 +206,16 @@ get_matched_account account1;
         startActivity(intent);
     }
 
+    public void get_local_db(){
+
+        SharedPreferences pref = getSharedPreferences("Local_DB",MODE_PRIVATE);
+        sex=pref.getString("sex","notfound");
+        Log.e("sex",sex);
+        account_id_localdb = pref.getInt("account_id",0);
+        Log.e("local_account", String.valueOf(account_id_localdb));
+        token_localdb=pref.getString("token","?");
+        Log.e("loacal_token",String.valueOf(token_localdb));
+
+
+    }
 }

@@ -207,8 +207,13 @@ public class Login_local extends Activity {
                     Intent intent_ghost= new Intent(Login_local.this, Basicinfo_Edit.class);
                     Intent intent_interview=new Intent(Login_local.this, Mediate.class);
                     check_login gsonresponse = response.body();
-                    Log.e("onresponse_check_login", gsonresponse.getResult());
-                    Log.e("onresponse_check_login",gsonresponse.getMessage());
+                    try{
+                        Log.e("onresponse_check_login", gsonresponse.getResult());
+                        Log.e("onresponse_check_login",gsonresponse.getMessage());
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+
                     try{
                         int account_id= Integer.parseInt(gsonresponse.getId());
                         String sex=gsonresponse.getSex();
@@ -217,9 +222,44 @@ public class Login_local extends Activity {
                     }catch (Exception e){
                         e.printStackTrace();
                     }
+                    try{
 
-                    if (gsonresponse.getStatus()==null) {
 
+                    if (gsonresponse.getStatus()!=null) {
+                            Log.e("onresponse", gsonresponse.getStatus());
+                            Log.e("onresponse", String.valueOf(response.code()));
+                            Log.e("onresponse", "success");
+
+                            if (gsonresponse.getStatus().equals("ACTIVATE"))
+                            {
+
+                                startActivity(intent_activate);
+                            }
+                            else if(gsonresponse.getStatus().equals("GHOST")){
+                                intent_ghost.putExtra("ID",Edit_id);
+                                intent_ghost.putExtra("PW",Edit_pw);
+                                intent_ghost.putExtra("setformat","EMAIL");
+                                intent_ghost.putExtra("token",token);
+
+                                startActivity(intent_ghost);
+                            }
+                            else if(gsonresponse.getStatus().equals("INREVIEW")){
+                                startActivity(intent_interview);
+                            }
+                            else if(gsonresponse.getStatus().equals("REJECTED")){
+
+                            }
+                            else{
+                                intent_ghost.putExtra("ID",Edit_id);
+                                intent_ghost.putExtra("PW",Edit_pw);
+                                Log.e("id",Edit_id);
+                                intent_ghost.putExtra("setformat","EMAIL");
+                                intent_ghost.putExtra("token",token);
+
+                                startActivity(intent_ghost);
+                            }
+
+                    }else{
                         Log.e("get_status","등록되지않은 이메일입니다");
                         intent_ghost.putExtra("ID",Edit_id);
                         intent_ghost.putExtra("PW",Edit_pw);
@@ -227,42 +267,9 @@ public class Login_local extends Activity {
                         intent_ghost.putExtra("token",token);
                         startActivity(intent_ghost);
                     }
-                    else
-                    {
-                        Log.e("onresponse", gsonresponse.getStatus());
-                        Log.e("onresponse", String.valueOf(response.code()));
-                        Log.e("onresponse", "success");
-
-                        if (gsonresponse.getStatus().equals("ACTIVATE"))
-                        {
-
-                            startActivity(intent_activate);
-                        }
-                        else if(gsonresponse.getStatus().equals("GHOST")){
-                            intent_ghost.putExtra("ID",Edit_id);
-                            intent_ghost.putExtra("PW",Edit_pw);
-                            intent_ghost.putExtra("setformat","EMAIL");
-                            intent_ghost.putExtra("token",token);
-
-                            startActivity(intent_ghost);
-                        }
-                        else if(gsonresponse.getStatus().equals("INREVIEW")){
-                            startActivity(intent_interview);
-                        }
-                        else if(gsonresponse.getStatus().equals("REJECTED")){
-
-                        }
-                        else{
-                            intent_ghost.putExtra("ID",Edit_id);
-                            intent_ghost.putExtra("PW",Edit_pw);
-                            Log.e("id",Edit_id);
-                            intent_ghost.putExtra("setformat","EMAIL");
-                            intent_ghost.putExtra("token",token);
-
-                            startActivity(intent_ghost);
-                        }
+                    }catch (Exception e){
+                        e.printStackTrace();
                     }
-
 
 
 

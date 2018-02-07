@@ -5,8 +5,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -54,7 +57,8 @@ public class Chatting extends AppCompatActivity  {
     int account_id;
     String sex;
     String token;
-
+    ArrayList<String>image_full_url=new ArrayList<>();
+    int profile_position=0;
     ImageView profile_img;
 
     @Override
@@ -69,6 +73,9 @@ public class Chatting extends AppCompatActivity  {
         setContentView(R.layout.activity_chatting);
         //그룹아이디를 받아와 메시지 리스트생성
         group_id = (int)getIntent().getSerializableExtra("group_id");
+        image_full_url=(getIntent().getStringArrayListExtra("image_full_url"));
+        profile_position=getIntent().getIntExtra("profile_position",profile_position);
+        Log.e("image_full_url잘넘어왔냐",image_full_url.get(0));
         Log.e("group_id", String.valueOf(group_id));
         get_local_data();
         // 커스텀 어댑터 생성
@@ -86,7 +93,7 @@ public class Chatting extends AppCompatActivity  {
         //프로필 이미지 서클 (프로필 url주세요)
         profile_img = (ImageView) findViewById(R.id.profile_image);
 
-   //     Picasso.with(getBaseContext()).load(profile_image_full_url.get(0)).transform(new CircleTransForm()).into(profile_img);
+        Picasso.with(getBaseContext()).load(image_full_url.get(profile_position)).transform(new CircleTransForm()).into(profile_img);
 
 
         Gson gson = new GsonBuilder()
@@ -167,55 +174,84 @@ public class Chatting extends AppCompatActivity  {
 
         });
 
+        final EditText editText = (EditText) findViewById(R.id.input_text);
+        final Button send_btn = (Button) findViewById(R.id.send_btn);
 
-
-    }
-    public void send_message(View v){
-
-        ArrayList<String>arrayList=new ArrayList<>();
-
-
-
-
-
-        EditText editText = (EditText) findViewById(R.id.input_text);
-        inputValue = editText.getText().toString();
-        RegisterMessage.setGrounp_id(group_id);
-        RegisterMessage.setContents(inputValue);
-        editText.setText("");
-
-        Call<register_message> get_post_register = apiService.get_post_register_message(RegisterMessage);
-        get_post_register.enqueue(new Callback<register_message>() {
+        editText.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onResponse(Call<register_message> call, Response<register_message> response) {
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-                RegisterMessage=response.body();
-                regist_message_result=String.valueOf(RegisterMessage.getResult());
-                Log.e("OnRegisterMessage",String.valueOf(RegisterMessage.getResult()));
-                Log.e("onresponse", String.valueOf(response.code()));
-                Log.e("onresponse", "success");
-                try {
-                    Log.e("regist_message_result",regist_message_result);
-                    m_Adapter.add(inputValue,1);
-                    m_Adapter.notifyDataSetChanged();
+            }
 
-                }catch (Exception e) {
-                    e.printStackTrace();
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                inputValue = charSequence.toString();
+                if(inputValue.replace(" ", "").equals("")||charSequence.length()<1){
+
+                    send_btn.setBackgroundResource(R.drawable.rounded_non_sendbtn);
+                    send_btn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Log.e("null","빈칸임당");
+                        }
+                    });
+                }else {
+                    send_btn.setBackgroundResource(R.drawable.rounded_sendbtn);
+                    send_btn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            ArrayList<String>arrayList=new ArrayList<>();
+                            RegisterMessage.setGrounp_id(group_id);
+                            RegisterMessage.setContents(inputValue);
+
+
+                            Call<register_message> get_post_register = apiService.get_post_register_message(RegisterMessage);
+                            get_post_register.enqueue(new Callback<register_message>() {
+                                @Override
+                                public void onResponse(Call<register_message> call, Response<register_message> response) {
+
+                                    RegisterMessage=response.body();
+                                    regist_message_result=String.valueOf(RegisterMessage.getResult());
+                                    Log.e("OnRegisterMessage",String.valueOf(RegisterMessage.getResult()));
+                                    Log.e("onresponse", String.valueOf(response.code()));
+                                    Log.e("onresponse", "success");
+                                    try {
+                                        Log.e("regist_message_result",regist_message_result);
+                                        m_Adapter.add(inputValue,1);
+                                        m_Adapter.notifyDataSetChanged();
+                                        editText.setText("");
+
+                                    }catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<register_message> call, Throwable t) {
+                                    Log.d("connectfail", t.toString());
+                                }
+
+                            });
+
+                        }
+                    });
                 }
-
-
             }
 
             @Override
-            public void onFailure(Call<register_message> call, Throwable t) {
-                Log.d("connectfail", t.toString());
-            }
+            public void afterTextChanged(Editable editable) {
 
+            }
         });
 
 
 
     }
+ /*   public void send_message(View v){
+
+
+
+    }*/
     public void get_local_data(){
         SharedPreferences pref = getSharedPreferences("Local_DB", MODE_PRIVATE);
         account_id = pref.getInt("account_id",0);
