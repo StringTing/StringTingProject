@@ -17,6 +17,7 @@ import com.tsengvn.typekit.TypekitContextWrapper;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import okhttp3.Interceptor;
 import okhttp3.MediaType;
@@ -65,6 +66,8 @@ public class Mediate extends AppCompatActivity {
         ArrayList<String>Imageprofile1=new ArrayList<>();
         ArrayList<String>Imageprofile2=new ArrayList<>();
         ArrayList<String>Imageprofile3=new ArrayList<>();
+        HashMap<String, RequestBody> images = null;
+
 
         try {
             for (int i = 0; i < Imageupload_countList.size(); i++) {
@@ -109,13 +112,19 @@ public class Mediate extends AppCompatActivity {
                     File file = new File(Imageprofile1.get(index));
                     if (index<3) {
                         RequestBody surveyBody = RequestBody.create(MediaType.parse("image/*"), file);
+                        images.put("image" + keyvalue.get(index) + "\"; filename=\"" + file.getName(), surveyBody);
 
                         images1[index] = MultipartBody.Part.createFormData("image" + keyvalue.get(index), file.getName(), surveyBody);
+                        Log.e("멀티파트폼 index<3", String.valueOf(images1[index]));
                     }
                     if (index==3){
-                        RequestBody surveyBody = RequestBody.create(MediaType.parse("text/plain"),Imageprofile1.get(index));
+                        RequestBody surveyBody = RequestBody.create(MediaType.parse("image/*"),"");
+                        images1[index] = MultipartBody.Part.createFormData("image" + keyvalue.get(index), file.getName(), surveyBody);
+                        images.put("image" + keyvalue.get(index), surveyBody);
 
-                        images1[index] = MultipartBody.Part.createFormData("image" + keyvalue.get(index), Imageprofile1.get(index), surveyBody);
+                        Log.e("멀티파트폼 index==3", String.valueOf(images1[index]));
+
+//                        images1[index] = MultipartBody.Part.createFormData("image" + keyvalue.get(index), Imageprofile1.get(index), surveyBody);
                     }
 
             }
@@ -164,12 +173,29 @@ public class Mediate extends AppCompatActivity {
             public void onResponse(Call<register_image> call, Response<register_image> response) {
                 register_image imageresponse=response.body();
                 Log.e("onregistImage",imageresponse.getResult());
+//                Log.e("onregistImage", imageresponse.getMessage());
 
 
             }
 
             @Override
             public void onFailure(Call<register_image> call, Throwable t) {
+                Log.e("onregistImage_fail",t.toString());
+            }
+        });
+        Call<register_image> call2 = apiService.post_register_image_map(images);
+        call2.enqueue(new Callback<register_image>() {
+            @Override
+            public void onResponse(Call<register_image> call2, Response<register_image> response) {
+                register_image imageresponse=response.body();
+                Log.e("onregistImage",imageresponse.getResult());
+                Log.e("onregistImage", imageresponse.getMessage());
+
+
+            }
+
+            @Override
+            public void onFailure(Call<register_image> call2, Throwable t) {
                 Log.e("onregistImage_fail",t.toString());
             }
         });

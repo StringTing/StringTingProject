@@ -6,8 +6,10 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
@@ -16,6 +18,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+import retrofit2.http.PartMap;
 import retrofit2.http.Path;
 import retrofit2.http.Url;
 
@@ -73,6 +76,10 @@ public interface Rest_ApiService {
         @Multipart
         @POST("register/image/")
         Call<register_image>post_register_image(@Part MultipartBody.Part[] images);
+
+        @Multipart
+        @POST("register/image")
+        Call<register_image>post_register_image_map(@PartMap () Map<String,RequestBody>map);
 
         @GET("{sex}/{account_id}/get/matched-account")
         Call<get_matched_accountList> get_matched_account(@Path("sex")String matched_sex, @Path("account_id")int matched_account_id);
