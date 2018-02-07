@@ -16,6 +16,7 @@ import com.tsengvn.typekit.TypekitContextWrapper;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import okhttp3.Interceptor;
 import okhttp3.MediaType;
@@ -28,6 +29,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Multipart;
 
 import static com.string.leeyun.stringting_android.API.Rest_ApiService.API_URL;
 
@@ -46,10 +48,10 @@ public class ImageUploading {
     Retrofit retrofit;
     String sex;
 
-    public void image_uplodaing_method(ArrayList<String> Imageupload_countList, final String token, final int account_id, final String sex){
+    public void image_uplodaing_method(ArrayList<String> Imageupload_countList, final String token, final int account_id, final String sex) {
 
-        Log.e("image_uploading_method 파라미타체크",Imageupload_countList.get(0));
-        Log.e("image_uploading_method 파라미타체크",token+account_id+sex);
+        Log.e("image_uploading_method 파라미타체크", Imageupload_countList.get(0));
+        Log.e("image_uploading_method 파라미타체크", token + account_id + sex);
 
         MultipartBody.Part[] images1 = new MultipartBody.Part[0];
         ArrayList<String> Imageresized_small = new ArrayList<>();
@@ -59,6 +61,7 @@ public class ImageUploading {
         ArrayList<String> Imageprofile2 = new ArrayList<>();
         ArrayList<String> Imageprofile3 = new ArrayList<>();
 
+        HashMap<String, RequestBody> images = null;
         try {
             for (int i = 0; i < Imageupload_countList.size(); i++) {
                 Imageresized_small.add(image_resize.bitmap_resized_small(Imageupload_countList.get(i)));
@@ -106,18 +109,31 @@ public class ImageUploading {
             keyvalue.add("-index");
 
             images1 = new MultipartBody.Part[Imageprofile1.size()];
-
+            images = new HashMap<String, RequestBody>();
             for (int index = 0; index < Imageprofile1.size(); index++) {
                 Log.e("Imageprofile1", Imageprofile1.get(index));
                 File file = new File(Imageprofile1.get(index));
-                RequestBody surveyBody = RequestBody.create(MediaType.parse("image/*"), file);
-                images1[index] = MultipartBody.Part.createFormData("image" + keyvalue.get(index), file.getName(), surveyBody);
+
+                if (index < 3) {
+                    RequestBody surveyBody = RequestBody.create(MediaType.parse("image/*"), file);
+                    images.put("image" + keyvalue.get(index) + "\"; filename=\"" + file.getName(), surveyBody);
+                    images1[index] = MultipartBody.Part.createFormData("image" + keyvalue.get(index), file.getName(), surveyBody);
+                    Log.e("멀티파트맵테스트 index<3", String.valueOf(images.get("image" + keyvalue.get(index) + "\";filename=\"" + file.getName())));
+                }
+                if (index == 3) {
+                    RequestBody surveyBody = RequestBody.create(MediaType.parse("text/plain"), Imageprofile1.get(index));
+                    images.put("image" + keyvalue.get(index), surveyBody);
+                    images1[index] = MultipartBody.Part.createFormData("image" + keyvalue.get(index), Imageprofile1.get(index), surveyBody);
+                    Log.e("멀티파트맵테스트 index==3", String.valueOf(images.get("image" + keyvalue.get(index))));
+
+                }
+
             }
+
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-
 
 
         OkHttpClient.Builder client1 = new OkHttpClient.Builder();
@@ -150,21 +166,22 @@ public class ImageUploading {
 
 
         apiService = retrofit.create(Rest_ApiService.class);
-        Call<register_image> call = apiService.post_register_image(images1);
-        call.enqueue(new Callback<register_image>() {
-            @Override
-            public void onResponse(Call<register_image> call, Response<register_image> response) {
-                register_image imageresponse = response.body();
-                Log.e("onregistImage", imageresponse.getResult());
-
-
-            }
-
-            @Override
-            public void onFailure(Call<register_image> call, Throwable t) {
-                Log.e("onregistImage_fail", t.toString());
-            }
-        });
+//        Call<register_image> call = apiService.post_register_image(images);
+//        call.enqueue(new Callback<register_image>() {
+//            @Override
+//            public void onResponse(Call<register_image> call, Response<register_image> response) {
+//                register_image imageresponse = response.body();
+//                Log.e("onregistImage", imageresponse.getResult());
+//                Log.e("onregisterImage",imageresponse.getMessage());
+//
+//
+//            }
+//
+//            @Override
+//            public void onFailure(Call<register_image> call, Throwable t) {
+//                Log.e("onregistImage_fail", t.toString());
+//            }
+//        });
 
     }
 
