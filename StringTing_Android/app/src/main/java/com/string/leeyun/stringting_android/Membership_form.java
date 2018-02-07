@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Environment;
 import android.text.Editable;
@@ -17,10 +18,12 @@ import android.widget.TextView;
 
 import com.string.leeyun.stringting_android.API.ResponseApi;
 import com.string.leeyun.stringting_android.API.Rest_ApiService;
+import com.string.leeyun.stringting_android.API.check_login;
 import com.string.leeyun.stringting_android.API.userinfo;
 import com.tsengvn.typekit.TypekitContextWrapper;
 
 import java.io.File;
+import java.lang.reflect.Member;
 import java.net.MalformedURLException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -54,7 +57,8 @@ public class Membership_form extends Activity {
     userinfo Userinfo =new userinfo();
     Rest_ApiService apiService;
     Retrofit retrofit;
-
+    String token;
+    String fcm_token;
     File Postfile;
 
     private Dialog dialog;
@@ -204,8 +208,8 @@ public class Membership_form extends Activity {
         String Email_CheckText="Email이 올바르지않은 형식입니다.";
         String PW_CheckText="문자,숫자,특수문자를 포함해주세요.";
         String Equal_PW="비밀번호가 일치하지 않습니다.";
-        String Email=Check_email.getText().toString();
-        String PW=Check_pw.getText().toString();
+        final String Email=Check_email.getText().toString();
+        final String PW=Check_pw.getText().toString();
         String EqualPw=EqualCheck_pw.getText().toString();
 
 
@@ -251,7 +255,7 @@ public class Membership_form extends Activity {
         boolean a = Pattern.matches("([a-zA-Z0-9].*[!,@,#,$,%,^,&,*,?,_,~])|([!,@,#,$,%,^,&,*,?,_,~].*[a-zA-Z0-9])",PW.trim());
         if(!b)
         {
-              Email_check_fail.setText(Email_CheckText);
+            Email_check_fail.setText(Email_CheckText);
 
         }
 
@@ -262,11 +266,98 @@ public class Membership_form extends Activity {
             //email이 맞는형식임
 
             if(PW.equals(EqualPw)) {
-                Intent intent = new Intent(getApplicationContext(), Basicinfo_Edit.class);
-                intent.putExtra("ID",Email);
-                intent.putExtra("PW",PW);
-                intent.putExtra("setformat","EMAIL");
-                startActivity(intent);
+                get_total_data_save();
+                check_login CheckLogin=new check_login();
+                CheckLogin.setEmail(Email);
+                CheckLogin.setPassword(PW);
+                CheckLogin.setFcm_token(fcm_token);
+                try {
+                    Call<check_login> post_check_login = apiService.post_check_login(CheckLogin);
+                    post_check_login.enqueue(new Callback<check_login>() {
+                        @Override
+                        public void onResponse(Call<check_login> call, Response<check_login> response) {
+
+
+                            Intent intent_activate = new Intent(Membership_form.this,  TabbedBar.class);
+                            Intent intent_ghost= new Intent(Membership_form.this, Basicinfo_Edit.class);
+                            Intent intent_interview=new Intent(Membership_form.this, Mediate.class);
+                            check_login gsonresponse = response.body();
+                            try {
+                                Log.e("onresponse_check_login", gsonresponse.getResult());
+                                Log.e("onresponse_check_login", gsonresponse.getMessage());
+                            }catch (Exception e){
+                                e.printStackTrace();
+                            }
+                            try{
+                                int account_id= Integer.parseInt(gsonresponse.getId());
+                                String sex=gsonresponse.getSex();
+                                put_total_data_save(gsonresponse.getToken(), Integer.parseInt(gsonresponse.getId()),gsonresponse.getSex());
+
+                            }catch (Exception e){
+                                e.printStackTrace();
+                            }
+
+                            if (gsonresponse.getStatus()==null) {
+
+                                Log.e("get_status","등록되지않은 이메일입니다");
+                                intent_ghost.putExtra("ID",Email);
+                                intent_ghost.putExtra("PW",PW);
+                                intent_ghost.putExtra("setformat","EMAIL");
+                                intent_ghost.putExtra("token",token);
+                                startActivity(intent_ghost);
+                            }
+                            else
+                            {
+                                Log.e("onresponse", gsonresponse.getStatus());
+                                Log.e("onresponse", String.valueOf(response.code()));
+                                Log.e("onresponse", "success");
+
+                                if (gsonresponse.getStatus().equals("ACTIVATE"))
+                                {
+
+                                    startActivity(intent_activate);
+                                }
+                                else if(gsonresponse.getStatus().equals("GHOST")){
+                                    intent_ghost.putExtra("ID",Email);
+                                    intent_ghost.putExtra("PW",PW);
+                                    intent_ghost.putExtra("setformat","EMAIL");
+                                    intent_ghost.putExtra("token",token);
+
+                                    startActivity(intent_ghost);
+                                }
+                                else if(gsonresponse.getStatus().equals("INREVIEW")){
+                                    startActivity(intent_interview);
+                                }
+                                else if(gsonresponse.getStatus().equals("REJECTED")){
+
+                                }
+                                else{
+                                    intent_ghost.putExtra("ID",Email);
+                                    intent_ghost.putExtra("PW",PW);
+                                    Log.e("id",Email);
+                                    intent_ghost.putExtra("setformat","EMAIL");
+                                    intent_ghost.putExtra("token",token);
+
+                                    startActivity(intent_ghost);
+                                }
+                            }
+
+
+
+
+                        }
+
+
+                        @Override
+                        public void onFailure(Call<check_login> call, Throwable t) {
+                            Log.d("sam", t.toString());
+                        }
+
+                    });
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
 
             }
             else
@@ -291,5 +382,27 @@ public class Membership_form extends Activity {
         super.onBackPressed(); // or super.finish();
 
     }
+
+
+    public void put_total_data_save(String token,int account_id,String sex){
+        SharedPreferences pref = getSharedPreferences("Local_DB", MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putString("token",token);
+        editor.putInt("account_id",account_id);
+        editor.putString("sex",sex);
+        editor.clear();
+
+
+        editor.commit();
+    }
+    public void get_total_data_save(){
+        SharedPreferences pref1 = getSharedPreferences("Local_DB", MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref1.edit();
+
+        fcm_token=pref1.getString("fcm_token","fcm_token is null");
+
+        editor.commit();
+    }
+
 
 }

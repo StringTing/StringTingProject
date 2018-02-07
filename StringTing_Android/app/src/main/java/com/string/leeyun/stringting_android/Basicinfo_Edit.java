@@ -103,6 +103,7 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
     String sex;
     String token_localdb;
     int account_id_localdb;
+    String Setting_id;
     message Message = new message();
 
     File Postfile;
@@ -177,6 +178,8 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.basicinfo_edit);
 
+        userinfo_save();
+
         OkHttpClient.Builder client1 = new OkHttpClient.Builder();
         client1.addInterceptor(new Interceptor() {
             @Override
@@ -184,9 +187,17 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
 
                 Request builder = chain.request();
                 Request newRequest;
-                newRequest = builder.newBuilder()
-                        .addHeader("access-token",token)
-                        .build();
+                if (Setting_id.equals("EMAIL")){
+                    newRequest = builder.newBuilder()
+                            .addHeader("access-token"," ")
+                            .build();
+                }
+                else {
+                    newRequest = builder.newBuilder()
+                            .addHeader("access-token", token_localdb)
+                            .build();
+                }
+
 
 
                 return chain.proceed(newRequest);
@@ -203,7 +214,6 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
 
 
 
-        userinfo UserInfo =new userinfo();
 
         userinfo_save();
 
@@ -597,7 +607,7 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
             Intent i = getIntent();                      // facebook 또는 kakao의 아이디, 메신저타입을 받아와 변수에 저장
             String id = i.getExtras().getString("ID");
             String PW = i.getExtras().getString("PW");
-            String Setting_id = i.getExtras().getString("setformat");
+            Setting_id = i.getExtras().getString("setformat");
             token=i.getExtras().getString("token");
             String fcm_token = i.getExtras().getString("fcm_token");
             Log.e("Test", id);
