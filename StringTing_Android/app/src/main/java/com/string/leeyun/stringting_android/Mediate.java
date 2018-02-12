@@ -144,7 +144,7 @@ public class Mediate extends AppCompatActivity {
                    }
                    if (index == 3) {
                        RequestBody surveyBody = RequestBody.create(MediaType.parse("text/plain"),"");
-                       images2[index] = MultipartBody.Part.createFormData("image" + keyvalue.get(index), Imageprofile1.get(index));
+                       images2[index] = MultipartBody.Part.createFormData("image" + keyvalue.get(index), Imageprofile2.get(index));
                    }
 
                }
@@ -162,7 +162,7 @@ public class Mediate extends AppCompatActivity {
                    }
                    if (index == 3) {
                        RequestBody surveyBody = RequestBody.create(MediaType.parse("text/plain"),"");
-                       images3[index] = MultipartBody.Part.createFormData("image" + keyvalue.get(index), Imageprofile1.get(index));
+                       images3[index] = MultipartBody.Part.createFormData("image" + keyvalue.get(index), Imageprofile3.get(index));
                    }
 
                }
