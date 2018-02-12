@@ -58,6 +58,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.HEAD;
 
 import static android.graphics.Color.BLACK;
 import static android.graphics.Color.GRAY;
@@ -179,6 +180,7 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
         setContentView(R.layout.basicinfo_edit);
 
         userinfo_save();
+
         OkHttpClient.Builder client1 = new OkHttpClient.Builder();
         client1.addInterceptor(new Interceptor() {
             @Override
@@ -197,6 +199,7 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
                             .build();
                 }
 
+
                 return chain.proceed(newRequest);
 
             }
@@ -211,7 +214,6 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
 
 
 
-        userinfo UserInfo =new userinfo();
 
         userinfo_save();
 
@@ -606,7 +608,9 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
             Intent i = getIntent();                      // facebook 또는 kakao의 아이디, 메신저타입을 받아와 변수에 저장
             String id = i.getExtras().getString("ID");
             String PW = i.getExtras().getString("PW");
-             Setting_id = i.getExtras().getString("setformat");
+
+            Setting_id = i.getExtras().getString("setformat");
+
             token=i.getExtras().getString("token");
             String fcm_token = i.getExtras().getString("fcm_token");
             Log.e("Test", id);

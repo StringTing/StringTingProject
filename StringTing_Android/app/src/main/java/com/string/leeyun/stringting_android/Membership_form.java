@@ -255,7 +255,7 @@ public class Membership_form extends Activity {
         boolean a = Pattern.matches("([a-zA-Z0-9].*[!,@,#,$,%,^,&,*,?,_,~])|([!,@,#,$,%,^,&,*,?,_,~].*[a-zA-Z0-9])",PW.trim());
         if(!b)
         {
-              Email_check_fail.setText(Email_CheckText);
+            Email_check_fail.setText(Email_CheckText);
 
         }
 
@@ -387,6 +387,7 @@ public class Membership_form extends Activity {
     public void put_total_data_save(String token,int account_id,String sex){
         SharedPreferences pref = getSharedPreferences("Local_DB", MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
+
             editor.putString("token",token);
             editor.putInt("account_id",account_id);
             editor.putString("sex",sex);
