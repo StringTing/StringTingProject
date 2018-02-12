@@ -111,6 +111,59 @@ public class Mediate extends AppCompatActivity {
 
            images1 = new MultipartBody.Part[Imageprofile1.size()];
 
+           if (Imageprofile1!=null) {
+
+            for (int index = 0; index < Imageprofile1.size(); index++) {
+                Log.e("Imageprofile1", Imageprofile1.get(index));
+                    File file = new File(Imageprofile1.get(index));
+                    if (index<3) {
+                        RequestBody surveyBody = RequestBody.create(MediaType.parse("image/*"), file);
+
+                        images1[index] = MultipartBody.Part.createFormData("image" + keyvalue.get(index), file.getName(), surveyBody);
+                        Log.e("멀티파트폼 index<3", String.valueOf(images1[index]));
+                    }
+                    if (index==3){
+                        RequestBody surveyBody = RequestBody.create(MediaType.parse("text/plain"),"");
+                        images1[index] = MultipartBody.Part.createFormData("image" + keyvalue.get(index), Imageprofile1.get(index));
+
+                       Log.e("멀티파트폼 index==3", String.valueOf(images1[index]));
+
+                   }
+
+               }
+           }
+           if (Imageprofile2!=null) {
+               for (int index = 0; index < Imageprofile2.size(); index++) {
+                   Log.e("Imageprofile1", Imageprofile2.get(index));
+                   File file = new File(Imageprofile2.get(index));
+                   if (index < 3) {
+                       RequestBody surveyBody = RequestBody.create(MediaType.parse("image/*"), file);
+
+                       images2[index] = MultipartBody.Part.createFormData("image" + keyvalue.get(index), file.getName(), surveyBody);
+                       Log.e("멀티파트폼 index<3", String.valueOf(images2[index]));
+                   }
+                   if (index == 3) {
+                       RequestBody surveyBody = RequestBody.create(MediaType.parse("text/plain"),"");
+                       images2[index] = MultipartBody.Part.createFormData("image" + keyvalue.get(index), Imageprofile1.get(index));
+                   }
+
+               }
+           }
+           if(Imageprofile3!=null){
+               for (int index = 0; index < Imageprofile2.size(); index++) {
+                   Log.e("Imageprofile1", Imageprofile2.get(index));
+                   File file = new File(Imageprofile2.get(index));
+                   if (index < 3) {
+                       RequestBody surveyBody = RequestBody.create(MediaType.parse("image/*"), file);
+                       images.put("image" + keyvalue.get(index) + "\"; filename=\"" + file.getName(), surveyBody);
+
+                       images3[index] = MultipartBody.Part.createFormData("image" + keyvalue.get(index), file.getName(), surveyBody);
+                       Log.e("멀티파트폼 index<3", String.valueOf(images3[index]));
+                   }
+                   if (index == 3) {
+                       RequestBody surveyBody = RequestBody.create(MediaType.parse("text/plain"),"");
+                       images3[index] = MultipartBody.Part.createFormData("image" + keyvalue.get(index), Imageprofile1.get(index));
+                   }
 
                }
            }
