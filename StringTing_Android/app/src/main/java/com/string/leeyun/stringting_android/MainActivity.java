@@ -285,7 +285,7 @@ public class MainActivity extends AppCompatActivity {
                                 SharedPreferences.Editor editor = pref.edit();
                                 editor.putString("token",token);
                                 editor.putString("fcm_token",refreshedToken);
-                                Log.e("fcm_token",token);
+                                Log.e("fcm_token",refreshedToken);
                                 editor.commit();
 
                             CheckLogin.setEmail(Email);
@@ -376,8 +376,10 @@ public class MainActivity extends AppCompatActivity {
                                     Intent intent_ghost= new Intent(MainActivity.this, Basicinfo_Edit.class);
                                     Intent intent_interview=new Intent(MainActivity.this, Mediate.class);
                                     check_login gsonresponse = response.body();
-                                    Log.e("onresponse_check_login", gsonresponse.getResult());
-                                    Log.e("onresponse_check_login",gsonresponse.getMessage());
+                                    if (gsonresponse.getResult()!=null) {
+                                        Log.e("onresponse_check_login", gsonresponse.getResult());
+                                        Log.e("onresponse_check_login", gsonresponse.getMessage());
+                                    }
                                     try{
                                         int account_id= Integer.parseInt(gsonresponse.getId());
                                         String sex=gsonresponse.getSex();
