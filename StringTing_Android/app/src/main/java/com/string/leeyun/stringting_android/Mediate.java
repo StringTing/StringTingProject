@@ -211,11 +211,11 @@ public class Mediate extends AppCompatActivity {
             imageUploadingApi.image_uploading(images1,token_localdb,account_id_localdb,sex);
 
         }
-        else if(images2[0]!=null){
+        if(images2[0]!=null){
             imageUploadingApi.image_uploading(images2,token_localdb,account_id_localdb,sex);
 
         }
-        else if(images3[0]!=null){
+        if(images3[0]!=null){
             imageUploadingApi.image_uploading(images3,token_localdb,account_id_localdb,sex);
 
         }

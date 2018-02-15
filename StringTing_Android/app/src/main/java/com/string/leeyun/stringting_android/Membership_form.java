@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.string.leeyun.stringting_android.API.ResponseApi;
 import com.string.leeyun.stringting_android.API.Rest_ApiService;
@@ -84,6 +85,7 @@ public class Membership_form extends Activity {
         final EditText email_edit = (EditText) findViewById(R.id.Email);
         final EditText pw_edit = (EditText)findViewById(R.id.Pw_edit);
         final EditText c_pw_edit =(EditText)findViewById(R.id.check_pw);
+
 
 
 

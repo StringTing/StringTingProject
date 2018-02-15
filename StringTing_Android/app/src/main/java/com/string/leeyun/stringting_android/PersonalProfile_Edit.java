@@ -1012,7 +1012,6 @@ public class PersonalProfile_Edit extends AppCompatActivity {
                                     .fit()
                                     .transform(transformation)
                                     .into(iv_UserPhoto1);
-                            storeCropImage(photo,filePath);
                             break;
                         }
                         case 2:{
@@ -1021,7 +1020,6 @@ public class PersonalProfile_Edit extends AppCompatActivity {
                                     .fit()
                                     .transform(transformation)
                                     .into(iv_UserPhoto2);
-                            storeCropImage(photo,filePath);
                             break;
                         }
                         case 3:{
@@ -1030,7 +1028,6 @@ public class PersonalProfile_Edit extends AppCompatActivity {
                                     .fit()
                                     .transform(transformation)
                                     .into(iv_UserPhoto3);
-                            storeCropImage(photo,filePath);
                             break;
                         }
                         case 4:{
@@ -1039,7 +1036,6 @@ public class PersonalProfile_Edit extends AppCompatActivity {
                                     .fit()
                                     .transform(transformation)
                                     .into(iv_UserPhoto4);
-                            storeCropImage(photo,filePath);
                             break;
                         }
                         case 5:{
@@ -1048,7 +1044,6 @@ public class PersonalProfile_Edit extends AppCompatActivity {
                                     .fit()
                                     .transform(transformation)
                                     .into(iv_UserPhoto5);
-                            storeCropImage(photo,filePath);
                             break;
                         }
                     }
@@ -1066,33 +1061,7 @@ public class PersonalProfile_Edit extends AppCompatActivity {
 
         }
     }
-    private void storeCropImage(Bitmap bitmap,String filePath){
-        //SmartWheel 폴더를 생성하여 이미지를 저장하는 방식
-        String dirPath=Environment.getExternalStorageDirectory().getAbsolutePath()+"/SmartWheel";
-        File directory_SmartWheel =new File(dirPath);
 
-        if(!directory_SmartWheel.exists()){
-            directory_SmartWheel.mkdir();
-        }
-        File copyFile= new File(filePath);
-        BufferedOutputStream out=null;
-
-        try{
-
-            copyFile.createNewFile();
-            out= new BufferedOutputStream(new FileOutputStream(copyFile));
-            bitmap.compress(Bitmap.CompressFormat.JPEG,100,out);
-
-            //sendBroadcst를 통해 Crop된 사진을 앨범에 보이도록 갱신한다
-            sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,Uri.fromFile(copyFile)));
-            out.flush();
-            out.close();
-
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-
-    }
     public String getPath(Uri uri) {
         String[] projection = {MediaStore.Images.Media.DATA};
         Cursor cursor = managedQuery(uri, projection, null, null, null);

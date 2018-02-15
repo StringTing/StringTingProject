@@ -141,6 +141,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
         FrameLayout kakaologin = (FrameLayout) findViewById(R.id.loginBtn2);
         kakaologin.setOnClickListener(new View.OnClickListener() {
             @Override
