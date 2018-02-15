@@ -963,16 +963,16 @@ public class PersonalProfile_Edit extends AppCompatActivity {
             }
             case PICK_FROM_CAMERA: {
                 //이미지를 가져온 이후 리자이즈할 이미지 크기
-                //이후에 이미지 크롭 어플리케이션 호출
-                Intent intent = new Intent("com.android.camera.action.CROP");
-                intent.setDataAndType(mImageCaptureUri, "image/*");
-
-                //CROP할 이미지 75*75(키울예정)
-
-                intent.putExtra("scale", true);
-                intent.putExtra("return-data", true);
-                startActivityForResult(intent, CROP_FROM_IMAGE);
-                break;
+//                //이후에 이미지 크롭 어플리케이션 호출
+//                Intent intent = new Intent("com.android.camera.action.CROP");
+//                intent.setDataAndType(mImageCaptureUri, "image/*");
+//
+//                //CROP할 이미지 75*75(키울예정)
+//
+//                intent.putExtra("scale", true);
+//                intent.putExtra("return-data", true);
+//                startActivityForResult(intent, CROP_FROM_IMAGE);
+//                break;
             }
             case CROP_FROM_IMAGE: {
                 //크롭 이후 이미지 받아서 이미지 뷰에 이미지 보여줌
@@ -982,7 +982,6 @@ public class PersonalProfile_Edit extends AppCompatActivity {
                 }
                 final Bundle extras = data.getExtras();
 
-//                imageupload_count++;
                 Log.e("imageipload_count", String.valueOf(imageupload_count));
 
 
@@ -995,9 +994,9 @@ public class PersonalProfile_Edit extends AppCompatActivity {
                 }
 
 
-
-                if (extras != null) {
-                    Bitmap photo = extras.getParcelable("data");//CROP된 BITMAP
+//
+//                if (extras != null) {
+//                    Bitmap photo = extras.getParcelable("data");//CROP된 BITMAP
 
                     Transformation transformation = new RoundedTransformationBuilder()
                             .borderWidthDp(0)
@@ -1049,7 +1048,7 @@ public class PersonalProfile_Edit extends AppCompatActivity {
                     }
 
 
-                }
+//                }
 
                 //임시파일삭제
                 File f = new File(mImageCaptureUri.getPath());
@@ -1145,7 +1144,8 @@ public class PersonalProfile_Edit extends AppCompatActivity {
     }
     public void edit_profile_confirm(View view){
 
-       
+        ImageUploading imageUploading = new ImageUploading();
+        imageUploading.image_uplodaing_method(Imageupload_countList,token,account_id,sex);
     }
 
     public void get_image_setting(ArrayList<String> image_url){

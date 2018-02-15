@@ -30,9 +30,6 @@ public class api_call {
 
 
     public void image_uploading(MultipartBody.Part[] images1, final String token, final int account_id, final String sex){
-
-
-
         Thread t = new Thread() {
             public void run() {
                 try {
@@ -95,9 +92,69 @@ public class api_call {
             e.printStackTrace();
         }
 
+    }
+    public void image_edit_uploading(MultipartBody.Part[] images1, final String token, final int account_id, final String sex){
+        Thread t = new Thread() {
+            public void run() {
+                try {
+                    OkHttpClient.Builder client1 = new OkHttpClient.Builder();
+                    client1.addInterceptor(new Interceptor() {
+                        @Override
+                        public okhttp3.Response intercept(Interceptor.Chain chain) throws IOException {
+
+                            Request builder = chain.request();
+                            Request newRequest;
 
 
+                            newRequest = builder.newBuilder()
+                                    .addHeader("access-token",token)
+                                    .addHeader("account-id", String.valueOf(account_id))
+                                    .addHeader("account-sex",sex)
+                                    .build();
+
+
+                            return chain.proceed(newRequest);
+
+                        }
+                    });
+
+
+                    retrofit = new Retrofit.Builder()
+                            .baseUrl(API_URL)
+                            .addConverterFactory(GsonConverterFactory.create())
+                            .client(client1.build())
+                            .build();
+                } catch (Exception e) {
+                    // 무시..
+                }
+            }
+        };
+        // 스레드 시작
+        t.start();
+
+        try {
+            t.join();
+            apiService= retrofit.create(Rest_ApiService.class);
+            Call<register_image> call = apiService.post_regist_edit_image(images1);
+            call.enqueue(new Callback<register_image>() {
+                @Override
+                public void onResponse(Call<register_image> call, Response<register_image> response) {
+                    register_image imageresponse=response.body();
+                    Log.e("model 이미지 업로딩 분류",imageresponse.getResult());
+//                Log.e("onregistImage", imageresponse.getMessage());
+
+
+                }
+
+                @Override
+                public void onFailure(Call<register_image> call, Throwable t) {
+                    Log.e("onregistImage_fail",t.toString());
+                }
+            });
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
     }
-
 }
