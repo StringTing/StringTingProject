@@ -78,8 +78,8 @@ public interface Rest_ApiService {
         Call<register_image>post_register_image(@Part MultipartBody.Part[] images);
 
         @Multipart
-        @POST("register/image")
-        Call<register_image>post_register_image_map(@PartMap () Map<String,RequestBody>map);
+        @POST("register/edit-image/")
+        Call<register_image>post_regist_edit_image(@Part MultipartBody.Part[] images);
 
         @GET("{sex}/{account_id}/get/matched-account")
         Call<get_matched_accountList> get_matched_account(@Path("sex")String matched_sex, @Path("account_id")int matched_account_id);
