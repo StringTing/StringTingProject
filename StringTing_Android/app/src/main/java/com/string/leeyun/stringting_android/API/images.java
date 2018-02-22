@@ -14,6 +14,7 @@ public class images {
         public class approved{
             int id;
             String name;
+            int index;
 
             public int getId() {
                 return id;
@@ -29,12 +30,17 @@ public class images {
 
             public void setName(String name) {
                 this.name = name;
+            }
+
+            public int getIndex() {
+                return index;
             }
 
         }
         public class in_review{
             int id;
             String name;
+            int index;
 
             public int getId() {
                 return id;
@@ -50,6 +56,10 @@ public class images {
 
             public void setName(String name) {
                 this.name = name;
+            }
+
+            public int getIndex() {
+                return index;
             }
         }
 

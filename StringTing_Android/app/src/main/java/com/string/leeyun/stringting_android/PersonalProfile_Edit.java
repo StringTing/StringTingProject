@@ -7,10 +7,8 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.ColorSpace;
 import android.net.Uri;
 import android.os.Environment;
-import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -18,8 +16,6 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.util.TypedValue;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
@@ -49,21 +45,15 @@ import com.string.leeyun.stringting_android.API.message;
 import com.string.leeyun.stringting_android.API.userinfo;
 import com.tsengvn.typekit.TypekitContextWrapper;
 
-import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.StringTokenizer;
 
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import retrofit2.Call;
 import retrofit2.Callback;
-import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -107,6 +97,12 @@ public class PersonalProfile_Edit extends AppCompatActivity {
     ArrayList<String>profile_image_list;
     ArrayList<String>profile_image_replace;
     ArrayList<String>profile_image_full_url=new ArrayList<String>();
+    ArrayList<String>profile_image_list_in_review;
+    ArrayList<String>profile_image_replace_in_review;
+    ArrayList<String>profile_image_full_url_in_review=new ArrayList<String>();
+    ArrayList<Integer>profile_approved_index_list=new ArrayList<Integer>();
+    ArrayList<Integer>Profile_in_review_index_list=new ArrayList<>();
+
     int macthing_account;
     String macthing_sex;
     ArrayList<Integer>detail_photo;
@@ -179,9 +175,7 @@ public class PersonalProfile_Edit extends AppCompatActivity {
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        birthday1.setAdapter(adapter);
-        birthday2.setAdapter(adapter_bir2);
-        birthday3.setAdapter(adapter_bir3);
+
         city.setAdapter(adapter2);
         blood.setAdapter(adapter3);
         drink.setAdapter(adapter4);
@@ -245,16 +239,28 @@ public class PersonalProfile_Edit extends AppCompatActivity {
                     getdetail=response.body();
                     profile_image_list=new ArrayList<String>();
                     profile_image_replace=new ArrayList<String>();
+                    profile_image_list_in_review=new ArrayList<String>();
+                    profile_image_replace_in_review=new ArrayList<String>();
                     try {
                         detail_photo=new ArrayList<Integer>();
 
                         if (getdetail.getImages().getApproved().get(0).getName() != null) {
-                            for (int i=0;i<getdetail.getImages().getApproved().size();i++){
+                            for (int i=0;i<getdetail.getImages().getApproved().size();i++) {
                                 //이미지 url 받아오는 로직
                                 profile_image_list.add(String.valueOf(getdetail.getImages().getApproved().get(i).getName()));
+                                profile_approved_index_list.add(getdetail.getImages().getApproved().get(i).getIndex());
                             }
 
-                            Log.e("get_eval_list_image", String.valueOf(getdetail.getImages().getApproved().get(0).getName()));
+                            Log.e("get_approved_list_image", String.valueOf(getdetail.getImages().getApproved().get(0).getName()));
+
+                        }
+                        if(getdetail.getImages().getIn_review().get(0).getName()!=null){
+                            for (int i=0;i<getdetail.getImages().getIn_review().size();i++) {
+                                //이미지 url 받아오는 로직
+                                profile_image_list_in_review.add(getdetail.getImages().getIn_review().get(i).getName());
+                                Profile_in_review_index_list.add(getdetail.getImages().getIn_review().get(i).getIndex());
+                            }
+                            Log.e("get_in_review_list_image", String.valueOf(getdetail.getImages().getApproved().get(0).getName()));
 
                         }
 
@@ -269,12 +275,19 @@ public class PersonalProfile_Edit extends AppCompatActivity {
                                 profile_image_replace.add(profile_image_list.get(i).replace(replace,large));
                                 //이미지 full url 이거 picasso에 바로 넣으면 됨
                                 profile_image_full_url.add(API_IMAGE_URL+profile_image_replace.get(i));
-
                             }
-                            get_image_setting(profile_image_full_url);
+                            get_image_setting(profile_image_full_url,profile_approved_index_list);
                             Log.e("image_url_first", profile_image_replace.get(0));
                         }
 
+                        if (getdetail.getImages().getIn_review().get(0) !=null) {
+                            for(int i=0; i<getdetail.getImages().getIn_review().size();i++){
+                                profile_image_replace_in_review.add(profile_image_list_in_review.get(i).replace(replace,large));
+                                profile_image_full_url_in_review.add(API_IMAGE_URL+profile_image_replace_in_review.get(i));
+                            }
+                            Log.e("image_url_in_review",profile_image_full_url_in_review.get(0));
+                            get_image_setting(profile_image_full_url_in_review,Profile_in_review_index_list);
+                        }
                         //이런식으로 음주,나이,키 등등 받아오면 됩니다.
                         getdetail.getDrink();
                         getdetail.getAge();
@@ -753,47 +766,6 @@ public class PersonalProfile_Edit extends AppCompatActivity {
             }
         });
 
-        //병역
-        if(getdetail.getMilitary_service_status().equals("군필")){
-            RadioArmy_Complete_checked.setChecked(true);
-        }
-        else if(getdetail.getMilitary_service_status().equals("미필")){
-            RadioArmy_InComplete_checked.setChecked(true);
-        }
-        else if(getdetail.getMilitary_service_status().equals("해당없음")){
-            RadioArmy_Notduty_checked.setChecked(true);
-        }
-
-        RadioArmy_Complete_checked.setOnClickListener(new RadioButton.OnClickListener(){
-            public void onClick(View v) {
-                if (RadioArmy_Complete_checked.isChecked()) {
-                    Log.e("병역.", "병역필");
-                    UserInfo.setMilitary_service_status("군필");
-                }
-
-            }
-        });
-
-        RadioArmy_InComplete_checked.setOnClickListener(new RadioButton.OnClickListener(){
-            public void onClick(View v) {
-                if (RadioArmy_InComplete_checked.isChecked()) {
-
-                    Log.e("병역.", "미필");
-                    UserInfo.setMilitary_service_status("미필");
-
-                }
-
-            }
-        });
-        RadioArmy_Notduty_checked.setOnClickListener(new RadioButton.OnClickListener(){
-            public void onClick(View v) {
-                if (RadioArmy_Notduty_checked.isChecked()) {
-                    Log.e("병역.", "해당없음");
-                    UserInfo.setMilitary_service_status("해당없음");
-                }
-
-            }
-        });
     }
 
     public void onClick(View v) {
@@ -994,8 +966,6 @@ public class PersonalProfile_Edit extends AppCompatActivity {
 
                 }
 
-
-
                 if (extras != null) {
                     Bitmap photo = extras.getParcelable("data");//CROP된 BITMAP
 
@@ -1144,11 +1114,11 @@ public class PersonalProfile_Edit extends AppCompatActivity {
 
     }
     public void edit_profile_confirm(View view){
-
+        
        
     }
 
-    public void get_image_setting(ArrayList<String> image_url){
+    public void get_image_setting(ArrayList<String> image_url,ArrayList<Integer> image_index){
         Transformation transformation = new RoundedTransformationBuilder()
                 .borderWidthDp(0)
                 .cornerRadiusDp(8)
@@ -1168,7 +1138,7 @@ public class PersonalProfile_Edit extends AppCompatActivity {
                     .load(image_url.get(i))
                     .fit()
                     .transform(transformation)
-                    .into(get_image_setting_preview.get(i));
+                    .into(get_image_setting_preview.get(image_index.get(i)));
         }
     }
 }
