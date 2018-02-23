@@ -73,6 +73,7 @@ import static com.string.leeyun.stringting_android.R.id.Spinner_drink;
 import static com.string.leeyun.stringting_android.R.id.Spinner_education;
 import static com.string.leeyun.stringting_android.R.id.Spinner_religion;
 import static com.string.leeyun.stringting_android.R.layout.spinner_item;
+import com.string.leeyun.stringting_android.model.api_call;
 
 public class PersonalProfile_Edit extends AppCompatActivity {
 
@@ -293,19 +294,12 @@ public class PersonalProfile_Edit extends AppCompatActivity {
                         getdetail.getAge();
 
                         if(sex.equals("female")){
-                            RelativeLayout army = (RelativeLayout) findViewById(R.id.army);
-                            RelativeLayout army_txt = (RelativeLayout) findViewById(R.id.army_txt);
-                            army_txt.setVisibility(View.GONE);
-                            army.setVisibility(View.GONE);
+
                             Spinner body_male=(Spinner)findViewById(Spinner_body_form_male);
                             Spinner body_female=(Spinner)findViewById(Spinner_body_form_female);
                             body_male.setVisibility(View.GONE);
                             body_female.setVisibility(View.VISIBLE);
                         }else {
-                            RelativeLayout army = (RelativeLayout)findViewById(R.id.army);
-                            RelativeLayout army_txt = (RelativeLayout) findViewById(R.id.army_txt);
-                            army_txt.setVisibility(View.VISIBLE);
-                            army.setVisibility(View.VISIBLE);
                             Spinner body_male=(Spinner)findViewById(Spinner_body_form_male);
                             Spinner body_female=(Spinner)findViewById(Spinner_body_form_female);
                             body_male.setVisibility(View.VISIBLE);
@@ -443,27 +437,6 @@ public class PersonalProfile_Edit extends AppCompatActivity {
         final Spinner spinnerEducation = (Spinner) findViewById(Spinner_education);
         final Spinner spinnerTall = (Spinner) findViewById(Spinner_Tall);
 
-
-        //생일스피너
-   /*     Log.e("생일",account.getBirthday());
-
-        String[] bir = getdetail.getBirthday().split("-");
-
-        List<String> birth = new ArrayList<>();
-        for (int i = 0; i < bir.length; i++) {
-            birth.add(bir[i]);
-        }
-
-
-        int birthYear_length = getResources().getStringArray(R.array.birthday1).length;
-        int birthYear_spinnerIndex =0;
-
-        for(int p=0;p<birthYear_length;p++){
-            if(spinnerbir1.getItemAtPosition(p).toString().equals(birth.get(0))){
-                birthYear_spinnerIndex = p;
-            }
-        }
-        spinnerbir1.setSelection(birthYear_spinnerIndex);*/
 
         //학력스피너
         //기존값 불러오기
@@ -965,8 +938,6 @@ public class PersonalProfile_Edit extends AppCompatActivity {
 
                 }
 
-
-
                     Transformation transformation = new RoundedTransformationBuilder()
                             .borderWidthDp(0)
                             .cornerRadiusDp(8)
@@ -1113,7 +1084,12 @@ public class PersonalProfile_Edit extends AppCompatActivity {
     public void edit_profile_confirm(View view){
 
         ImageUploading imageUploading = new ImageUploading();
-        imageUploading.image_uplodaing_method(Imageupload_countList,token,account_id,sex);
+        if(Imageupload_countList.size()>=1) {
+            imageUploading.image_uplodaing_method(Imageupload_countList, token, account_id, sex);
+        }
+        api_call editing_basicinfo = new api_call();
+        editing_basicinfo.editing_basicinfo(UserInfo,token,account_id,sex);
+        Log.e("수정하기베이직인포테스트","메소드호출완료");
     }
 
     public void get_image_setting(ArrayList<String> image_url,ArrayList<Integer> image_index){
