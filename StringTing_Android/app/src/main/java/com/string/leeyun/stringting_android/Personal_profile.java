@@ -231,13 +231,11 @@ public class Personal_profile extends AppCompatActivity {
 
                         Picasso.with(Personal_profile.this).load(profile_image_full_url.get(0)).transform(new CircleTransForm()).into(profile);
 
-                       /*
-                        내 프로필 서클
+
 
                        ImageView my_profile=(ImageView)findViewById(R.id.my_profile);
 
-                       Picasso.with(Personal_profile.this).load(?????????).transform(new CircleTransForm()).into(my_profile);*/
-
+                        Picasso.with(Personal_profile.this).load(profile_image_full_url.get(1)).transform(new CircleTransForm()).into(profile);
 
 
 
