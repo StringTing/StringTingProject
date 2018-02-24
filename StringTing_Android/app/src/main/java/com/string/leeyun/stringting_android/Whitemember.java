@@ -75,7 +75,13 @@ public class Whitemember extends AppCompatActivity {
 
 
     public void onClick(View v) {
-
+        //사진촬영
+        DialogInterface.OnClickListener cameraListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                doTakePhotoAction();
+            }
+        };
         //앨범가져오기
         DialogInterface.OnClickListener albumListener = new DialogInterface.OnClickListener() {
             @Override
@@ -93,7 +99,7 @@ public class Whitemember extends AppCompatActivity {
 
         new AlertDialog.Builder(this)
                 .setTitle("업로드이미지 선택")
-                //.setPositiveButton("사진촬영",cameraListener)
+                .setPositiveButton("사진촬영",cameraListener)
                 .setNeutralButton("앨범선택", albumListener)
                 .setNegativeButton("취소", canceListener)
                 .show();
@@ -105,6 +111,19 @@ public class Whitemember extends AppCompatActivity {
         intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
         startActivityForResult(intent, PICK_FROM_ALBUM);
 
+    }
+    private void doTakePhotoAction(){
+        Intent cameraIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
+        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT,
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI.toString());
+
+        try {
+            cameraIntent.putExtra("return-data", true);
+            startActivityForResult(cameraIntent, PICK_FROM_CAMERA);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
