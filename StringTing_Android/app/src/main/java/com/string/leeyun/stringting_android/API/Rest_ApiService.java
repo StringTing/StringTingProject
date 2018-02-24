@@ -77,9 +77,7 @@ public interface Rest_ApiService {
         @POST("register/image/")
         Call<register_image>post_register_image(@Part MultipartBody.Part[] images);
 
-        @Multipart
-        @POST("register/edit-image/")
-        Call<register_image>post_regist_edit_image(@Part MultipartBody.Part[] images);
+
 
         @GET("{sex}/{account_id}/get/matched-account")
         Call<get_matched_accountList> get_matched_account(@Path("sex")String matched_sex, @Path("account_id")int matched_account_id);
@@ -101,6 +99,13 @@ public interface Rest_ApiService {
 
         @POST("register/edit-introduction-qna/")
         Call<post_qna_list>post_edit_qna(@Body post_qna_list postEditQna);
+
+        @Multipart
+        @POST("register/edit-image/")
+        Call<register_image>post_regist_edit_image(@Part MultipartBody.Part[] images);
+
+        @POST("register/edit-account-info/")
+        Call<join>post_regist_edit_basicinfo(@Body userinfo Userinfo);
     }
 
 

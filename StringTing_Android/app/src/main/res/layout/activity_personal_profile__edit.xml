@@ -164,7 +164,10 @@
                     android:textSize="12sp" />
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> c6698de8d4eb941f5d5a1eeea9c8e51815f8ea1f
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -558,25 +561,7 @@
 
                 </RelativeLayout>
 
-                <RelativeLayout
-                    android:id="@+id/army_txt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
 
-                    <TextView
-                        android:id="@+id/textView22"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="9sp"
-                        android:textColor="#7f7e7e"
-                        android:letterSpacing="-0.02"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="17dp"
-                        android:layout_marginTop="8dp"
-                        android:textAlignment="textEnd"
-                        android:text="* 병역 정보는 공개되지 않는 정보입니다.\n* 공익 또는 대체복무 등의 경우, 해당없음을 선택해주세요." />
-
-                </RelativeLayout>
 
               <!--  <FrameLayout
                     android:layout_width="match_parent"
