@@ -9,7 +9,6 @@ import java.io.Serializable;
 public class userinfo implements Serializable{
 
 
-
     private String login_format;
     private String birthday;
     private String military_service_status;
@@ -28,6 +27,7 @@ public class userinfo implements Serializable{
     private String fcm_token;
     private String token;
     private String sex;
+
 
     public void setFcm_token(String fcm_token) {
         this.fcm_token = fcm_token;

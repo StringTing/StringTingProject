@@ -1089,7 +1089,10 @@ public class PersonalProfile_Edit extends AppCompatActivity {
         }
         api_call editing_basicinfo = new api_call();
         editing_basicinfo.editing_basicinfo(UserInfo,token,account_id,sex);
+        Log.e("수정하기페이지 Userinfo에 값이 들어있나", String.valueOf(UserInfo.getBlood_type()+UserInfo.getBody_form()));
         Log.e("수정하기베이직인포테스트","메소드호출완료");
+        super.onBackPressed();
+
     }
 
     public void get_image_setting(ArrayList<String> image_url,ArrayList<Integer> image_index){

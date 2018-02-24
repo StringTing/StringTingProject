@@ -193,7 +193,7 @@ public class api_call {
                             .client(client1.build())
                             .build();
                 } catch (Exception e) {
-                    // 무시..
+                    // 무시.;
                 }
             }
         };
@@ -202,13 +202,15 @@ public class api_call {
 
         try {
             t.join();
-            Call<join> postEditUserinfo = apiService.post_regist_edit_basicinfo(Userinfo);
-            postEditUserinfo.enqueue(new Callback<join>() {
+            Log.e("수정하기 edit basicinfo Userinfo 잘넘어왔나", String.valueOf(Userinfo));
+            apiService= retrofit.create(Rest_ApiService.class);
+            Call<userinfo> postEditUserinfo = apiService.post_regist_edit_basicinfo(Userinfo);
+            postEditUserinfo.enqueue(new Callback<userinfo>() {
                 @Override
-                public void onResponse(Call<join> call, Response<join> response) {
+                public void onResponse(Call<userinfo> call, Response<userinfo> response) {
 
-                    join gsonresponse=response.body();
-                    Log.e("onresponse_join", gsonresponse.getResult());
+                    userinfo gsonresponse=response.body();
+                    Log.e("베이직인포 수정하기 응답", gsonresponse.getResult());
                     Log.e("onresponse", String.valueOf(response.code()));
                     Log.e("onresponse", "success");
 
@@ -216,7 +218,7 @@ public class api_call {
                 }
 
                 @Override
-                public void onFailure(Call<join> call, Throwable t) {
+                public void onFailure(Call<userinfo> call, Throwable t) {
                     Log.d("sam", t.toString());
                 }
 

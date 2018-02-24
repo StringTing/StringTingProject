@@ -164,10 +164,7 @@
                     android:textSize="12sp" />
 
 
-<<<<<<< HEAD
 
-=======
->>>>>>> c6698de8d4eb941f5d5a1eeea9c8e51815f8ea1f
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
