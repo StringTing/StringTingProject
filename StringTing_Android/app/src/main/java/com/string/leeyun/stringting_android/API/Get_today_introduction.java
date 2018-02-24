@@ -43,7 +43,7 @@ public class Get_today_introduction {
     @SerializedName("images")
     private images images;
     @SerializedName("opened")
-    private boolean opened;
+    private String opened;
     @SerializedName("score")
     private double score;
     private int id;
@@ -81,13 +81,13 @@ public class Get_today_introduction {
     }
 
 
-    public void setOpened(boolean opened) {
+    public void setOpened(String opened) {
         this.opened = opened;
     }
 
 
 
-    public boolean isOpened() {
+    public String isOpened() {
         return opened;
     }
 

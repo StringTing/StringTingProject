@@ -47,6 +47,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.zip.Inflater;
 
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -97,8 +98,8 @@ public class Tab_First extends Fragment implements View.OnClickListener {
     public String last_image_url_third;
     ArrayList<Get_today_introduction> im_get_today;
     ArrayList<Ger_last_5day_matched_account>im_get_last_5day;
-    Boolean opened_form_api1;
-    Boolean opened_form_api2;
+    String opened_form_api1;
+    String opened_form_api2;
     TableRow tr;
     ImageView img_pic ;
     //이미지 들어오는거
@@ -241,7 +242,30 @@ public class Tab_First extends Fragment implements View.OnClickListener {
                         e.printStackTrace();
                         Log.e("imagenull_today", "false");
                     }
+                    Log.e("open_form_api1",String.valueOf(opened_form_api1));
+                    try {
+                        if (opened_form_api1.equals("true")) {
 
+                            Log.e("open_form_api1",String.valueOf(opened_form_api1));
+                            ImageView today_rock = (ImageView) v.findViewById(R.id.today_rock_img);
+                            today_rock.setVisibility(View.GONE);
+                            openselected_count="true";
+
+                        }
+
+
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                    try{
+                        if(opened_form_api2.equals("true")){
+                            ImageView today_rock = (ImageView) v.findViewById(R.id.today_rock_img2);
+                            openselected_count_second="true";
+                            today_rock.setVisibility(View.GONE);
+                        }
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
                 }
 
                 @Override
@@ -309,27 +333,7 @@ public class Tab_First extends Fragment implements View.OnClickListener {
 
         Log.e("openselected_second",openselected_second);
 
-        try {
-            if (openselected.equals("true")&&opened_form_api1==true) {
 
-
-                ImageView today_rock = (ImageView) v.findViewById(R.id.today_rock_img);
-                today_rock.setVisibility(View.GONE);
-
-            }
-
-
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        try{
-            if(openselected_second.equals("true")&&opened_form_api2==true){
-                ImageView today_rock = (ImageView) v.findViewById(R.id.today_rock_img2);
-                today_rock.setVisibility(View.GONE);
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
 
 
         // Inflate the layout for this fragment
@@ -388,7 +392,7 @@ public class Tab_First extends Fragment implements View.OnClickListener {
 
                 }else {
                     Intent e = new Intent(getActivity(),TodaypicScd_pop.class);
-                    e.putExtra("matching_account",matching_account.get(1));
+                    e.putExtra("matching_account",matching_account.get(0));
                     e.putExtra("what_pic","second");
 
                     if (sex.equals("male")){
