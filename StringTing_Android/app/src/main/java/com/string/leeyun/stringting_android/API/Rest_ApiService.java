@@ -105,7 +105,7 @@ public interface Rest_ApiService {
         Call<register_image>post_regist_edit_image(@Part MultipartBody.Part[] images);
 
         @POST("register/edit-account-info/")
-        Call<join>post_regist_edit_basicinfo(@Body userinfo Userinfo);
+        Call<userinfo>post_regist_edit_basicinfo(@Body userinfo Userinfo);
     }
 
 
