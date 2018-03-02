@@ -232,4 +232,42 @@ public class api_call {
 
 
     }
+
+    public void my_pic(final String token, final int account_id, final String sex){
+        OkHttpClient.Builder client1 = new OkHttpClient.Builder();
+        client1.addInterceptor(new Interceptor() {
+            @Override
+            public okhttp3.Response intercept(Chain chain) throws IOException {
+
+                Request builder = chain.request();
+                Request newRequest;
+
+
+                newRequest = builder.newBuilder()
+                        .addHeader("access-token",token)
+                        .addHeader("account-id", String.valueOf(account_id))
+                        .addHeader("account-sex",sex)
+                        .addHeader("Content-Type","application/json")
+                        .build();
+
+
+                return chain.proceed(newRequest);
+
+            }
+        });
+
+        retrofit = new Retrofit.Builder()
+                .baseUrl(API_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(client1.build())
+                .build();
+
+
+        apiService= retrofit.create(Rest_ApiService.class);
+
+        
+
+
+
+    }
 }
