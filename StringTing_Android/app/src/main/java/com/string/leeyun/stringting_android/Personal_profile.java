@@ -20,6 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.makeramen.roundedimageview.RoundedTransformationBuilder;
 import com.squareup.picasso.Picasso;
@@ -35,6 +36,8 @@ import com.string.leeyun.stringting_android.API.get_introduction_qna;
 import com.string.leeyun.stringting_android.API.get_introduction_qnalist;
 import com.string.leeyun.stringting_android.API.get_introduction_questionlist;
 
+
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -196,8 +199,6 @@ public class Personal_profile extends AppCompatActivity {
                         LinearLayout inflatedLayout = (LinearLayout)findViewById(R.id.pic_view);
                         LayoutInflater inflater =  (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-                        //imageview 동적으로 생성하는 부분 라운드처리해줘야함
-
                         for(int x=0;x<profile_image_full_url.size();x++) {
 
                             ImageView image = new ImageView(Personal_profile.this);
@@ -236,6 +237,11 @@ public class Personal_profile extends AppCompatActivity {
                        ImageView my_profile=(ImageView)findViewById(R.id.my_profile);
 
                         Picasso.with(Personal_profile.this).load(profile_image_full_url.get(1)).transform(new CircleTransForm()).into(profile);
+
+                        TextView profileText= (TextView)findViewById(R.id.profile_text);
+                        String first_shp="#";
+                        String shp=" #";
+                        profileText.setText(String.valueOf(first_shp+getdetail.getHeight())+" "+shp+getdetail.getDrink()+" "+shp+getdetail.getDepartment()+" "+shp+getdetail.getLocation());
 
 
 
