@@ -1,29 +1,13 @@
 package com.string.leeyun.stringting_android.API;
 
-import com.google.gson.JsonArray;
-
-import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
-import retrofit2.http.Field;
-import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
-import retrofit2.http.PartMap;
 import retrofit2.http.Path;
-import retrofit2.http.Url;
-
-import static com.string.leeyun.stringting_android.R.id.sex;
-import static com.string.leeyun.stringting_android.R.mipmap.t;
 
 /**
  * Created by leeyun on 2017. 11. 3..
@@ -77,7 +61,8 @@ public interface Rest_ApiService {
         @POST("register/image/")
         Call<register_image>post_register_image(@Part MultipartBody.Part[] images);
 
-
+        @GET("{sex}/{account_id}/get/my-pick-list/")
+        Call<Get_my_pick_list>get_my_pick_list(@Path("sex")String pick_sex, @Path("account_id")int pick_id);
 
         @GET("{sex}/{account_id}/get/matched-account")
         Call<get_matched_accountList> get_matched_account(@Path("sex")String matched_sex, @Path("account_id")int matched_account_id);
@@ -106,6 +91,9 @@ public interface Rest_ApiService {
 
         @POST("register/edit-account-info/")
         Call<userinfo>post_regist_edit_basicinfo(@Body userinfo Userinfo);
+
+
+
     }
 
 
