@@ -290,7 +290,7 @@ public class MainActivity extends AppCompatActivity {
                                 editor.commit();
 
                             CheckLogin.setEmail(Email);
-
+                            CheckLogin.setSex(sex);
                             CheckLogin.setPassword(" ");
                             CheckLogin.setFcm_token(refreshedToken);
                                 responapi.setEmail(Email);
@@ -377,20 +377,18 @@ public class MainActivity extends AppCompatActivity {
                                     Intent intent_ghost= new Intent(MainActivity.this, Basicinfo_Edit.class);
                                     Intent intent_interview=new Intent(MainActivity.this, Mediate.class);
                                     check_login gsonresponse = response.body();
-                                    if (gsonresponse.getResult()!=null) {
-                                        Log.e("onresponse_check_login", gsonresponse.getResult());
-                                        Log.e("onresponse_check_login", gsonresponse.getMessage());
-                                    }
+
                                     try{
                                         int account_id= Integer.parseInt(gsonresponse.getId());
                                         String sex=gsonresponse.getSex();
                                         save_local_data(sex,account_id,token);
+                                        Log.e("체크로그인",gsonresponse.getStatus());
 
                                     }catch (Exception e){
                                         e.printStackTrace();
                                     }
 
-                                    if (gsonresponse.getStatus()==null) {
+                                    if (gsonresponse.getStatus().equals(null)) {
 
                                         Log.e("get_status","등록되지않은 이메일입니다");
                                         intent_ghost.putExtra("ID",Email);
