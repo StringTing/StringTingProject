@@ -1,15 +1,14 @@
 package com.string.leeyun.stringting_android.model;
 
-import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
 
+import com.string.leeyun.stringting_android.API.Get_my_pick_list;
 import com.string.leeyun.stringting_android.API.Rest_ApiService;
-import com.string.leeyun.stringting_android.API.join;
 import com.string.leeyun.stringting_android.API.register_image;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import okhttp3.Interceptor;
 import okhttp3.MultipartBody;
@@ -20,8 +19,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+
+import static com.string.leeyun.stringting_android.API.Rest_ApiService.API_IMAGE_URL;
 import static com.string.leeyun.stringting_android.API.Rest_ApiService.API_URL;
 import com.string.leeyun.stringting_android.API.userinfo;
+import com.string.leeyun.stringting_android.Tab_Third;
 
 /**
  * Created by ahdguialee on 2018. 2. 12..
@@ -30,6 +32,8 @@ import com.string.leeyun.stringting_android.API.userinfo;
 public class api_call {
     Retrofit retrofit;
     Rest_ApiService apiService;
+
+
 
 
     public void image_uploading(MultipartBody.Part[] images1, final String token, final int account_id, final String sex){
@@ -160,7 +164,6 @@ public class api_call {
         }
 
     }
-
     public void editing_basicinfo(userinfo Userinfo, final String token, final int account_id, final String sex){
         Thread t = new Thread() {
             public void run() {
@@ -232,42 +235,71 @@ public class api_call {
 
 
     }
+    public void my_pick(final String token, final int account_id, final String sex){
+        Thread t = new Thread() {
+            public void run() {
+                try {
+                    OkHttpClient.Builder client1 = new OkHttpClient.Builder();
+                    client1.addInterceptor(new Interceptor() {
+                        @Override
+                        public okhttp3.Response intercept(Interceptor.Chain chain) throws IOException {
 
-    public void my_pic(final String token, final int account_id, final String sex){
-        OkHttpClient.Builder client1 = new OkHttpClient.Builder();
-        client1.addInterceptor(new Interceptor() {
-            @Override
-            public okhttp3.Response intercept(Chain chain) throws IOException {
-
-                Request builder = chain.request();
-                Request newRequest;
-
-
-                newRequest = builder.newBuilder()
-                        .addHeader("access-token",token)
-                        .addHeader("account-id", String.valueOf(account_id))
-                        .addHeader("account-sex",sex)
-                        .addHeader("Content-Type","application/json")
-                        .build();
+                            Request builder = chain.request();
+                            Request newRequest;
 
 
-                return chain.proceed(newRequest);
+                            newRequest = builder.newBuilder()
+                                    .addHeader("access-token",token)
+                                    .addHeader("account-id", String.valueOf(account_id))
+                                    .addHeader("account-sex",sex)
+                                    .build();
 
+
+                            return chain.proceed(newRequest);
+
+                        }
+                    });
+
+
+                    retrofit = new Retrofit.Builder()
+                            .baseUrl(API_URL)
+                            .addConverterFactory(GsonConverterFactory.create())
+                            .client(client1.build())
+                            .build();
+                } catch (Exception e) {
+                    // 무시..
+                }
             }
-        });
+        };
+        // 스레드 시작
+        t.start();
 
-        retrofit = new Retrofit.Builder()
-                .baseUrl(API_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .client(client1.build())
-                .build();
+        try {
+            t.join();
+            apiService= retrofit.create(Rest_ApiService.class);
+            Call<Get_my_pick_list> call = apiService.get_my_pick_list(sex,account_id);
+            call.enqueue(new Callback<Get_my_pick_list>() {
+                @Override
+                public void onResponse(Call<Get_my_pick_list> call, Response<Get_my_pick_list> response) {
+                    Log.e("나의 픽",String.valueOf(response.raw()));
+                    Log.e("나의 픽", String.valueOf(response.body()));
+                    Log.e("나의 픽", String.valueOf(response.code()));
 
+                    Get_my_pick_list get_my_pick = response.body();
+                    Log.e("좋아요보낸리스트",String.valueOf(get_my_pick.getSend_like_list()));
+                }
 
-        apiService= retrofit.create(Rest_ApiService.class);
+                @Override
+                public void onFailure(Call<Get_my_pick_list> call, Throwable t) {
 
-        
+                }
 
+            });
 
-
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
+
+
 }
