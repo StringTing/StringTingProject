@@ -21,6 +21,12 @@ public class Get_my_pick_list {
     private ArrayList<Get_my_pick_list> accounts;
 
 
+
+    private List<receive_like_list> receive_like_list;
+    private List<receive_high_score_list>receive_high_score_list;
+    private List<send_like_list>send_like_list;
+    private List<give_high_score_list>give_high_score_list;
+
     public List<Get_my_pick_list.receive_like_list> getReceive_like_list() {
         return receive_like_list;
     }
@@ -45,11 +51,13 @@ public class Get_my_pick_list {
         this.send_like_list = send_like_list;
     }
 
-    private List<receive_like_list> receive_like_list;
-    private List<receive_high_score_list>receive_high_score_list;
-    private List<send_like_list>send_like_list;
-  //  private List<give_high_score_list>give_high_score_list;
+    public List<Get_my_pick_list.give_high_score_list> getGive_high_score_list() {
+        return give_high_score_list;
+    }
 
+    public void setGive_high_score_list(List<Get_my_pick_list.give_high_score_list> give_high_score_list) {
+        this.give_high_score_list = give_high_score_list;
+    }
 
     public ArrayList<Get_my_pick_list> getAccounts() {
         return accounts;

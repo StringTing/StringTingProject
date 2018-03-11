@@ -51,7 +51,7 @@
                         android:layout_marginTop="31dp"
                         android:layout_marginLeft="16dp"
                         android:letterSpacing="0.04"
-                        android:text="내가 좋아하는 카드"
+                        android:text="나를 좋아하는 카드"
                         android:textColor="#000000"
                         android:textSize="12sp" />
 
@@ -125,7 +125,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="16dp"
                         android:letterSpacing="0.04"
-                        android:text="내가 호감있는 카드"
+                        android:text="내게 호감있는 카드"
                         android:textColor="#000000"
                         android:textSize="12sp" />
 
@@ -197,7 +197,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="16dp"
                         android:letterSpacing="0.04"
-                        android:text="나를 좋아하는 카드"
+                        android:text="내가 좋아하는 카드"
                         android:textColor="#000000"
                         android:textSize="12sp" />
 
@@ -270,7 +270,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="16dp"
                         android:letterSpacing="0.04"
-                        android:text="내게 호감있는 카드"
+                        android:text="내가 호감있는 카드"
                         android:textColor="#000000"
                         android:textSize="12sp" />
 
