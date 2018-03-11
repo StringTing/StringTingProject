@@ -172,7 +172,13 @@ public class Tab_Third extends Fragment {
 
                         if(get_my_pick.getGive_high_score_list().get(0).getImages().getApproved().get(0).getName() != null) {
                             for (int i = 0; i < get_my_pick.getGive_high_score_list().size(); i++) {
-                                give_high_image_list.add(String.valueOf(get_my_pick.getGive_high_score_list().get(6).getImages().getApproved().get(0).getName()));
+                                if(get_my_pick.getGive_high_score_list().get(i).getImages().getApproved().size()!=0) {
+
+                                    give_high_image_list.add(String.valueOf(get_my_pick.getGive_high_score_list().get(i).getImages().getApproved().get(0).getName()));
+                                }
+                                else {
+                                    give_high_image_list.add(String.valueOf(get_my_pick.getGive_high_score_list().get(i).getImages().getIn_review().get(0).getName()));
+                                }
                                 give_high_image_replace.add(give_high_image_list.get(i).replace(replace,small));
                                 give_high_image_full_url.add(API_IMAGE_URL+give_high_image_replace.get(i));
                                 Log.e("지난픽들 log", String.valueOf(give_high_image_full_url));
