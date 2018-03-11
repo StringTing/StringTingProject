@@ -727,6 +727,7 @@ public class Tab_First extends Fragment implements View.OnClickListener {
                         tr = new TableRow(getApplicationContext());
                         tr.setPadding(0, 35, 0, 0);
                         for (int j = 0; j < 3; ++j) {
+                            int img_cnt = j+(3*i);
                             View img = inflater.inflate(R.layout.addimg, null);
                             ImageView img_pic = (ImageView) img.findViewById(R.id.last1);
 
@@ -739,7 +740,7 @@ public class Tab_First extends Fragment implements View.OnClickListener {
 
 
                             Picasso.with(getContext())
-                                    .load(last5_image_full_url.get(i+ last5_image_full_url.size() % 3))
+                                    .load(last5_image_full_url.get(img_cnt))
                                     .fit()
                                     .transform(transformation)
                                     .into(img_pic);
@@ -753,6 +754,7 @@ public class Tab_First extends Fragment implements View.OnClickListener {
                         tr = new TableRow(getApplicationContext());
                         tr.setPadding(0, 35, 0, 0);
                         for (int i = 0; i < remainder % 3; ++i) {
+                            int remainder_cnt = last5_image_full_url.size() - (remainder%3) +i;
                             View img = inflater.inflate(R.layout.addimg, null);
                             ImageView img_pic = (ImageView) img.findViewById(R.id.last1);
 
@@ -765,7 +767,7 @@ public class Tab_First extends Fragment implements View.OnClickListener {
 
 
                             Picasso.with(getContext())
-                                    .load(last5_image_full_url.get(i))
+                                    .load(last5_image_full_url.get(remainder_cnt))
                                     .fit()
                                     .transform(transformation)
                                     .into(img_pic);
