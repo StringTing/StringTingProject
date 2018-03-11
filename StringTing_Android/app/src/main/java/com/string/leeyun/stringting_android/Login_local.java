@@ -192,6 +192,7 @@ public class Login_local extends Activity {
         CheckLogin.setEmail(Edit_id);
         CheckLogin.setPassword(Edit_pw);
         CheckLogin.setFcm_token(fcm_token);
+        CheckLogin.setSex(sex);
 
         Log.e("checkloginsex",sex);
         Log.e("checkloginfcm",fcm_token);
