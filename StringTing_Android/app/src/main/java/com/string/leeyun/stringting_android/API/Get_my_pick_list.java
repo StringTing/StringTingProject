@@ -72,9 +72,25 @@ public class Get_my_pick_list {
         int age,height;
         float score;
         boolean smoke,authenticated;
-        String education,department,location,body_form,drink,religion,blood_type,id_image;
+        String education;
+        String department;
+        String location;
+        String body_form;
+        String drink;
+        String religion;
+        String blood_type;
+        String id_image;
+        String opened;
         private images images;
 
+
+        public String isOpened() {
+            return opened;
+        }
+
+        public void setOpened(String opened) {
+            this.opened = opened;
+        }
         public int getId() {
             return id;
         }
