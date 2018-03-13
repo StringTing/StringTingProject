@@ -1,5 +1,6 @@
 package com.string.leeyun.stringting_android;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -51,21 +52,30 @@ public class Tab_Third extends Fragment {
     Retrofit retrofit;
 
 
+
+    ArrayList<Integer> matching_account=new ArrayList<Integer>();
+
     ArrayList<String> get_like_image_list=new ArrayList<>();
     ArrayList<String> get_like_image_replace=new ArrayList<>();
     ArrayList<String> get_like_image_full_url=new ArrayList<String>();
+    ArrayList<String >set_get_like_info_text = new ArrayList<String>();
+    public static ArrayList<String> get_like_openselected = new ArrayList<String>();
+    public static ArrayList<String> get_like_openselected_count= new ArrayList<String>();
 
     ArrayList<String> get_high_image_list=new ArrayList<>();
     ArrayList<String> get_high_image_replace=new ArrayList<>();
     ArrayList<String> get_high_image_full_url=new ArrayList<String>();
+    ArrayList<String >set_get_high_info_text = new ArrayList<String>();
 
     ArrayList<String> send_like_image_list=new ArrayList<>();
     ArrayList<String> send_like_image_replace=new ArrayList<>();
     ArrayList<String> send_like_image_full_url=new ArrayList<String>();
+    ArrayList<String >set_send_like_info_text = new ArrayList<String>();
 
     ArrayList<String> give_high_image_list= new ArrayList<>();
     ArrayList<String> give_high_image_replace=new ArrayList<>();
     ArrayList<String> give_high_image_full_url=new ArrayList<String>();
+    ArrayList<String >set_give_high_info_text = new ArrayList<String>();
 
 
     Get_my_pick_list myPick = new Get_my_pick_list();
@@ -140,14 +150,23 @@ public class Tab_Third extends Fragment {
                         String replace = "{}";
                         String medium = "medium";
                         String small = "small";
+
                         if(get_my_pick.getReceive_like_list().get(0).getImages().getApproved().get(0).getName() != null) {
                             for (int i = 0; i < get_my_pick.getReceive_like_list().size(); i++) {
                                 get_like_image_list.add(String.valueOf(get_my_pick.getReceive_like_list().get(i).getImages().getApproved().get(0).getName()));
                                 get_like_image_replace.add(get_like_image_list.get(i).replace(replace,small));
                                 get_like_image_full_url.add(API_IMAGE_URL+get_like_image_replace.get(i));
                                 Log.e("지난픽들 log", String.valueOf(get_like_image_full_url));
+
+                                String first_shp="#";
+                                String shp=" #";
+                                set_get_like_info_text.add(String.valueOf(first_shp+get_my_pick.getReceive_like_list().get(i).getLocation())+shp+get_my_pick.getReceive_like_list().get(i).getAge()) ;
+
+                                matching_account.add(get_my_pick.getReceive_like_list().get(i).getId());
+                                get_like_openselected.add(String.valueOf(get_my_pick.getReceive_like_list().get(i).isOpened()));
                             }
-                            get_like_view(inflater,get_like_image_full_url);
+                            get_like_view(inflater,get_like_image_full_url,set_get_like_info_text,get_like_openselected);
+                       //     open(inflater,get_like_openselected);
                         }
 
                         if(get_my_pick.getReceive_high_score_list().get(0).getImages().getApproved().get(0).getName() != null) {
@@ -156,8 +175,12 @@ public class Tab_Third extends Fragment {
                                 get_high_image_replace.add(get_high_image_list.get(i).replace(replace,small));
                                 get_high_image_full_url.add(API_IMAGE_URL+get_high_image_replace.get(i));
                                 Log.e("지난픽들 log", String.valueOf(get_high_image_full_url));
+
+                                String first_shp="#";
+                                String shp=" #";
+                                set_get_high_info_text.add(String.valueOf(first_shp+get_my_pick.getReceive_high_score_list().get(i).getLocation())+shp+get_my_pick.getReceive_high_score_list().get(i).getAge()) ;
                             }
-                            get_high_view(inflater,get_high_image_full_url);
+                            get_high_view(inflater,get_high_image_full_url,set_get_high_info_text);
                         }
 
                         if(get_my_pick.getSend_like_list().get(0).getImages().getApproved().get(0).getName() != null) {
@@ -166,14 +189,18 @@ public class Tab_Third extends Fragment {
                                 send_like_image_replace.add(send_like_image_list.get(i).replace(replace,small));
                                 send_like_image_full_url.add(API_IMAGE_URL+send_like_image_replace.get(i));
                                 Log.e("지난픽들 log", String.valueOf(send_like_image_full_url));
+
+                                String first_shp="#";
+                                String shp=" #";
+                                set_send_like_info_text.add(String.valueOf(first_shp+get_my_pick.getSend_like_list().get(i).getLocation())+shp+get_my_pick.getSend_like_list().get(i).getAge()) ;
+
                             }
-                            send_like_view(inflater,send_like_image_full_url);
+                            send_like_view(inflater,send_like_image_full_url,set_send_like_info_text);
                         }
 
                         if(get_my_pick.getGive_high_score_list().get(0).getImages().getApproved().get(0).getName() != null) {
                             for (int i = 0; i < get_my_pick.getGive_high_score_list().size(); i++) {
                                 if(get_my_pick.getGive_high_score_list().get(i).getImages().getApproved().size()!=0) {
-
                                     give_high_image_list.add(String.valueOf(get_my_pick.getGive_high_score_list().get(i).getImages().getApproved().get(0).getName()));
                                 }
                                 else {
@@ -182,8 +209,13 @@ public class Tab_Third extends Fragment {
                                 give_high_image_replace.add(give_high_image_list.get(i).replace(replace,small));
                                 give_high_image_full_url.add(API_IMAGE_URL+give_high_image_replace.get(i));
                                 Log.e("지난픽들 log", String.valueOf(give_high_image_full_url));
+
+                                String first_shp="#";
+                                String shp=" #";
+                                set_give_high_info_text.add(String.valueOf(first_shp+get_my_pick.getGive_high_score_list().get(i).getLocation())+shp+get_my_pick.getGive_high_score_list().get(i).getAge()) ;
+
                             }
-                            give_high_view(inflater,give_high_image_full_url);
+                            give_high_view(inflater,give_high_image_full_url,set_give_high_info_text);
                         }
 
                         //     Log.e("get_eval_list_image", String.valueOf(im_get_today.get(0).getImages().getApproved().get(0).getName()));
@@ -214,8 +246,81 @@ public class Tab_Third extends Fragment {
         return v;
     }
 
+    public void open_rock(final View img,final String open_state,final int match_act){
 
-    public void get_like_view(final LayoutInflater inflater, final ArrayList<String> pos){
+            try {
+                if (open_state.equals("true")) {
+                    Log.e("오픈에피아ㅓㅓ",String.valueOf(open_state));
+
+                    //자물쇠 없애버리기
+                    ImageView rock = (ImageView) img.findViewById(R.id.rock_img);
+                    rock.setVisibility(View.GONE);
+
+                    get_like_openselected_count.add("true");
+
+
+                    //터치 할때
+                    img.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+
+                            //복붙해옴
+                            if (open_state.equals("true")){
+                                    Intent direct_detail = new Intent(getActivity(),Personal_profile.class);
+                                    direct_detail.putExtra("matching_account",match_act);
+                               //     direct_detail.putExtra("what_pic","first");
+                                    if (sex.equals("male")){
+                                        direct_detail.putExtra("matching_sex","female");
+                                    }
+                                    else{
+                                        direct_detail.putExtra("matching_sex","male");
+
+                                    }
+                                    startActivity(direct_detail);
+                                }
+
+                            }/*else {
+                                Intent e = new Intent(getActivity(),TodaypicScd_pop.class);
+                                e.putExtra("matching_account",matching_account.get(0));
+                                e.putExtra("what_pic","second");
+
+                                if (sex.equals("male")){
+                                    e.putExtra("matching_sex","female");
+                                }
+                                else{
+                                    e.putExtra("matching_sex","male");
+
+                                }
+                                if (openselected_count.equals("true")){
+                                    Intent direct_detail = new Intent(getActivity(),Personal_profile.class);
+                                    direct_detail.putExtra("matching_account",matching_account.get(0));
+                                    direct_detail.putExtra("what_pic","first");
+                                    if (sex.equals("male")){
+                                        direct_detail.putExtra("matching_sex","female");
+                                    }
+                                    else{
+                                        direct_detail.putExtra("matching_sex","male");
+
+                                    }
+                                    startActivity(direct_detail);
+
+                                }
+                                startActivity(e);
+                            }
+                            //여기까지
+                        */
+                    });
+
+
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
+    }
+
+
+    public void get_like_view(final LayoutInflater inflater, final ArrayList<String> pos,final ArrayList<String> info,final ArrayList<String> open){
 
         //추가할 부모 뷰
         //final TableLayout inflatedLayout = (TableLayout) v.findViewById(R.id.addpic);
@@ -239,6 +344,11 @@ public class Tab_Third extends Fragment {
                 for (last_img_count = 0; last_img_count <pos.size() % 3; ++last_img_count) {
                     View img = inflater.inflate(R.layout.addimg, null);
                     ImageView img_pic = (ImageView) img.findViewById(R.id.last1);
+                    TextView info_view = (TextView) img.findViewById(R.id.l_textView);
+
+                    open_rock(img,open.get(last_img_count),matching_account.get(last_img_count));
+
+                    info_view.setText(info.get(last_img_count));
 
                     Transformation transformation = new RoundedTransformationBuilder()
                             .borderColor(Color.BLACK)
@@ -272,6 +382,11 @@ public class Tab_Third extends Fragment {
             for (int i = 0; i < 3 ; ++i) {
                 View img = inflater.inflate(R.layout.addimg, null);
                 ImageView img_pic = (ImageView) img.findViewById(R.id.last1);
+                TextView info_view = (TextView) img.findViewById(R.id.l_textView);
+
+                open_rock(img,open.get(i),matching_account.get(i));
+
+                info_view.setText(info.get(i));
 
                 Transformation transformation = new RoundedTransformationBuilder()
                         .borderColor(Color.BLACK)
@@ -308,6 +423,11 @@ public class Tab_Third extends Fragment {
                             int img_cnt = j+(3*i);
                             View img = inflater.inflate(R.layout.addimg, null);
                             ImageView img_pic = (ImageView) img.findViewById(R.id.last1);
+                            TextView info_view = (TextView) img.findViewById(R.id.l_textView);
+
+                            open_rock(img,open.get(img_cnt),matching_account.get(img_cnt));
+
+                            info_view.setText(info.get(img_cnt));
 
                             Transformation transformation = new RoundedTransformationBuilder()
                                     .borderColor(Color.BLACK)
@@ -338,6 +458,11 @@ public class Tab_Third extends Fragment {
                             int remainder_cnt = pos.size() - (remainder%3) +i;
                             View img = inflater.inflate(R.layout.addimg, null);
                             ImageView img_pic = (ImageView) img.findViewById(R.id.last1);
+                            TextView info_view = (TextView) img.findViewById(R.id.l_textView);
+
+                            open_rock(img,open.get(remainder_cnt),matching_account.get(remainder_cnt));
+
+                            info_view.setText(info.get(remainder_cnt));
 
                             Transformation transformation = new RoundedTransformationBuilder()
                                     .borderColor(Color.BLACK)
@@ -364,7 +489,7 @@ public class Tab_Third extends Fragment {
 
     }
 
-    public void get_high_view(final LayoutInflater inflater, final ArrayList<String> pos){
+    public void get_high_view(final LayoutInflater inflater, final ArrayList<String> pos,final ArrayList<String> info){
 
         //추가할 부모 뷰
         //final TableLayout inflatedLayout = (TableLayout) v.findViewById(R.id.addpic);
@@ -388,6 +513,9 @@ public class Tab_Third extends Fragment {
                 for (last_img_count = 0; last_img_count <pos.size() % 3; ++last_img_count) {
                     View img = inflater.inflate(R.layout.addimg, null);
                     ImageView img_pic = (ImageView) img.findViewById(R.id.last1);
+                    TextView info_view = (TextView) img.findViewById(R.id.l_textView);
+
+                    info_view.setText(info.get(last_img_count));
 
                     Transformation transformation = new RoundedTransformationBuilder()
                             .borderColor(Color.BLACK)
@@ -421,6 +549,9 @@ public class Tab_Third extends Fragment {
             for (int i = 0; i < 3 ; ++i) {
                 View img = inflater.inflate(R.layout.addimg, null);
                 ImageView img_pic = (ImageView) img.findViewById(R.id.last1);
+                TextView info_view = (TextView) img.findViewById(R.id.l_textView);
+
+                info_view.setText(info.get(i));
 
                 Transformation transformation = new RoundedTransformationBuilder()
                         .borderColor(Color.BLACK)
@@ -457,6 +588,9 @@ public class Tab_Third extends Fragment {
                             int img_cnt = j+(3*i);
                             View img = inflater.inflate(R.layout.addimg, null);
                             ImageView img_pic = (ImageView) img.findViewById(R.id.last1);
+                            TextView info_view = (TextView) img.findViewById(R.id.l_textView);
+
+                            info_view.setText(info.get(img_cnt));
 
                             Transformation transformation = new RoundedTransformationBuilder()
                                     .borderColor(Color.BLACK)
@@ -487,6 +621,9 @@ public class Tab_Third extends Fragment {
                             int remainder_cnt = pos.size() - (remainder%3) +i;
                             View img = inflater.inflate(R.layout.addimg, null);
                             ImageView img_pic = (ImageView) img.findViewById(R.id.last1);
+                            TextView info_view = (TextView) img.findViewById(R.id.l_textView);
+
+                            info_view.setText(info.get(remainder_cnt));
 
                             Transformation transformation = new RoundedTransformationBuilder()
                                     .borderColor(Color.BLACK)
@@ -513,7 +650,7 @@ public class Tab_Third extends Fragment {
 
     }
 
-    public void send_like_view(final LayoutInflater inflater,final ArrayList<String> pos){
+    public void send_like_view(final LayoutInflater inflater,final ArrayList<String> pos,final ArrayList<String> info){
 
         //추가할 부모 뷰
         //final TableLayout inflatedLayout = (TableLayout) v.findViewById(R.id.addpic);
@@ -537,6 +674,9 @@ public class Tab_Third extends Fragment {
                 for (last_img_count = 0; last_img_count <pos.size() % 3; ++last_img_count) {
                     View img = inflater.inflate(R.layout.addimg, null);
                     ImageView img_pic = (ImageView) img.findViewById(R.id.last1);
+                    TextView info_view = (TextView) img.findViewById(R.id.l_textView);
+
+                    info_view.setText(info.get(last_img_count));
 
                     Transformation transformation = new RoundedTransformationBuilder()
                             .borderColor(Color.BLACK)
@@ -570,6 +710,9 @@ public class Tab_Third extends Fragment {
             for (int i = 0; i < 3 ; ++i) {
                 View img = inflater.inflate(R.layout.addimg, null);
                 ImageView img_pic = (ImageView) img.findViewById(R.id.last1);
+                TextView info_view = (TextView) img.findViewById(R.id.l_textView);
+
+                info_view.setText(info.get(i));
 
                 Transformation transformation = new RoundedTransformationBuilder()
                         .borderColor(Color.BLACK)
@@ -606,6 +749,9 @@ public class Tab_Third extends Fragment {
                             int img_cnt = j+(3*i);
                             View img = inflater.inflate(R.layout.addimg, null);
                             ImageView img_pic = (ImageView) img.findViewById(R.id.last1);
+                            TextView info_view = (TextView) img.findViewById(R.id.l_textView);
+
+                            info_view.setText(info.get(img_cnt));
 
                             Transformation transformation = new RoundedTransformationBuilder()
                                     .borderColor(Color.BLACK)
@@ -636,6 +782,9 @@ public class Tab_Third extends Fragment {
                             int remainder_cnt = pos.size() - (remainder%3) +i;
                             View img = inflater.inflate(R.layout.addimg, null);
                             ImageView img_pic = (ImageView) img.findViewById(R.id.last1);
+                            TextView info_view = (TextView) img.findViewById(R.id.l_textView);
+
+                            info_view.setText(info.get(remainder_cnt));
 
                             Transformation transformation = new RoundedTransformationBuilder()
                                     .borderColor(Color.BLACK)
@@ -662,7 +811,7 @@ public class Tab_Third extends Fragment {
 
     }
 
-    public void give_high_view(final LayoutInflater inflater,final ArrayList<String> pos){
+    public void give_high_view(final LayoutInflater inflater,final ArrayList<String> pos,final ArrayList<String> info){
 
         //추가할 부모 뷰
         //final TableLayout inflatedLayout = (TableLayout) v.findViewById(R.id.addpic);
@@ -686,6 +835,9 @@ public class Tab_Third extends Fragment {
                 for (last_img_count = 0; last_img_count <pos.size() % 3; ++last_img_count) {
                     View img = inflater.inflate(R.layout.addimg, null);
                     ImageView img_pic = (ImageView) img.findViewById(R.id.last1);
+                    TextView info_view = (TextView) img.findViewById(R.id.l_textView);
+
+                    info_view.setText(info.get(last_img_count));
 
                     Transformation transformation = new RoundedTransformationBuilder()
                             .borderColor(Color.BLACK)
@@ -719,6 +871,9 @@ public class Tab_Third extends Fragment {
             for (int i = 0; i < 3 ; ++i) {
                 View img = inflater.inflate(R.layout.addimg, null);
                 ImageView img_pic = (ImageView) img.findViewById(R.id.last1);
+                TextView info_view = (TextView) img.findViewById(R.id.l_textView);
+
+                info_view.setText(info.get(i));
 
                 Transformation transformation = new RoundedTransformationBuilder()
                         .borderColor(Color.BLACK)
@@ -755,6 +910,9 @@ public class Tab_Third extends Fragment {
                             int img_cnt = j+(3*i);
                             View img = inflater.inflate(R.layout.addimg, null);
                             ImageView img_pic = (ImageView) img.findViewById(R.id.last1);
+                            TextView info_view = (TextView) img.findViewById(R.id.l_textView);
+
+                            info_view.setText(info.get(img_cnt));
 
                             Transformation transformation = new RoundedTransformationBuilder()
                                     .borderColor(Color.BLACK)
@@ -785,6 +943,9 @@ public class Tab_Third extends Fragment {
                             int remainder_cnt = pos.size() - (remainder%3) +i;
                             View img = inflater.inflate(R.layout.addimg, null);
                             ImageView img_pic = (ImageView) img.findViewById(R.id.last1);
+                            TextView info_view = (TextView) img.findViewById(R.id.l_textView);
+
+                            info_view.setText(info.get(remainder_cnt));
 
                             Transformation transformation = new RoundedTransformationBuilder()
                                     .borderColor(Color.BLACK)
