@@ -20,7 +20,9 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
+import com.facebook.FacebookAuthorizationException;
 import com.facebook.FacebookSdk;
 import com.kakao.auth.Session;
 import com.facebook.FacebookCallback;
@@ -135,7 +137,7 @@ public class Preexistence_Login extends Activity {
         //이용약관 및 개인정보 취급방식에대한 링크
 
        Intent intent=getIntent();
-        fcm_token= (String) intent.getExtras().get("fcm_token");
+       fcm_token= (String) intent.getExtras().get("fcm_token");
 
 
 
@@ -154,207 +156,224 @@ public class Preexistence_Login extends Activity {
 
 
     public void facebookLoginOnclick(View v){
-        FacebookSdk.sdkInitialize(getApplicationContext());
-        callbackManager = CallbackManager.Factory.create();
+        Thread t = new Thread() {
+            public void run() {
+                FacebookSdk.sdkInitialize(getApplicationContext());
+                callbackManager = CallbackManager.Factory.create();
 
-        LoginManager.getInstance().logInWithReadPermissions(Preexistence_Login.this,
-                Arrays.asList("public_profile", "email"));
-        LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
-
-            @Override
-            public void onSuccess(final LoginResult result) {
-
-                GraphRequest request;
-                request = GraphRequest.newMeRequest(result.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
+                LoginManager.getInstance().logInWithReadPermissions(Preexistence_Login.this,
+                        Arrays.asList("public_profile", "email"));
+                LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
 
                     @Override
-                    public void onCompleted(JSONObject user, GraphResponse response) {
-                        if (response.getError() != null) {
+                    public void onSuccess(final LoginResult result) {
 
-                        } else {
-                            try{
-                                Log.e("user profile", user.toString());
-                                Email   = response.getJSONObject().getString("id").toString();
-                                sex= response.getJSONObject().getString("gender".toString());
-                                Log.e("email:",Email);
-                                Log.e("sex",sex);
-                                save_sex(sex);
-                                token= String.valueOf(result.getAccessToken().getToken());
-                                Log.e("facebook_token", String.valueOf(result.getAccessToken().getToken()));
+                        GraphRequest request;
+                        request = GraphRequest.newMeRequest(result.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
 
-                                SharedPreferences pref = getSharedPreferences("Local_DB", MODE_PRIVATE);
-                                SharedPreferences.Editor editor = pref.edit();
-                                editor.putString("token",token);
-                                Log.e("fcm_token",token);
-                                editor.commit();
-
-                                CheckLogin.setEmail(Email);
-                                CheckLogin.getPassword(" ");
-                                responapi.setEmail(Email);
-
-
-                                finish();}
-                            catch (Exception e){
-                                e.printStackTrace();
-                            }
-                        }
-                        OkHttpClient.Builder client1 = new OkHttpClient.Builder();
-                        client1.addInterceptor(new Interceptor() {
                             @Override
-                            public okhttp3.Response intercept(Chain chain) throws IOException {
+                            public void onCompleted(JSONObject user, GraphResponse response) {
+                                if (response.getError() != null) {
 
-                                Request builder = chain.request();
-                                Request newRequest;
+                                } else {
+                                    try {
+                                        Log.e("user profile", user.toString());
+                                        Email = response.getJSONObject().getString("id").toString();
+                                        sex = response.getJSONObject().getString("gender".toString());
+                                        Log.e("email:", Email);
+                                        Log.e("sex", sex);
+                                        token = String.valueOf(result.getAccessToken().getToken());
+                                        Log.e("facebook_token", String.valueOf(result.getAccessToken().getToken()));
+
+                                        SharedPreferences pref = getSharedPreferences("Local_DB", MODE_PRIVATE);
+                                        SharedPreferences.Editor editor = pref.edit();
+                                        editor.putString("token", token);
+                                        editor.putString("fcm_token", fcm_token);
+                                        Log.e("fcm_token", fcm_token);
+                                        editor.commit();
+
+                                        CheckLogin.setEmail(Email);
+                                        CheckLogin.setSex(sex);
+                                        CheckLogin.setPassword(" ");
+                                        CheckLogin.setFcm_token(fcm_token);
+                                        responapi.setEmail(Email);
 
 
-                                newRequest = builder.newBuilder()
-                                        .addHeader("access-token",token)
+                                        finish();
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                                OkHttpClient.Builder client1 = new OkHttpClient.Builder();
+                                client1.addInterceptor(new Interceptor() {
+                                    @Override
+                                    public okhttp3.Response intercept(Chain chain) throws IOException {
+
+                                        Request builder = chain.request();
+                                        Request newRequest;
+
+
+                                        newRequest = builder.newBuilder()
+                                                .addHeader("access-token", token)
+                                                .build();
+
+
+                                        return chain.proceed(newRequest);
+
+                                    }
+                                });
+
+                                retrofit = new Retrofit.Builder()
+                                        .baseUrl(API_URL)
+                                        .addConverterFactory(GsonConverterFactory.create())
+                                        .client(client1.build())
                                         .build();
+                                apiService = retrofit.create(Rest_ApiService.class);
+
+                                callback = new SessionCallback();
+                                Session.getCurrentSession().addCallback(callback);
 
 
-                                return chain.proceed(newRequest);
+                                try {
 
+                                    Call<ResponseApi> comment = apiService.getPostEmailStr1(responapi);
+                                    comment.enqueue(new Callback<ResponseApi>() {
+                                        @Override
+                                        public void onResponse(Call<ResponseApi> call, Response<ResponseApi> response) {
+
+
+                                            ResponseApi gsonresponse = response.body();
+                                            Log.e("onresponse_Email_check", gsonresponse.getResult());
+                                            Log.e("onresponse_Email_check", gsonresponse.getMessage());
+                                            Log.e("onresponse_Email_check", String.valueOf(response.code()));
+                                            if ("true".equals(gsonresponse.getResult())) {
+                                                Log.v("onresponse_Email_check", "success");
+
+                                            } else {
+                                                Log.v("onresponse", "fail");
+                                            }
+
+
+                                        }
+
+                                        @Override
+                                        public void onFailure(Call<ResponseApi> call, Throwable t) {
+                                            Log.d("sam", "fail");
+                                        }
+                                    });
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+
+
+                                try {
+                                    Call<check_login> post_check_login = apiService.post_check_login(CheckLogin);
+                                    post_check_login.enqueue(new Callback<check_login>() {
+                                        @Override
+                                        public void onResponse(Call<check_login> call, Response<check_login> response) {
+
+                                            Intent intent_activate = new Intent(Preexistence_Login.this, TabbedBar.class);
+                                            Intent intent_ghost = new Intent(Preexistence_Login.this, Basicinfo_Edit.class);
+                                            Intent intent_interview = new Intent(Preexistence_Login.this, Mediate.class);
+                                            check_login gsonresponse = response.body();
+
+                                            try {
+                                                int account_id = Integer.parseInt(gsonresponse.getId());
+                                                String sex = gsonresponse.getSex();
+                                                save_local_data(sex, account_id, token);
+                                                Log.e("체크로그인", gsonresponse.getStatus());
+
+                                            } catch (Exception e) {
+                                                e.printStackTrace();
+                                            }
+
+                                            if (gsonresponse.getStatus().equals(null)) {
+
+                                                Log.e("get_status", "등록되지않은 이메일입니다");
+                                                intent_ghost.putExtra("ID", Email);
+                                                intent_ghost.putExtra("PW", "-");
+                                                intent_ghost.putExtra("setformat", "FACEBOOK");
+                                                intent_ghost.putExtra("token", token);
+                                                startActivity(intent_ghost);
+                                            } else {
+                                                Log.e("onresponse", gsonresponse.getStatus());
+                                                Log.e("onresponse", String.valueOf(response.code()));
+                                                Log.e("onresponse", "success");
+
+                                                if (gsonresponse.getStatus().equals("ACTIVATE")) {
+
+                                                    startActivity(intent_activate);
+                                                } else if (gsonresponse.getStatus().equals("GHOST")) {
+                                                    intent_ghost.putExtra("ID", Email);
+                                                    intent_ghost.putExtra("PW", "-");
+                                                    intent_ghost.putExtra("setformat", "FACEBOOK");
+                                                    intent_ghost.putExtra("token", token);
+
+                                                    startActivity(intent_ghost);
+                                                } else if (gsonresponse.getStatus().equals("INREVIEW")) {
+                                                    startActivity(intent_interview);
+                                                } else if (gsonresponse.getStatus().equals("REJECTED")) {
+
+                                                } else {
+                                                    intent_ghost.putExtra("ID", Email);
+                                                    intent_ghost.putExtra("PW", " ");
+                                                    Log.e("id", Email);
+                                                    intent_ghost.putExtra("setformat", "FACEBOOK");
+                                                    intent_ghost.putExtra("fcm_token", fcm_token);
+                                                    intent_ghost.putExtra("token", token);
+
+                                                    startActivity(intent_ghost);
+                                                }
+                                            }
+
+
+                                        }
+
+
+                                        @Override
+                                        public void onFailure(Call<check_login> call, Throwable t) {
+                                            Log.d("sam", t.toString());
+                                        }
+
+                                    });
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
                             }
                         });
+                        Bundle parameters = new Bundle();
+                        parameters.putString("fields", "id,name,email,gender,birthday");
+                        request.setParameters(parameters);
+                        request.executeAsync();
+                    }
 
-                        retrofit = new Retrofit.Builder()
-                                .baseUrl(API_URL)
-                                .addConverterFactory(GsonConverterFactory.create())
-                                .client(client1.build())
-                                .build();
-                        apiService= retrofit.create(Rest_ApiService.class);
-
-                        callback = new SessionCallback();
-                        Session.getCurrentSession().addCallback(callback);
-
-
-                        try {
-
-                            Call<ResponseApi> comment = apiService.getPostEmailStr1(responapi);
-                            comment.enqueue(new Callback<ResponseApi>() {
-                                @Override
-                                public void onResponse(Call<ResponseApi> call, Response<ResponseApi> response) {
-
-
-                                    ResponseApi gsonresponse=response.body();
-                                    Log.e("onresponse_Email_check", gsonresponse.getResult());
-                                    Log.e("onresponse_Email_check",gsonresponse.getMessage());
-                                    Log.e("onresponse_Email_check", String.valueOf(response.code()));
-
-                                    if("true".equals(gsonresponse.getResult())){
-                                        Log.v("onresponse_Email_check", "success");
-
-                                    }
-                                    else{
-                                        Log.v("onresponse","fail");
-                                    }
-
-
-
-                                }
-
-                                @Override
-                                public void onFailure(Call<ResponseApi> call, Throwable t) {
-                                    Log.d("sam", "fail");
-                                }
-                            });
-                        }catch (Exception e){
-                            e.printStackTrace();
+                    @Override
+                    public void onError(FacebookException error) {
+                        Log.e("test", "Error: " + error);
+                        if (error instanceof FacebookAuthorizationException) {
+                            if (AccessToken.getCurrentAccessToken() != null) {
+                                LoginManager.getInstance().logOut();
+                            }
                         }
+                        //finish();
+                    }
 
-
-
-
-                        try {
-                            Call<check_login> post_check_login = apiService.post_check_login(CheckLogin);
-                            post_check_login.enqueue(new Callback<check_login>() {
-                                @Override
-                                public void onResponse(Call<check_login> call, Response<check_login> response) {
-
-                                    Intent intent_activate = new Intent(Preexistence_Login.this,  TabbedBar.class);
-                                    Intent intent_ghost= new Intent(Preexistence_Login.this, Basicinfo_Edit.class);
-                                    Intent intent_interview=new Intent(Preexistence_Login.this, Mediate.class);
-                                    check_login gsonresponse = response.body();
-                                    Log.e("onresponse_check_login", gsonresponse.getResult());
-                                    if (gsonresponse.getStatus()==null) {
-
-                                        Log.e("get_status","등록되지않은 이메일입니다");
-                                        startActivity(intent_ghost);
-                                    }
-                                    else
-                                    {
-                                        Log.e("onresponse", gsonresponse.getStatus());
-                                        Log.e("onresponse", String.valueOf(response.code()));
-                                        Log.e("onresponse", "success");
-
-                                        if (gsonresponse.getStatus().equals("ACTIVATE"))
-                                        {
-
-                                            startActivity(intent_activate);
-                                        }
-                                        else if(gsonresponse.getStatus().equals("GHOST")){
-                                            intent_ghost.putExtra("ID",Email);
-                                            intent_ghost.putExtra("PW","-");
-                                            intent_ghost.putExtra("setformat","FACEBOOK");
-                                            startActivity(intent_ghost);
-                                        }
-                                        else if(gsonresponse.getStatus().equals("INREVIEW")){
-                                            startActivity(intent_interview);
-                                        }
-                                        else if(gsonresponse.getStatus().equals("REJECTED")){
-
-                                        }
-                                        else{
-                                            intent_ghost.putExtra("ID",Email);
-                                            intent_ghost.putExtra("PW"," ");
-                                            intent_ghost.putExtra("setformat","FACEBOOK");
-                                            intent_ghost.putExtra("fcm_token",fcm_token);
-                                            startActivity(intent_ghost);
-                                        }
-                                    }
-
-
-
-
-                                }
-
-
-                                @Override
-                                public void onFailure(Call<check_login> call, Throwable t) {
-                                    Log.d("sam", t.toString());
-                                }
-
-                            });
-                        }catch (Exception e){
-                            e.printStackTrace();
-                        }
+                    @Override
+                    public void onCancel() {
+                        //finish();
                     }
                 });
-                Bundle parameters = new Bundle();
-                parameters.putString("fields", "id,name,email,gender,birthday");
-                request.setParameters(parameters);
-                request.executeAsync();
             }
-
-            @Override
-            public void onError(FacebookException error) {
-                Log.e("test", "Error: " + error);
-                //finish();
-            }
-
-            @Override
-            public void onCancel() {
-                //finish();
-            }
-        });
+        };
+        t.start();
     }
 
 
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-       // super.onActivityResult(requestCode, resultCode, data);
-      //  callbackManager.onActivityResult(requestCode, resultCode, data);
+        super.onActivityResult(requestCode, resultCode, data);
+        callbackManager.onActivityResult(requestCode, resultCode, data);
         if (Session.getCurrentSession().handleActivityResult(requestCode, resultCode, data)) {
             return;
         }
@@ -362,6 +381,7 @@ public class Preexistence_Login extends Activity {
         super.onActivityResult(requestCode, resultCode, data);
 
     }
+
 
 
     public void onClick_membership(View v){
@@ -423,13 +443,16 @@ public class Preexistence_Login extends Activity {
     public void onBackPressed() {
         super.onBackPressed();
     }
-    public void save_sex(String data){
+
+    public void save_local_data(String sex,int account_id,String token){
         SharedPreferences pref = getSharedPreferences("Local_DB", MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
-        editor.putString("sex",data);
+        editor.putString("sex",sex);
+        editor.putInt("account_id",account_id);
+        editor.putString("token",token);
+
         editor.clear();
         editor.commit();
-
     }
 }
 
