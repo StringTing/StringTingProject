@@ -105,6 +105,7 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
     String token_localdb;
     int account_id_localdb;
     String Setting_id;
+    String fcm_token;
     message Message = new message();
 
     File Postfile;
@@ -179,7 +180,28 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.basicinfo_edit);
 
-        userinfo_save();
+        try {
+            Intent i = getIntent();                      // facebook 또는 kakao의 아이디, 메신저타입을 받아와 변수에 저장
+            String id = i.getExtras().getString("ID");
+            String PW = i.getExtras().getString("PW");
+
+            Setting_id = i.getExtras().getString("setformat");
+
+            token=i.getExtras().getString("token");
+            fcm_token = i.getExtras().getString("fcm_token");
+            Log.e("Setting_id", Setting_id);
+            Log.e("fcm_token",fcm_token);
+
+            UserInfo.setEmail(id);
+            UserInfo.setPassword(PW);
+            UserInfo.setLogin_format(Setting_id);
+            UserInfo.setEmail(id);
+            UserInfo.setFcm_token(fcm_token);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+//        userinfo_save();
 
         OkHttpClient.Builder client1 = new OkHttpClient.Builder();
         client1.addInterceptor(new Interceptor() {
@@ -195,7 +217,7 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
                 }
                 else {
                     newRequest = builder.newBuilder()
-                            .addHeader("access-token", token_localdb)
+                            .addHeader("access-token", token)
                             .build();
                 }
 
@@ -215,7 +237,6 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
 
 
 
-        userinfo_save();
 
         iv_UserPhoto1 = (ImageView) this.findViewById(R.id.photo1);
         iv_UserPhoto2 = (ImageView) this.findViewById(R.id.photo2);
@@ -612,30 +633,16 @@ public class Basicinfo_Edit extends AppCompatActivity implements View.OnClickLis
             Setting_id = i.getExtras().getString("setformat");
 
             token=i.getExtras().getString("token");
-            String fcm_token = i.getExtras().getString("fcm_token");
-            Log.e("Test", id);
-            Log.e("Test1", String.valueOf(Setting_id));
+            fcm_token = i.getExtras().getString("fcm_token");
+            Log.e("token", token);
+            Log.e("Setting_id", Setting_id);
+            Log.e("fcm_token",fcm_token);
 
-        UserInfo.setEmail(id);
-        UserInfo.setPassword(PW);
-        UserInfo.setLogin_format(Setting_id);
-        UserInfo.setEmail(id);
+            UserInfo.setEmail(id);
+            UserInfo.setPassword(PW);
+            UserInfo.setLogin_format(Setting_id);
+            UserInfo.setEmail(id);
 
-        SharedPreferences fcm = getSharedPreferences("Local_DB", MODE_PRIVATE);
-
-        try {
-            fcm_token = fcm.getString("fcm_token", "success");
-            Log.v("fcm_token",fcm_token);
-
-                Log.e("localid is null","fail");
-                UserInfo.setFcm_token(fcm_token);
-
-
-
-        }catch (Exception e){
-            e.printStackTrace();
-            Log.e("can not get localid","fail");
-        }
         }catch (Exception e){
             e.printStackTrace();
         }

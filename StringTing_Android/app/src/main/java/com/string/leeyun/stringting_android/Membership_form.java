@@ -182,7 +182,7 @@ public class Membership_form extends Activity {
 
     public static boolean checkPW(String pw){
 
-        String regex = "^[A-Za-z0-9_@./#&+-]*.{8,20}$";
+        String regex = "([a-zA-Z0-9].*[!,@,#,$,%,^,&,*,?,_,~])|([!,@,#,$,%,^,&,*,?,_,~].*[a-zA-Z0-9])";
         Pattern p = Pattern.compile(regex);
         Matcher m = p.matcher(pw);
         boolean isNormal = m.matches();
@@ -305,7 +305,7 @@ public class Membership_form extends Activity {
                                 intent_ghost.putExtra("ID",Email);
                                 intent_ghost.putExtra("PW",PW);
                                 intent_ghost.putExtra("setformat","EMAIL");
-                                intent_ghost.putExtra("token",token);
+                                intent_ghost.putExtra("fcm_token",fcm_token);
                                 startActivity(intent_ghost);
                             }
                             else
@@ -323,7 +323,8 @@ public class Membership_form extends Activity {
                                     intent_ghost.putExtra("ID",Email);
                                     intent_ghost.putExtra("PW",PW);
                                     intent_ghost.putExtra("setformat","EMAIL");
-                                    intent_ghost.putExtra("token",token);
+                                    intent_ghost.putExtra("fcm_token",fcm_token);
+
 
                                     startActivity(intent_ghost);
                                 }
@@ -338,7 +339,8 @@ public class Membership_form extends Activity {
                                     intent_ghost.putExtra("PW",PW);
                                     Log.e("id",Email);
                                     intent_ghost.putExtra("setformat","EMAIL");
-                                    intent_ghost.putExtra("token",token);
+                                    intent_ghost.putExtra("fcm_token",fcm_token);
+
 
                                     startActivity(intent_ghost);
                                 }
