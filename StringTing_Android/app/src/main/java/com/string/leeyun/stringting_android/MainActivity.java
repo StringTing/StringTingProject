@@ -14,6 +14,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.text.util.Linkify;
 import android.util.Base64;
 import android.util.Log;
@@ -375,6 +376,7 @@ public class MainActivity extends AppCompatActivity {
                                             Intent intent_activate = new Intent(MainActivity.this, TabbedBar.class);
                                             Intent intent_ghost = new Intent(MainActivity.this, Basicinfo_Edit.class);
                                             Intent intent_interview = new Intent(MainActivity.this, Mediate.class);
+                                            Intent intent_rejected = new Intent(MainActivity.this, Rejected_mediate.class);
                                             check_login gsonresponse = response.body();
 
                                             try {
@@ -387,12 +389,14 @@ public class MainActivity extends AppCompatActivity {
                                                 e.printStackTrace();
                                             }
 
-                                            if (gsonresponse.getStatus().equals(null)) {
+                                            if (TextUtils.isEmpty(gsonresponse.getStatus())){
 
                                                 Log.e("get_status", "등록되지않은 이메일입니다");
                                                 intent_ghost.putExtra("ID", Email);
                                                 intent_ghost.putExtra("PW", "-");
                                                 intent_ghost.putExtra("setformat", "FACEBOOK");
+                                                intent_ghost.putExtra("fcm_token", refreshedToken);
+
                                                 intent_ghost.putExtra("token", token);
                                                 startActivity(intent_ghost);
                                             } else {
@@ -407,13 +411,15 @@ public class MainActivity extends AppCompatActivity {
                                                     intent_ghost.putExtra("ID", Email);
                                                     intent_ghost.putExtra("PW", "-");
                                                     intent_ghost.putExtra("setformat", "FACEBOOK");
+                                                    intent_ghost.putExtra("fcm_token", refreshedToken);
+
                                                     intent_ghost.putExtra("token", token);
 
                                                     startActivity(intent_ghost);
                                                 } else if (gsonresponse.getStatus().equals("INREVIEW")) {
                                                     startActivity(intent_interview);
                                                 } else if (gsonresponse.getStatus().equals("REJECTED")) {
-
+                                                    startActivity(intent_rejected);
                                                 } else {
                                                     intent_ghost.putExtra("ID", Email);
                                                     intent_ghost.putExtra("PW", " ");
