@@ -14,6 +14,7 @@ import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.text.util.Linkify;
 import android.util.Log;
 import android.view.View;
@@ -287,7 +288,7 @@ public class Preexistence_Login extends Activity {
                                                 e.printStackTrace();
                                             }
 
-                                            if (gsonresponse.getStatus().equals(null)) {
+                                            if (TextUtils.isEmpty(gsonresponse.getStatus())) {
 
                                                 Log.e("get_status", "등록되지않은 이메일입니다");
                                                 intent_ghost.putExtra("ID", Email);
