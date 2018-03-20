@@ -220,7 +220,16 @@ public class Get_my_pick_list {
         float score;
         boolean smoke,authenticated;
         String education,department,location,body_form,drink,religion,blood_type,id_image;
+        String opened;
         private images images;
+
+        public String isOpened() {
+            return opened;
+        }
+
+        public void setOpened(String opened) {
+            this.opened = opened;
+        }
 
         public int getId() {
             return id;
@@ -348,7 +357,16 @@ public class Get_my_pick_list {
         float score;
         boolean smoke,authenticated;
         String education,department,location,body_form,drink,religion,blood_type,id_image;
+        String opened;
         private images images;
+
+        public String isOpened() {
+            return opened;
+        }
+
+        public void setOpened(String opened) {
+            this.opened = opened;
+        }
 
         public int getId() {
             return id;
@@ -477,7 +495,16 @@ public class Get_my_pick_list {
         float score;
         boolean smoke,authenticated;
         String education,department,location,body_form,drink,religion,blood_type,id_image;
+        String opened;
         private images images;
+
+        public String isOpened() {
+            return opened;
+        }
+
+        public void setOpened(String opened) {
+            this.opened = opened;
+        }
 
         public int getId() {
             return id;
