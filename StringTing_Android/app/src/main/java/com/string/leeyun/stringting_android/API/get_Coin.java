@@ -9,33 +9,13 @@ import java.util.ArrayList;
  */
 
 public class get_Coin {
-    @SerializedName("accounts")
-    ArrayList<get_Coin> accounts;
+    int amount;
 
-    public ArrayList<get_Coin> getAccounts() {
-        return accounts;
+    public int getAmount() {
+        return amount;
     }
 
-    public void setAccounts(ArrayList<get_Coin> accounts) {
-        this.accounts = accounts;
-    }
-
-    int id;
-    int coin;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getCoin() {
-        return coin;
-    }
-
-    public void setCoin(int coin) {
-        this.coin = coin;
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 }
