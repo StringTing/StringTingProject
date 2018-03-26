@@ -5,6 +5,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
@@ -15,6 +16,8 @@ import android.widget.Toast;
 
 import com.android.vending.billing.IInAppBillingService;
 import com.facebook.common.Common;
+import com.string.leeyun.stringting_android.API.Rest_ApiService;
+import com.string.leeyun.stringting_android.API.get_Coin;
 import com.string.leeyun.stringting_android.util.IabHelper;
 import com.string.leeyun.stringting_android.util.IabResult;
 import com.string.leeyun.stringting_android.util.Inventory;
@@ -23,7 +26,19 @@ import com.string.leeyun.stringting_android.util.Purchase;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.List;
+
+import okhttp3.Interceptor;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
+import static com.string.leeyun.stringting_android.API.Rest_ApiService.API_URL;
 
 /**
  * Created by leeyun on 2018. 1. 6..
@@ -33,8 +48,11 @@ public class google_play_item_payment extends Activity{
     IInAppBillingService mService;
     IabHelper iaphelper;
 
-
-
+    int account_id;
+    String token;
+    String sex;
+    Rest_ApiService apiService;
+    Retrofit retrofit;
 
     IabHelper.QueryInventoryFinishedListener mGotInventoryListener = new IabHelper.QueryInventoryFinishedListener() {
         public void onQueryInventoryFinished(IabResult result,
@@ -97,6 +115,73 @@ public class google_play_item_payment extends Activity{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coin);
+
+        get_local_data();
+
+        //Get coin
+        Thread t = new Thread() {
+            public void run() {
+                try {
+                    OkHttpClient.Builder client1 = new OkHttpClient.Builder();
+                    client1.addInterceptor(new Interceptor() {
+                        @Override
+                        public okhttp3.Response intercept(Interceptor.Chain chain) throws IOException {
+
+                            Request builder = chain.request();
+                            Request newRequest;
+
+
+                            newRequest = builder.newBuilder()
+                                    .addHeader("access-token",token)
+                                    .addHeader("account-id", String.valueOf(account_id))
+                                    .addHeader("account-sex",sex)
+                                    .build();
+
+
+                            return chain.proceed(newRequest);
+
+                        }
+                    });
+
+
+                    retrofit = new Retrofit.Builder()
+                            .baseUrl(API_URL)
+                            .addConverterFactory(GsonConverterFactory.create())
+                            .client(client1.build())
+                            .build();
+                } catch (Exception e) {
+                    // 무시..
+                }
+            }
+        };
+        // 스레드 시작
+        t.start();
+
+        try {
+            t.join();
+            apiService= retrofit.create(Rest_ApiService.class);
+            Call<get_Coin> call = apiService.get_Coin(sex,account_id);
+
+            call.enqueue(new Callback<get_Coin>() {
+                @Override
+                public void onResponse(Call<get_Coin> call, Response<get_Coin> response) {
+                    Log.e("코인",String.valueOf(response.raw()));
+                    Log.e("코인", String.valueOf(response.body()));
+                    Log.e("코인", String.valueOf(response.code()));
+                    Log.e("코인 수", String.valueOf(response.body().getCoin()));
+
+
+                }
+
+                @Override
+                public void onFailure(Call<get_Coin> call, Throwable t) {
+
+                }
+            });
+
+        }catch (Exception e){
+
+        }
 
 
         Intent intent=new Intent("com.android.vending.billing.InAppBillingService.BIND");
@@ -455,5 +540,14 @@ public class google_play_item_payment extends Activity{
                 Log.d("myLog", "onActivityResult handled by IABUtil.");
             }
         }
+    }
+
+    public void get_local_data(){
+        SharedPreferences pref = this.getSharedPreferences("Local_DB", MODE_PRIVATE);
+        account_id = pref.getInt("account_id",0);
+        Log.e("local_account", Integer.toString(account_id));
+        token=pref.getString("token","?");
+        sex=pref.getString("sex","0");
+        Log.e("local_token",String.valueOf(token));
     }
 }
