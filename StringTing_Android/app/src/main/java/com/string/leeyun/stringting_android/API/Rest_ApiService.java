@@ -64,6 +64,9 @@ public interface Rest_ApiService {
         @GET("{sex}/{account_id}/get/my-pick-list/")
         Call<Get_my_pick_list>get_my_pick_list(@Path("sex")String pick_sex, @Path("account_id")int pick_id);
 
+        @GET("{sex}/{account_id}/get/coin-amount/")
+        Call<get_Coin>get_Coin(@Path("sex")String pick_sex, @Path("account_id")int coin_id);
+
         @GET("{sex}/{account_id}/get/matched-account")
         Call<get_matched_accountList> get_matched_account(@Path("sex")String matched_sex, @Path("account_id")int matched_account_id);
 
