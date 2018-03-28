@@ -21,7 +21,7 @@ public class get_Coin {
     }
 
     int id;
-    int coin;
+    int amount;
 
     public int getId() {
         return id;
@@ -31,11 +31,11 @@ public class get_Coin {
         this.id = id;
     }
 
-    public int getCoin() {
-        return coin;
+    public int getAmount() {
+        return amount;
     }
 
-    public void setCoin(int coin) {
-        this.coin = coin;
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 }

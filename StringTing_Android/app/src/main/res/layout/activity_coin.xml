@@ -68,7 +68,7 @@
                 android:layout_height="32dp"
                 android:layout_centerVertical="true"
                 android:layout_toLeftOf="@+id/mul"
-                app:srcCompat="@drawable/coin" />
+                android:background="@drawable/coin" />
 
             <TextView
                 android:id="@+id/mul"
@@ -131,7 +131,7 @@
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:layout_gravity="center"
-                app:srcCompat="@drawable/coin" />
+                android:background="@drawable/coin" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -180,7 +180,7 @@
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:layout_gravity="center"
-                app:srcCompat="@drawable/coin" />
+                android:background="@drawable/coin" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -231,7 +231,7 @@
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:layout_gravity="center"
-                app:srcCompat="@drawable/coin" />
+                android:background="@drawable/coin" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -280,7 +280,7 @@
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:layout_gravity="center"
-                app:srcCompat="@drawable/coin" />
+                android:background="@drawable/coin" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -328,7 +328,7 @@
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:layout_gravity="center"
-                app:srcCompat="@drawable/coin" />
+                android:background="@drawable/coin" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -375,7 +375,7 @@
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:layout_gravity="center"
-                app:srcCompat="@drawable/coin" />
+                android:background="@drawable/coin" />
 
             <TextView
                 android:layout_width="wrap_content"
