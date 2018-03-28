@@ -25,6 +25,7 @@ import com.string.leeyun.stringting_android.util.Purchase;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.util.List;
@@ -168,8 +169,10 @@ public class google_play_item_payment extends Activity{
                     Log.e("코인",String.valueOf(response.raw()));
                     Log.e("코인", String.valueOf(response.body()));
                     Log.e("코인", String.valueOf(response.code()));
-                    Log.e("코인 수", String.valueOf(response.body().getCoin()));
+                    Log.e("코인 수", String.valueOf(response.body().getAmount()));
 
+                    TextView coin_amt = (TextView)findViewById(R.id.coin_amount);
+                    coin_amt.setText(String.valueOf(response.body().getAmount()));
 
                 }
 
